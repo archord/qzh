@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+  <context:annotation-config/>
+   
+  <!-- spring mvc的应用 -->
+  <context:component-scan base-package="com.mseeworld.qzh.web"></context:component-scan>
+
+  <!-- 上传拦截，如最大上传值及最小上传值 -->
+  <bean id="multipartResolver"
+              class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <!-- one of the properties available; the maximum file size in bytes -->
+    <property name="maxUploadSize" value="7277180" />
+  </bean> 
+		
+  <!-- 视图-->
+  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="prefix" value="/WEB-INF/index/" />
+    <property name="suffix" value=".jsp" />
+  </bean>
+   
+  <!-- hibernate整合到spring中 -->
+  <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />  
+    <property name="ignoreResourceNotFound" value="false" />
+    <property name="locations">
+      <value>classpath:database.properties</value>
+    </property>
+  </bean>
+	
+  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName" value="${jdbc.driverClassName}"/>
+    <property name="url" value="${jdbc.url}"/>
+    <property name="username" value="${jdbc.username}"/>
+    <property name="password" value="${jdbc.password}"/>
+  </bean>
+  
+  <!--<context:property-placeholder location="jdbc.properties"/>-->
+
+  <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="packagesToScan">
+      <list>
+        <value>com.mseeworld.qzh.model</value>
+      </list>
+    </property>
+    <property name="hibernateProperties">
+      <props>
+        <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+        <prop key="hibernate.show_sql">true</prop>
+        <!--<prop key="hibernate.hbm2ddl.auto">update</prop>-->
+      </props>
+    </property>
+  </bean>
+	
+  <bean id="hibernateUtil" class="com.mseeworld.qzh.util.HibernateUtil"></bean>
+  <bean id="userDao" class="com.mseeworld.qzh.dao.impl.UserDAOImpl"></bean>
+  <bean id="categoryDao" class="com.mseeworld.qzh.dao.impl.CategoryDAOImpl"></bean>
+  <bean id="productDao" class="com.mseeworld.qzh.dao.impl.ProductDAOImpl"></bean>
+  <bean id="salesOrderDao" class="com.mseeworld.qzh.dao.impl.SalesOrderDAOImpl"></bean>
+	
+  <bean id="userService" class="com.mseeworld.qzh.service.impl.UserServiceImpl"></bean>
+  <bean id="productService" class="com.mseeworld.qzh.service.impl.ProductServiceImpl"></bean>
+  <bean id="categoryService" class="com.mseeworld.qzh.service.impl.CategoryServiceImpl"></bean>
+  <bean id="salesOrderService" class="com.mseeworld.qzh.service.impl.SalesOrderServiceImpl"></bean>
+
+</beans>
