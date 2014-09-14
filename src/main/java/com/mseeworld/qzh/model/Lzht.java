@@ -1,5 +1,5 @@
 package com.mseeworld.qzh.model;
-// Generated Aug 20, 2014 8:31:04 AM by Hibernate Tools 3.2.1.GA
+// Generated Sep 6, 2014 9:23:12 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;

@@ -6,7 +6,12 @@ Ext.onReady(function() {
   Ext.QuickTips.init();
   /**启动动态加载js*/
   Ext.Loader.setConfig({
-    enabled: true
+    enabled: true,
+    disableCaching: false,
+    paths: {
+        GeoExt: "/qzh/GeoExt",
+        Ext: "/qzh/extjs4"
+    }
   });
   /**开始执行应用程序*/
   Ext.application({
@@ -21,6 +26,6 @@ Ext.onReady(function() {
 	  }]
       });
     },
-    controllers: ["core.app.controller.MainController"]
+    controllers: ["core.controller.MainController"]
   });
 });

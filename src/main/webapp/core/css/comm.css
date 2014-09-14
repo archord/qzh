@@ -32,6 +32,18 @@
 .tree_model_add{
 	background-image: url(./imgs/tree/tree_model_add.png) !important;
 }
+.tree_model_lv1{
+	background: url(./imgs/new/icons-series.png) no-repeat 0 -40px !important;
+}
+.tree_model_lv2{
+	background: url(./imgs/new/icons-series.png) no-repeat 0 -80px !important;
+}
+.tree_model_lv3{
+	background: url(./imgs/new/icons-series.png) no-repeat 0 0 !important;
+}
+.tree_model_lv4{
+	background: url(./imgs/new/icons-series.png) no-repeat 0 -120px !important;
+}
 .tree_folder_add{
 	background-image: url(./imgs/tree/tree_folder_add.png) !important;
 }

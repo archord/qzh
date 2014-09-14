@@ -1,0 +1,25 @@
+/*
+ * 商品实体类
+ */
+ Ext.define("core.model.DkModel",{
+ 	extend:"Ext.data.Model",
+ 	fields:[
+ 		{name:"id",type:"int",srotable:false},
+ 		{name:"dkbm",type:"string",srotable:false},
+ 		{name:"dklx",type:"char",srotable:false},
+ 		{name:"dkmc",type:"string",srotable:false},
+ 		{name:"dkzjlx",type:"char",srotable:false},
+ 		{name:"dkzjhm",type:"string",srotable:false},
+ 		{name:"dkdz",type:"string",srotable:false},
+ 		{name:"yzbm",type:"string",srotable:false},
+ 		{name:"lxdh",type:"string",srotable:false},
+ 		{name:"dkcysl",type:"int",srotable:false},
+ 		{name:"dkdcrq",type:"date",srotable:false},
+ 		{name:"dkdcy",type:"string",srotable:false},
+ 		{name:"dkdcjs",type:"string",srotable:false},
+ 		{name:"gsjs",type:"string",srotable:false},
+ 		{name:"gsjsr",type:"string",srotable:false},
+ 		{name:"gsshrq",type:"date",srotable:false},
+ 		{name:"gsshr",type:"string",srotable:false}
+ 	]
+ });

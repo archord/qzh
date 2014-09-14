@@ -1,0 +1,20 @@
+/*
+ * 商品实体类
+ */
+ Ext.define("core.model.PeopleModel",{
+ 	extend:"Ext.data.Model",
+ 	fields:[
+ 		{name:"id",type:"int",srotable:false},
+ 		{name:"fbfbm",type:"string",srotable:false},
+ 		{name:"fbfmc",type:"string",srotable:false},
+ 		{name:"fbffzrxm",type:"string",srotable:false},
+ 		{name:"fzrzjlx",type:"char",srotable:false},
+ 		{name:"fzrzjhm",type:"string",srotable:false},
+ 		{name:"lxdh",type:"string",srotable:false},
+ 		{name:"fbfdz",type:"string",srotable:false},
+ 		{name:"yzbm",type:"string",srotable:false},
+ 		{name:"fbfdcy",type:"string",srotable:false},
+ 		{name:"fbfdcrq",type:"date",srotable:false},
+ 		{name:"fbfdcjs",type:"string",srotable:false}
+ 	]
+ });
