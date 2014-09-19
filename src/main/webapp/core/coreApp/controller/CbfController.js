@@ -16,7 +16,7 @@ Ext.define("core.controller.CbfController", {
 //          store.filter("id", 0);
         }
       },
-      "orgTreeShow2": {
+      "orgTreeCbf": {
         itemclick: function(tree, record, item, index, e, eOpts) {
           //节点点击事件
           var pform = tree.up("cbfLayout").down("cbfform").getForm();
@@ -69,7 +69,7 @@ Ext.define("core.controller.CbfController", {
       "cbfform button[ref=save]": {
         click: function(btn) {
           var pform = btn.up("cbfform").getForm();
-          var orgTree = btn.up('cbfLayout').down("orgTreeShow2");
+          var orgTree = btn.up('cbfLayout').down("orgTreeCbf");
           var curSelNode = orgTree.getSelectionModel().getSelection();
 //          alert(curSelNode[0].raw.orgId);
           if (pform.findField("isAdd").getValue() === '1') {
@@ -110,10 +110,10 @@ Ext.define("core.controller.CbfController", {
   },
   views: [
     "core.view.CbfLayout",
-    "core.view.OrgTreeShow2",
+    "core.view.OrgTreeCbf",
     "core.view.CbfForm",
     "core.view.CbfGrid"
   ],
-  stores: ["core.store.CbfStore", "core.store.OrgStore2"],
+  stores: ["core.store.CbfStore", "core.store.OrgStore"],
   models: ["core.model.CbfModel"]
 });

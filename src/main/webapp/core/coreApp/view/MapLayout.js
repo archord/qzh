@@ -25,14 +25,14 @@ Ext.define("core.view.MapLayout", {
     bodyStyle: 'padding:1px'
   },
   layout: 'border',
-  items: [{
+  items: [Ext.create('core.view.OrgTreeMap', {
       title: "地区列表",
       region: 'west',
       // iconCls:'goodtype_tree',
-      xtype: "orgTreeShow3",
+      store: Ext.create('core.store.OrgStore'),
       margins: '5 2 5 5',
       width: 150
-    }, Ext.create('GeoExt.panel.Map', {
+    }), , Ext.create('GeoExt.panel.Map', {
     border: true,
     region: "center",
     // we do not want all overlays, to try the OverlayLayerContainer
@@ -41,7 +41,7 @@ Ext.define("core.view.MapLayout", {
     //zoom: 6,
     layers: [
       new OpenLayers.Layer.WMS("底图",
-              "http://localhost:8081/geoserver/cite/wms", {
+              "/geoserver/cite/wms", {
         layers: "cite:geotif08"
       }, {
         buffer: 0,
@@ -52,7 +52,7 @@ Ext.define("core.view.MapLayout", {
       }
       ),
       new OpenLayers.Layer.WMS("矢量图",
-              "http://localhost:8081/geoserver/cite/wms", {
+              "/geoserver/cite/wms", {
         layers: "cite:Export_Output",
         transparent: true,
         format: "image/gif"

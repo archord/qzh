@@ -16,7 +16,7 @@ Ext.define("core.controller.PeopleController", {
 //          store.filter("id", 0);
         }
       },
-      "orgTreeShow": {
+      "orgTreePeo": {
         itemclick: function(tree, record, item, index, e, eOpts) {
           //节点点击事件
           var pform = tree.up("peopleLayout").down("peopleform").getForm();
@@ -64,7 +64,7 @@ Ext.define("core.controller.PeopleController", {
       "peopleform button[ref=save]": {
         click: function(btn) {
           var pform = btn.up("peopleform").getForm();
-          var orgTree = btn.up('peopleLayout').down("orgTreeShow");
+          var orgTree = btn.up('peopleLayout').down("orgTreePeo");
           var curSelNode = orgTree.getSelectionModel().getSelection();
 //          alert(curSelNode[0].raw.orgId);
           if (pform.findField("isAdd").getValue() === '1') {
@@ -105,10 +105,10 @@ Ext.define("core.controller.PeopleController", {
   },
   views: [
     "core.view.PeopleLayout",
-    "core.view.OrgTreeShow",
+    "core.view.OrgTreePeo",
     "core.view.PeopleForm",
     "core.view.PeopleGrid"
   ],
-  stores: ["core.store.PeopleStore", "core.store.OrgStore1"],
+  stores: ["core.store.PeopleStore", "core.store.OrgStore"],
   models: ["core.model.PeopleModel"]
 });

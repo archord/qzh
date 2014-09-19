@@ -16,7 +16,8 @@ Ext.define("core.view.CbfLayout", {
       title: "地区列表",
       region: 'west',
       // iconCls:'goodtype_tree',
-      xtype: "orgTreeShow2",
+      xtype: "orgTreeCbf",
+      store: Ext.create('core.store.OrgStore'),
       margins: '5 2 5 5',
       width: 150
     }, {
@@ -49,4 +50,12 @@ Ext.define("core.view.CbfLayout", {
 
         }]
     }]
+//  ,
+//  initComponent: function() {
+//    Ext.apply(this, {
+//      store: Ext.create('core.store.OrgStore')
+//    });
+//
+//    this.callParent(arguments);
+//  }
 });

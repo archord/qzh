@@ -16,7 +16,7 @@ Ext.define("core.controller.DkController", {
 //          store.filter("id", 0);
         }
       },
-      "orgTreeShow3": {
+      "orgTreeDk": {
         itemclick: function(tree, record, item, index, e, eOpts) {
           //节点点击事件
           var pform = tree.up("dkLayout").down("dkform").getForm();
@@ -69,7 +69,7 @@ Ext.define("core.controller.DkController", {
       "dkform button[ref=save]": {
         click: function(btn) {
           var pform = btn.up("dkform").getForm();
-          var orgTree = btn.up('dkLayout').down("orgTreeShow3");
+          var orgTree = btn.up('dkLayout').down("orgTreeDk");
           var curSelNode = orgTree.getSelectionModel().getSelection();
 //          alert(curSelNode[0].raw.orgId);
           if (pform.findField("isAdd").getValue() === '1') {
@@ -110,10 +110,10 @@ Ext.define("core.controller.DkController", {
   },
   views: [
     "core.view.DkLayout",
-    "core.view.OrgTreeShow3",
+    "core.view.OrgTreeDk",
     "core.view.DkForm",
     "core.view.DkGrid"
   ],
-  stores: ["core.store.DkStore", "core.store.OrgStore3"],
+  stores: ["core.store.DkStore", "core.store.OrgStore"],
   models: ["core.model.DkModel"]
 });

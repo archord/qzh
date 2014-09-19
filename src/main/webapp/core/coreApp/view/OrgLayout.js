@@ -17,6 +17,7 @@ Ext.define("core.view.OrgLayout", {
       region: 'west',
       // iconCls:'goodtype_tree',
       xtype: "orgTree",
+      store: Ext.create('core.store.OrgStore'),
       margins: '5 2 5 5',
       width: 200
     }, {

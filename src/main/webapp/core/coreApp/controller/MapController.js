@@ -16,7 +16,7 @@ Ext.define("core.controller.MapController", {
 //          store.filter("id", 0);
         }
       },
-      "orgTreeShow3": {
+      "orgTreeMap": {
         itemclick: function(tree, record, item, index, e, eOpts) {
           
         }
@@ -26,8 +26,8 @@ Ext.define("core.controller.MapController", {
   },
   views: [
     "core.view.MapLayout",
-    "core.view.OrgTreeShow3"
+    "core.view.OrgTreeMap"
   ],
-  stores: ["core.store.OrgStore3"],
+  stores: ["core.store.OrgStore"],
   models: []
 });

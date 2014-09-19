@@ -16,7 +16,8 @@ Ext.define("core.view.PeopleLayout", {
       title: "地区列表",
       region: 'west',
       // iconCls:'goodtype_tree',
-      xtype: "orgTreeShow",
+      xtype: "orgTreePeo",
+      store: Ext.create('core.store.OrgStore'),
       margins: '5 2 5 5',
       width: 150
     }, {

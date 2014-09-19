@@ -12,14 +12,14 @@ Ext.define("core.view.DkLayout", {
     bodyStyle: 'padding:1px'
   },
   layout: 'border',
-  items: [{
+  items: [Ext.create('core.view.OrgTreeDk', {
       title: "地区列表",
       region: 'west',
       // iconCls:'goodtype_tree',
-      xtype: "orgTreeShow3",
+      store: Ext.create('core.store.OrgStore'),
       margins: '5 2 5 5',
       width: 150
-    }, {
+    }), {
       xtype: "panel",
       region: "center",
       border: 0,
