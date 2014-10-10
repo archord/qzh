@@ -18,67 +18,52 @@ Ext.define("core.controller.DkController", {
       },
       "orgTreeDk": {
         itemclick: function(tree, record, item, index, e, eOpts) {
-          //节点点击事件
-          var pform = tree.up("dkLayout").down("dkform").getForm();
-          pform.findField("isAdd").setValue("1");
 
-          if (record.raw) {
-            if (record.raw.orgLevel < 3) {
-              pform.findField("orgName").setValue("必须在左侧选择村级以下区域");
-              pform.findField("orgId").setValue("");
-              pform.findField("orgLevel").setValue(record.raw.orgLevel);
-            } else {
-              pform.findField("orgName").setValue(record.raw.orgName);
-              pform.findField("orgId").setValue(record.raw.orgId);
-              pform.findField("orgLevel").setValue(record.raw.orgLevel);
-            }
-          }
         }
       },
       "dkgrid": {
         itemclick: function(tree, record, item, index, e, eOpts) {
 
-          var pform = tree.up("dkLayout").down("dkform").getForm();
-          pform.findField("isAdd").setValue("0");
-
-          if (record.raw) {
-            pform.findField("orgName").setValue(" ");
-            pform.findField("orgId").setValue(record.raw.orgId);
-            pform.findField("orgLevel").setValue(record.raw.orgLevel);
-
-            pform.findField("id").setValue(record.raw.id);
-            pform.findField("dkbm").setValue(record.raw.dkbm);
-            pform.findField("dklx").setValue(record.raw.dklx);
-            pform.findField("dkmc").setValue(record.raw.dkmc);
-            pform.findField("dkzjlx").setValue(record.raw.dkzjlx);
-            pform.findField("dkzjhm").setValue(record.raw.dkzjhm);
-            pform.findField("dkdz").setValue(record.raw.dkdz);
-            pform.findField("yzbm").setValue(record.raw.yzbm);
-            pform.findField("lxdh").setValue(record.raw.lxdh);
-            pform.findField("dkcysl").setValue(record.raw.dkcysl);
-            pform.findField("dkdcrq").setValue(record.raw.dkdcrq);
-            pform.findField("dkdcy").setValue(record.raw.dkdcy);
-            pform.findField("dkdcjs").setValue(record.raw.dkdcjs);
-            pform.findField("gsjs").setValue(record.raw.gsjs);
-            pform.findField("gsjsr").setValue(record.raw.gsjsr);
-            pform.findField("gsshrq").setValue(record.raw.gsshrq);
-            pform.findField("gsshr").setValue(record.raw.gsshr);
+        }
+      },
+      "dkgrid button[ref=add]": {
+        click: function(btn) {
+          var orgTree = btn.up('dkLayout').down("orgTreeDk");
+          var curSelNode = orgTree.getSelectionModel().getSelection();
+          if (curSelNode.length>0) {
+            if (curSelNode[0].raw.orgLevel < 3) {
+              Ext.MessageBox.alert("提示","必须在左侧选择村级以下区域");
+            } else {
+              var dkWin = Ext.create("core.view.DkForm");
+              dkWin.show();
+            }
           }
         }
       },
-      "dkform button[ref=save]": {
+      "dkgrid button[ref=del]": {
         click: function(btn) {
-          var pform = btn.up("dkform").getForm();
-          var orgTree = btn.up('dkLayout').down("orgTreeDk");
-          var curSelNode = orgTree.getSelectionModel().getSelection();
-//          alert(curSelNode[0].raw.orgId);
-          if (pform.findField("isAdd").getValue() === '1') {
-            if (pform.findField("orgId").getValue() === "" || pform.findField("orgLevel").getValue() < 3) {
-              pform.findField("orgName").setValue("必须在左侧选择村级以下区域");
-              alert("必须在左侧选择村级以下区域!");
-              return;
+          Ext.MessageBox.confirm("注意", "是否删除该记录？", function(btn) {
+            if (btn === "yes") {
+              console.log("delete record");
+            } else {
+              console.log("not delete record");
             }
+          });
+        }
+      },
+      "dkwindow button[ref=save]": {
+        click: function(btn) {
+          var orgTree = Ext.getCmp("orgTreeDk");
+          var curSelNode = orgTree.getSelectionModel().getSelection();
+          if (curSelNode[0].raw) {
+            if (curSelNode[0].raw.orgLevel < 3) {
+              Ext.MessageBox.alert("提示","必须在左侧选择村级以下区域");
+              return;
+            } 
+          }else{
+            return;
           }
+          var pform = btn.up("dkwindow").down("form").getForm();
           if (pform.isValid()) {
             pform.submit({
               url: "./dk/add_dk.do",

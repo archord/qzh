@@ -10,13 +10,14 @@
     <mapping class="com.mseeworld.qzh.model.Fbf"/>
     <mapping class="com.mseeworld.qzh.model.Cbht"/>
     <mapping class="com.mseeworld.qzh.model.CbjyqzQzhf"/>
+    <mapping class="com.mseeworld.qzh.model.Dk"/>
     <mapping class="com.mseeworld.qzh.model.Qslyzlfj"/>
     <mapping class="com.mseeworld.qzh.model.Cbdkxx"/>
     <mapping class="com.mseeworld.qzh.model.CbfJtcy"/>
     <mapping class="com.mseeworld.qzh.model.Category"/>
     <mapping class="com.mseeworld.qzh.model.Cart"/>
-    <mapping class="com.mseeworld.qzh.model.AOrganization"/>
     <mapping class="com.mseeworld.qzh.model.OrderFormDto"/>
+    <mapping class="com.mseeworld.qzh.model.AOrganization"/>
     <mapping class="com.mseeworld.qzh.model.CartItem"/>
     <mapping class="com.mseeworld.qzh.model.Product"/>
     <mapping class="com.mseeworld.qzh.model.Cbjyqz"/>

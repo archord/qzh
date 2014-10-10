@@ -4,6 +4,7 @@
 Ext.define("core.view.DkLayout", {
   extend: 'Ext.panel.Panel',
   alias: 'widget.dkLayout',
+  id: "dkLayout",
   title: "<center height=40>承包方信息管理</center>",
   closable:true,
   defaults: {
@@ -15,6 +16,7 @@ Ext.define("core.view.DkLayout", {
   items: [Ext.create('core.view.OrgTreeDk', {
       title: "地区列表",
       region: 'west',
+      id: "orgTreeDk",
       // iconCls:'goodtype_tree',
       store: Ext.create('core.store.OrgStore'),
       margins: '5 2 5 5',
@@ -24,18 +26,8 @@ Ext.define("core.view.DkLayout", {
       region: "center",
       border: 0,
       header: false,
-      layout: "border",
+      layout: "fit",
       items: [{
-          //xtype : 'panel',
-          region: 'north',
-          // iconCls:'goodtype_tree',
-          margins: '5 0 5 0',
-          height: 360,
-          title: '承包方详细信息',
-          collapsible: true, // 可以被折叠
-          xtype: "dkform"
-
-        }, {
           // iconCls:'good_table',
           collapsible: true, // 可以被折叠
           //xtype : 'panel',
@@ -45,7 +37,7 @@ Ext.define("core.view.DkLayout", {
           xtype: "dkgrid",
           bbar: [],
 //          store: Ext.create("core.store.PeopleStore", {}),
-          title: "人员列表"
+          title: "地块信息列表"
 
         }]
     }]

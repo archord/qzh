@@ -1,17 +1,16 @@
 package com.mseeworld.qzh.controller;
 
-import com.mseeworld.qzh.dao.CbfDao;
-import com.mseeworld.qzh.model.Cbf;
+import com.mseeworld.qzh.dao.DkDao;
+import com.mseeworld.qzh.model.Dk;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 import java.util.List;
-import javax.annotation.Resource;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -19,20 +18,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/dk")
 public class DkController {
  
-  private CbfDao cbfDao;
+  private DkDao dkDao;
+  private Dk dk;
 
   /**
    * @param cbfDao the cbfDao to set
    */
-  @Resource
-  public void setCbfDao(CbfDao cbfDao) {
-    this.cbfDao = cbfDao;
+//  @Resource
+  public void setDkDao(DkDao dkDao) {
+    this.dkDao = dkDao;
+  }
+
+  public void setDk(Dk dk) {
+    this.dk = dk;
   }
 
   @RequestMapping(value = "/listall_dk", method = RequestMethod.GET)
   public void listAllPeople(HttpServletRequest request, PrintWriter writer) {
     int n = 10;
-    List<Cbf> cbfs = cbfDao.getFirstNOfAll(n);
+    List<Dk> cbfs = dkDao.getFirstNOfAll(n);
 
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
@@ -41,7 +45,7 @@ public class DkController {
     rstStr.append(10);
     rstStr.append(",rows:[");
     int i = 0;
-    for (Cbf cbf : cbfs) {
+    for (Dk cbf : cbfs) {
       try {
         String tStr = ow.writeValueAsString(cbf);
         rstStr.append(tStr);
@@ -57,61 +61,43 @@ public class DkController {
   }
 
   @RequestMapping(value = "/add_dk", method = RequestMethod.POST)
-  public void addPeople(HttpServletRequest request, HttpServletResponse response, PrintWriter writer) throws IOException {
-    String id = request.getParameter("id");
-    String orgId = request.getParameter("orgId");
-    
-    String cbfbm = request.getParameter("cbfbm");
-    String cbflx = request.getParameter("cbflx");
-    String cbfmc = request.getParameter("cbfmc");
-    String cbfzjlx = request.getParameter("cbfzjlx");
-    String cbfzjhm = request.getParameter("cbfzjhm");
-    String cbfdz = request.getParameter("cbfdz");
-    String yzbm = request.getParameter("yzbm");
-    String lxdh = request.getParameter("lxdh");
-    String cbfcysl = request.getParameter("cbfcysl");
-    String cbfdcrq = request.getParameter("cbfdcrq");
-    String cbfdcy = request.getParameter("cbfdcy");
-    String cbfdcjs = request.getParameter("cbfdcjs");
-    String gsjs = request.getParameter("gsjs");
-    String gsjsr = request.getParameter("gsjsr");
-    String gsshrq = request.getParameter("gsshrq");
-    String gsshr = request.getParameter("gsshr");
-
-    String isAdd = request.getParameter("isAdd");
-
-    Cbf cbf = new Cbf();
-    if (!id.equals("")) {
-      cbf.setId(Long.parseLong(id));
-    }
-    cbf.setOrgId(Long.parseLong(orgId));
-    cbf.setCbfbm(cbfbm);
-    cbf.setCbflx('1');
-    cbf.setCbfmc(cbfmc);
-    cbf.setCbfzjlx('1');
-    cbf.setCbfzjhm(cbfzjhm);
-    cbf.setCbfdz(cbfdz);
-    cbf.setYzbm(yzbm);
-    cbf.setLxdh(lxdh);
-    if(!cbfcysl.isEmpty())
-    cbf.setCbfcysl(Integer.parseInt(cbfcysl));
-    cbf.setCbfdcrq(new Date());
-    cbf.setCbfdcy(cbfdcy);
-    cbf.setCbfdcjs(cbfdcjs);
-    cbf.setGsjs(gsjs);
-    cbf.setGsjsr(gsjsr);
-    cbf.setGsshrq(new Date());
-    cbf.setGsshr(gsshr);
-
+  public void addPeople(@ModelAttribute Dk obj,Map model) throws IOException {
+//    String id = request.getParameter("id");
+//    String orgId = request.getParameter("orgId");
+//    
+//    String dkbm = request.getParameter("dkbm");
+//    String dkmc = request.getParameter("dkmc");
+//    String syqxz = request.getParameter("syqxz");
+//    String dklb = request.getParameter("dklb");
+//    String tdlylx = request.getParameter("tdlylx");
+//    String dldj = request.getParameter("dldj");
+//    String tdyt = request.getParameter("tdyt");
+//    String sfjbnt = request.getParameter("sfjbnt");
+//    String scmj = request.getParameter("scmj");
+//    String dkdz = request.getParameter("dkdz");
+//    String dkxz = request.getParameter("dkxz");
+//    String dknz = request.getParameter("dknz");
+//    String dkbz = request.getParameter("dkbz");
+//    String dkbzxx = request.getParameter("dkbzxx");
+//    String zjrxm = request.getParameter("zjrxm");
+//
+//    String isAdd = request.getParameter("isAdd");
+//
+//    Dk obj = (Dk)command;
+//    if (!id.equals("")) {
+//      obj.setId(Long.parseLong(id));
+//    }
+//    System.out.println("dklb="+dklb);
+//    System.out.println("dkbm="+dk.getDkbm());
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-    String tStr = ow.writeValueAsString(cbf);
+    String tStr = ow.writeValueAsString(obj);
     System.out.println(tStr);
-    cbfDao.saveOrUpdate(cbf);
+//    dkDao.saveOrUpdate(obj);
     
-    response.setCharacterEncoding("UTF-8");
-    response.setContentType("text/html;  charset=UTF-8");
-
-    writer.write("{success:true, msg:'发包方信息保存成功!'}");
+//    response.setCharacterEncoding("UTF-8");
+//    response.setContentType("text/html;  charset=UTF-8");
+//
+//    writer.write("{success:true, msg:'发包方信息保存成功!'}");
   }
 
   /**
@@ -127,6 +113,13 @@ public class DkController {
 //		}else{
 //			writer.write("{success:false,msg:'删除失败!'}");
 //		}
+  }
+
+  /**
+   * @return the dk
+   */
+  public Dk getDk() {
+    return dk;
   }
 
 }
