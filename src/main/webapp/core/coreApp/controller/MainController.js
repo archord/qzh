@@ -149,6 +149,27 @@ Ext.define("core.controller.MainController", {
               funController: "core.controller.MapController",
               funViewName: "core.view.MapLayout"
             });
+          } else if (record.data["id"] === "cbht-manage") {
+            self.addFunItem({
+              mainView: mainView,
+              funViewXtype: "cbhtLayout",
+              funController: "core.controller.CbhtController",
+              funViewName: "core.view.CbhtLayout"
+            });
+          } else if (record.data["id"] === "lzhht-manage") {
+            self.addFunItem({
+              mainView: mainView,
+              funViewXtype: "lzhhtLayout",
+              funController: "core.controller.LzhhtController",
+              funViewName: "core.view.LzhhtLayout"
+            });
+          } else if (record.data["id"] === "qzh-manage") {
+            self.addFunItem({
+              mainView: mainView,
+              funViewXtype: "qzhLayout",
+              funController: "core.controller.QzhController",
+              funViewName: "core.view.QzhLayout"
+            });
           }
         }//itemclick end
       }//"westview treepanel" end

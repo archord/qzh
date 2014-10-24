@@ -1,11 +1,11 @@
 /**
  * 类别管理布局类
  */
-Ext.define("core.view.DkLayout", {
+Ext.define("core.view.CbhtLayout", {
   extend: 'Ext.panel.Panel',
-  alias: 'widget.dkLayout',
-  id: "dkLayout",
-  title: "<center height=40>地块信息管理</center>",
+  alias: 'widget.cbhtLayout',
+  id: "cbhtLayout",
+  title: "<center height=40>承包合同管理</center>",
   closable: true,
   defaults: {
     split: true, // 可以设置好看点的折叠效果
@@ -13,10 +13,10 @@ Ext.define("core.view.DkLayout", {
     bodyStyle: 'padding:1px'
   },
   layout: 'border',
-  items: [Ext.create('core.view.OrgTreeDk', {
+  items: [Ext.create('core.view.OrgTreeCbht', {
       title: "地区列表",
       region: 'west',
-      id: "orgTreeDk",
+      id: "orgTreeCbht",
       // iconCls:'goodtype_tree',
       store: Ext.create('core.store.OrgStore'),
       margins: '5 2 5 5',
@@ -34,10 +34,10 @@ Ext.define("core.view.DkLayout", {
           //xtype : 'panel',
           region: 'center',
           height: 200,
-          xtype: "dkgrid",
+          xtype: "cbhtgrid",
           bbar: [],
 //          store: Ext.create("core.store.PeopleStore", {}),
-          title: "地块信息列表"
+          title: "承包合同列表"
 
         }]
     }]

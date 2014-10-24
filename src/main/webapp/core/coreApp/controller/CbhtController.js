@@ -1,4 +1,4 @@
-Ext.define("core.controller.DkController", {
+Ext.define("core.controller.CbhtController", {
 //	mixins:{
 //		gridUtils:"core.utils.GridUtils"
 //	},
@@ -8,7 +8,7 @@ Ext.define("core.controller.DkController", {
     var self = this;
     this.control({
       /**showbefor*/
-      "dkLayout": {
+      "cbhtLayout": {
         beforeshow: function(layout, opt) {
           //alert(layout.getXType());
 //          var grid = layout.down("product_grid");
@@ -16,13 +16,13 @@ Ext.define("core.controller.DkController", {
 //          store.filter("id", 0);
         }
       },
-      "orgTreeDk": {
+      "orgTreeCbht": {
         itemclick: function(tree, record, item, index, e, eOpts) {
-          //cannot find dkwindow, so pform is undefined
-          var pform = Ext.getCmp("dkwindow");
+          //cannot find cbhtwindow, so pform is undefined
+          var pform = Ext.getCmp("cbhtwindow");
           if (pform) { // null  undefined NaN empty string("") 0 false //if( typeof foo !== 'undefined' )
-//            console.log(pform);
-//            console.log(pform.findField("orgName").getValue());
+            console.log(pform);
+            console.log(pform.findField("orgName").getValue());
             pform.findField("isAdd").setValue("1");
             if (record.raw) {
               if (record.raw.orgLevel < 3) {
@@ -38,42 +38,42 @@ Ext.define("core.controller.DkController", {
           }
         }
       },
-      "dkgrid": {
+      "cbhtgrid": {
         itemclick: function(tree, record, item, index, e, eOpts) {
         }
       },
-      "dkgrid button[ref=add]": {
+      "cbhtgrid button[ref=add]": {
         click: function(btn) {
-          var orgTree = btn.up('dkLayout').down("orgTreeDk");
-          var curSelNode = orgTree.getSelectionModel().getSelection();
-          if (curSelNode.length > 0) {
-            if (curSelNode[0].raw.orgLevel < 3) {
-              Ext.MessageBox.alert("提示", "必须在左侧选择村级以下区域");
-            } else {
-              var dkWin = Ext.create("core.view.DkForm");
-              dkWin.myExtraParams = {orgId: curSelNode[0].raw.orgId}; // Add additional stuff
-//              dkWin.on('show', function(win) {
+//          var orgTree = btn.up('cbhtLayout').down("orgTreeCbht");
+//          var curSelNode = orgTree.getSelectionModel().getSelection();
+//          if (curSelNode.length > 0) {
+//            if (curSelNode[0].raw.orgLevel < 3) {
+//              Ext.MessageBox.alert("提示", "必须在左侧选择村级以下区域");
+//            } else {
+              var cbhtWin = Ext.create("core.view.CbhtWindow");
+//              cbhtWin.myExtraParams = {orgId: curSelNode[0].raw.orgId}; 
+//              cbhtWin.on('show', function(win) {
 //                console.log('orgId=' + win.myExtraParams.orgId);
 //              });
-              dkWin.show();
-            }
-          } else {
-            Ext.MessageBox.alert("提示", "必须在左侧选择村级以下区域");
-          }
+              cbhtWin.show();
+//            }
+//          } else {
+//            Ext.MessageBox.alert("提示", "必须在左侧选择村级以下区域");
+//          }
         }
       },
-      "dkgrid button[ref=edit]": {
+      "cbhtgrid button[ref=edit]": {
         click: function(btn) {
-          var dkTree = btn.up('dkgrid');
-          var curSelNode = dkTree.getSelectionModel().getSelection();
+          var cbhtTree = btn.up('cbhtgrid');
+          var curSelNode = cbhtTree.getSelectionModel().getSelection();
           if (curSelNode.length > 0) {
-            var dkWin = Ext.create("core.view.DkForm");
-            dkWin.extraParas = {dk: curSelNode[0].raw, idAdd: 0, orgLevel: 3};
-            dkWin.show();
+            var cbhtWin = Ext.create("core.view.CbhtWindow");
+            cbhtWin.extraParas = {cbht: curSelNode[0].raw, idAdd: 0, orgLevel: 3};
+            cbhtWin.show();
           }
         }
       },
-      "dkgrid button[ref=del]": {
+      "cbhtgrid button[ref=del]": {
         click: function(btn) {
           Ext.MessageBox.confirm("注意", "是否删除该记录？", function(btn) {
             if (btn === "yes") {
@@ -84,10 +84,16 @@ Ext.define("core.controller.DkController", {
           });
         }
       },
-      "dkwindow button[ref=save]": {
+      "fbfwindow button[ref=save]": {
         click: function(btn) {
-          var orgTree = Ext.getCmp("orgTreeDk");
-          var pform = btn.up("dkwindow").down("form").getForm();
+          alert(1);
+        }
+      },
+      "cbhtwindow button[ref=save]": {
+        click: function(btn) {
+          console.log("cbhtwindow button[ref=save]");
+          var orgTree = Ext.getCmp("orgTreeCbht");
+          var pform = btn.up("cbhtwindow").down("form").getForm();
           if (pform.findField("isAdd").getValue() === '1') {
             var curSelNode = orgTree.getSelectionModel().getSelection();
             if (curSelNode[0].raw) {
@@ -107,13 +113,13 @@ Ext.define("core.controller.DkController", {
           }
           if (pform.isValid()) {
             pform.submit({
-              url: "./dk/add_dk.do",
+              url: "./cbht/add_cbht.do",
               success: function(form, action) {
-                var dkgrid = Ext.getCmp("dkgrid");
-                var store = dkgrid.getStore();
+                var cbhtgrid = Ext.getCmp("cbhtgrid");
+                var store = cbhtgrid.getStore();
                 store.load();
                 Ext.MessageBox.alert("提示", "保存成功！");
-                btn.up("dkwindow").close();
+                btn.up("cbhtwindow").close();
               },
               failure: function(form, action) {
                 var resObj = Ext.decode(action.response.responseText);
@@ -132,11 +138,15 @@ Ext.define("core.controller.DkController", {
     });
   },
   views: [
-    "core.view.DkLayout",
-    "core.view.OrgTreeDk",
-    "core.view.DkForm",
-    "core.view.DkGrid"
+    "core.view.CbhtLayout",
+    "core.view.OrgTreeCbht",
+    "core.view.CbhtGrid",
+    "core.view.CbhtWindow",
+    "core.view.CbhtForm",
+    "core.view.CbhtDkGrid",
+    "core.view.PeopleGrid",
+    "core.view.FbfWindow"
   ],
-  stores: ["core.store.DkStore", "core.store.OrgStore"],
-  models: ["core.model.DkModel"]
+  stores: ["core.store.CbhtStore", "core.store.CbhtDkStore", "core.store.OrgStore", "core.store.PeopleStore"],
+  models: ["core.model.CbhtModel", "core.model.DkModel"]
 });

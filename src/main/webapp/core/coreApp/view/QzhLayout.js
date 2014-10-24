@@ -6,7 +6,7 @@ Ext.define("core.view.DkLayout", {
   alias: 'widget.dkLayout',
   id: "dkLayout",
   title: "<center height=40>地块信息管理</center>",
-  closable: true,
+  closable:true,
   defaults: {
     split: true, // 可以设置好看点的折叠效果
     collapsible: true, // 可以被折叠
@@ -27,13 +27,13 @@ Ext.define("core.view.DkLayout", {
       border: 0,
       header: false,
       layout: "fit",
-      margins: '5 0 5 0',
       items: [{
           // iconCls:'good_table',
           collapsible: true, // 可以被折叠
           //xtype : 'panel',
           region: 'center',
           height: 200,
+          margins: '5 0 5 0',
           xtype: "dkgrid",
           bbar: [],
 //          store: Ext.create("core.store.PeopleStore", {}),

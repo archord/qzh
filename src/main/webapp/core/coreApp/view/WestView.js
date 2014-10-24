@@ -91,11 +91,11 @@ Ext.define("core.view.WestView", {
             expanded: true,
             children: [
               {
-                id: "cght-manage",
+                id: "cbht-manage",
                 text: "承包合同管理",
                 leaf: true
               }, {
-                id: "lzht-manage",
+                id: "lzhht-manage",
                 text: "流转合同管理",
                 leaf: true
               }

@@ -6,7 +6,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
 import org.springframework.stereotype.Controller;
@@ -17,20 +21,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/dk")
 public class DkController {
- 
+
   private DkDao dkDao;
-  private Dk dk;
 
   /**
    * @param cbfDao the cbfDao to set
    */
-//  @Resource
+  @Resource
   public void setDkDao(DkDao dkDao) {
     this.dkDao = dkDao;
-  }
-
-  public void setDk(Dk dk) {
-    this.dk = dk;
   }
 
   @RequestMapping(value = "/listall_dk", method = RequestMethod.GET)
@@ -61,10 +60,11 @@ public class DkController {
   }
 
   @RequestMapping(value = "/add_dk", method = RequestMethod.POST)
-  public void addPeople(@ModelAttribute Dk obj,Map model) throws IOException {
-//    String id = request.getParameter("id");
+  public void addPeople(@ModelAttribute("dk") Dk obj, Map model, HttpServletResponse response, PrintWriter writer) {
+
+      //    String id = request.getParameter("id");
 //    String orgId = request.getParameter("orgId");
-//    
+//
 //    String dkbm = request.getParameter("dkbm");
 //    String dkmc = request.getParameter("dkmc");
 //    String syqxz = request.getParameter("syqxz");
@@ -89,15 +89,21 @@ public class DkController {
 //    }
 //    System.out.println("dklb="+dklb);
 //    System.out.println("dkbm="+dk.getDkbm());
-    ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-    String tStr = ow.writeValueAsString(obj);
-    System.out.println(tStr);
-//    dkDao.saveOrUpdate(obj);
+    response.setCharacterEncoding("UTF-8");
+    response.setContentType("text/html;  charset=UTF-8");
     
-//    response.setCharacterEncoding("UTF-8");
-//    response.setContentType("text/html;  charset=UTF-8");
-//
-//    writer.write("{success:true, msg:'发包方信息保存成功!'}");
+    try {
+//      Dk aa = new Dk();
+      ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+      String tStr = ow.writeValueAsString(obj);
+//      System.out.println(tStr);
+      dkDao.saveOrUpdate(obj);
+
+      writer.write("{success:true, msg:'地块信息保存成功!'}");
+    } catch (IOException ex) {
+      writer.write("{success:false, msg:'地块信息保存失败!'}");
+      Logger.getLogger(DkController.class.getName()).log(Level.SEVERE, null, ex);
+    }
   }
 
   /**
@@ -113,13 +119,6 @@ public class DkController {
 //		}else{
 //			writer.write("{success:false,msg:'删除失败!'}");
 //		}
-  }
-
-  /**
-   * @return the dk
-   */
-  public Dk getDk() {
-    return dk;
   }
 
 }

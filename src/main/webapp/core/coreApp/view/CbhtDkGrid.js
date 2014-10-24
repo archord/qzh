@@ -1,11 +1,9 @@
-/**
- * 商品数据列表视图类
- * */
-Ext.define("core.view.DkGrid", {
+
+Ext.define("core.view.CbhtDkGrid", {
   extend: "Ext.grid.Panel",
-  alias: "widget.dkgrid",
-  id: "dkgrid",
-  store: "core.store.DkStore",
+  alias: "widget.cbhtdkgrid",
+  id: "cbhtdkgrid",
+  store: "core.store.CbhtDkStore",
   border: 0,
   selModel: {
     selType: "checkboxmodel"
@@ -54,7 +52,7 @@ Ext.define("core.view.DkGrid", {
   ],
   bbar: {
     xtype: 'pagingtoolbar',
-    store: 'core.store.DkStore',
+    store: 'core.store.CbhtDkStore',
     dock: 'bottom',
     displayInfo: true
   },
@@ -62,13 +60,13 @@ Ext.define("core.view.DkGrid", {
   columnLines: true, //展示竖线
   columns: [
     {xtype: 'rownumberer'},
-    {text: "地块编码", dataIndex: "dkbm", width: 100, field: {
+    {text: "地块编码", dataIndex: "cbhtbm", width: 100, field: {
         xtype: "textfield"
       }},
-    {text: "地块名称", dataIndex: "dkmc", width: 100, field: {
+    {text: "地块名称", dataIndex: "cbhtmc", width: 100, field: {
         xtype: "textfield"
       }},
-    {text: "地块类别", dataIndex: "dklb", width: 70, field: {
+    {text: "地块类别", dataIndex: "cbhtlb", width: 70, field: {
         xtype: "textfield"
       }},
     {text: "土地用途", dataIndex: "tdyt", width: 70, field: {
@@ -77,16 +75,16 @@ Ext.define("core.view.DkGrid", {
     {text: "实测面积", dataIndex: "scmj", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "地块东至", dataIndex: "dkdz", width: 70, field: {
+    {text: "地块东至", dataIndex: "cbhtdz", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "地块西至", dataIndex: "dkxz", width: 70, field: {
+    {text: "地块西至", dataIndex: "cbhtxz", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "地块南至", dataIndex: "dknz", width: 70, field: {
+    {text: "地块南至", dataIndex: "cbhtnz", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "地块北至", dataIndex: "dkbz", width: 70, field: {
+    {text: "地块北至", dataIndex: "cbhtbz", width: 70, field: {
         xtype: "textfield"
       }}
   ],

@@ -36,7 +36,7 @@
     <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />  
     <property name="ignoreResourceNotFound" value="false" />
     <property name="locations">
-      <value>classpath:database.properties</value>
+      <value>classpath:database_master.properties</value>
     </property>
   </bean>
 	
@@ -77,6 +77,7 @@
   <bean id="peopleService" class="com.mseeworld.qzh.service.PeopleServiceImpl"></bean>
   <bean id="fbfDao" class="com.mseeworld.qzh.dao.FbfDaoImpl"></bean>
   <bean id="cbfDao" class="com.mseeworld.qzh.dao.CbfDaoImpl"></bean>
+  <bean id="dkDao" class="com.mseeworld.qzh.dao.DkDaoImpl"></bean>
 
   <bean id="hibernateUtil" class="com.mseeworld.qzh.util.HibernateUtil"></bean>
   <bean id="userDao" class="com.mseeworld.qzh.dao.UserDAOImpl"></bean>

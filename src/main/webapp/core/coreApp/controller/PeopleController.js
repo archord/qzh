@@ -70,7 +70,7 @@ Ext.define("core.controller.PeopleController", {
           if (pform.findField("isAdd").getValue() === '1') {
             if (pform.findField("orgId").getValue() === "" || pform.findField("orgLevel").getValue() < 3) {
               pform.findField("orgName").setValue("必须在左侧选择村级以下区域");
-              alert("必须在左侧选择村级以下区域!");
+              Ext.MessageBox.alert("提示","必须在左侧选择村级以下区域!");
               return;
             }
           }

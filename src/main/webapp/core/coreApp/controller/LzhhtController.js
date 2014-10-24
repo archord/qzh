@@ -21,8 +21,8 @@ Ext.define("core.controller.DkController", {
           //cannot find dkwindow, so pform is undefined
           var pform = Ext.getCmp("dkwindow");
           if (pform) { // null  undefined NaN empty string("") 0 false //if( typeof foo !== 'undefined' )
-//            console.log(pform);
-//            console.log(pform.findField("orgName").getValue());
+            console.log(pform);
+            console.log(pform.findField("orgName").getValue());
             pform.findField("isAdd").setValue("1");
             if (record.raw) {
               if (record.raw.orgLevel < 3) {

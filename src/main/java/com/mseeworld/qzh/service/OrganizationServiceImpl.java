@@ -44,6 +44,7 @@ public class OrganizationServiceImpl implements OrganizationService {
       rstStr.append("',iconCls: 'tree_model_lv");
       rstStr.append(org.getOrgLevel());
       rstStr.append("',expandable:true,");
+      rstStr.append("expanded:true,");
       if (org.getParentId() == 0) {
         rstStr.append("parent:'root'");
       } else {
