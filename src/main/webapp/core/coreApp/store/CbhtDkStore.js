@@ -6,7 +6,7 @@ Ext.define("core.store.CbhtDkStore", {
   //autoSync:true,//与服务器同步
   proxy: {
     type: "ajax",
-    url: "./cbht/listall_cbht.do",
+    url: "./dk/list_dk.do",
     reader: {
       type: "json",
       root: "rows",

@@ -20,7 +20,7 @@
 
   <!-- 上传拦截，如最大上传值及最小上传值 -->
   <bean id="multipartResolver"
-              class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
     <!-- one of the properties available; the maximum file size in bytes -->
     <property name="maxUploadSize" value="7277180" />
   </bean> 
@@ -36,7 +36,7 @@
     <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />  
     <property name="ignoreResourceNotFound" value="false" />
     <property name="locations">
-      <value>classpath:database_master.properties</value>
+      <value>classpath:database.properties</value>
     </property>
   </bean>
 	
@@ -64,7 +64,8 @@
       </props>
     </property>
   </bean>
-    
+  
+
   <!-- Declare a transaction manager-->
   <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
     <property name="sessionFactory" ref="sessionFactory" />
@@ -78,6 +79,7 @@
   <bean id="fbfDao" class="com.mseeworld.qzh.dao.FbfDaoImpl"></bean>
   <bean id="cbfDao" class="com.mseeworld.qzh.dao.CbfDaoImpl"></bean>
   <bean id="dkDao" class="com.mseeworld.qzh.dao.DkDaoImpl"></bean>
+  <bean id="cbhtDao" class="com.mseeworld.qzh.dao.CbhtDaoImpl"></bean>
 
   <bean id="hibernateUtil" class="com.mseeworld.qzh.util.HibernateUtil"></bean>
   <bean id="userDao" class="com.mseeworld.qzh.dao.UserDAOImpl"></bean>

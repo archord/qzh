@@ -18,23 +18,12 @@ Ext.define("core.controller.DkController", {
       },
       "orgTreeDk": {
         itemclick: function(tree, record, item, index, e, eOpts) {
-          //cannot find dkwindow, so pform is undefined
-          var pform = Ext.getCmp("dkwindow");
-          if (pform) { // null  undefined NaN empty string("") 0 false //if( typeof foo !== 'undefined' )
-//            console.log(pform);
-//            console.log(pform.findField("orgName").getValue());
-            pform.findField("isAdd").setValue("1");
-            if (record.raw) {
-              if (record.raw.orgLevel < 3) {
-                pform.findField("orgName").setValue("必须在左侧选择村级以下区域");
-                pform.findField("orgId").setValue("");
-                pform.findField("orgLevel").setValue(record.raw.orgLevel);
-              } else {
-                pform.findField("orgName").setValue(record.raw.orgName);
-                pform.findField("orgId").setValue(record.raw.orgId);
-                pform.findField("orgLevel").setValue(record.raw.orgLevel);
+          var dkgrid = Ext.getCmp("dkgrid");
+          var store = dkgrid.getStore();
+          if (record.raw) {
+              if (record.raw.orgLevel >= 3) {
+                store.load({params: {orgId: record.raw.orgId}});
               }
-            }
           }
         }
       },
@@ -50,7 +39,7 @@ Ext.define("core.controller.DkController", {
             if (curSelNode[0].raw.orgLevel < 3) {
               Ext.MessageBox.alert("提示", "必须在左侧选择村级以下区域");
             } else {
-              var dkWin = Ext.create("core.view.DkForm");
+              var dkWin = Ext.create("core.view.DkWindow");
               dkWin.myExtraParams = {orgId: curSelNode[0].raw.orgId}; // Add additional stuff
 //              dkWin.on('show', function(win) {
 //                console.log('orgId=' + win.myExtraParams.orgId);
@@ -67,7 +56,7 @@ Ext.define("core.controller.DkController", {
           var dkTree = btn.up('dkgrid');
           var curSelNode = dkTree.getSelectionModel().getSelection();
           if (curSelNode.length > 0) {
-            var dkWin = Ext.create("core.view.DkForm");
+            var dkWin = Ext.create("core.view.DkWindow");
             dkWin.extraParas = {dk: curSelNode[0].raw, idAdd: 0, orgLevel: 3};
             dkWin.show();
           }
@@ -134,7 +123,7 @@ Ext.define("core.controller.DkController", {
   views: [
     "core.view.DkLayout",
     "core.view.OrgTreeDk",
-    "core.view.DkForm",
+    "core.view.DkWindow",
     "core.view.DkGrid"
   ],
   stores: ["core.store.DkStore", "core.store.OrgStore"],

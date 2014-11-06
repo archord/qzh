@@ -12,7 +12,6 @@ Ext.define("core.view.CbhtDkGrid", {
   frame: true,
   tbar: [
     {xtype: 'button', text: '添加', ref: 'add', iconCls: 'table_add'}, '|',
-    {xtype: 'button', text: '修改', ref: 'edit', iconCls: 'table_edit'}, '|',
     {xtype: 'button', text: '删除', ref: 'del', iconCls: 'table_remove'},
     "->",
     '按名称查询:',
@@ -60,13 +59,13 @@ Ext.define("core.view.CbhtDkGrid", {
   columnLines: true, //展示竖线
   columns: [
     {xtype: 'rownumberer'},
-    {text: "地块编码", dataIndex: "cbhtbm", width: 100, field: {
+    {text: "地块编码", dataIndex: "dkbm", width: 100, field: {
         xtype: "textfield"
       }},
-    {text: "地块名称", dataIndex: "cbhtmc", width: 100, field: {
+    {text: "地块名称", dataIndex: "dkmc", width: 100, field: {
         xtype: "textfield"
       }},
-    {text: "地块类别", dataIndex: "cbhtlb", width: 70, field: {
+    {text: "地块类别", dataIndex: "dklb", width: 70, field: {
         xtype: "textfield"
       }},
     {text: "土地用途", dataIndex: "tdyt", width: 70, field: {

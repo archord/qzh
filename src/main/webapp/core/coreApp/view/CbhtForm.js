@@ -2,6 +2,7 @@ Ext.define("core.view.CbhtForm", {
   extend: 'Ext.form.Panel',
   alias: "widget.cbhtform",
   align: "left",
+  id: "cbhtformid",
   frame: true,
 //  xtype: "form",
 //  ref: "cbhtform",
@@ -15,6 +16,12 @@ Ext.define("core.view.CbhtForm", {
   },
   defaultType: 'textfield',
   border: 0,
+  tbar: [{
+      xtype: "button",
+      ref: "save",
+      iconCls: 'table_save',
+      text: "保存"
+    }],
   items: [{
       colspan: 2,
       xtype: "textfield",
@@ -46,7 +53,7 @@ Ext.define("core.view.CbhtForm", {
       xtype: "textfield",
       fieldLabel: "主键",
       name: "id",
-      value: "0",
+      value: 0,
       hidden: true
     }, {
       xtype: "textfield",
@@ -63,7 +70,7 @@ Ext.define("core.view.CbhtForm", {
     }, {
       xtype: "textfield",
       fieldLabel: "发包方编码",
-      name: "fbfmc",
+      name: "fbfbm",
       allowBlank: false,
       blankText: '发包方编码不能为空',
       readOnly: false,
@@ -89,7 +96,23 @@ Ext.define("core.view.CbhtForm", {
       name: "cbfbm",
       allowBlank: false,
       blankText: '承包方编码不能为空',
-      readOnly: false
+      readOnly: false,
+      listeners: {
+        render: function(component) {
+          component.getEl().on('click', function(event, el) {
+//            component.setValue("TEXT");
+            var cbhtWin;
+            if (!cbhtWin) {
+              cbhtWin = Ext.create("core.view.CbfWindow");
+            }
+            if (cbhtWin.isVisible()) {
+              cbhtWin.hide();
+            } else {
+              cbhtWin.show();
+            }
+          });
+        }
+      }
     }, {
       xtype: "datefield",
       fieldLabel: "承包期限起",

@@ -13,7 +13,11 @@ import java.util.List;
  */
 public interface DkDao extends BaseHibernateDao<Dk> {
 
-  public List<Dk> getByOrgId(long orgId);
+  public List<Dk> getByOrgId(int orgId, int limit);
+  
+  public List<Dk> getByCbhtId(int cbhtId, int limit);
 
-  public List<Dk> getFirstNOfAll(int n);
+  public List<Dk> getFirstNOfAll(int limit);
+  
+  public void updateCbhtId(String dkIds, String cbhtId);
 }

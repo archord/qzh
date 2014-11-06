@@ -1,8 +1,8 @@
-Ext.define("core.view.FbfWindow", {
+Ext.define("core.view.DkSearchWindow", {
   extend: 'Ext.Window',
-  alias: "widget.fbfwindow",
+  alias: "widget.dksearchwindow",
   bodyStyle: 'background:transparent',
-  title: "发包方列表",
+  title: "地块列表",
   layout: "border",
   width: 600,
   height: 300,
@@ -18,8 +18,8 @@ Ext.define("core.view.FbfWindow", {
       title: "组织机构列表",
       region: 'west',
       // iconCls:'goodtype_tree',
-      xtype: "orgTreeCbht",
-      id: "orgTreeCbht_fbf",
+      xtype: "orgTreeCbhtDkSearch",
+      id: "orgTreeCbht_dkSearch",
       store: Ext.create('core.store.OrgStore'),
       margins: '5 2 5 5',
       width: 150,
@@ -33,11 +33,11 @@ Ext.define("core.view.FbfWindow", {
       region: 'center',
       height: 300,
       margins: '5 0 5 0',
-      xtype: "people_grid",
-      multiSelect: false,
+      xtype: "dkgrid",
+      multiSelect: true,
       tbar: [],
 //          store: Ext.create("core.store.PeopleStore", {}),
-      title: "人员列表"
+      title: "地块列表"
 
     }
     //使用下面的方法会报错

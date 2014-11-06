@@ -60,31 +60,34 @@ Ext.define("core.view.CbhtGrid", {
   columnLines: true, //展示竖线
   columns: [
     {xtype: 'rownumberer'},
-    {text: "地块编码", dataIndex: "cbhtbm", width: 100, field: {
+    {text: "承包合同编码", dataIndex: "cbhtbm", width: 100, field: {
         xtype: "textfield"
       }},
-    {text: "地块名称", dataIndex: "cbhtmc", width: 100, field: {
+    {text: "原承包合同编码", dataIndex: "ycbhtbm", width: 100, field: {
         xtype: "textfield"
       }},
-    {text: "地块类别", dataIndex: "cbhtlb", width: 70, field: {
+    {text: "发包方编码", dataIndex: "fbfbm", width: 100, field: {
         xtype: "textfield"
       }},
-    {text: "土地用途", dataIndex: "tdyt", width: 70, field: {
+    {text: "承包方编码", dataIndex: "cbfbm", width: 100, field: {
         xtype: "textfield"
       }},
-    {text: "实测面积", dataIndex: "scmj", width: 70, field: {
+    {text: "承包方式", dataIndex: "cbfs", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "地块东至", dataIndex: "cbhtdz", width: 70, field: {
+    {text: "承包期限起", dataIndex: "cbqxq", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "地块西至", dataIndex: "cbhtxz", width: 70, field: {
+    {text: "承包期限止", dataIndex: "cbqxz", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "地块南至", dataIndex: "cbhtnz", width: 70, field: {
+    {text: "同总面积", dataIndex: "htzmj", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "地块北至", dataIndex: "cbhtbz", width: 70, field: {
+    {text: "地块总数", dataIndex: "cbdkzs", width: 70, field: {
+        xtype: "textfield"
+      }},
+    {text: "签订时间", dataIndex: "qdsj", width: 70, field: {
         xtype: "textfield"
       }}
   ],

@@ -6,7 +6,7 @@ Ext.define("core.store.DkStore", {
   //autoSync:true,//与服务器同步
   proxy: {
     type: "ajax",
-    url: "./dk/listall_dk.do",
+    url: "./dk/list_dk.do",
     reader: {
       type: "json",
       root: "rows",

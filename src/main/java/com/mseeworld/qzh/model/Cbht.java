@@ -1,11 +1,14 @@
 package com.mseeworld.qzh.model;
-// Generated Sep 6, 2014 9:23:12 PM by Hibernate Tools 3.2.1.GA
+// Generated Oct 28, 2014 10:12:26 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,26 +24,27 @@ public class Cbht  implements java.io.Serializable {
 
 
      private long id;
-     private char cbhtbm;
-     private Character ycbhtbm;
-     private Character fbfbm;
-     private Character cbfbm;
-     private Character cbfs;
+     private String cbhtbm;
+     private String ycbhtbm;
+     private String fbfbm;
+     private String cbfbm;
+     private String cbfs;
      private Date cbqxq;
      private Date cbqxz;
      private Float htzmj;
      private Integer cbdkzs;
      private Date qdsj;
+     private Long orgId;
 
     public Cbht() {
     }
 
 	
-    public Cbht(long id, char cbhtbm) {
+    public Cbht(long id, String cbhtbm) {
         this.id = id;
         this.cbhtbm = cbhtbm;
     }
-    public Cbht(long id, char cbhtbm, Character ycbhtbm, Character fbfbm, Character cbfbm, Character cbfs, Date cbqxq, Date cbqxz, Float htzmj, Integer cbdkzs, Date qdsj) {
+    public Cbht(long id, String cbhtbm, String ycbhtbm, String fbfbm, String cbfbm, String cbfs, Date cbqxq, Date cbqxz, Float htzmj, Integer cbdkzs, Date qdsj, Long orgId) {
        this.id = id;
        this.cbhtbm = cbhtbm;
        this.ycbhtbm = ycbhtbm;
@@ -52,11 +56,13 @@ public class Cbht  implements java.io.Serializable {
        this.htzmj = htzmj;
        this.cbdkzs = cbdkzs;
        this.qdsj = qdsj;
+       this.orgId = orgId;
     }
    
-     @Id 
-    
-    @Column(name="id", unique=true, nullable=false)
+  @Id
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cbht_seq")
+  @SequenceGenerator(name = "cbht_seq", sequenceName = "cbht_id_seq")
+  @Column(name = "id", unique = true, nullable = false)
     public long getId() {
         return this.id;
     }
@@ -65,48 +71,48 @@ public class Cbht  implements java.io.Serializable {
         this.id = id;
     }
     
-    @Column(name="cbhtbm", nullable=false, length=1)
-    public char getCbhtbm() {
+    @Column(name="cbhtbm", nullable=false, length=19)
+    public String getCbhtbm() {
         return this.cbhtbm;
     }
     
-    public void setCbhtbm(char cbhtbm) {
+    public void setCbhtbm(String cbhtbm) {
         this.cbhtbm = cbhtbm;
     }
     
-    @Column(name="ycbhtbm", length=1)
-    public Character getYcbhtbm() {
+    @Column(name="ycbhtbm", length=19)
+    public String getYcbhtbm() {
         return this.ycbhtbm;
     }
     
-    public void setYcbhtbm(Character ycbhtbm) {
+    public void setYcbhtbm(String ycbhtbm) {
         this.ycbhtbm = ycbhtbm;
     }
     
-    @Column(name="fbfbm", length=1)
-    public Character getFbfbm() {
+    @Column(name="fbfbm", length=14)
+    public String getFbfbm() {
         return this.fbfbm;
     }
     
-    public void setFbfbm(Character fbfbm) {
+    public void setFbfbm(String fbfbm) {
         this.fbfbm = fbfbm;
     }
     
-    @Column(name="cbfbm", length=1)
-    public Character getCbfbm() {
+    @Column(name="cbfbm", length=18)
+    public String getCbfbm() {
         return this.cbfbm;
     }
     
-    public void setCbfbm(Character cbfbm) {
+    public void setCbfbm(String cbfbm) {
         this.cbfbm = cbfbm;
     }
     
-    @Column(name="cbfs", length=1)
-    public Character getCbfs() {
+    @Column(name="cbfs", length=3)
+    public String getCbfs() {
         return this.cbfs;
     }
     
-    public void setCbfs(Character cbfs) {
+    public void setCbfs(String cbfs) {
         this.cbfs = cbfs;
     }
     @Temporal(TemporalType.DATE)
@@ -153,6 +159,15 @@ public class Cbht  implements java.io.Serializable {
     
     public void setQdsj(Date qdsj) {
         this.qdsj = qdsj;
+    }
+    
+    @Column(name="org_id")
+    public Long getOrgId() {
+        return this.orgId;
+    }
+    
+    public void setOrgId(Long orgId) {
+        this.orgId = orgId;
     }
 
 

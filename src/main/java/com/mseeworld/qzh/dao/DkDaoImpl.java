@@ -15,25 +15,43 @@ import org.hibernate.Session;
  */
 public class DkDaoImpl extends BaseHibernateDaoImpl<Dk> implements DkDao{
   
-  public List<Dk> getByOrgId(long orgId){
+  public List<Dk> getFirstNOfAll(int limit){
     
     Session session = getCurrentSession();
-    String sql = "select * "
-            + "from dk "
-            + "where org_id= " + orgId + " "
-            + "order by id";
+    String sql = "select * from dk order by id limit "+ limit;
     Query q = session.createSQLQuery(sql).addEntity(Dk.class);
 
     return q.list();
   }
   
-  
-  public List<Dk> getFirstNOfAll(int n){
+  public List<Dk> getByOrgId(int orgId, int limit){
     
     Session session = getCurrentSession();
-    String sql = "select * from dk order by id limit "+ n;
+    String sql = "select * from dk where org_id="+ orgId +" order by id";
+    if(limit>0){
+      sql += " limit "+ limit;
+    }
     Query q = session.createSQLQuery(sql).addEntity(Dk.class);
 
     return q.list();
+  }
+  
+  public List<Dk> getByCbhtId(int cbhtId, int limit){
+    
+    Session session = getCurrentSession();
+    String sql = "select * from dk where cbht_id="+ cbhtId +" order by id";
+    if(limit>0){
+      sql += " limit "+ limit;
+    }
+    Query q = session.createSQLQuery(sql).addEntity(Dk.class);
+
+    return q.list();
+  }
+  
+  public void updateCbhtId(String dkIds, String cbhtId){
+    
+    Session session = getCurrentSession();
+    String sql = "update dk set cbht_id ="+ cbhtId +" where id in ("+ dkIds +")";
+    session.createSQLQuery(sql).executeUpdate();
   }
 }
