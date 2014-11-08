@@ -113,8 +113,24 @@ Ext.define("core.view.WestView", {
             expanded: true,
             children: [
               {
-                id: "qz-manage",
-                text: "权证管理",
+                id: "qz-generate",
+                text: "权证生成",
+                leaf: true
+              },{
+                id: "qz-get",
+                text: "权证领取",
+                leaf: true
+              },{
+                id: "qz-reissue",
+                text: "权证补发",
+                leaf: true
+              },{
+                id: "qz-renew",
+                text: "权证焕发",
+                leaf: true
+              },{
+                id: "qz-cancel",
+                text: "权证注销",
                 leaf: true
               }
             ]
@@ -171,6 +187,10 @@ Ext.define("core.view.WestView", {
               }, {
                 id: "system-user-manage",
                 text: "系统用户管理",
+                leaf: true
+              }, {
+                id: "data-import",
+                text: "数据导入",
                 leaf: true
               }
             ]

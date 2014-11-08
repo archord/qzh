@@ -33,37 +33,14 @@ Ext.define("core.view.MapLayout", {
       margins: '5 2 5 5',
       width: 150
     }), , Ext.create('GeoExt.panel.Map', {
-    border: true,
-    region: "center",
-    // we do not want all overlays, to try the OverlayLayerContainer
-    map: new OpenLayers.Map({allOverlays: false}),
-    //center: [146.1569825, -41.6109735],
-    //zoom: 6,
-    layers: [
-      new OpenLayers.Layer.WMS("底图",
-              "/geoserver/cite/wms", {
-        layers: "cite:geotif08"
-      }, {
-        buffer: 0,
-        visibility: false,
-        projection: "EPSG:2351",
-        maxExtent: new OpenLayers.Bounds(
-                2.7427118263325926E7, 4533983.087420987, 2.7429978295091048E7, 4537211.441640869)
-      }
-      ),
-      new OpenLayers.Layer.WMS("矢量图",
-              "/geoserver/cite/wms", {
-        layers: "cite:Export_Output",
-        transparent: true,
-        format: "image/gif"
-      }, {
-        isBaseLayer: false,
-        buffer: 0,
-        projection: "EPSG:2351",
-        maxExtent: new OpenLayers.Bounds(
-                2.7427533132E7, 4534310.627248583, 2.7429808179E7, 4536783.197)
-      }
-      )
-    ]
-  })]
+      alias: 'widget.mapPanel',
+      id: 'mapPanelId',
+      border: true,
+      region: "center",
+      // we do not want all overlays, to try the OverlayLayerContainer
+      map: new OpenLayers.Map({allOverlays: false}),
+      //center: [146.1569825, -41.6109735],
+      //zoom: 6,
+      layers: [ ]
+    })]
 });

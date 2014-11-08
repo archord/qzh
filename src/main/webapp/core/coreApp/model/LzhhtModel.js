@@ -1,25 +1,24 @@
 /*
  * 商品实体类
  */
- Ext.define("core.model.DkModel",{
- 	extend:"Ext.data.Model",
- 	fields:[
- 		{name:"id",type:"int",srotable:false},
- 		{name:"dkbm",type:"string",srotable:false},
- 		{name:"dkmc",type:"string",srotable:false},
- 		{name:"syqxz",type:"string",srotable:false},
- 		{name:"dklb",type:"string",srotable:false},
- 		{name:"tdlylx",type:"string",srotable:false},
- 		{name:"dldj",type:"string",srotable:false},
- 		{name:"tdyt",type:"char",srotable:false},
- 		{name:"sfjbnt",type:"char",srotable:false},
- 		{name:"scmj",type:"float",srotable:false},
- 		{name:"dkdz",type:"string",srotable:false},
- 		{name:"dkxz",type:"string",srotable:false},
- 		{name:"dknz",type:"string",srotable:false},
- 		{name:"dkbz",type:"string",srotable:false},
- 		{name:"dkbzxx",type:"string",srotable:false},
- 		{name:"zjrxm",type:"string",srotable:false},
- 		{name:"orgId",type:"long",srotable:false}
- 	]
- });
+Ext.define("core.model.LzhhtModel", {
+  extend: "Ext.data.Model",
+  fields: [
+    {name: "id", type: "int", srotable: false},
+    {name: "ycbhtbm", type: "string", srotable: false},
+    {name: "lzhtbm", type: "string", srotable: false},
+    {name: "cbfbm", type: "string", srotable: false},
+    {name: "srfbm", type: "string", srotable: false},
+    {name: "lzfs", type: "string", srotable: false},
+    {name: "lzqx", type: "string", srotable: false},
+    {name: "lzqxksrq", type: "char", srotable: false},
+    {name: "lzqxjsrq", type: "char", srotable: false},
+    {name: "lzmj", type: "float", srotable: false},
+    {name: "lzdks", type: "int", srotable: false},
+    {name: "lzqtdyt", type: "string", srotable: false},
+    {name: "lzhtdyt", type: "string", srotable: false},
+    {name: "lzjgsm", type: "string", srotable: false},
+    {name: "htqdrq", type: "string", srotable: false},
+    {name: "orgId", type: "int", srotable: false}
+  ]
+});

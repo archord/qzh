@@ -1,6 +1,6 @@
-Ext.define("core.view.DkForm", {
+Ext.define("core.view.LzhhtWindow", {
   extend: 'Ext.window.Window',
-  alias: "widget.dkwindow",
+  alias: "widget.lzhhtwindow",
   align: "left",
   frame: true,
   bodyStyle: 'background:transparent',
@@ -10,26 +10,25 @@ Ext.define("core.view.DkForm", {
       if (_this.extraParas) {
         _this.down("form").getForm().findField("orgName").setValue("修改地块信息");
         _this.down("form").getForm().findField("isAdd").setValue(0);
-        _this.down("form").getForm().findField("orgId").setValue(_this.extraParas.dk.orgId);
+        _this.down("form").getForm().findField("orgId").setValue(_this.extraParas.lzhht.orgId);
         _this.down("form").getForm().findField("orgLevel").setValue(_this.extraParas.orgLevel);
-        _this.down("form").getForm().findField("id").setValue(_this.extraParas.dk.id);
-        _this.down("form").getForm().findField("dkbm").setValue(_this.extraParas.dk.dkbm);
-        _this.down("form").getForm().findField("dkmc").setValue(_this.extraParas.dk.dkmc);
-        _this.down("form").getForm().findField("syqxz").setValue(_this.extraParas.dk.syqxz);
-        _this.down("form").getForm().findField("dklb").setValue(_this.extraParas.dk.dklb);
-        _this.down("form").getForm().findField("tdlylx").setValue(_this.extraParas.dk.tdlylx);
-        _this.down("form").getForm().findField("dldj").setValue(_this.extraParas.dk.dldj);
-        _this.down("form").getForm().findField("tdyt").setValue(_this.extraParas.dk.tdyt);
-        _this.down("form").getForm().findField("sfjbnt").setValue(_this.extraParas.dk.sfjbnt);
-        _this.down("form").getForm().findField("scmj").setValue(_this.extraParas.dk.scmj);
-        _this.down("form").getForm().findField("dkdz").setValue(_this.extraParas.dk.dkdz);
-        _this.down("form").getForm().findField("dkxz").setValue(_this.extraParas.dk.dkxz);
-        _this.down("form").getForm().findField("dknz").setValue(_this.extraParas.dk.dknz);
-        _this.down("form").getForm().findField("dkbz").setValue(_this.extraParas.dk.dkbz);
-        _this.down("form").getForm().findField("dkbzxx").setValue(_this.extraParas.dk.dkbzxx);
-        _this.down("form").getForm().findField("zjrxm").setValue(_this.extraParas.dk.zjrxm);
+        _this.down("form").getForm().findField("id").setValue(_this.extraParas.lzhht.id);
+        _this.down("form").getForm().findField("ycbhtbm").setValue(_this.extraParas.lzhht.ycbhtbm);
+        _this.down("form").getForm().findField("lzhtbm").setValue(_this.extraParas.lzhht.lzhtbm);
+        _this.down("form").getForm().findField("cbfbm").setValue(_this.extraParas.lzhht.cbfbm);
+        _this.down("form").getForm().findField("srfbm").setValue(_this.extraParas.lzhht.srfbm);
+        _this.down("form").getForm().findField("lzfs").setValue(_this.extraParas.lzhht.lzfs);
+        _this.down("form").getForm().findField("lzqx").setValue(_this.extraParas.lzhht.lzqx);
+        _this.down("form").getForm().findField("lzqxksrq").setValue(_this.extraParas.lzhht.lzqxksrq);
+        _this.down("form").getForm().findField("lzqxjsrq").setValue(_this.extraParas.lzhht.lzqxjsrq);
+        _this.down("form").getForm().findField("lzmj").setValue(_this.extraParas.lzhht.lzmj);
+        _this.down("form").getForm().findField("lzdks").setValue(_this.extraParas.lzhht.lzdks);
+        _this.down("form").getForm().findField("lzqtdyt").setValue(_this.extraParas.lzhht.lzqtdyt);
+        _this.down("form").getForm().findField("lzhtdyt").setValue(_this.extraParas.lzhht.lzhtdyt);
+        _this.down("form").getForm().findField("lzjgsm").setValue(_this.extraParas.lzhht.lzjgsm);
+        _this.down("form").getForm().findField("htqdrq").setValue(_this.extraParas.lzhht.htqdrq);
       } else {
-        var orgTree = Ext.getCmp("orgTreeDk");
+        var orgTree = Ext.getCmp("orgTreeLzhht");
         var curSelNode = orgTree.getSelectionModel().getSelection();
         if (curSelNode[0].raw) {
           _this.down("form").getForm().findField("orgName").setValue(curSelNode[0].raw.orgName);
@@ -89,102 +88,97 @@ Ext.define("core.view.DkForm", {
           hidden: true
         }, {
           xtype: "textfield",
-          fieldLabel: "地块编码",
-          name: "dkbm",
+          fieldLabel: "承包合同编码",
+          name: "ycbhtbm",
           allowBlank: false,
-          blankText: '地块编码不能为空'
+          blankText: '承包合同编码不能为空'
         }, {
           xtype: "textfield",
-          fieldLabel: "地块名称",
-          name: "dkmc",
+          fieldLabel: "流转合同编码",
+          name: "lzhtbm",
           allowBlank: false,
-          blankText: '地块名称不能为空',
+          blankText: '流转合同编码不能为空',
           readOnly: false
         }, {
           xtype: "textfield",
-          fieldLabel: "所有权性质",
-          name: "syqxz",
+          fieldLabel: "承包方编码",
+          name: "cbfbm",
+          allowBlank: false,
+          blankText: '承包方编码不能为空',
+          readOnly: false
+        }, {
+          xtype: "textfield",
+          fieldLabel: "受让方编码",
+          name: "srfbm",
+          allowBlank: false,
+          blankText: '受让方编码不能为空',
+          readOnly: false
+        }, {
+          xtype: "textfield",
+          fieldLabel: "流转方式",
+          name: "lzfs",
           allowBlank: true,
           readOnly: false
         }, {
           xtype: "textfield",
-          fieldLabel: "地块类别",
-          name: "dklb",
+          fieldLabel: "流转期限",
+          name: "lzqx",
+          allowBlank: true,
+          readOnly: false
+        }, {
+          xtype: "datefield",
+          fieldLabel: "流转开始日期",
+          name: "lzqxksrq",
+          format: 'Y-m-d',
+          allowBlank: true,
+          readOnly: false
+        }, {
+          xtype: "datefield",
+          fieldLabel: "流转结束日期",
+          name: "lzqxjsrq",
+          format: 'Y-m-d',
           allowBlank: true,
           readOnly: false
         }, {
           xtype: "textfield",
-          fieldLabel: "土地利用类型",
-          name: "tdlylx",
-          allowBlank: true,
-          readOnly: false
-        }, {
-          xtype: "textfield",
-          fieldLabel: "地力等级",
-          name: "dldj",
-          allowBlank: true,
-          readOnly: false
-        }, {
-          xtype: "textfield",
-          fieldLabel: "土地用途",
-          name: "tdyt",
+          fieldLabel: "流转面积",
+          name: "lzmj",
           value: "0",
           allowBlank: true,
           readOnly: false
         }, {
           xtype: "textfield",
-          fieldLabel: "是否基本农田",
+          fieldLabel: "流转地块数",
           value: "0",
-          name: "sfjbnt",
-          allowBlank: true,
-          readOnly: false
-        }, {
-          colspan: 2,
-          xtype: "textfield",
-          fieldLabel: "实测面积",
-          name: "scmj",
-          value: "0",
+          name: "lzdks",
           allowBlank: true,
           readOnly: false
         }, {
           xtype: "textfield",
-          fieldLabel: "地块东至",
-          name: "dkdz",
+          fieldLabel: "流转前土地用途",
+          name: "lzqtdyt",
           allowBlank: true,
           readOnly: false
         }, {
           xtype: "textfield",
-          fieldLabel: "地块西至",
-          name: "dkxz",
-          allowBlank: true,
-          readOnly: false
-        }, {
-          xtype: "textfield",
-          fieldLabel: "地块南至",
-          name: "dknz",
-          allowBlank: true,
-          readOnly: false
-        }, {
-          xtype: "textfield",
-          fieldLabel: "地块北至",
-          name: "dkbz",
+          fieldLabel: "流转后土地用途",
+          name: "lzhtdyt",
           allowBlank: true,
           readOnly: false
         }, {
           width: 430,
           colspan: 2,
           xtype: "textfield",
-          fieldLabel: "地块备注信息",
-          name: "dkbzxx",
+          fieldLabel: "流转费用说明",
+          name: "lzjgsm",
           allowBlank: true,
           readOnly: false
         }, {
-          margin: "7 15 10 15",
-          width: 430,
           colspan: 2,
-          xtype: "textfield",
-          fieldLabel: "指界人姓名",
-          name: "zjrxm",
+          xtype: "datefield",
+          fieldLabel: "合同签订日期",
+          name: "htqdrq",
+          format: 'Y-m-d',
           allowBlank: true,
           readOnly: false
         }]}],

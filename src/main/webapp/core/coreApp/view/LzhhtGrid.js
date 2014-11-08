@@ -1,11 +1,11 @@
 /**
  * 商品数据列表视图类
  * */
-Ext.define("core.view.DkGrid", {
+Ext.define("core.view.LzhhtGrid", {
   extend: "Ext.grid.Panel",
-  alias: "widget.dkgrid",
-  id: "dkgrid",
-  store: "core.store.DkStore",
+  alias: "widget.lzhhtGrid",
+  id: "lzhhtgrid",
+  store: "core.store.LzhhtStore",
   border: 0,
   selModel: {
     selType: "checkboxmodel"
@@ -62,31 +62,46 @@ Ext.define("core.view.DkGrid", {
   columnLines: true, //展示竖线
   columns: [
     {xtype: 'rownumberer'},
-    {text: "地块编码", dataIndex: "dkbm", width: 100, field: {
+    {text: "承包合同编码", dataIndex: "ycbhtbm", width: 100, field: {
         xtype: "textfield"
       }},
-    {text: "地块名称", dataIndex: "dkmc", width: 100, field: {
+    {text: "流转合同编码", dataIndex: "lzhtbm", width: 100, field: {
         xtype: "textfield"
       }},
-    {text: "地块类别", dataIndex: "dklb", width: 70, field: {
+    {text: "承包方编码", dataIndex: "cbfbm", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "土地用途", dataIndex: "tdyt", width: 70, field: {
+    {text: "受让方编码", dataIndex: "srfbm", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "实测面积", dataIndex: "scmj", width: 70, field: {
+    {text: "流转方式", dataIndex: "lzfs", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "地块东至", dataIndex: "dkdz", width: 70, field: {
+    {text: "流转期限", dataIndex: "lzqx", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "地块西至", dataIndex: "dkxz", width: 70, field: {
+    {text: "流转开始日期", dataIndex: "lzqxksrq", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "地块南至", dataIndex: "dknz", width: 70, field: {
+    {text: "流转结束日期", dataIndex: "lzqxjsrq", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "地块北至", dataIndex: "dkbz", width: 70, field: {
+    {text: "流转面积", dataIndex: "lzmj", width: 70, field: {
+        xtype: "textfield"
+      }},
+    {text: "流转地块数", dataIndex: "lzdks", width: 70, field: {
+        xtype: "textfield"
+      }},
+    {text: "流转前土地用途", dataIndex: "lzqtdyt", width: 70, field: {
+        xtype: "textfield"
+      }},
+    {text: "流转后土地用途", dataIndex: "lzhtdyt", width: 70, field: {
+        xtype: "textfield"
+      }},
+    {text: "流转费用说明", dataIndex: "lzjgsm", width: 70, field: {
+        xtype: "textfield"
+      }},
+    {text: "合同签订日期", dataIndex: "htqdrq", width: 70, field: {
         xtype: "textfield"
       }}
   ],

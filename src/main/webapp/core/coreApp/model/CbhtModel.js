@@ -11,9 +11,9 @@ Ext.define("core.model.CbhtModel", {
     {name: "cbfbm", type: "string", srotable: false},
     {name: "cbfs", type: "string", srotable: false},
     {name: "cbqxq", type: "string", srotable: false},
-    {name: "cbqxz", type: "char", srotable: false},
-    {name: "htzmj", type: "char", srotable: false},
-    {name: "cbdkzs", type: "float", srotable: false},
+    {name: "cbqxz", type: "string", srotable: false},
+    {name: "htzmj", type: "float", srotable: false},
+    {name: "cbdkzs", type: "int", srotable: false},
     {name: "qdsj", type: "string", srotable: false},
     {name: "orgId", type: "int", srotable: false}
   ],

@@ -1,12 +1,12 @@
 
-Ext.define("core.store.DkStore", {
+Ext.define("core.store.LzhhtStore", {
   extend: 'Ext.data.Store',
-  model: 'core.model.DkModel',
+  model: 'core.model.LzhhtModel',
   pageSize: 10,
   //autoSync:true,//与服务器同步
   proxy: {
     type: "ajax",
-    url: "./dk/list_dk.do",
+    url: "./lzht/list_lzht.do",
     reader: {
       type: "json",
       root: "rows",
