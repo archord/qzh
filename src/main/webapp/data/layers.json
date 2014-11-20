@@ -1,10 +1,10 @@
 [{"name": "A",
-    "url": "http://localhost:8081/geoserver/cite/wms",
+    "url": "/geoserver/cite/wms",
     "params": {"layers": "cite:geotif08", "transparent": false}, 
     "options": {"isBaseLayer": true, "buffer": 0, "visibility": false, "projection": "EPSG:2351", 
       "maxExtent": {"left": 27427118.263326, "bottom": 4533983.087421, "right": 27429978.295091, "top": 4537211.4416409}}}, 
   {"name": "a0", 
-    "url": "http://localhost:8081/geoserver/cite/wms", 
+    "url": "/geoserver/cite/wms", 
     "params": {"layers": "cite:Export_Output", "transparent": true, "format": "image/gif"}, 
     "options": {"isBaseLayer": false, "buffer": 0, "visibility": true, "projection": "EPSG:2351", 
       "maxExtent": {"left": 27427533.132, "bottom": 4534310.627248583, "right": 27429808.179, "top": 4536783.197}}}]

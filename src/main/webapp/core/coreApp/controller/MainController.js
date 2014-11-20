@@ -163,12 +163,12 @@ Ext.define("core.controller.MainController", {
               funController: "core.controller.LzhhtController",
               funViewName: "core.view.LzhhtLayout"
             });
-          } else if (record.data["id"] === "qzh-manage") {
+          } else if (record.data["id"] === "qzh-generate") {
             self.addFunItem({
               mainView: mainView,
-              funViewXtype: "qzhLayout",
-              funController: "core.controller.QzhController",
-              funViewName: "core.view.QzhLayout"
+              funViewXtype: "qzhGenerateGrid",
+              funController: "core.controller.QzhGenerateController",
+              funViewName: "core.view.qzh.QzhGenerateLayout"
             });
           }
         }//itemclick end

@@ -1,9 +1,9 @@
 
-Ext.define("core.view.CbhtGrid", {
+Ext.define("core.view.qzh.QzhCbhtGrid", {
   extend: "Ext.grid.Panel",
-  alias: "widget.cbhtgrid",
-  id: "cbhtgrid",
-  store: "core.store.CbhtStore",
+  alias: "widget.qzhCbhtGrid",
+  id: "qzhCbhtGridId",
+  store: "core.store.CbhtStore_qz",
   border: 0,
   selModel: {
     selType: "checkboxmodel"
@@ -11,10 +11,6 @@ Ext.define("core.view.CbhtGrid", {
   multiSelect: true,
   frame: true,
   tbar: [
-    {xtype: 'button', text: '添加', ref: 'add', iconCls: 'table_add'}, '|',
-    {xtype: 'button', text: '修改', ref: 'edit', iconCls: 'table_edit'}, '|',
-    {xtype: 'button', text: '删除', ref: 'del', iconCls: 'table_remove'},
-    "->",
     '按名称查询:',
     {
       xtype: 'triggerfield',
@@ -52,7 +48,7 @@ Ext.define("core.view.CbhtGrid", {
   ],
   bbar: {
     xtype: 'pagingtoolbar',
-    store: 'core.store.CbhtStore',
+    store: 'core.store.CbhtStore_qz',
     dock: 'bottom',
     displayInfo: true
   },
@@ -63,31 +59,13 @@ Ext.define("core.view.CbhtGrid", {
     {text: "承包合同编码", dataIndex: "cbhtbm", width: 120, field: {
         xtype: "textfield"
       }},
-    {text: "原承包合同编码", dataIndex: "ycbhtbm", width: 120, field: {
-        xtype: "textfield"
-      }},
     {text: "发包方编码", dataIndex: "fbfbm", width: 120, field: {
         xtype: "textfield"
       }},
     {text: "承包方编码", dataIndex: "cbfbm", width: 120, field: {
         xtype: "textfield"
       }},
-    {text: "承包方式", dataIndex: "cbfs", width: 70, field: {
-        xtype: "textfield"
-      }},
-    {text: "承包期限起", dataIndex: "cbqxq", width: 70, field: {
-        xtype: "textfield"
-      }},
-    {text: "承包期限止", dataIndex: "cbqxz", width: 70, field: {
-        xtype: "textfield"
-      }},
-    {text: "同总面积", dataIndex: "htzmj", width: 70, field: {
-        xtype: "textfield"
-      }},
-    {text: "地块总数", dataIndex: "cbdkzs", width: 70, field: {
-        xtype: "textfield"
-      }},
-    {text: "签订时间", dataIndex: "qdsj", width: 70, field: {
+    {text: "承包方姓名", dataIndex: "cbfmc", width: 70, field: {
         xtype: "textfield"
       }}
   ],

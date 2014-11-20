@@ -113,23 +113,23 @@ Ext.define("core.view.WestView", {
             expanded: true,
             children: [
               {
-                id: "qz-generate",
+                id: "qzh-generate",
                 text: "权证生成",
                 leaf: true
               },{
-                id: "qz-get",
+                id: "qzh-get",
                 text: "权证领取",
                 leaf: true
               },{
-                id: "qz-reissue",
+                id: "qzh-reissue",
                 text: "权证补发",
                 leaf: true
               },{
-                id: "qz-renew",
+                id: "qzh-renew",
                 text: "权证焕发",
                 leaf: true
               },{
-                id: "qz-cancel",
+                id: "qzh-cancel",
                 text: "权证注销",
                 leaf: true
               }

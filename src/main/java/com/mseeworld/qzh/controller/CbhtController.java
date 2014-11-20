@@ -3,6 +3,7 @@ package com.mseeworld.qzh.controller;
 import com.mseeworld.qzh.dao.CbhtDao;
 import com.mseeworld.qzh.model.Cbht;
 import com.mseeworld.qzh.model.Cbht1;
+import com.mseeworld.qzh.view.CbhtView;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -46,6 +47,33 @@ public class CbhtController {
     rstStr.append(",rows:[");
     int i = 0;
     for (Cbht cbht : cbhts) {
+      try {
+        String tStr = ow.writeValueAsString(cbht);
+        rstStr.append(tStr);
+      } catch (IOException ex) {
+        ex.printStackTrace();
+      }
+      if (i++ < cbhts.size()) {
+        rstStr.append(",");
+      }
+    }
+    rstStr.append("]}");
+    writer.write(rstStr.toString());
+  }
+
+  @RequestMapping(value = "/listall_cbht2", method = RequestMethod.GET)
+  public void listAllCbht2(HttpServletRequest request, PrintWriter writer) {
+    int n = 10;
+    List<CbhtView> cbhts = cbhtDao.getFirstNOfCbhtView(n);
+
+    ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+
+    StringBuilder rstStr = new StringBuilder("");
+    rstStr.append("{totalCount:");
+    rstStr.append(10);
+    rstStr.append(",rows:[");
+    int i = 0;
+    for (CbhtView cbht : cbhts) {
       try {
         String tStr = ow.writeValueAsString(cbht);
         rstStr.append(tStr);

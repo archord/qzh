@@ -81,6 +81,7 @@
   <bean id="dkDao" class="com.mseeworld.qzh.dao.DkDaoImpl"></bean>
   <bean id="cbhtDao" class="com.mseeworld.qzh.dao.CbhtDaoImpl"></bean>
   <bean id="lzhtDao" class="com.mseeworld.qzh.dao.LzhhtDaoImpl"></bean>
+  <bean id="cbjyqzdjbDao" class="com.mseeworld.qzh.dao.CbjyqzdjbDaoImpl"></bean>
 
   <bean id="hibernateUtil" class="com.mseeworld.qzh.util.HibernateUtil"></bean>
   <bean id="userDao" class="com.mseeworld.qzh.dao.UserDAOImpl"></bean>

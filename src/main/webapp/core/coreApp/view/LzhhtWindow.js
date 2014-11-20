@@ -42,7 +42,7 @@ Ext.define("core.view.LzhhtWindow", {
   items: [{
       columnWidth: .7,
       xtype: "form",
-      ref: "dkform",
+      ref: "lzhhtform",
       defaults: {
         margin: "7 15 0 15",
         selectOnFocus: true,

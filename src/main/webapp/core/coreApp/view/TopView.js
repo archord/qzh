@@ -16,7 +16,7 @@ Ext.define("core.view.TopView", {
         border: 0,
         padding: '10px'
       },
-      html: "<h1><font color=white size=5>&nbsp;&nbsp;&nbsp;&nbsp;农村土地承包经营权证管理系统</font></h1>"
+      html: "<h1><font color=white size=5>&nbsp;&nbsp;&nbsp;&nbsp;农村土地承包经营权管理系统</font></h1>"
     }, {
       layout: {
         type: 'hbox',

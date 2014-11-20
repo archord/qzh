@@ -54,7 +54,7 @@ Ext.define("core.view.LzhhtGrid", {
   ],
   bbar: {
     xtype: 'pagingtoolbar',
-    store: 'core.store.DkStore',
+    store: 'core.store.LzhhtStore',
     dock: 'bottom',
     displayInfo: true
   },

@@ -1,11 +1,11 @@
 /**
  * 类别管理布局类
  */
-Ext.define("core.view.LzhhtLayout", {
+Ext.define("core.view.qzh.QzhGenerateLayout", {
   extend: 'Ext.panel.Panel',
-  alias: 'widget.lzhhtLayout',
-  id: "lzhhtLayout",
-  title: "<center height=40>流转合同管理</center>",
+  alias: 'widget.qzhGenerateLayout',
+  id: "qzhGenerateLayoutId",
+  title: "<center height=40>权证生成</center>",
   closable:true,
   defaults: {
     split: true, // 可以设置好看点的折叠效果
@@ -13,10 +13,10 @@ Ext.define("core.view.LzhhtLayout", {
     bodyStyle: 'padding:1px'
   },
   layout: 'border',
-  items: [Ext.create('core.view.OrgTreeLzhht', {
+  items: [Ext.create('core.view.qzh.OrgTreeQzhGenerate', {
       title: "地区列表",
       region: 'west',
-      id: "orgTreeLzhht",
+      id: "orgTreeQzhGenerate",
       // iconCls:'goodtype_tree',
       store: Ext.create('core.store.OrgStore'),
       margins: '5 2 5 5',
@@ -34,10 +34,10 @@ Ext.define("core.view.LzhhtLayout", {
           region: 'center',
           height: 200,
           margins: '5 0 5 0',
-          xtype: "lzhhtGrid",
+          xtype: "qzhGenerateGrid",
           bbar: [],
 //          store: Ext.create("core.store.PeopleStore", {}),
-          title: "流转合同列表"
+          title: "权证列表"
 
         }]
     }]

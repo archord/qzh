@@ -9,6 +9,7 @@ Ext.define("core.model.CbhtModel", {
     {name: "ycbhtbm", type: "string", srotable: false},
     {name: "fbfbm", type: "string", srotable: false},
     {name: "cbfbm", type: "string", srotable: false},
+    {name: "cbfmc", type: "string", srotable: false},
     {name: "cbfs", type: "string", srotable: false},
     {name: "cbqxq", type: "string", srotable: false},
     {name: "cbqxz", type: "string", srotable: false},
