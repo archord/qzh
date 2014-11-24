@@ -1,0 +1,25 @@
+/*
+ *  
+ */
+ Ext.define("core.cbht.model.DkModel",{
+ 	extend:"Ext.data.Model",
+ 	fields:[
+ 		{name:"id",type:"int",srotable:false},
+ 		{name:"dkbm",type:"string",srotable:false},
+ 		{name:"dkmc",type:"string",srotable:false},
+ 		{name:"syqxz",type:"string",srotable:false},
+ 		{name:"dklb",type:"string",srotable:false},
+ 		{name:"tdlylx",type:"string",srotable:false},
+ 		{name:"dldj",type:"string",srotable:false},
+ 		{name:"tdyt",type:"char",srotable:false},
+ 		{name:"sfjbnt",type:"char",srotable:false},
+ 		{name:"scmj",type:"float",srotable:false},
+ 		{name:"dkdz",type:"string",srotable:false},
+ 		{name:"dkxz",type:"string",srotable:false},
+ 		{name:"dknz",type:"string",srotable:false},
+ 		{name:"dkbz",type:"string",srotable:false},
+ 		{name:"dkbzxx",type:"string",srotable:false},
+ 		{name:"zjrxm",type:"string",srotable:false},
+ 		{name:"orgId",type:"long",srotable:false}
+ 	]
+ });

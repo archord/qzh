@@ -1,0 +1,25 @@
+/*
+ *  
+ */
+ Ext.define("core.cbf.model.CbfModel",{
+ 	extend:"Ext.data.Model",
+ 	fields:[
+ 		{name:"id",type:"int",srotable:false},
+ 		{name:"cbfbm",type:"string",srotable:false},
+ 		{name:"cbflx",type:"char",srotable:false},
+ 		{name:"cbfmc",type:"string",srotable:false},
+ 		{name:"cbfzjlx",type:"char",srotable:false},
+ 		{name:"cbfzjhm",type:"string",srotable:false},
+ 		{name:"cbfdz",type:"string",srotable:false},
+ 		{name:"yzbm",type:"string",srotable:false},
+ 		{name:"lxdh",type:"string",srotable:false},
+ 		{name:"cbfcysl",type:"int",srotable:false},
+ 		{name:"cbfdcrq",type:"date",srotable:false},
+ 		{name:"cbfdcy",type:"string",srotable:false},
+ 		{name:"cbfdcjs",type:"string",srotable:false},
+ 		{name:"gsjs",type:"string",srotable:false},
+ 		{name:"gsjsr",type:"string",srotable:false},
+ 		{name:"gsshrq",type:"date",srotable:false},
+ 		{name:"gsshr",type:"string",srotable:false}
+ 	]
+ });

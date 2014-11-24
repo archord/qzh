@@ -26,6 +26,6 @@ Ext.onReady(function() {
 	  }]
       });
     },
-    controllers: ["core.controller.MainController"]
+    controllers: ["core.main.controller.MainController"]
   });
 });

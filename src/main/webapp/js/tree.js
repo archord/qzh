@@ -130,7 +130,30 @@ Ext.application({
       }
     });
 
-    var layer;
+        // 弹出层显示点击的区域元素的属性
+        var featureInfo = new OpenLayers.Control.WMSGetFeatureInfo({
+            url: 'http://192.168.13.23:8081/geoserver/cite/wms',
+            title: 'Identify features by clicking',
+            //infoFormat: 'application/gml+xml',
+            //format: new OpenLayers.Format.GML,
+            queryVisible: true,
+            output: 'features',
+            eventListeners: {
+                "getfeatureinfo": function (event) {
+                    var feature = event;
+                    mapPanel.map.addPopup(new OpenLayers.Popup.FramedCloud(
+                            "chicken",
+                            mapPanel.map.getLonLatFromPixel(event.xy),
+                            null,
+                            event.text,
+                            null,
+                            true
+                            ));
+                }
+            }
+        });
+        mapPanel.map.addControl(featureInfo);
+        featureInfo.activate();
 
     // create the tree with the configuration from above
     tree = Ext.create('GeoExt.tree.Panel', {
