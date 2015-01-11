@@ -84,9 +84,12 @@ Ext.define("core.qzh_get.view.QzhGetForm", {
       allowBlank: false,
       readOnly: false
     }, {
-      xtype: "textfield",
+      xtype: "combobox",
       fieldLabel: "是否领取",
       name: "qzsfly",
+      store: "core.combobox.store.SfdmbStore",
+      displayField: 'sf',
+      valueField: 'dm',
       allowBlank: false,
       readOnly: false
     }, {
@@ -104,9 +107,12 @@ Ext.define("core.qzh_get.view.QzhGetForm", {
       allowBlank: true,
       readOnly: false
     }, {
-      xtype: "textfield",
+      xtype: "combobox",
       fieldLabel: "领取人证件类型",
       name: "qzlqrzjlx",
+      store: "core.combobox.store.ZjlxdmbStore",
+      displayField: 'zjlx',
+      valueField: 'dm',
       allowBlank: true,
       readOnly: false
     }, {

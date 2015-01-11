@@ -21,6 +21,7 @@ public class CbfJtcy  implements java.io.Serializable {
      private String cbfbm;
      private String cyxm;
      private Character cyxb;
+     private String cymz;
      private Character cyzjlx;
      private String cyzjhm;
      private String yhzgx;
@@ -34,11 +35,12 @@ public class CbfJtcy  implements java.io.Serializable {
     public CbfJtcy(long id) {
         this.id = id;
     }
-    public CbfJtcy(long id, String cbfbm, String cyxm, Character cyxb, Character cyzjlx, String cyzjhm, String yhzgx, Character cybz, Character sfgyr) {
+    public CbfJtcy(long id, String cbfbm, String cyxm, Character cyxb, String cymz, Character cyzjlx, String cyzjhm, String yhzgx, Character cybz, Character sfgyr) {
        this.id = id;
        this.cbfbm = cbfbm;
        this.cyxm = cyxm;
        this.cyxb = cyxb;
+       this.cymz = cymz;
        this.cyzjlx = cyzjlx;
        this.cyzjhm = cyzjhm;
        this.yhzgx = yhzgx;
@@ -128,6 +130,22 @@ public class CbfJtcy  implements java.io.Serializable {
     public void setSfgyr(Character sfgyr) {
         this.sfgyr = sfgyr;
     }
+
+  /**
+   * @return the cymz
+   */
+    
+  @Column(name="cymz", length=50)
+  public String getCymz() {
+    return cymz;
+  }
+
+  /**
+   * @param cymz the cymz to set
+   */
+  public void setCymz(String cymz) {
+    this.cymz = cymz;
+  }
 
 
 

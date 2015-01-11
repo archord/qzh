@@ -260,6 +260,9 @@ Ext.define("core.cbht.controller.CbhtController", {
     "core.cbht.view.DkGrid",
     "core.cbht.view.OrgTreeCbhtDkSearch"
   ],
-  stores: ["core.cbht.store.CbhtStore", "core.cbht.store.CbhtDkStore", "core.cbht.store.OrgStore", "core.cbht.store.FbfStore", "core.cbht.store.CbfStore", "core.cbht.store.DkStore"],
+  stores: ["core.cbht.store.CbhtStore", "core.cbht.store.CbhtDkStore", 
+            "core.cbht.store.OrgStore", "core.cbht.store.FbfStore", 
+            "core.cbht.store.CbfStore", "core.cbht.store.DkStore", 
+          "core.combobox.store.CbjyqqdfsdmbStore"],
   models: ["core.cbht.model.CbhtModel", "core.cbht.model.DkModel"]
 });

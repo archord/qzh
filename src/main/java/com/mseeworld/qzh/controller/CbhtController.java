@@ -43,7 +43,7 @@ public class CbhtController {
 
     StringBuilder rstStr = new StringBuilder("");
     rstStr.append("{totalCount:");
-    rstStr.append(10);
+    rstStr.append(cbhts.size());
     rstStr.append(",rows:[");
     int i = 0;
     for (Cbht cbht : cbhts) {
@@ -53,7 +53,7 @@ public class CbhtController {
       } catch (IOException ex) {
         ex.printStackTrace();
       }
-      if (i++ < cbhts.size()) {
+      if (++i < cbhts.size()) {
         rstStr.append(",");
       }
     }
@@ -70,7 +70,7 @@ public class CbhtController {
 
     StringBuilder rstStr = new StringBuilder("");
     rstStr.append("{totalCount:");
-    rstStr.append(10);
+    rstStr.append(cbhts.size());
     rstStr.append(",rows:[");
     int i = 0;
     for (CbhtView cbht : cbhts) {

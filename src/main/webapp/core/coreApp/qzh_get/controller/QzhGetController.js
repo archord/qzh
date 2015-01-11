@@ -130,6 +130,8 @@ Ext.define("core.qzh_get.controller.QzhGetController", {
     "core.qzh_get.view.QzhGetGrid_Qzh",
     "core.qzh_get.view.QzhGetForm"
   ],
-  stores: ["core.qzh_get.store.CbjyqzStore", "core.qzh_get.store.OrgStore_QzhGet", "core.qzh_get.store.OrgStore_QzhGet_Qzh", "core.qzh_get.store.CbjyqzdjbStore"],
+  stores: ["core.qzh_get.store.CbjyqzStore", "core.qzh_get.store.OrgStore_QzhGet", 
+            "core.qzh_get.store.OrgStore_QzhGet_Qzh", "core.qzh_get.store.CbjyqzdjbStore",
+          "core.combobox.store.ZjlxdmbStore", "core.combobox.store.SfdmbStore"],
   models: ["core.qzh_get.model.CbjyqzModel", "core.qzh.model.CbjyqzdjbModel"]
 });

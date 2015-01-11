@@ -61,7 +61,7 @@ public class DkController {
 
     StringBuilder rstStr = new StringBuilder("");
     rstStr.append("{totalCount:");
-    rstStr.append(10);
+    rstStr.append(cbfs.size());
     rstStr.append(",rows:[");
     int i = 0;
     for (Dk cbf : cbfs) {
@@ -71,7 +71,7 @@ public class DkController {
       } catch (IOException ex) {
         ex.printStackTrace();
       }
-      if (i++ < cbfs.size()) {
+      if (++i < cbfs.size()) {
         rstStr.append(",");
       }
     }

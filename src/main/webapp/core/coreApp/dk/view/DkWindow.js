@@ -101,15 +101,21 @@ Ext.define("core.dk.view.DkWindow", {
           blankText: '地块名称不能为空',
           readOnly: false
         }, {
-          xtype: "textfield",
+          xtype: "combobox",
           fieldLabel: "所有权性质",
           name: "syqxz",
+          store: "core.combobox.store.SyqsxdmbStore",
+          displayField: 'syqsx',
+          valueField: 'dm',
           allowBlank: true,
           readOnly: false
         }, {
-          xtype: "textfield",
+          xtype: "combobox",
           fieldLabel: "地块类别",
           name: "dklb",
+          store: "core.combobox.store.DklbdmbStore",
+          displayField: 'dkxz',
+          valueField: 'dm',
           allowBlank: true,
           readOnly: false
         }, {
@@ -119,22 +125,29 @@ Ext.define("core.dk.view.DkWindow", {
           allowBlank: true,
           readOnly: false
         }, {
-          xtype: "textfield",
+          xtype: "combobox",
           fieldLabel: "地力等级",
           name: "dldj",
+          store: "core.combobox.store.DldjdmbStore",
+          displayField: 'dldj',
+          valueField: 'dm',
           allowBlank: true,
           readOnly: false
         }, {
-          xtype: "textfield",
+          xtype: "combobox",
           fieldLabel: "土地用途",
           name: "tdyt",
-          value: "0",
+          store: "core.combobox.store.TdytdmbStore",
+          displayField: 'tdytd',
+          valueField: 'dm',
           allowBlank: true,
           readOnly: false
         }, {
-          xtype: "textfield",
+          xtype: "combobox",
           fieldLabel: "是否基本农田",
-          value: "0",
+          store: "core.combobox.store.SfdmbStore",
+          displayField: 'sf',
+          valueField: 'dm',
           name: "sfjbnt",
           allowBlank: true,
           readOnly: false

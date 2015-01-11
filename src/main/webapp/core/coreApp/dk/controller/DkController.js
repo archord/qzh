@@ -126,6 +126,12 @@ Ext.define("core.dk.controller.DkController", {
     "core.dk.view.DkWindow",
     "core.dk.view.DkGrid"
   ],
-  stores: ["core.dk.store.DkStore", "core.dk.store.OrgStore"],
+  stores: ["core.dk.store.DkStore", 
+    "core.dk.store.OrgStore", 
+    "core.combobox.store.SyqsxdmbStore", 
+    "core.combobox.store.DklbdmbStore", 
+    "core.combobox.store.DldjdmbStore", 
+    "core.combobox.store.TdytdmbStore", 
+    "core.combobox.store.SfdmbStore"],
   models: ["core.dk.model.DkModel"]
 });

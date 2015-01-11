@@ -26,19 +26,19 @@ Ext.define("core.fbf.view.FbfForm", {
       allowBlank: true,
       blankText: '必须在右侧选择村级以下区域',
       readOnly: true
-    },{
+    }, {
       xtype: "textfield",
       fieldLabel: "区域级别",
       name: "isAdd",
       value: "1",
       hidden: true
-    },{
+    }, {
       xtype: "textfield",
       fieldLabel: "区域级别",
       name: "orgLevel",
       value: "0",
       hidden: true
-    },{
+    }, {
       xtype: "textfield",
       fieldLabel: "主键",
       name: "id",
@@ -69,9 +69,12 @@ Ext.define("core.fbf.view.FbfForm", {
       name: "fbffzrxm",
       readOnly: false
     }, {
-      xtype: "textfield",
+      xtype: "combobox",
       fieldLabel: "负责人证件类型",
       name: "fzrzjlx",
+      store: "core.combobox.store.ZjlxdmbStore",
+      displayField: 'zjlx',
+      valueField: 'dm',
       allowBlank: true,
       readOnly: false
     }, {

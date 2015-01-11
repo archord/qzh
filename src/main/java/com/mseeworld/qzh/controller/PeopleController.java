@@ -50,7 +50,7 @@ public class PeopleController {
 
     StringBuilder rstStr = new StringBuilder("");
     rstStr.append("{totalCount:");
-    rstStr.append(10);
+    rstStr.append(fbfs.get(0));
     rstStr.append(",rows:[");
     int i = 0;
     for (Fbf fbf : fbfs) {
@@ -60,7 +60,7 @@ public class PeopleController {
       } catch (IOException ex) {
         ex.printStackTrace();
       }
-      if (i++ < fbfs.size()) {
+      if (++i < fbfs.size()) {
         rstStr.append(",");
       }
     }

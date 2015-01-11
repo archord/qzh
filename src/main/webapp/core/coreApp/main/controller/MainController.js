@@ -135,6 +135,13 @@ Ext.define("core.main.controller.MainController", {
               funController: "core.cbf.controller.CbfController",
               funViewName: "core.cbf.view.CbfLayout"
             });
+          } else if (record.data["id"] === "jtcy-manage") {
+            self.addFunItem({
+              mainView: mainView,
+              funViewXtype: "cbfJtcyLayout",
+              funController: "core.cbf_jtcy.controller.QzhCbfJtcyController",
+              funViewName: "core.cbf_jtcy.view.QzhCbfJtcyLayout"
+            });
           } else if (record.data["id"] === "dk-manage") {
             self.addFunItem({
               mainView: mainView,
@@ -180,23 +187,30 @@ Ext.define("core.main.controller.MainController", {
           }else if (record.data["id"] === "qzh-reissue") {
             self.addFunItem({
               mainView: mainView,
-              funViewXtype: "qzhGetLayout",
-              funController: "core.qzh_reissue.controller.QzhGenerateController",
-              funViewName: "core.qzh_reissue.view.QzhGenerateLayout"
+              funViewXtype: "qzhReissueLayout",
+              funController: "core.qzh_reissue.controller.QzhReissueController",
+              funViewName: "core.qzh_reissue.view.QzhReissueLayout"
             });
           }else if (record.data["id"] === "qzh-renew") {
             self.addFunItem({
               mainView: mainView,
-              funViewXtype: "qzhGetLayout",
-              funController: "core.qzh-renew.controller.QzhGenerateController",
-              funViewName: "core.qzh-renew.view.QzhGenerateLayout"
+              funViewXtype: "qzhRenewLayout",
+              funController: "core.qzh_renew.controller.QzhRenewController",
+              funViewName: "core.qzh_renew.view.QzhRenewLayout"
             });
           }else if (record.data["id"] === "qzh-cancel") {
             self.addFunItem({
               mainView: mainView,
-              funViewXtype: "qzhGetLayout",
-              funController: "core.qzh-cancel.controller.QzhGenerateController",
-              funViewName: "core.qzh-cancel.view.QzhGenerateLayout"
+              funViewXtype: "qzhCancelLayout",
+              funController: "core.qzh_cancel.controller.QzhCancelController",
+              funViewName: "core.qzh_cancel.view.QzhCancelLayout"
+            });
+          }else if (record.data["id"] === "data-import") {
+            self.addFunItem({
+              mainView: mainView,
+              funViewXtype: "qzhCancelLayout",
+              funController: "core.qzh_cancel.controller.QzhCancelController",
+              funViewName: "core.qzh_cancel.view.QzhCancelLayout"
             });
           }
         }//itemclick end

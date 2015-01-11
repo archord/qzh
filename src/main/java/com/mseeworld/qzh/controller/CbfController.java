@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/cbf")
 public class CbfController {
- 
+
   private CbfDao cbfDao;
 
   /**
@@ -38,7 +38,7 @@ public class CbfController {
 
     StringBuilder rstStr = new StringBuilder("");
     rstStr.append("{totalCount:");
-    rstStr.append(10);
+    rstStr.append(cbfs.size());
     rstStr.append(",rows:[");
     int i = 0;
     for (Cbf cbf : cbfs) {
@@ -48,7 +48,7 @@ public class CbfController {
       } catch (IOException ex) {
         ex.printStackTrace();
       }
-      if (i++ < cbfs.size()) {
+      if (++i < cbfs.size()) {
         rstStr.append(",");
       }
     }
@@ -60,7 +60,7 @@ public class CbfController {
   public void addPeople(HttpServletRequest request, HttpServletResponse response, PrintWriter writer) throws IOException {
     String id = request.getParameter("id");
     String orgId = request.getParameter("orgId");
-    
+
     String cbfbm = request.getParameter("cbfbm");
     String cbflx = request.getParameter("cbflx");
     String cbfmc = request.getParameter("cbfmc");
@@ -93,8 +93,9 @@ public class CbfController {
     cbf.setCbfdz(cbfdz);
     cbf.setYzbm(yzbm);
     cbf.setLxdh(lxdh);
-    if(!cbfcysl.isEmpty())
-    cbf.setCbfcysl(Integer.parseInt(cbfcysl));
+    if (!cbfcysl.isEmpty()) {
+      cbf.setCbfcysl(Integer.parseInt(cbfcysl));
+    }
     cbf.setCbfdcrq(new Date());
     cbf.setCbfdcy(cbfdcy);
     cbf.setCbfdcjs(cbfdcjs);
@@ -107,7 +108,7 @@ public class CbfController {
     String tStr = ow.writeValueAsString(cbf);
     System.out.println(tStr);
     cbfDao.saveOrUpdate(cbf);
-    
+
     response.setCharacterEncoding("UTF-8");
     response.setContentType("text/html;  charset=UTF-8");
 
@@ -128,5 +129,4 @@ public class CbfController {
 //			writer.write("{success:false,msg:'删除失败!'}");
 //		}
   }
-
 }

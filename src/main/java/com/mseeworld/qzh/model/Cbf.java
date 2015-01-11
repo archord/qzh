@@ -24,6 +24,8 @@ public class Cbf implements java.io.Serializable {
   private String cbfbm;
   private Character cbflx;
   private String cbfmc;
+  private char  cbfxb;
+  private String cbfmz;
   private Character cbfzjlx;
   private String cbfzjhm;
   private String cbfdz;
@@ -45,11 +47,13 @@ public class Cbf implements java.io.Serializable {
     this.id = id;
   }
 
-  public Cbf(long id, String cbfbm, Character cbflx, String cbfmc, Character cbfzjlx, String cbfzjhm, String cbfdz, String yzbm, String lxdh, Integer cbfcysl, Date cbfdcrq, String cbfdcy, String cbfdcjs, String gsjs, String gsjsr, Date gsshrq, String gsshr) {
+  public Cbf(long id, String cbfbm, Character cbflx, String cbfmc, char cbfxb, String cbfmz, Character cbfzjlx, String cbfzjhm, String cbfdz, String yzbm, String lxdh, Integer cbfcysl, Date cbfdcrq, String cbfdcy, String cbfdcjs, String gsjs, String gsjsr, Date gsshrq, String gsshr) {
     this.id = id;
     this.cbfbm = cbfbm;
     this.cbflx = cbflx;
     this.cbfmc = cbfmc;
+    this.cbfxb = cbfxb;
+    this.cbfmz = cbfmz;
     this.cbfzjlx = cbfzjlx;
     this.cbfzjhm = cbfzjhm;
     this.cbfdz = cbfdz;
@@ -237,6 +241,38 @@ public class Cbf implements java.io.Serializable {
    */
   public void setOrgId(long orgId) {
     this.orgId = orgId;
+  }
+
+  /**
+   * @return the cbfxb
+   */
+  
+  @Column(name = "cbfxb")
+  public char getCbfxb() {
+    return cbfxb;
+  }
+
+  /**
+   * @param cbfxb the cbfxb to set
+   */
+  public void setCbfxb(char cbfxb) {
+    this.cbfxb = cbfxb;
+  }
+
+  /**
+   * @return the cbfmz
+   */
+  
+  @Column(name = "cbfmz")
+  public String getCbfmz() {
+    return cbfmz;
+  }
+
+  /**
+   * @param cbfmz the cbfmz to set
+   */
+  public void setCbfmz(String cbfmz) {
+    this.cbfmz = cbfmz;
   }
 
 }

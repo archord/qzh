@@ -114,9 +114,12 @@ Ext.define("core.lzhht.view.LzhhtWindow", {
           blankText: '受让方编码不能为空',
           readOnly: false
         }, {
-          xtype: "textfield",
+          xtype: "combobox",
           fieldLabel: "流转方式",
           name: "lzfs",
+          store: "core.combobox.store.CbjyqqdfsdmbStore",
+          displayField: 'qdfs',
+          valueField: 'dm',
           allowBlank: true,
           readOnly: false
         }, {
@@ -154,15 +157,21 @@ Ext.define("core.lzhht.view.LzhhtWindow", {
           allowBlank: true,
           readOnly: false
         }, {
-          xtype: "textfield",
+          xtype: "combobox",
           fieldLabel: "流转前土地用途",
           name: "lzqtdyt",
+          store: "core.combobox.store.TdytdmbStore",
+          displayField: 'tdytd',
+          valueField: 'dm',
           allowBlank: true,
           readOnly: false
         }, {
-          xtype: "textfield",
+          xtype: "combobox",
           fieldLabel: "流转后土地用途",
           name: "lzhtdyt",
+          store: "core.combobox.store.TdytdmbStore",
+          displayField: 'tdytd',
+          valueField: 'dm',
           allowBlank: true,
           readOnly: false
         }, {

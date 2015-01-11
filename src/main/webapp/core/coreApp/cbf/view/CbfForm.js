@@ -26,19 +26,19 @@ Ext.define("core.cbf.view.CbfForm", {
       allowBlank: true,
       blankText: '必须在右侧选择村级以下区域',
       readOnly: true
-    },{
+    }, {
       xtype: "textfield",
       fieldLabel: "区域级别",
       name: "isAdd",
       value: "1",
       hidden: true
-    },{
+    }, {
       xtype: "textfield",
       fieldLabel: "区域级别",
       name: "orgLevel",
       value: "0",
       hidden: true
-    },{
+    }, {
       xtype: "textfield",
       fieldLabel: "主键",
       name: "id",
@@ -57,10 +57,13 @@ Ext.define("core.cbf.view.CbfForm", {
       allowBlank: false,
       blankText: '承包方编码不能为空'
     }, {
-      xtype: "textfield",
+      xtype: "combobox",
       fieldLabel: "承包方类型",
       name: "cbflx",
-      allowBlank: true  ,
+      store: "core.combobox.store.CbflxdmbStore",
+      displayField: 'cbflx',
+      valueField: 'dm',
+      allowBlank: true,
       blankText: '承包方类型不能为空',
       readOnly: false
     }, {
@@ -71,9 +74,12 @@ Ext.define("core.cbf.view.CbfForm", {
       blankText: '承包方名称不能为空',
       readOnly: false
     }, {
-      xtype: "textfield",
+      xtype: "combobox",
       fieldLabel: "承包方证件类型",
       name: "cbfzjlx",
+      store: "core.combobox.store.ZjlxdmbStore",
+      displayField: 'zjlx',
+      valueField: 'dm',
       allowBlank: true,
       readOnly: false
     }, {
@@ -127,7 +133,7 @@ Ext.define("core.cbf.view.CbfForm", {
       name: "cbfdcjs",
       allowBlank: true,
       readOnly: false
-    },{
+    }, {
       xtype: "textfield",
       fieldLabel: "公示记事",
       name: "gsjs",

@@ -20,24 +20,7 @@ Ext.define("core.main.view.WestView", {
     activeOnTop: true
   },
   items: [{
-      title: "组织机构",
-      items: [{
-          xtype: "treepanel",
-          rootVisible: false, // 不展示根节点
-          displayField: "text",
-          border: 0,
-          root: {
-            expanded: true,
-            children: [{
-                text: "组织机构管理",
-                id: "org-manage",
-                leaf: true
-              }
-            ]
-          }
-        }]
-    }, {
-      title: "人员信息管理",
+      title: "权证管理",
       items: [{
           xtype: "treepanel",
           rootVisible: false, // 不展示根节点
@@ -47,34 +30,24 @@ Ext.define("core.main.view.WestView", {
             expanded: true,
             children: [
               {
-                id: "fbf-manage",
-                text: "发包方管理",
+                id: "qzh-generate",
+                text: "权证生成",
                 leaf: true
               }, {
-                id: "cbf-manage",
-                text: "承包方管理",
+                id: "qzh-get",
+                text: "权证领取",
                 leaf: true
-              }
-            ]
-          }
-        }]
-    }, {
-      title: "地块信息管理",
-      items: [{
-          xtype: "treepanel",
-          rootVisible: false, // 不展示根节点
-          displayField: "text",
-          border: 0,
-          root: {
-            expanded: true,
-            children: [
-              {
-                id: "dk-manage",
-                text: "地块信息管理",
+              }, {
+                id: "qzh-reissue",
+                text: "权证补发",
                 leaf: true
-              },{
-                id: "map-manage",
-                text: "地图信息查看",
+              }, {
+                id: "qzh-renew",
+                text: "权证换发",
+                leaf: true
+              }, {
+                id: "qzh-cancel",
+                text: "权证注销",
                 leaf: true
               }
             ]
@@ -103,7 +76,7 @@ Ext.define("core.main.view.WestView", {
           }
         }]
     }, {
-      title: "权证管理",
+      title: "地块信息管理",
       items: [{
           xtype: "treepanel",
           rootVisible: false, // 不展示根节点
@@ -113,24 +86,55 @@ Ext.define("core.main.view.WestView", {
             expanded: true,
             children: [
               {
-                id: "qzh-generate",
-                text: "权证生成",
+                id: "dk-manage",
+                text: "地块信息管理",
                 leaf: true
-              },{
-                id: "qzh-get",
-                text: "权证领取",
+              }, {
+                id: "map-manage",
+                text: "地图信息查看",
                 leaf: true
-              },{
-                id: "qzh-reissue",
-                text: "权证补发",
+              }
+            ]
+          }
+        }]
+    }, {
+      title: "人员信息管理",
+      items: [{
+          xtype: "treepanel",
+          rootVisible: false, // 不展示根节点
+          displayField: "text",
+          border: 0,
+          root: {
+            expanded: true,
+            children: [
+              {
+                id: "fbf-manage",
+                text: "发包方管理",
                 leaf: true
-              },{
-                id: "qzh-renew",
-                text: "权证焕发",
+              }, {
+                id: "cbf-manage",
+                text: "承包方管理",
                 leaf: true
-              },{
-                id: "qzh-cancel",
-                text: "权证注销",
+              }, {
+                id: "jtcy-manage",
+                text: "承包方家庭成员管理",
+                leaf: true
+              }
+            ]
+          }
+        }]
+    }, {
+      title: "组织机构",
+      items: [{
+          xtype: "treepanel",
+          rootVisible: false, // 不展示根节点
+          displayField: "text",
+          border: 0,
+          root: {
+            expanded: true,
+            children: [{
+                text: "组织机构管理",
+                id: "org-manage",
                 leaf: true
               }
             ]
@@ -190,7 +194,7 @@ Ext.define("core.main.view.WestView", {
                 leaf: true
               }, {
                 id: "data-import",
-                text: "数据导入",
+                text: "数据导入导出",
                 leaf: true
               }
             ]

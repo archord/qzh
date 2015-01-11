@@ -114,6 +114,6 @@ Ext.define("core.cbf.controller.CbfController", {
     "core.cbf.view.CbfForm",
     "core.cbf.view.CbfGrid"
   ],
-  stores: ["core.cbf.store.CbfStore", "core.cbf.store.OrgStore"],
+  stores: ["core.cbf.store.CbfStore", "core.cbf.store.OrgStore", "core.combobox.store.ZjlxdmbStore", "core.combobox.store.CbflxdmbStore"],
   models: ["core.cbf.model.CbfModel"]
 });

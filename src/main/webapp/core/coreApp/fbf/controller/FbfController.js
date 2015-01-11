@@ -109,6 +109,6 @@ Ext.define("core.fbf.controller.FbfController", {
     "core.fbf.view.FbfForm",
     "core.fbf.view.FbfGrid"
   ],
-  stores: ["core.fbf.store.FbfStore", "core.fbf.store.OrgStore"],
+  stores: ["core.fbf.store.FbfStore", "core.fbf.store.OrgStore","core.combobox.store.ZjlxdmbStore"],
   models: ["core.fbf.model.FbfModel"]
 });

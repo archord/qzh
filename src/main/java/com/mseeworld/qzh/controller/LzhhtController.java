@@ -60,7 +60,7 @@ public class LzhhtController {
 
     StringBuilder rstStr = new StringBuilder("");
     rstStr.append("{totalCount:");
-    rstStr.append(10);
+    rstStr.append(cbfs.size());
     rstStr.append(",rows:[");
     int i = 0;
     for (Lzht cbf : cbfs) {
@@ -70,7 +70,7 @@ public class LzhhtController {
       } catch (IOException ex) {
         ex.printStackTrace();
       }
-      if (i++ < cbfs.size()) {
+      if (++i < cbfs.size()) {
         rstStr.append(",");
       }
     }

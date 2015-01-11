@@ -137,6 +137,7 @@ Ext.define("core.lzhht.controller.LzhhtController", {
     "core.lzhht.view.LzhhtWindow",
     "core.lzhht.view.LzhhtGrid"
   ],
-  stores: ["core.lzhht.store.LzhhtStore", "core.lzhht.store.OrgStore"],
+  stores: ["core.lzhht.store.LzhhtStore", "core.lzhht.store.OrgStore",
+  "core.combobox.store.TdytdmbStore", "core.combobox.store.CbjyqqdfsdmbStore"],
   models: ["core.lzhht.model.LzhhtModel"]
 });

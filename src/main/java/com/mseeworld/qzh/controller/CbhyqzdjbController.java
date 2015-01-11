@@ -42,7 +42,7 @@ public class CbhyqzdjbController {
 
     StringBuilder rstStr = new StringBuilder("");
     rstStr.append("{totalCount:");
-    rstStr.append(10);
+    rstStr.append(cbjyqzdjbs.size());
     rstStr.append(",rows:[");
     int i = 0;
     for (Cbjyqzdjb cbjyqzdjb : cbjyqzdjbs) {
@@ -52,7 +52,7 @@ public class CbhyqzdjbController {
       } catch (IOException ex) {
         ex.printStackTrace();
       }
-      if (i++ < cbjyqzdjbs.size()) {
+      if (++i < cbjyqzdjbs.size()) {
         rstStr.append(",");
       }
     }

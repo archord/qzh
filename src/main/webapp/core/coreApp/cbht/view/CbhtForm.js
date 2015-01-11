@@ -140,9 +140,12 @@ Ext.define("core.cbht.view.CbhtForm", {
       allowBlank: true,
       readOnly: false
     }, {
-      xtype: "textfield",
+      xtype: "combobox",
       fieldLabel: "承包方式",
       name: "cbfs",
+      store: "core.combobox.store.CbjyqqdfsdmbStore",
+      displayField: 'qdfs',
+      valueField: 'dm',
       allowBlank: true,
       readOnly: false
     }, {

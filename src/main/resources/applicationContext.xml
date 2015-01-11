@@ -82,6 +82,18 @@
   <bean id="cbhtDao" class="com.mseeworld.qzh.dao.CbhtDaoImpl"></bean>
   <bean id="lzhtDao" class="com.mseeworld.qzh.dao.LzhhtDaoImpl"></bean>
   <bean id="cbjyqzdjbDao" class="com.mseeworld.qzh.dao.CbjyqzdjbDaoImpl"></bean>
+  <bean id="syqsxDao" class="com.mseeworld.qzh.dao.SyqsxDaoImpl"></bean>
+  <bean id="cbjyqqdfsdmbDao" class="com.mseeworld.qzh.dao.CbjyqqdfsdmbDaoImpl"></bean>
+  
+  <!--combobox-->
+  <bean id="cbflxdmbDao" class="com.mseeworld.qzh.dao.CbflxdmbDaoImpl"></bean>
+  <bean id="cybzdmbDao" class="com.mseeworld.qzh.dao.CybzdmbDaoImpl"></bean>
+  <bean id="dklbdmbDao" class="com.mseeworld.qzh.dao.DklbdmbDaoImpl"></bean>
+  <bean id="dldjdmbDao" class="com.mseeworld.qzh.dao.DldjdmbDaoImpl"></bean>
+  <bean id="sfdmbDao" class="com.mseeworld.qzh.dao.SfdmbDaoImpl"></bean>
+  <bean id="tdytdmbDao" class="com.mseeworld.qzh.dao.TdytdmbDaoImpl"></bean>
+  <bean id="xbdmbDao" class="com.mseeworld.qzh.dao.XbdmbDaoImpl"></bean>
+  <bean id="zjlxdmbDao" class="com.mseeworld.qzh.dao.ZjlxdmbDaoImpl"></bean>
 
   <bean id="hibernateUtil" class="com.mseeworld.qzh.util.HibernateUtil"></bean>
   <bean id="userDao" class="com.mseeworld.qzh.dao.UserDAOImpl"></bean>

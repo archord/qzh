@@ -18,7 +18,6 @@
 		<org.springframework.security.version>3.1.0.RELEASE</org.springframework.security.version>
 		<spring.integration.version>2.0.5.RELEASE</spring.integration.version>
     <postgres.version>9.3-1100.JDBC.41</postgres.version>
-	 <netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
     <javaee.version>6.0</javaee.version>
     <hibernate.version>4.0.1.Final</hibernate.version>
     <servlet.version>2.4</servlet.version>
@@ -52,7 +51,7 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
-      <version>4.1.7.Final</version>
+      <version>4.0.1.Final</version> <!--4.1.7.Final-->
     </dependency>
     
     <dependency>
