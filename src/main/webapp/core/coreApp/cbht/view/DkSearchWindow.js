@@ -1,4 +1,4 @@
-Ext.define("core.dk.view.DkSearchWindow", {
+Ext.define("core.cbht.view.DkSearchWindow", {
   extend: 'Ext.Window',
   alias: "widget.dksearchwindow",
   bodyStyle: 'background:transparent',
@@ -20,7 +20,7 @@ Ext.define("core.dk.view.DkSearchWindow", {
       // iconCls:'goodtype_tree',
       xtype: "orgTreeCbhtDkSearch",
       id: "orgTreeCbht_dkSearch",
-      store: Ext.create('core.dk.store.OrgStore'),
+      store: Ext.create('core.cbht.store.OrgStore'),
       margins: '5 2 5 5',
       width: 150,
       split: true,

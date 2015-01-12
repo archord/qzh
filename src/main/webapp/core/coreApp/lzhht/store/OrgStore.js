@@ -4,7 +4,7 @@
 Ext.define("core.lzhht.store.OrgStore", {
   extend: 'Ext.data.TreeStore',
   defaultRootId: "root",
-  storeId: 'orgStoreId',
+  storeId: 'orgStoreId_lzhht',
   //autoSync:true,//与服务器同步
   proxy: {
     api: {

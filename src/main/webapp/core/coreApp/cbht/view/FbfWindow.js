@@ -1,6 +1,6 @@
-Ext.define("core.cbht.view.FbfWindow", {
+Ext.define("core.cbht.view.FbfWindow_cbht", {
   extend: 'Ext.Window',
-  alias: "widget.fbfwindow",
+  alias: "widget.fbfwindow_cbht",
   bodyStyle: 'background:transparent',
   title: "发包方列表",
   layout: "border",
@@ -33,7 +33,7 @@ Ext.define("core.cbht.view.FbfWindow", {
       region: 'center',
       height: 300,
       margins: '5 0 5 0',
-      xtype: "fbfGrid",
+      xtype: "fbfGrid_cbht",
       multiSelect: false,
       tbar: [],
 //          store: Ext.create("core.fbf.store.FbfStore", {}),

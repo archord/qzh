@@ -50,12 +50,4 @@ Ext.define("core.fbf.view.FbfLayout", {
 
         }]
     }]
-//  ,
-//  initComponent: function() {
-//    Ext.apply(this, {
-//      store: Ext.create('core.fbf.store.OrgStore')
-//    });
-//
-//    this.callParent(arguments);
-//  }
 });

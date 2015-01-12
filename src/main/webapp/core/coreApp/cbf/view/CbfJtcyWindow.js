@@ -1,11 +1,11 @@
-Ext.define("core.cbht.view.CbhtWindow", {
+Ext.define("core.cbf.view.CbfJtcyWindow", {
   extend: 'Ext.window.Window',
-  alias: "widget.cbhtwindow",
-  id: "cbhtwindowId",
+  alias: "widget.cbfJtcyWindow",
+  id: "cbfJtcyWindowId",
   align: "left",
   frame: true,
   bodyStyle: 'background:transparent',
-  title: "添加承包合同",
+  title: "添加家庭成员信息",
 //  layout: "border",
   listeners: {
     show: function(_this) {
@@ -26,13 +26,13 @@ Ext.define("core.cbht.view.CbhtWindow", {
         _this.down("form").getForm().findField("cbdkzs").setValue(_this.extraParas.cbht.cbdkzs);
         _this.down("form").getForm().findField("qdsj").setValue(_this.extraParas.cbht.qdsj);
         
-        var dkgrid = Ext.getCmp("cbhtdkgrid");
+        var dkgrid = Ext.getCmp("cbfgrid");
         var store = dkgrid.getStore();
         store.load({params: {cbhtId: _this.extraParas.cbht.id}});
       } else {
-        var orgTree = Ext.getCmp("orgTreeCbht");
+        var orgTree = Ext.getCmp("orgTreeCbf");
         var curSelNode = orgTree.getSelectionModel().getSelection();
-        if (curSelNode.length > 0 && curSelNode[0].raw) {
+        if (curSelNode[0].raw) {
           _this.down("form").getForm().findField("orgName").setValue(curSelNode[0].raw.orgName);
           _this.down("form").getForm().findField("isAdd").setValue(1);
           _this.down("form").getForm().findField("orgId").setValue(curSelNode[0].raw.orgId);
@@ -46,37 +46,9 @@ Ext.define("core.cbht.view.CbhtWindow", {
       region: 'center',
       // iconCls:'goodtype_tree',
       margins: '5 0 5 0',
-      height: 220,
-      width: 750,
-//      collapsible: true, // 可以被折叠
-      xtype: "cbhtform"
-    }, {
-      // iconCls:'good_table',
-//      collapsible: true, // 可以被折叠
-      //xtype : 'panel',
-      region: 'south ',
-      height: 200,
-      width: 750,
-      margins: '5 0 5 0',
-      xtype: "cbhtdkgrid",
-      bbar: [],
-//          store: Ext.create("core.cbht.store.FbfStore", {}),
-      title: "承包地块"
-
+      height: 210,
+      width: 600,
+      collapsible: false, // 可以被折叠
+      xtype: "cbfJtcyForm"
     }]
-//  ,
-//  buttons: [{
-//      xtype: "button",
-//      text: '保存',
-//      ref: "save",
-//      width: 50
-//    }, {
-//      xtype: "button",
-//      text: '取消',
-//      width: 50,
-//      //margin : "10 10 10 20",
-//      handler: function(_btn) {
-//        _btn.up('.window').close();
-//      }
-//    }]
 });

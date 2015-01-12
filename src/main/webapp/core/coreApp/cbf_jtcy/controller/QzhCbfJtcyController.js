@@ -130,8 +130,8 @@ Ext.define("core.cbf_jtcy.controller.QzhCbfJtcyController", {
     "core.cbf_jtcy.view.QzhCbfJtcyGrid_Qzh",
     "core.cbf_jtcy.view.QzhCbfJtcyForm"
   ],
-  stores: ["core.cbf_jtcy.store.CbjyqzStore", "core.cbf_jtcy.store.OrgStore_QzhCbfJtcy", 
+  stores: ["core.cbf_jtcy.store.CbfjtcyStore", "core.cbf_jtcy.store.OrgStore_QzhCbfJtcy", 
             "core.cbf_jtcy.store.OrgStore_QzhCbfJtcy_Qzh", "core.cbf_jtcy.store.CbjyqzdjbStore",
           "core.combobox.store.ZjlxdmbStore", "core.combobox.store.SfdmbStore"],
-  models: ["core.cbf_jtcy.model.CbjyqzModel", "core.qzh.model.CbjyqzdjbModel"]
+  models: ["core.cbf_jtcy.model.CbfjtcyModel", "core.cbf.model.CbfModel"]
 });

@@ -1,7 +1,7 @@
 
-Ext.define("core.cbf_jtcy.store.CbjyqzStore", {
+Ext.define("core.cbf_jtcy.store.CbfjtcyStore", {
   extend: 'Ext.data.Store',
-  model: 'core.cbf_jtcy.model.CbjyqzModel',
+  model: 'core.cbf_jtcy.model.CbfjtcyModel',
   pageSize: 10,
   //autoSync:true,//与服务器同步
   proxy: {

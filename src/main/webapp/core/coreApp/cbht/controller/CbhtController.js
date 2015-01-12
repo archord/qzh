@@ -86,9 +86,9 @@ Ext.define("core.cbht.controller.CbhtController", {
           });
         }
       },
-      "fbfwindow button[ref=save]": {
+      "fbfwindow_cbht button[ref=save]": {
         click: function(btn) {
-          var tree = btn.up('fbfwindow').down('fbfGrid');
+          var tree = btn.up('fbfwindow_cbht').down('fbfGrid_cbht');
           var curSelNode = tree.getSelectionModel().getSelection();
           if (curSelNode.length > 0) {
             var window = Ext.getCmp("cbhtwindowId");
@@ -98,9 +98,9 @@ Ext.define("core.cbht.controller.CbhtController", {
           btn.up('.window').close();
         }
       },
-      "cbfwindow button[ref=save]": {
+      "cbfwindow_cbht button[ref=save]": {
         click: function(btn) {
-          var tree = btn.up('cbfwindow').down('cbfgrid');
+          var tree = btn.up('cbfwindow_cbht').down('cbfgrid_cbht');
           var curSelNode = tree.getSelectionModel().getSelection();
           if (curSelNode.length > 0) {
             var window = Ext.getCmp("cbhtwindowId");
@@ -253,10 +253,10 @@ Ext.define("core.cbht.controller.CbhtController", {
     "core.cbht.view.CbhtWindow",
     "core.cbht.view.CbhtForm",
     "core.cbht.view.CbhtDkGrid",
-    "core.cbht.view.FbfWindow",
-    "core.cbht.view.CbfWindow",
-    "core.cbht.view.FbfGrid",
-    "core.cbht.view.CbfGrid",
+    "core.cbht.view.FbfWindow_cbht",
+    "core.cbht.view.CbfWindow_cbht",
+    "core.cbht.view.FbfGrid_cbht",
+    "core.cbht.view.CbfGrid_cbht",
     "core.cbht.view.DkGrid",
     "core.cbht.view.OrgTreeCbhtDkSearch"
   ],

@@ -18,26 +18,12 @@ Ext.define("core.cbf.controller.CbfController", {
       },
       "orgTreeCbf": {
         itemclick: function(tree, record, item, index, e, eOpts) {
-          //节点点击事件
-          var pform = tree.up("cbfLayout").down("cbfform").getForm();
-          pform.findField("isAdd").setValue("1");
 
-          if (record.raw) {
-            if (record.raw.orgLevel < 3) {
-              pform.findField("orgName").setValue("必须在左侧选择村级以下区域");
-              pform.findField("orgId").setValue("");
-              pform.findField("orgLevel").setValue(record.raw.orgLevel);
-            } else {
-              pform.findField("orgName").setValue(record.raw.orgName);
-              pform.findField("orgId").setValue(record.raw.orgId);
-              pform.findField("orgLevel").setValue(record.raw.orgLevel);
-            }
-          }
         }
       },
       "cbfgrid": {
         itemclick: function(tree, record, item, index, e, eOpts) {
-
+          return;
           var pform = tree.up("cbfLayout").down("cbfform").getForm();
           pform.findField("isAdd").setValue("0");
 
@@ -66,16 +52,60 @@ Ext.define("core.cbf.controller.CbfController", {
           }
         }
       },
+      "cbfgrid button[ref=add]": {
+        click: function(btn) {
+          var cbhtWin = Ext.create("core.cbf.view.CbfWindow");
+          cbhtWin.show();
+        }
+      },
+      "cbfgrid button[ref=edit]": {
+        click: function(btn) {
+          var cbhtTree = btn.up('cbfgrid');
+          var curSelNode = cbhtTree.getSelectionModel().getSelection();
+          if (curSelNode.length > 0) {
+            var cbhtWin = Ext.create("core.cbf.view.CbfWindow");
+            cbhtWin.extraParas = {cbht: curSelNode[0].raw, idAdd: 0, orgLevel: 3};
+            cbhtWin.show();
+          } else {
+            Ext.MessageBox.alert("提示", "请在下方选择承包合同！");
+          }
+        }
+      },
+      "cbfgrid button[ref=del]": {
+        click: function(btn) {
+          Ext.MessageBox.confirm("注意", "是否删除该记录？", function(btn) {
+            if (btn === "yes") {
+              console.log("delete record");
+            } else {
+              console.log("not delete record");
+            }
+          });
+        }
+      },
       "cbfform button[ref=save]": {
         click: function(btn) {
-          var pform = btn.up("cbfform").getForm();
-          var orgTree = btn.up('cbfLayout').down("orgTreeCbf");
-          var curSelNode = orgTree.getSelectionModel().getSelection();
-//          alert(curSelNode[0].raw.orgId);
+          var orgTree = Ext.getCmp("orgTreeCbfId");
+          var pform = btn.up("cbfWindow").down("form").getForm();
           if (pform.findField("isAdd").getValue() === '1') {
+            var curSelNode = orgTree.getSelectionModel().getSelection();
+            if (curSelNode.length > 0 && curSelNode[0].raw) {
+              if (curSelNode[0].raw.orgLevel < 3) {
+                pform.findField("orgName").setValue("必须在左侧选择村级以下区域");
+                Ext.MessageBox.alert("提示", "必须在左侧选择村级以下区域");
+                return;
+              } else {
+                pform.findField("orgName").setValue(curSelNode[0].raw.orgName);
+                pform.findField("orgLevel").setValue(curSelNode[0].raw.orgLevel);
+                pform.findField("orgId").setValue(curSelNode[0].raw.orgId);
+              }
+            } else {
+              pform.findField("orgName").setValue("必须在左侧选择村级以下区域");
+              Ext.MessageBox.alert("提示", "必须在左侧选择村级以下区域");
+              return;
+            }
             if (pform.findField("orgId").getValue() === "" || pform.findField("orgLevel").getValue() < 3) {
               pform.findField("orgName").setValue("必须在左侧选择村级以下区域");
-              alert("必须在左侧选择村级以下区域!");
+              Ext.MessageBox.alert("提示", "必须在左侧选择村级以下区域!");
               return;
             }
           }
@@ -104,6 +134,41 @@ Ext.define("core.cbf.controller.CbfController", {
             });
           }
         }
+      },
+      "cbfJtcyGrid button[ref=add]": {
+        click: function(btn) {
+          var pform = btn.up('cbfWindow').down("form").getForm();
+          if (parseInt(pform.findField("id").getValue()) > 0) {
+            var cbhtWin = Ext.create("core.cbf.view.CbfJtcyWindow");
+            cbhtWin.show();
+          } else {
+            Ext.MessageBox.alert("提示", "请保存承包方信息后，再添加家庭成员信息！<br/>或在修改窗口添加家庭成员信息！");
+          }
+        }
+      },
+      "cbfJtcyGrid button[ref=edit]": {
+        click: function(btn) {
+          var cbhtTree = btn.up('cbfgrid');
+          var curSelNode = cbhtTree.getSelectionModel().getSelection();
+          if (curSelNode.length > 0) {
+            var cbhtWin = Ext.create("core.cbf.view.CbfJtcyWindow");
+            cbhtWin.extraParas = {cbht: curSelNode[0].raw, idAdd: 0, orgLevel: 3};
+            cbhtWin.show();
+          } else {
+            Ext.MessageBox.alert("提示", "请在下方选择承包合同！");
+          }
+        }
+      },
+      "cbfJtcyGrid button[ref=del]": {
+        click: function(btn) {
+          Ext.MessageBox.confirm("注意", "是否删除该记录？", function(btn) {
+            if (btn === "yes") {
+              console.log("delete record");
+            } else {
+              console.log("not delete record");
+            }
+          });
+        }
       }
 
     });
@@ -112,8 +177,19 @@ Ext.define("core.cbf.controller.CbfController", {
     "core.cbf.view.CbfLayout",
     "core.cbf.view.OrgTreeCbf",
     "core.cbf.view.CbfForm",
-    "core.cbf.view.CbfGrid"
+    "core.cbf.view.CbfGrid",
+    "core.cbf.view.CbfJtcyGrid",
+    "core.cbf.view.CbfJtcyWindow",
+    "core.cbf.view.CbfJtcyForm",
+    "core.cbf.view.CbfWindow"
   ],
-  stores: ["core.cbf.store.CbfStore", "core.cbf.store.OrgStore", "core.combobox.store.ZjlxdmbStore", "core.combobox.store.CbflxdmbStore"],
-  models: ["core.cbf.model.CbfModel"]
+  stores: ["core.cbf.store.CbfStore",
+    "core.cbf.store.OrgStore",
+    "core.combobox.store.ZjlxdmbStore",
+    "core.combobox.store.CbflxdmbStore",
+    "core.combobox.store.XbdmbStore",
+    "core.combobox.store.SfdmbStore",
+    "core.cbf.store.CbfjtcyStore",
+    "core.combobox.store.XbdmbStore"],
+  models: ["core.cbf.model.CbfModel", "core.cbf.model.CbfjtcyModel"]
 });

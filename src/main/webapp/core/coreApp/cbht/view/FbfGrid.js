@@ -1,9 +1,9 @@
 /**
  *  
  * */
-Ext.define("core.cbht.view.FbfGrid",{
+Ext.define("core.cbht.view.FbfGrid_cbht",{
 	extend:"Ext.grid.Panel",
-	alias:"widget.fbfGrid",
+	alias:"widget.fbfGrid_cbht",
 	store:"core.cbht.store.FbfStore",
 	border:0,
 	selModel:{

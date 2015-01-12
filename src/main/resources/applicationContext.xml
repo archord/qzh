@@ -84,6 +84,7 @@
   <bean id="cbjyqzdjbDao" class="com.mseeworld.qzh.dao.CbjyqzdjbDaoImpl"></bean>
   <bean id="syqsxDao" class="com.mseeworld.qzh.dao.SyqsxDaoImpl"></bean>
   <bean id="cbjyqqdfsdmbDao" class="com.mseeworld.qzh.dao.CbjyqqdfsdmbDaoImpl"></bean>
+  <bean id="cbfJtcyDao" class="com.mseeworld.qzh.dao.CbfJtcyDaoImpl"></bean>
   
   <!--combobox-->
   <bean id="cbflxdmbDao" class="com.mseeworld.qzh.dao.CbflxdmbDaoImpl"></bean>

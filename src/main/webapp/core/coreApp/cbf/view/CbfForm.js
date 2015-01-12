@@ -75,6 +75,22 @@ Ext.define("core.cbf.view.CbfForm", {
       readOnly: false
     }, {
       xtype: "combobox",
+      fieldLabel: "承包方性别",
+      name: "cbfxb",
+      store: "core.combobox.store.XbdmbStore",
+      displayField: 'xb',
+      valueField: 'dm',
+      allowBlank: true,
+      readOnly: false
+    }, {
+      xtype: "textfield",
+      fieldLabel: "承包民族",
+      name: "cbfmz",
+      allowBlank: true,
+      blankText: '承包方名称不能为空',
+      readOnly: false
+    }, {
+      xtype: "combobox",
       fieldLabel: "承包方证件类型",
       name: "cbfzjlx",
       store: "core.combobox.store.ZjlxdmbStore",

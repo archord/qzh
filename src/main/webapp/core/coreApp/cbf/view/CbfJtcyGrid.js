@@ -1,11 +1,11 @@
 /**
  *  
  * */
-Ext.define("core.cbf_jtcy.view.QzhCbfJtcyGrid", {
+Ext.define("core.cbf.view.CbfJtcyGrid", {
   extend: "Ext.grid.Panel",
-  alias: "widget.qzhCbfJtcyGrid",
-  id: "qzhCbfJtcyGridId",
-  store: "core.cbf_jtcy.store.CbfjtcyStore",
+  alias: "widget.cbfJtcyGrid",
+  id: "cbfJtcyGridId",
+  store: "core.cbf.store.CbfjtcyStore",
   border: 0,
   selModel: {
     selType: "checkboxmodel"
@@ -54,7 +54,7 @@ Ext.define("core.cbf_jtcy.view.QzhCbfJtcyGrid", {
   ],
   bbar: {
     xtype: 'pagingtoolbar',
-    store: 'core.cbf_jtcy.store.CbfjtcyStore',
+    store: 'core.cbf.store.CbfjtcyStore',
     dock: 'bottom',
     displayInfo: true
   },
@@ -62,31 +62,31 @@ Ext.define("core.cbf_jtcy.view.QzhCbfJtcyGrid", {
   columnLines: true, //展示竖线
   columns: [
     {xtype: 'rownumberer'},
-    {text: "承包经营权证编码", dataIndex: "cbfbm", width: 120, field: {
+    {text: "承包方编码", dataIndex: "cbfbm", width: 120, field: {
         xtype: "textfield"
       }},
-    {text: "发包方编码", dataIndex: "cyxm", width: 120, field: {
+    {text: "成员姓名", dataIndex: "cyxm", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "承包方编码", dataIndex: "cyxb", width: 120, field: {
+    {text: "成员性别", dataIndex: "cyxb", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "承包方式", dataIndex: "cymz", width: 70, field: {
+    {text: "成员民族", dataIndex: "cymz", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "承包期限", dataIndex: "cyzjlx", width: 70, field: {
+    {text: "成员证件类型", dataIndex: "cyzjlx", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "承包期限起", dataIndex: "cyzjhm", width: 70, field: {
+    {text: "成员证件号码", dataIndex: "cyzjhm", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "承包期限止", dataIndex: "yhzgx", width: 70, field: {
+    {text: "与户主关系", dataIndex: "yhzgx", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "承包期限起", dataIndex: "cybz", width: 70, field: {
+    {text: "成员备注", dataIndex: "cybz", width: 120, field: {
         xtype: "textfield"
       }},
-    {text: "承包期限止", dataIndex: "sfgyr", width: 70, field: {
+    {text: "是否共有人", dataIndex: "sfgyr", width: 70, field: {
         xtype: "textfield"
       }}
   ],

@@ -115,10 +115,6 @@ Ext.define("core.main.view.WestView", {
                 id: "cbf-manage",
                 text: "承包方管理",
                 leaf: true
-              }, {
-                id: "jtcy-manage",
-                text: "承包方家庭成员管理",
-                leaf: true
               }
             ]
           }

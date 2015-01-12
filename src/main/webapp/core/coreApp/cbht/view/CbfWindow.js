@@ -1,6 +1,6 @@
-Ext.define("core.cbht.view.CbfWindow", {
+Ext.define("core.cbht.view.CbfWindow_cbht", {
   extend: 'Ext.Window',
-  alias: "widget.cbfwindow",
+  alias: "widget.cbfwindow_cbht",
   bodyStyle: 'background:transparent',
   title: "承包方列表",
   layout: "border",
@@ -33,7 +33,7 @@ Ext.define("core.cbht.view.CbfWindow", {
       region: 'center',
       height: 300,
       margins: '5 0 5 0',
-      xtype: "cbfgrid",
+      xtype: "cbfgrid_cbht",
       multiSelect: false,
       tbar: [],
 //          store: Ext.create("core.cbf.store.FbfStore", {}),

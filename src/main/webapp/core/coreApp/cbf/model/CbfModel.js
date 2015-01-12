@@ -8,6 +8,8 @@
  		{name:"cbfbm",type:"string",srotable:false},
  		{name:"cbflx",type:"char",srotable:false},
  		{name:"cbfmc",type:"string",srotable:false},
+ 		{name:"cbfxb",type:"char",srotable:false},
+ 		{name:"cbfmz",type:"string",srotable:false},
  		{name:"cbfzjlx",type:"char",srotable:false},
  		{name:"cbfzjhm",type:"string",srotable:false},
  		{name:"cbfdz",type:"string",srotable:false},
