@@ -52,7 +52,7 @@ Ext.define("core.cbf.view.CbfWindow", {
       region: 'center',
       // iconCls:'goodtype_tree',
       margins: '5 0 5 0',
-      height: 220,
+      height: 240,
       width: 750,
 //      collapsible: true, // 可以被折叠
       xtype: "cbfform"

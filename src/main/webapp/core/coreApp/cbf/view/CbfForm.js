@@ -9,7 +9,7 @@ Ext.define("core.cbf.view.CbfForm", {
   },
   layout: {
     type: "table",
-    columns: 2
+    columns: 3
   },
   tbar: [{
       xtype: "button",
@@ -18,7 +18,7 @@ Ext.define("core.cbf.view.CbfForm", {
       text: "保存"
     }],
   items: [{
-      colspan: 2,
+      colspan: 3,
       xtype: "textfield",
       width: 430,
       fieldLabel: "所属区域",
@@ -53,12 +53,14 @@ Ext.define("core.cbf.view.CbfForm", {
     }, {
       xtype: "textfield",
       fieldLabel: "承包方编码",
+      width: 220,
       name: "cbfbm",
       allowBlank: false,
       blankText: '承包方编码不能为空'
     }, {
       xtype: "combobox",
       fieldLabel: "承包方类型",
+      width: 220,
       name: "cbflx",
       store: "core.combobox.store.CbflxdmbStore",
       displayField: 'cbflx',
@@ -69,6 +71,7 @@ Ext.define("core.cbf.view.CbfForm", {
     }, {
       xtype: "textfield",
       fieldLabel: "承包方名称",
+      width: 220,
       name: "cbfmc",
       allowBlank: false,
       blankText: '承包方名称不能为空',
@@ -76,6 +79,7 @@ Ext.define("core.cbf.view.CbfForm", {
     }, {
       xtype: "combobox",
       fieldLabel: "承包方性别",
+      width: 220,
       name: "cbfxb",
       store: "core.combobox.store.XbdmbStore",
       displayField: 'xb',
@@ -85,6 +89,7 @@ Ext.define("core.cbf.view.CbfForm", {
     }, {
       xtype: "textfield",
       fieldLabel: "承包民族",
+      width: 220,
       name: "cbfmz",
       allowBlank: true,
       blankText: '承包方名称不能为空',
@@ -92,6 +97,7 @@ Ext.define("core.cbf.view.CbfForm", {
     }, {
       xtype: "combobox",
       fieldLabel: "承包方证件类型",
+      width: 220,
       name: "cbfzjlx",
       store: "core.combobox.store.ZjlxdmbStore",
       displayField: 'zjlx',
@@ -101,75 +107,86 @@ Ext.define("core.cbf.view.CbfForm", {
     }, {
       xtype: "textfield",
       fieldLabel: "承包方证件号码",
+      width: 220,
       name: "cbfzjhm",
       allowBlank: true,
       readOnly: false
     }, {
       xtype: "textfield",
       fieldLabel: "承包方地址",
+      width: 220,
       name: "cbfdz",
       allowBlank: true,
       readOnly: false
     }, {
       xtype: "textfield",
       fieldLabel: "邮政编码",
+      width: 220,
       name: "yzbm",
       allowBlank: true,
       readOnly: false
     }, {
       xtype: "textfield",
       fieldLabel: "联系电话",
+      width: 220,
       name: "lxdh",
       allowBlank: true,
       readOnly: false
     }, {
       xtype: "textfield",
       fieldLabel: "承包方成员数量",
+      width: 220,
       name: "cbfcysl",
       allowBlank: true,
       readOnly: false
     }, {
-      xtype: "textfield",
+      xtype: "datefield",
       fieldLabel: "承包方调查日期",
+      width: 220,
       name: "cbfdcrq",
-      allowBlank: true,
+      allowBlank: false,
+      format: 'Y-m-d',
       readOnly: false
     }, {
-      colspan: 2,
       xtype: "textfield",
       fieldLabel: "承包方调查员",
+      width: 220,
       name: "cbfdcy",
       allowBlank: true,
       readOnly: false
     }, {
-      colspan: 2,
-      width: 430,
       xtype: "textfield",
       fieldLabel: "承包方调查记事",
+      width: 220,
       name: "cbfdcjs",
       allowBlank: true,
       readOnly: false
     }, {
       xtype: "textfield",
       fieldLabel: "公示记事",
+      width: 220,
       name: "gsjs",
       allowBlank: true,
       readOnly: false
     }, {
       xtype: "textfield",
       fieldLabel: "公示记事人",
+      width: 220,
       name: "gsjsr",
       allowBlank: true,
       readOnly: false
     }, {
-      xtype: "textfield",
+      xtype: "datefield",
       fieldLabel: "公示审核日期",
+      width: 220,
       name: "gsshrq",
-      allowBlank: true,
+      allowBlank: false,
+      format: 'Y-m-d',
       readOnly: false
     }, {
       xtype: "textfield",
       fieldLabel: "公示审核人",
+      width: 220,
       name: "gsshr",
       allowBlank: true,
       readOnly: false
