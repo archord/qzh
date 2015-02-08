@@ -133,7 +133,7 @@ public class CbhtController {
   }
 
   /**
-   * 删除商品people/remove_people.do
+   * 删除people/remove_people.do
    */
   @RequestMapping(value = "/remove_cbht", method = RequestMethod.POST)
   public void deletePeople(HttpServletRequest request, PrintWriter writer) {

@@ -119,9 +119,12 @@ Ext.define("core.dk.view.DkWindow", {
           allowBlank: true,
           readOnly: false
         }, {
-          xtype: "textfield",
+          xtype: "combobox",
           fieldLabel: "土地利用类型",
           name: "tdlylx",
+          store: "core.combobox.store.TdlylxStore",
+          displayField: 'lbmc',
+          valueField: 'lbbm',
           allowBlank: true,
           readOnly: false
         }, {
@@ -156,7 +159,7 @@ Ext.define("core.dk.view.DkWindow", {
           xtype: "textfield",
           fieldLabel: "实测面积",
           name: "scmj",
-          value: "0",
+          value: "0.0",
           allowBlank: true,
           readOnly: false
         }, {

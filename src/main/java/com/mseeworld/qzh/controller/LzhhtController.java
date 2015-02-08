@@ -113,7 +113,7 @@ public class LzhhtController {
   }
 
   /**
-   * 删除商品people/remove_people.do
+   * 删除people/remove_people.do
    */
   @RequestMapping(value = "/remove_lzht", method = RequestMethod.POST)
   public void delete(HttpServletRequest request, PrintWriter writer) {

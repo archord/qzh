@@ -6,7 +6,7 @@ Ext.define("core.qzh_get.store.CbjyqzStore", {
   //autoSync:true,//与服务器同步
   proxy: {
     type: "ajax",
-    url: "./cbjyqzdjb/listall_cbjyqzdjb.do",
+    url: "./cbjyqz/listall_cbjyqz.do",
     reader: {
       type: "json",
       root: "rows",

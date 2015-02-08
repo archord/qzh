@@ -51,7 +51,7 @@ public class OrganizationController {
   }
 
   /**
-   * 新增产品product/add_product.do
+   * 新增product/add_product.do
    */
   @RequestMapping(value = "/addOrg", method = RequestMethod.POST)
   public void addProduct(HttpServletRequest request, HttpServletResponse response, PrintWriter writer) throws IOException {
@@ -116,15 +116,15 @@ public class OrganizationController {
     response.setContentType("text/html;  charset=UTF-8");
 
 //		if(null != productService.add(product)){
-//			writer.write("{success:true, msg:'商品新增成功!'}");
+//			writer.write("{success:true, msg:'新增成功!'}");
 //		}else{
-//			writer.write("{success:false, msg:'商品新增失败!'}");
+//			writer.write("{success:false, msg:'新增失败!'}");
 //		}
-    writer.write("{success:true, msg:'商品新增成功!'}");
+    writer.write("{success:true, msg:'新增成功!'}");
   }
 
   /**
-   * 删除商品product/remove_product.do
+   * 删除product/remove_product.do
    */
   @RequestMapping(value = "/remove_org", method = RequestMethod.POST)
   public void deleteProduct(HttpServletRequest request, PrintWriter writer) {
@@ -135,7 +135,7 @@ public class OrganizationController {
   }
 
   /**
-   * 修改商品信息product/update_product.do
+   * 修改信息product/update_product.do
    */
   @RequestMapping(value = "/update_product", method = RequestMethod.POST)
   public void updateProduct(@RequestParam MultipartFile photos, HttpServletRequest request, HttpServletResponse response, PrintWriter writer) throws IOException {
@@ -178,9 +178,9 @@ public class OrganizationController {
     response.setContentType("text/html;  charset=UTF-8");
 
 //    if (productService.modify(product)) {
-//      writer.write("{success:true, msg:'商品修改成功!',photo:'" + photos.getOriginalFilename() + "'}");
+//      writer.write("{success:true, msg:'修改成功!',photo:'" + photos.getOriginalFilename() + "'}");
 //    } else {
-//      writer.write("{success:false, msg:'商品修改失败!'}");
+//      writer.write("{success:false, msg:'修改失败!'}");
 //    }
   }
 }

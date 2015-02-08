@@ -111,7 +111,7 @@ Ext.define("core.org.controller.OrgController", {
         }
       },
       /**
-       *删除商品
+       *删除
        */
       "orgTree button[ref=delOrg]": {
         click: function(btn) {
@@ -231,7 +231,7 @@ Ext.define("core.org.controller.OrgController", {
             treeForm.findField("parent").setValue(record.data.parentId);
             treeForm.findField("leaf").setValue(record.data.leaf);
           }
-          /**加载类别对应的商品到grid中*/
+          /**加载类别对应的到grid中*/
           store.clearFilter(false);
           if (record.raw) {
             store.filter("category", record.raw.text);
@@ -344,7 +344,7 @@ Ext.define("core.org.controller.OrgController", {
           }
           var pid = records[0].data.parentId;
           Ext.MessageBox.confirm("重要提示",
-                  "如果删除些类别，同时也会删除些类别对应的所有商品信息，确定要删除吗？",
+                  "如果删除些类别，同时也会删除些类别对应的所有信息，确定要删除吗？",
                   function(e) {
                     if (e == 'yes') {
                       Ext.Ajax.request({

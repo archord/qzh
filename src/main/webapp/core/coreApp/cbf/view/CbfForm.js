@@ -1,6 +1,7 @@
 Ext.define("core.cbf.view.CbfForm", {
   extend: "Ext.form.Panel",
   alias: "widget.cbfform",
+  id: "cbfformId",
   align: "left",
   frame: true,
   defaults: {

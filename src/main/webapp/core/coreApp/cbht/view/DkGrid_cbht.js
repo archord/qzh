@@ -1,11 +1,11 @@
 /**
  *  
  * */
-Ext.define("core.cbht.view.DkGrid", {
+Ext.define("core.cbht.view.DkGrid_cbht", {
   extend: "Ext.grid.Panel",
-  alias: "widget.dkgrid",
-  id: "dkgrid",
-  store: "core.dk.store.DkStore",
+  alias: "widget.dkgrid_cbht",
+  id: "dkgridId_cbht",
+  store: "core.cbht.store.DkStore",
   border: 0,
   selModel: {
     selType: "checkboxmodel"
@@ -54,7 +54,7 @@ Ext.define("core.cbht.view.DkGrid", {
   ],
   bbar: {
     xtype: 'pagingtoolbar',
-    store: 'core.dk.store.DkStore',
+    store: 'core.cbht.store.DkStore',
     dock: 'bottom',
     displayInfo: true
   },

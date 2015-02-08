@@ -1,12 +1,10 @@
 package com.mseeworld.qzh.controller;
 
-import com.mseeworld.qzh.dao.CbfDao;
-import com.mseeworld.qzh.dao.CbfJtcyDao;
-import com.mseeworld.qzh.model.Cbf;
-import com.mseeworld.qzh.model.CbfJtcy;
-import com.mseeworld.qzh.model.Dk;
+import com.mseeworld.qzh.dao.CbhtDao;
+import com.mseeworld.qzh.dao.CbjyqzDao;
+import com.mseeworld.qzh.model.Cbht;
+import com.mseeworld.qzh.model.Cbjyqz;
 import com.mseeworld.qzh.util.NumberFormatUtil;
-import java.beans.PropertyEditorSupport;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -19,7 +17,6 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,37 +24,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/cbf")
-public class CbfController {
+@RequestMapping("/cbjyqz")
+public class CbhyqzController {
 
-  private CbfDao cbfDao;
-  private CbfJtcyDao cbfJtcyDao;
+  private CbjyqzDao cbjyqzDao;
+  private CbhtDao cbhtDao;
 
   @Resource
-  public void setCbfDao(CbfDao cbfDao) {
-    this.cbfDao = cbfDao;
+  public void setCbjyqzDao(CbjyqzDao cbjyqzDao) {
+    this.cbjyqzDao = cbjyqzDao;
+  }
+  
+  @Resource
+  public void setCbhtDao(CbhtDao cbhtDao) {
+    this.cbhtDao = cbhtDao;
   }
 
-  @RequestMapping(value = "/listall_cbf", method = RequestMethod.GET)
+  @RequestMapping(value = "/listall_cbjyqz", method = RequestMethod.GET)
   public void listAll(HttpServletRequest request, PrintWriter writer) {
     int n = 10;
-    List<Cbf> cbfs = cbfDao.getFirstNOfAll(n);
+    List<Cbjyqz> objs = cbjyqzDao.getFirstNOfAll(n);
 
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
     StringBuilder rstStr = new StringBuilder("");
     rstStr.append("{totalCount:");
-    rstStr.append(cbfs.size());
+    rstStr.append(objs.size());
     rstStr.append(",rows:[");
     int i = 0;
-    for (Cbf cbf : cbfs) {
+    for (Cbjyqz cbjyqz : objs) {
       try {
-        String tStr = ow.writeValueAsString(cbf);
+        String tStr = ow.writeValueAsString(cbjyqz);
         rstStr.append(tStr);
       } catch (IOException ex) {
         ex.printStackTrace();
       }
-      if (++i < cbfs.size()) {
+      if (++i < objs.size()) {
         rstStr.append(",");
       }
     }
@@ -65,24 +67,24 @@ public class CbfController {
     writer.write(rstStr.toString());
   }
 
-  @RequestMapping(value = "/add_cbf", method = RequestMethod.POST)
-  public void add(@ModelAttribute("cbf") Cbf obj, HttpServletResponse response, PrintWriter writer) throws IOException {
+  @RequestMapping(value = "/add_cbjyqz", method = RequestMethod.POST)
+  public void add(@ModelAttribute("cbjyqz") Cbjyqz obj,HttpServletResponse response, PrintWriter writer) throws IOException  {
 
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
     String tStr = ow.writeValueAsString(obj);
     System.out.println(tStr);
-    cbfDao.saveOrUpdate(obj);
+    cbjyqzDao.saveOrUpdate(obj);
 
     response.setCharacterEncoding("UTF-8");
     response.setContentType("text/html;  charset=UTF-8");
 
-    writer.write("{success:true, msg:'发包方信息保存成功!'}");
+    writer.write("{success:true, msg:'承包合同信息保存成功!'}");
   }
 
   /**
    * 删除people/remove_people.do
    */
-  @RequestMapping(value = "/remove_cbf", method = RequestMethod.POST)
+  @RequestMapping(value = "/remove_cbjyqz", method = RequestMethod.POST)
   public void delete(HttpServletRequest request, PrintWriter writer) {
 //		
 //		String[] ids = request.getParameter("ids").replaceAll("\"", "").split(",");
@@ -94,18 +96,11 @@ public class CbfController {
 //		}
   }
 
+
   @InitBinder
   public void initBinder(WebDataBinder binder) {
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     NumberFormatUtil.registerDoubleFormat(binder);
-  }
-
-  /**
-   * @param cbfJtcyDao the cbfJtcyDao to set
-   */
-  @Resource
-  public void setCbfJtcyDao(CbfJtcyDao cbfJtcyDao) {
-    this.cbfJtcyDao = cbfJtcyDao;
   }
 }

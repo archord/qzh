@@ -7,6 +7,7 @@ import com.mseeworld.qzh.dao.DklbdmbDao;
 import com.mseeworld.qzh.dao.DldjdmbDao;
 import com.mseeworld.qzh.dao.SfdmbDao;
 import com.mseeworld.qzh.dao.SyqsxDao;
+import com.mseeworld.qzh.dao.TdlylxDao;
 import com.mseeworld.qzh.dao.TdytdmbDao;
 import com.mseeworld.qzh.dao.XbdmbDao;
 import com.mseeworld.qzh.dao.ZjlxdmbDao;
@@ -17,6 +18,7 @@ import com.mseeworld.qzh.model.Dklbdmb;
 import com.mseeworld.qzh.model.Dldjdmb;
 import com.mseeworld.qzh.model.Sfdmb;
 import com.mseeworld.qzh.model.Syqsxdmb;
+import com.mseeworld.qzh.model.Tdlylx;
 import com.mseeworld.qzh.model.Tdytdmb;
 import com.mseeworld.qzh.model.Xbdmb;
 import com.mseeworld.qzh.model.Zjlxdmb;
@@ -47,6 +49,7 @@ public class ComboboxController {
   private TdytdmbDao tdytdmbDao;
   private XbdmbDao xbdmbDao;
   private ZjlxdmbDao zjlxdmbDao;
+  private TdlylxDao tdlylxDao;
 
   /**
    * @param cbfDao the cbfDao to set
@@ -54,6 +57,34 @@ public class ComboboxController {
   @Resource
   public void setSyqsxDao(SyqsxDao syqsxDao) {
     this.syqsxDao = syqsxDao;
+  }
+
+  @RequestMapping(value = "/get_all_tdlylx", method = RequestMethod.GET)
+  public void listAllTdlylx(HttpServletRequest request, HttpServletResponse response, PrintWriter writer) {
+    int n = 10;
+
+
+    List<Tdlylx> objs = tdlylxDao.getAll();
+    ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+
+    StringBuilder rstStr = new StringBuilder("");
+    rstStr.append("[");
+    int i = 0;
+    for (Tdlylx obj : objs) {
+      try {
+        String tStr = ow.writeValueAsString(obj);
+        rstStr.append(tStr);
+      } catch (IOException ex) {
+        ex.printStackTrace();
+      }
+      if (++i < objs.size()) {
+        rstStr.append(",");
+      }
+    }
+    rstStr.append("]");
+    response.setCharacterEncoding("utf-8");
+    response.setContentType("text/html; charset=utf-8");
+    writer.write(rstStr.toString());
   }
 
   @RequestMapping(value = "/get_all_syqsx", method = RequestMethod.GET)
@@ -406,6 +437,14 @@ public class ComboboxController {
   @Resource
   public void setZjlxdmbDao(ZjlxdmbDao zjlxdmbDao) {
     this.zjlxdmbDao = zjlxdmbDao;
+  }
+
+  /**
+   * @param tdlylxDao the tdlylxDao to set
+   */
+  @Resource
+  public void setTdlylxDao(TdlylxDao tdlylxDao) {
+    this.tdlylxDao = tdlylxDao;
   }
 
 }

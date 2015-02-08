@@ -62,16 +62,28 @@ Ext.define("core.dk.view.DkGrid", {
   columnLines: true, //展示竖线
   columns: [
     {xtype: 'rownumberer'},
-    {text: "地块编码", dataIndex: "dkbm", width: 100, field: {
+    {text: "地块编码", dataIndex: "dkbm", width: 120, field: {
         xtype: "textfield"
       }},
-    {text: "地块名称", dataIndex: "dkmc", width: 100, field: {
+    {text: "地块名称", dataIndex: "dkmc", field: {
         xtype: "textfield"
       }},
-    {text: "地块类别", dataIndex: "dklb", width: 70, field: {
+    {text: "所有权性质", dataIndex: "syqxz", field: {
+        xtype: "textfield"
+      }},
+    {text: "地块类别", dataIndex: "dklb", field: {
+        xtype: "textfield"
+      }},
+    {text: "土地利用类型", dataIndex: "tdlylx", field: {
+        xtype: "textfield"
+      }},
+    {text: "地力等级", dataIndex: "dldj", width: 100, field: {
         xtype: "textfield"
       }},
     {text: "土地用途", dataIndex: "tdyt", width: 70, field: {
+        xtype: "textfield"
+      }},
+    {text: "是否基本农田", dataIndex: "sfjbnt", width: 100, field: {
         xtype: "textfield"
       }},
     {text: "实测面积", dataIndex: "scmj", width: 70, field: {
@@ -87,6 +99,12 @@ Ext.define("core.dk.view.DkGrid", {
         xtype: "textfield"
       }},
     {text: "地块北至", dataIndex: "dkbz", width: 70, field: {
+        xtype: "textfield"
+      }},
+    {text: "地块备注信息", dataIndex: "dkbzxx", width: 70, field: {
+        xtype: "textfield"
+      }},
+    {text: "指界人姓名", dataIndex: "zjrxm", width: 70, field: {
         xtype: "textfield"
       }}
   ],

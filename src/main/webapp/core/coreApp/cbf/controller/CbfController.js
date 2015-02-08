@@ -64,7 +64,7 @@ Ext.define("core.cbf.controller.CbfController", {
           var curSelNode = cbhtTree.getSelectionModel().getSelection();
           if (curSelNode.length > 0) {
             var cbhtWin = Ext.create("core.cbf.view.CbfWindow");
-            cbhtWin.extraParas = {cbht: curSelNode[0].raw, idAdd: 0, orgLevel: 3};
+            cbhtWin.extraParas = {obj: curSelNode[0].raw, idAdd: 0, orgLevel: 3};
             cbhtWin.show();
           } else {
             Ext.MessageBox.alert("提示", "请在下方选择承包合同！");
@@ -119,8 +119,47 @@ Ext.define("core.cbf.controller.CbfController", {
                   }
                 });
 
-                var store = btn.up("cbfLayout").down("cbfgrid").getStore();
+                var store = Ext.getCmp("cbfgridId").getStore();
                 store.load();
+              },
+              failure: function(form, action) {
+                var resObj = Ext.decode(action.response.responseText);
+                Ext.MessageBox.show({
+                  title: '错误',
+                  buttons: Ext.MessageBox.OK,
+                  icon: Ext.MessageBox.ERROR,
+                  msg: resObj.msg
+                });
+              }
+            });
+          }
+        }
+      },
+      "cbfJtcyForm button[ref=save]": {
+        click: function(btn) {
+          var pform = btn.up("cbfJtcyWindow").down("form").getForm();
+          var url = "";
+          if (parseInt(pform.findField("cbfbm").getValue()) > 0) {
+            url = "./cbfjtcy/add_cbfJtcy.do";
+          } else {
+            url = "./cbfjtcy/update_cbfJtcy.do";
+          }
+          if (pform.isValid()) {
+            pform.submit({
+              url: url,
+              success: function(form, action) {
+                Ext.MessageBox.confirm("提示", "保存成功！是否继续？", function(btn) {
+                  if (btn === "yes") {
+                    pform.reset();
+                  } else {
+                    Ext.getCmp("cbfJtcyWindowId").close();
+                  }
+                });
+
+                var cbfForm = Ext.getCmp("cbfformId");
+                var cbfJtcyGrid = Ext.getCmp("cbfJtcyGridId");
+                var store = cbfJtcyGrid.getStore();
+                store.load({params: {cbfbm: pform.findField("cbfbm").getValue()}});
               },
               failure: function(form, action) {
                 var resObj = Ext.decode(action.response.responseText);
@@ -140,6 +179,7 @@ Ext.define("core.cbf.controller.CbfController", {
           var pform = btn.up('cbfWindow').down("form").getForm();
           if (parseInt(pform.findField("id").getValue()) > 0) {
             var cbhtWin = Ext.create("core.cbf.view.CbfJtcyWindow");
+            cbhtWin.extraParas = {isAdd: 1, cbfbm: pform.findField("cbfbm").getValue()};
             cbhtWin.show();
           } else {
             Ext.MessageBox.alert("提示", "请保存承包方信息后，再添加家庭成员信息！<br/>或在修改窗口添加家庭成员信息！");
@@ -148,14 +188,14 @@ Ext.define("core.cbf.controller.CbfController", {
       },
       "cbfJtcyGrid button[ref=edit]": {
         click: function(btn) {
-          var cbhtTree = btn.up('cbfgrid');
+          var cbhtTree = btn.up('cbfJtcyGrid');
           var curSelNode = cbhtTree.getSelectionModel().getSelection();
           if (curSelNode.length > 0) {
             var cbhtWin = Ext.create("core.cbf.view.CbfJtcyWindow");
-            cbhtWin.extraParas = {cbht: curSelNode[0].raw, idAdd: 0, orgLevel: 3};
+            cbhtWin.extraParas = {obj: curSelNode[0].raw, isAdd: 0, orgLevel: 3};
             cbhtWin.show();
           } else {
-            Ext.MessageBox.alert("提示", "请在下方选择承包合同！");
+            Ext.MessageBox.alert("提示", "请在下方选择承包方家庭成员！");
           }
         }
       },

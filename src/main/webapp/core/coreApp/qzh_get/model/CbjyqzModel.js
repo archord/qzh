@@ -6,12 +6,13 @@ Ext.define("core.qzh_get.model.CbjyqzModel", {
   fields: [
     {name: "id", type: "int", srotable: false},
     {name: "cbjyqzbm", type: "string", srotable: false},
-    {name: "fbfbm", type: "string", srotable: false},
-    {name: "cbfbm", type: "string", srotable: false},
-    {name: "cbfs", type: "string", srotable: false},
-    {name: "cbqx", type: "string", srotable: false},
-    {name: "cbqxq", type: "string", srotable: false},
-    {name: "cbqxz", type: "string", srotable: false}
+    {name: "fzjg", type: "string", srotable: false},
+    {name: "fzrq", type: "string", srotable: false},
+    {name: "qzsfly", type: "string", srotable: false},
+    {name: "qzlqrq", type: "string", srotable: false},
+    {name: "qzlqrxm", type: "string", srotable: false},
+    {name: "qzlqrzjlx", type: "string", srotable: false},
+    {name: "qzlqrzjhm", type: "string", srotable: false}
   ],
   proxy: {
     type: 'ajax',

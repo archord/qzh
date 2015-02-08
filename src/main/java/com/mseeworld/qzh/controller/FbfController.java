@@ -1,12 +1,9 @@
 package com.mseeworld.qzh.controller;
 
-import com.mseeworld.qzh.dao.CbfDao;
-import com.mseeworld.qzh.dao.CbfJtcyDao;
-import com.mseeworld.qzh.model.Cbf;
-import com.mseeworld.qzh.model.CbfJtcy;
-import com.mseeworld.qzh.model.Dk;
+import com.mseeworld.qzh.dao.FbfDao;
+import com.mseeworld.qzh.model.Fbf;
+import com.mseeworld.qzh.service.PeopleService;
 import com.mseeworld.qzh.util.NumberFormatUtil;
-import java.beans.PropertyEditorSupport;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -19,45 +16,57 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-@RequestMapping("/cbf")
-public class CbfController {
+@RequestMapping("/fbf")
+public class FbfController {
 
-  private CbfDao cbfDao;
-  private CbfJtcyDao cbfJtcyDao;
+  private PeopleService peopleService;
+  private FbfDao fbfDao;
 
+  /**
+   * @param fbfDao the fbfDao to set
+   */
   @Resource
-  public void setCbfDao(CbfDao cbfDao) {
-    this.cbfDao = cbfDao;
+  public void setFbfDao(FbfDao fbfDao) {
+    this.fbfDao = fbfDao;
   }
 
-  @RequestMapping(value = "/listall_cbf", method = RequestMethod.GET)
-  public void listAll(HttpServletRequest request, PrintWriter writer) {
+  @Resource
+  public void setPeopleService(PeopleService peopleService) {
+    this.peopleService = peopleService;
+  }
+
+  /**
+   * 分页查询信息./people/list_people.do
+   */
+  @RequestMapping(value = "/listall_fbf", method = RequestMethod.GET)
+  public void listAllPeople(HttpServletRequest request, PrintWriter writer) {
     int n = 10;
-    List<Cbf> cbfs = cbfDao.getFirstNOfAll(n);
+    List<Fbf> fbfs = fbfDao.getFirstNOfAll(n);
 
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
     StringBuilder rstStr = new StringBuilder("");
     rstStr.append("{totalCount:");
-    rstStr.append(cbfs.size());
+    rstStr.append(fbfs.get(0));
     rstStr.append(",rows:[");
     int i = 0;
-    for (Cbf cbf : cbfs) {
+    for (Fbf fbf : fbfs) {
       try {
-        String tStr = ow.writeValueAsString(cbf);
+        String tStr = ow.writeValueAsString(fbf);
         rstStr.append(tStr);
       } catch (IOException ex) {
         ex.printStackTrace();
       }
-      if (++i < cbfs.size()) {
+      if (++i < fbfs.size()) {
         rstStr.append(",");
       }
     }
@@ -65,14 +74,17 @@ public class CbfController {
     writer.write(rstStr.toString());
   }
 
-  @RequestMapping(value = "/add_cbf", method = RequestMethod.POST)
-  public void add(@ModelAttribute("cbf") Cbf obj, HttpServletResponse response, PrintWriter writer) throws IOException {
+  /**
+   * 新增people/add_people.do
+   */
+  @RequestMapping(value = "/add_fbf", method = RequestMethod.POST)
+  public void addPeople(@ModelAttribute("fbf") Fbf obj, HttpServletResponse response, PrintWriter writer) throws IOException {
 
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
     String tStr = ow.writeValueAsString(obj);
     System.out.println(tStr);
-    cbfDao.saveOrUpdate(obj);
-
+    
+    fbfDao.saveOrUpdate(obj);
     response.setCharacterEncoding("UTF-8");
     response.setContentType("text/html;  charset=UTF-8");
 
@@ -82,16 +94,17 @@ public class CbfController {
   /**
    * 删除people/remove_people.do
    */
-  @RequestMapping(value = "/remove_cbf", method = RequestMethod.POST)
-  public void delete(HttpServletRequest request, PrintWriter writer) {
-//		
-//		String[] ids = request.getParameter("ids").replaceAll("\"", "").split(",");
-//		
-//		if(peopleService.remove(ids)){
-//			writer.write("{success:true,msg:'删除成功!'}");
-//		}else{
-//			writer.write("{success:false,msg:'删除失败!'}");
-//		}
+  @RequestMapping(value = "/remove_fbf", method = RequestMethod.POST)
+  public void deletePeople(HttpServletRequest request, PrintWriter writer) {
+
+  }
+
+  /**
+   * 修改信息people/update_people.do
+   */
+  @RequestMapping(value = "/update_fbf", method = RequestMethod.POST)
+  public void updatePeople(@RequestParam MultipartFile photos, HttpServletRequest request, HttpServletResponse response, PrintWriter writer) throws IOException {
+
   }
 
   @InitBinder
@@ -99,13 +112,5 @@ public class CbfController {
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     NumberFormatUtil.registerDoubleFormat(binder);
-  }
-
-  /**
-   * @param cbfJtcyDao the cbfJtcyDao to set
-   */
-  @Resource
-  public void setCbfJtcyDao(CbfJtcyDao cbfJtcyDao) {
-    this.cbfJtcyDao = cbfJtcyDao;
   }
 }

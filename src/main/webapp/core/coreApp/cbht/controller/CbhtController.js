@@ -175,7 +175,7 @@ Ext.define("core.cbht.controller.CbhtController", {
       },
       "dksearchwindow button[ref=save]": {
         click: function(btn) {
-          var orgTree = Ext.getCmp("dkgrid");
+          var orgTree = Ext.getCmp("dkgridId_cbht");
           var curSelNode = orgTree.getSelectionModel().getSelection();
           if (curSelNode.length > 0) {
             var dkIds = "";
@@ -194,7 +194,11 @@ Ext.define("core.cbht.controller.CbhtController", {
               url: "./dk/update_dk.do?cbhtId=" + cbhtId + "&dkIds=" + dkIds,
               success: function(response, opts) {
 
-                var dkgrid = Ext.getCmp("cbhtdkgrid");
+                var dkgrid_cbht = Ext.getCmp("dkgridId_cbht");
+                var store = dkgrid_cbht.getStore();
+                store.reload();
+
+                var dkgrid = Ext.getCmp("cbhtdkgridid");
                 var store = dkgrid.getStore();
                 store.load({params: {cbhtId: cbhtId}});
                 Ext.MessageBox.alert("提示", "保存成功！");
@@ -257,12 +261,12 @@ Ext.define("core.cbht.controller.CbhtController", {
     "core.cbht.view.CbfWindow_cbht",
     "core.cbht.view.FbfGrid_cbht",
     "core.cbht.view.CbfGrid_cbht",
-    "core.cbht.view.DkGrid",
+    "core.cbht.view.DkGrid_cbht",
     "core.cbht.view.OrgTreeCbhtDkSearch"
   ],
-  stores: ["core.cbht.store.CbhtStore", "core.cbht.store.CbhtDkStore", 
-            "core.cbht.store.OrgStore", "core.cbht.store.FbfStore", 
-            "core.cbht.store.CbfStore", "core.cbht.store.DkStore", 
-          "core.combobox.store.CbjyqqdfsdmbStore"],
+  stores: ["core.cbht.store.CbhtStore", "core.cbht.store.CbhtDkStore",
+    "core.cbht.store.OrgStore", "core.cbht.store.FbfStore",
+    "core.cbht.store.CbfStore", "core.cbht.store.DkStore",
+    "core.combobox.store.CbjyqqdfsdmbStore"],
   models: ["core.cbht.model.CbhtModel", "core.cbht.model.DkModel"]
 });

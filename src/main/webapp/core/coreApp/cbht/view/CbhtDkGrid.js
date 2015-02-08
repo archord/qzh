@@ -2,7 +2,7 @@
 Ext.define("core.cbht.view.CbhtDkGrid", {
   extend: "Ext.grid.Panel",
   alias: "widget.cbhtdkgrid",
-  id: "cbhtdkgrid",
+  id: "cbhtdkgridid",
   store: "core.cbht.store.CbhtDkStore",
   border: 0,
   selModel: {
@@ -74,16 +74,16 @@ Ext.define("core.cbht.view.CbhtDkGrid", {
     {text: "实测面积", dataIndex: "scmj", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "地块东至", dataIndex: "cbhtdz", width: 70, field: {
+    {text: "地块东至", dataIndex: "dkdz", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "地块西至", dataIndex: "cbhtxz", width: 70, field: {
+    {text: "地块西至", dataIndex: "dkxz", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "地块南至", dataIndex: "cbhtnz", width: 70, field: {
+    {text: "地块南至", dataIndex: "dknz", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "地块北至", dataIndex: "cbhtbz", width: 70, field: {
+    {text: "地块北至", dataIndex: "dkbz", width: 70, field: {
         xtype: "textfield"
       }}
   ],

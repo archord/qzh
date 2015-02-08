@@ -41,8 +41,6 @@ public class DkController {
 
     String orgId = request.getParameter("orgId");
     String cbhtId = request.getParameter("cbhtId");
-    System.out.println("orgId=" + orgId);
-    System.out.println("cbhtId=" + cbhtId);
 
     List<Dk> cbfs = null;
     int limit1 = 10;
@@ -56,6 +54,44 @@ public class DkController {
     } else {
       cbfs = dkDao.getFirstNOfAll(limit1);
     }
+
+    ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+
+    StringBuilder rstStr = new StringBuilder("");
+    rstStr.append("{totalCount:");
+    rstStr.append(cbfs.size());
+    rstStr.append(",rows:[");
+    int i = 0;
+    for (Dk cbf : cbfs) {
+      try {
+        String tStr = ow.writeValueAsString(cbf);
+        rstStr.append(tStr);
+      } catch (IOException ex) {
+        ex.printStackTrace();
+      }
+      if (++i < cbfs.size()) {
+        rstStr.append(",");
+      }
+    }
+    rstStr.append("]}");
+    writer.write(rstStr.toString());
+  }
+
+  @RequestMapping(value = "/list_dk_cbht", method = RequestMethod.GET)
+  public void listDkCbht(HttpServletRequest request, PrintWriter writer) {
+
+    String page = request.getParameter("page");
+    String start = request.getParameter("from");
+    String limit = request.getParameter("to");
+
+    String orgId = request.getParameter("orgId");
+    String cbhtId = request.getParameter("cbhtId");
+
+    List<Dk> cbfs = null;
+    int limit1 = 10;
+
+    cbfs = dkDao.getDkOfNullChbtId(limit1);
+
 
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
@@ -106,7 +142,7 @@ public class DkController {
     String cbhtId = request.getParameter("cbhtId");
     System.out.println("dkIds=" + dkIds);
     System.out.println("cbhtId=" + cbhtId);
-    
+
     dkDao.updateCbhtId(dkIds, cbhtId);
 
 
@@ -114,7 +150,7 @@ public class DkController {
   }
 
   /**
-   * 删除商品people/remove_people.do
+   * 删除people/remove_people.do
    */
   @RequestMapping(value = "/remove_dk", method = RequestMethod.POST)
   public void delete(HttpServletRequest request, PrintWriter writer) {

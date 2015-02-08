@@ -108,9 +108,10 @@ Ext.define("core.fbf.view.FbfForm", {
       allowBlank: true,
       readOnly: false
     }, {
-      xtype: "textfield",
+      xtype: "datefield",
       fieldLabel: "发包方调查日期",
       name: "fbfdcrq",
+      format: 'Y-m-d',
       allowBlank: true,
       readOnly: false
     }, {

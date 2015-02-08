@@ -1,14 +1,12 @@
-/*
- *  
- */
- Ext.define("core.fbf.store.FbfStore",{
+
+Ext.define("core.fbf.store.FbfStore",{
  	extend:'Ext.data.Store',
 	model:'core.fbf.model.FbfModel',
 	pageSize:10,
 	//autoSync:true,//与服务器同步
 	proxy:{
 		type:"ajax",
-		url:"./people/listall_people.do",
+		url:"./fbf/listall_fbf.do",
 		reader:{
 			type:"json",
 			root:"rows",

@@ -19,8 +19,8 @@ Ext.define("core.main.view.TopView", {
         paddingTop: '25px',
         paddingRight: '10px'
       },
-      //html: "<h1><font color=white size=5>&nbsp;&nbsp;&nbsp;&nbsp;Extjs4</font></h1>"
-      html: "<h3><font color=white size=4>&nbsp;&nbsp;&nbsp;&nbsp;农村土地承包经营权管理系统</font></h2>"
+      html: "<h1><font color=white size=5>&nbsp;&nbsp;&nbsp;&nbsp;Extjs4</font></h1>"
+//      html: "<h3><font color=white size=4>&nbsp;&nbsp;&nbsp;&nbsp;农村土地承包经营权管理系统</font></h2>"
     }, {
       layout: {
         type: 'hbox',

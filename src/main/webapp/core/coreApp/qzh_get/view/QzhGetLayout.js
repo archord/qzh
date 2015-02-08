@@ -37,7 +37,7 @@ Ext.define("core.qzh_get.view.QzhGetLayout", {
           xtype: "qzhGetGrid",
           bbar: [],
 //          store: Ext.create("core.qzh_get.store.FbfStore", {}),
-          title: "权证列表"
+          title: "权证领取记录"
 
         }]
     }]

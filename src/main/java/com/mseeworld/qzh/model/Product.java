@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * 产品类
+ * 类
  * @author 邱盛华
  *
  */
@@ -17,15 +17,15 @@ import javax.persistence.Table;
 @Table(name="t_product")
 public class Product {
 	/**
-	 * 产品编号
+	 * 编号
 	 */
 	private int id;
 	/**
-	 * 产品名称
+	 * 名称
 	 */
 	private String name;
 	/**
-	 * 产品描述
+	 * 描述
 	 */
 	private String descr;
 	/**

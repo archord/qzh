@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface CbfJtcyDao extends BaseHibernateDao<CbfJtcy> {
 
-  public List<CbfJtcy> getCbfsByOrgId(long orgId);
+  public List<CbfJtcy> getCbfsByCbfBm(String cbfbm);
 
   public List<CbfJtcy> getFirstNOfAll(int n);
 }

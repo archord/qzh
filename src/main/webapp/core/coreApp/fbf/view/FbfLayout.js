@@ -46,7 +46,7 @@ Ext.define("core.fbf.view.FbfLayout", {
           xtype: "fbfGrid",
           bbar: [],
 //          store: Ext.create("core.fbf.store.FbfStore", {}),
-          title: "人员列表"
+          title: "发包方列表"
 
         }]
     }]

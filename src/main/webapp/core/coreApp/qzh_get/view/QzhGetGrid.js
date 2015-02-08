@@ -65,22 +65,25 @@ Ext.define("core.qzh_get.view.QzhGetGrid", {
     {text: "承包经营权证编码", dataIndex: "cbjyqzbm", width: 120, field: {
         xtype: "textfield"
       }},
-    {text: "发包方编码", dataIndex: "fbfbm", width: 120, field: {
+    {text: "发证机关", dataIndex: "fzjg", width: 120, field: {
         xtype: "textfield"
       }},
-    {text: "承包方编码", dataIndex: "cbfbm", width: 120, field: {
+    {text: "发证日期", dataIndex: "fzrq", width: 120, field: {
         xtype: "textfield"
       }},
-    {text: "承包方式", dataIndex: "cbfs", width: 70, field: {
+    {text: "是否领取", dataIndex: "qzsfly", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "承包期限", dataIndex: "cbqx", width: 70, field: {
+    {text: "领取日期", dataIndex: "qzlqrq", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "承包期限起", dataIndex: "cbqxq", width: 70, field: {
+    {text: "领取人姓名", dataIndex: "qzlqrxm", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "承包期限止", dataIndex: "cbqxz", width: 70, field: {
+    {text: "领取人证件类型", dataIndex: "qzlqrzjlx", width: 70, field: {
+        xtype: "textfield"
+      }},
+    {text: "领取人证件号码", dataIndex: "qzlqrzjhm", width: 70, field: {
         xtype: "textfield"
       }}
   ],

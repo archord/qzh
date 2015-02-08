@@ -5,7 +5,10 @@ package com.mseeworld.qzh.model;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,7 +26,7 @@ public class Cbjyqz  implements java.io.Serializable {
      private long id;
      private String cbjyqzbm;
      private String fzjg;
-     private Date gzrq;
+     private Date fzrq;
      private Character qzsfly;
      private Date qzlqrq;
      private String qzlqrxm;
@@ -37,11 +40,11 @@ public class Cbjyqz  implements java.io.Serializable {
     public Cbjyqz(long id) {
         this.id = id;
     }
-    public Cbjyqz(long id, String cbjyqzbm, String fzjg, Date gzrq, Character qzsfly, Date qzlqrq, String qzlqrxm, Character qzlqrzjlx, String qzlqrzjhm) {
+    public Cbjyqz(long id, String cbjyqzbm, String fzjg, Date fzrq, Character qzsfly, Date qzlqrq, String qzlqrxm, Character qzlqrzjlx, String qzlqrzjhm) {
        this.id = id;
        this.cbjyqzbm = cbjyqzbm;
        this.fzjg = fzjg;
-       this.gzrq = gzrq;
+       this.fzrq = fzrq;
        this.qzsfly = qzsfly;
        this.qzlqrq = qzlqrq;
        this.qzlqrxm = qzlqrxm;
@@ -50,7 +53,8 @@ public class Cbjyqz  implements java.io.Serializable {
     }
    
      @Id 
-    
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cbjyqz_seq")
+  @SequenceGenerator(name = "cbjyqz_seq", sequenceName = "cbjyqz_id_seq")
     @Column(name="id", unique=true, nullable=false)
     public long getId() {
         return this.id;
@@ -78,13 +82,13 @@ public class Cbjyqz  implements java.io.Serializable {
         this.fzjg = fzjg;
     }
     @Temporal(TemporalType.DATE)
-    @Column(name="gzrq", length=13)
-    public Date getGzrq() {
-        return this.gzrq;
+    @Column(name="fzrq", length=13)
+    public Date getFzrq() {
+        return this.fzrq;
     }
     
-    public void setGzrq(Date gzrq) {
-        this.gzrq = gzrq;
+    public void setFzrq(Date fzrq) {
+        this.fzrq = fzrq;
     }
     
     @Column(name="qzsfly", length=1)

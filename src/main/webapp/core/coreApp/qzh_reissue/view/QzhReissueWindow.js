@@ -12,23 +12,23 @@ Ext.define("core.qzh_reissue.view.QzhReissueWindow", {
       if (_this.extraParas) {
         _this.down("form").getForm().findField("orgName").setValue("修改承包合同信息");
         _this.down("form").getForm().findField("isAdd").setValue(0);
-        _this.down("form").getForm().findField("orgId").setValue(_this.extraParas.cbht.orgId);
+        _this.down("form").getForm().findField("orgId").setValue(_this.extraParas.obj.orgId);
         _this.down("form").getForm().findField("orgLevel").setValue(_this.extraParas.orgLevel);
-        _this.down("form").getForm().findField("id").setValue(_this.extraParas.cbht.id);
-        _this.down("form").getForm().findField("cbhtbm").setValue(_this.extraParas.cbht.cbhtbm);
-        _this.down("form").getForm().findField("ycbhtbm").setValue(_this.extraParas.cbht.ycbhtbm);
-        _this.down("form").getForm().findField("fbfbm").setValue(_this.extraParas.cbht.fbfbm);
-        _this.down("form").getForm().findField("cbfbm").setValue(_this.extraParas.cbht.cbfbm);
-        _this.down("form").getForm().findField("cbfs").setValue(_this.extraParas.cbht.cbfs);
-        _this.down("form").getForm().findField("cbqxq").setValue(_this.extraParas.cbht.cbqxq);
-        _this.down("form").getForm().findField("cbqxz").setValue(_this.extraParas.cbht.cbqxz);
-        _this.down("form").getForm().findField("htzmj").setValue(_this.extraParas.cbht.htzmj);
-        _this.down("form").getForm().findField("cbdkzs").setValue(_this.extraParas.cbht.cbdkzs);
-        _this.down("form").getForm().findField("qdsj").setValue(_this.extraParas.cbht.qdsj);
+        _this.down("form").getForm().findField("id").setValue(_this.extraParas.obj.id);
+        _this.down("form").getForm().findField("cbhtbm").setValue(_this.extraParas.obj.cbhtbm);
+        _this.down("form").getForm().findField("ycbhtbm").setValue(_this.extraParas.obj.ycbhtbm);
+        _this.down("form").getForm().findField("fbfbm").setValue(_this.extraParas.obj.fbfbm);
+        _this.down("form").getForm().findField("cbfbm").setValue(_this.extraParas.obj.cbfbm);
+        _this.down("form").getForm().findField("cbfs").setValue(_this.extraParas.obj.cbfs);
+        _this.down("form").getForm().findField("cbqxq").setValue(_this.extraParas.obj.cbqxq);
+        _this.down("form").getForm().findField("cbqxz").setValue(_this.extraParas.obj.cbqxz);
+        _this.down("form").getForm().findField("htzmj").setValue(_this.extraParas.obj.htzmj);
+        _this.down("form").getForm().findField("cbdkzs").setValue(_this.extraParas.obj.cbdkzs);
+        _this.down("form").getForm().findField("qdsj").setValue(_this.extraParas.obj.qdsj);
         
         var dkgrid = Ext.getCmp("cbhtdkgrid");
         var store = dkgrid.getStore();
-        store.load({params: {cbhtId: _this.extraParas.cbht.id}});
+        store.load({params: {cbhtId: _this.extraParas.obj.id}});
       } else {
         var orgTree = Ext.getCmp("orgTreeCbht");
         var curSelNode = orgTree.getSelectionModel().getSelection();

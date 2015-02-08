@@ -54,7 +54,7 @@ Ext.define("core.qzh_cancel.controller.QzhCancelController", {
           var curSelNode = lzhhtTree.getSelectionModel().getSelection();
           if (curSelNode.length > 0) {
             var lzhhtWin = Ext.create("core.qzh_cancel.view.QzhCancelWindow");
-            lzhhtWin.extraParas = {lzhht: curSelNode[0].raw, idAdd: 0, orgLevel: 3};
+            lzhhtWin.extraParas = {obj: curSelNode[0].raw, idAdd: 0, orgLevel: 3};
             lzhhtWin.show();
           }
         }

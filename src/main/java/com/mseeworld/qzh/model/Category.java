@@ -13,7 +13,7 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 /**
- * 产品分类
+ * 分类
  * @author 邱盛华
  *
  */
@@ -41,7 +41,7 @@ public class Category {
 	 */
 	private boolean leaf = true;
 	/**
-	 * 一个类中包含的产品(一对多的关系)
+	 * 一个类中包含的(一对多的关系)
 	 */
 	private Set<Product> products = new HashSet<Product>();
 	

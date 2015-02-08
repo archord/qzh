@@ -5,7 +5,10 @@ package com.mseeworld.qzh.model;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,8 +42,10 @@ public class CbjyqzQzzx  implements java.io.Serializable {
        this.zxrq = zxrq;
     }
    
+
      @Id 
-    
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cbjyqz_qzzx_seq")
+  @SequenceGenerator(name = "cbjyqz_qzzx_seq", sequenceName = "cbjyqz_qzzx_id_seq")
     @Column(name="id", unique=true, nullable=false)
     public long getId() {
         return this.id;

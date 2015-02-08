@@ -54,23 +54,7 @@ Ext.define("core.cbf.view.CbfJtcyForm", {
       fieldLabel: "承包方编码",
       name: "cbfbm",
       allowBlank: false,
-      blankText: '承包方编码不能为空',
-      listeners: {
-        render: function(component) {
-          component.getEl().on('click', function(event, el) {
-//            component.setValue("TEXT");
-            var cbhtWin;
-            if (!cbhtWin) {
-              cbhtWin = Ext.create("core.cbf.view.QzhWindow");
-            }
-            if (cbhtWin.isVisible()) {
-              cbhtWin.hide();
-            } else {
-              cbhtWin.show();
-            }
-          });
-        }
-      }
+      blankText: '承包方编码不能为空'
     }, {
       xtype: "textfield",
       fieldLabel: "成员姓名",
@@ -105,13 +89,13 @@ Ext.define("core.cbf.view.CbfJtcyForm", {
       xtype: "textfield",
       fieldLabel: "成员证件号码",
       name: "cyzjhm",
-      allowBlank: true,
+      allowBlank: false,
       readOnly: false
     }, {
       xtype: "textfield",
       fieldLabel: "与户主关系",
       name: "yhzgx",
-      allowBlank: true,
+      allowBlank: false,
       readOnly: false
     }, {
       xtype: "textfield",

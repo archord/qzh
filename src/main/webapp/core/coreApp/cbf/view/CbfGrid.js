@@ -4,6 +4,7 @@
 Ext.define("core.cbf.view.CbfGrid", {
   extend: "Ext.grid.Panel",
   alias: "widget.cbfgrid",
+  id: "cbfgridId",
   store: "core.cbf.store.CbfStore",
   border: 0,
   selModel: {

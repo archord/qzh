@@ -12,9 +12,9 @@ function scrol(){
 	window.scrollBy(0, scroll_y);
 }
 
-/**根据关键字查询商品*/
+/**根据关键字查询*/
 function searchProduct(){
-	if(document.keywordform.keyword.value == "请输入您所要查找的商品名称")  {  
+	if(document.keywordform.keyword.value == "请输入您所要查找的名称")  {  
 		alert("请输入关键字!");
 		document.keywordform.keyword.focus();
 		return  false;
@@ -60,7 +60,7 @@ function  CheckLoginForm1()
 }
 /**查询关键字*/
 function checkKeyword(){
-	if(document.keywordform.keyword.value =="请输入您所要查找的商品名称"){
+	if(document.keywordform.keyword.value =="请输入您所要查找的名称"){
 		alert("请输入关键字!");
 		document.keywordform.keyword.focus();
 		return  false;

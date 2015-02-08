@@ -68,7 +68,7 @@ Ext.define("core.lzhht.controller.LzhhtController", {
           var curSelNode = lzhhtTree.getSelectionModel().getSelection();
           if (curSelNode.length > 0) {
             var lzhhtWin = Ext.create("core.lzhht.view.LzhhtWindow");
-            lzhhtWin.extraParas = {lzhht: curSelNode[0].raw, idAdd: 0, orgLevel: 3};
+            lzhhtWin.extraParas = {obj: curSelNode[0].raw, idAdd: 0, orgLevel: 3};
             lzhhtWin.show();
           }
         }

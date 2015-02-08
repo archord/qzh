@@ -3,7 +3,7 @@ package com.mseeworld.qzh.dao;
 import com.mseeworld.qzh.model.AOrganization;
 import java.util.List;
 /**
- * 产品分类数据访问对象接口
+ * 分类数据访问对象接口
  * @author 邱盛华
  */
 public interface OrganizationDAO extends BaseHibernateDao<AOrganization>{

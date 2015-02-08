@@ -82,6 +82,10 @@
   <bean id="cbhtDao" class="com.mseeworld.qzh.dao.CbhtDaoImpl"></bean>
   <bean id="lzhtDao" class="com.mseeworld.qzh.dao.LzhhtDaoImpl"></bean>
   <bean id="cbjyqzdjbDao" class="com.mseeworld.qzh.dao.CbjyqzdjbDaoImpl"></bean>
+  <bean id="cbjyqzDao" class="com.mseeworld.qzh.dao.CbjyqzDaoImpl"></bean>
+  <bean id="cbjyqzQzbfDao" class="com.mseeworld.qzh.dao.CbjyqzQzbfDaoImpl"></bean>
+  <bean id="cbjyqzQzhfDao" class="com.mseeworld.qzh.dao.CbjyqzQzhfDaoImpl"></bean>
+  <bean id="cbjyqzQzzxDao" class="com.mseeworld.qzh.dao.CbjyqzQzzxDaoImpl"></bean>
   <bean id="syqsxDao" class="com.mseeworld.qzh.dao.SyqsxDaoImpl"></bean>
   <bean id="cbjyqqdfsdmbDao" class="com.mseeworld.qzh.dao.CbjyqqdfsdmbDaoImpl"></bean>
   <bean id="cbfJtcyDao" class="com.mseeworld.qzh.dao.CbfJtcyDaoImpl"></bean>
@@ -95,6 +99,7 @@
   <bean id="tdytdmbDao" class="com.mseeworld.qzh.dao.TdytdmbDaoImpl"></bean>
   <bean id="xbdmbDao" class="com.mseeworld.qzh.dao.XbdmbDaoImpl"></bean>
   <bean id="zjlxdmbDao" class="com.mseeworld.qzh.dao.ZjlxdmbDaoImpl"></bean>
+  <bean id="tdlylxDao" class="com.mseeworld.qzh.dao.TdlylxDaoImpl"></bean>
 
   <bean id="hibernateUtil" class="com.mseeworld.qzh.util.HibernateUtil"></bean>
   <bean id="userDao" class="com.mseeworld.qzh.dao.UserDAOImpl"></bean>

@@ -33,7 +33,7 @@ Ext.define("core.cbht.view.DkSearchWindow", {
       region: 'center',
       height: 300,
       margins: '5 0 5 0',
-      xtype: "dkgrid",
+      xtype: "dkgrid_cbht",
       multiSelect: true,
       tbar: [],
 //          store: Ext.create("core.dk.store.FbfStore", {}),

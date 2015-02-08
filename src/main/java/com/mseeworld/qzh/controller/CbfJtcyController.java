@@ -2,8 +2,10 @@ package com.mseeworld.qzh.controller;
 
 import com.mseeworld.qzh.dao.CbfJtcyDao;
 import com.mseeworld.qzh.model.CbfJtcy;
+import com.mseeworld.qzh.util.NumberFormatUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
@@ -11,7 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -28,8 +34,11 @@ public class CbfJtcyController {
 
   @RequestMapping(value = "/listall_cbfjtcy", method = RequestMethod.GET)
   public void listAllPeople(HttpServletRequest request, PrintWriter writer) {
+
+    String cbfbm = request.getParameter("cbfbm");
+
     int n = 10;
-    List<CbfJtcy> cbfs = cbfJtcyDao.getFirstNOfAll(n);
+    List<CbfJtcy> cbfs = cbfJtcyDao.getCbfsByCbfBm(cbfbm);
 
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
@@ -53,58 +62,27 @@ public class CbfJtcyController {
     writer.write(rstStr.toString());
   }
 
-  @RequestMapping(value = "/add_cbfjtcy", method = RequestMethod.POST)
-  public void addPeople(HttpServletRequest request, HttpServletResponse response, PrintWriter writer) throws IOException {
-    String id = request.getParameter("id");
-    String orgId = request.getParameter("orgId");
-
-    String cbfbm = request.getParameter("cbfbm");
-    String cbflx = request.getParameter("cbflx");
-    String cbfmc = request.getParameter("cbfmc");
-    String cbfzjlx = request.getParameter("cbfzjlx");
-    String cbfzjhm = request.getParameter("cbfzjhm");
-    String cbfdz = request.getParameter("cbfdz");
-    String yzbm = request.getParameter("yzbm");
-    String lxdh = request.getParameter("lxdh");
-    String cbfcysl = request.getParameter("cbfcysl");
-    String cbfdcrq = request.getParameter("cbfdcrq");
-    String cbfdcy = request.getParameter("cbfdcy");
-    String cbfdcjs = request.getParameter("cbfdcjs");
-    String gsjs = request.getParameter("gsjs");
-    String gsjsr = request.getParameter("gsjsr");
-    String gsshrq = request.getParameter("gsshrq");
-    String gsshr = request.getParameter("gsshr");
-
-    String isAdd = request.getParameter("isAdd");
-
-    CbfJtcy cbf = new CbfJtcy();
-    if (!id.equals("")) {
-      cbf.setId(Long.parseLong(id));
-    }
-//    cbf.setOrgId(Long.parseLong(orgId));
-//    cbf.setCbfbm(cbfbm);
-//    cbf.setCbflx('1');
-//    cbf.setCbfmc(cbfmc);
-//    cbf.setCbfzjlx('1');
-//    cbf.setCbfzjhm(cbfzjhm);
-//    cbf.setCbfdz(cbfdz);
-//    cbf.setYzbm(yzbm);
-//    cbf.setLxdh(lxdh);
-//    if (!cbfcysl.isEmpty()) {
-//      cbf.setCbfcysl(Integer.parseInt(cbfcysl));
-//    }
-//    cbf.setCbfdcrq(new Date());
-//    cbf.setCbfdcy(cbfdcy);
-//    cbf.setCbfdcjs(cbfdcjs);
-//    cbf.setGsjs(gsjs);
-//    cbf.setGsjsr(gsjsr);
-//    cbf.setGsshrq(new Date());
-//    cbf.setGsshr(gsshr);
+  @RequestMapping(value = "/add_cbfJtcy", method = RequestMethod.POST)
+  public void add(@ModelAttribute("cbfJtcy") CbfJtcy obj, HttpServletResponse response, PrintWriter writer) throws IOException {
 
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-    String tStr = ow.writeValueAsString(cbf);
+    String tStr = ow.writeValueAsString(obj);
     System.out.println(tStr);
-    cbfJtcyDao.saveOrUpdate(cbf);
+    cbfJtcyDao.save(obj);
+
+    response.setCharacterEncoding("UTF-8");
+    response.setContentType("text/html;  charset=UTF-8");
+
+    writer.write("{success:true, msg:'发包方信息保存成功!'}");
+  }
+
+  @RequestMapping(value = "/update_cbfJtcy", method = RequestMethod.POST)
+  public void update(@ModelAttribute("cbfJtcy") CbfJtcy obj, HttpServletResponse response, PrintWriter writer) throws IOException {
+
+    ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+    String tStr = ow.writeValueAsString(obj);
+    System.out.println(tStr);
+    cbfJtcyDao.update(obj);
 
     response.setCharacterEncoding("UTF-8");
     response.setContentType("text/html;  charset=UTF-8");
@@ -113,7 +91,7 @@ public class CbfJtcyController {
   }
 
   /**
-   * 删除商品people/remove_people.do
+   * 删除people/remove_people.do
    */
   @RequestMapping(value = "/remove_cbfjtcy", method = RequestMethod.POST)
   public void deletePeople(HttpServletRequest request, PrintWriter writer) {
@@ -127,4 +105,10 @@ public class CbfJtcyController {
 //		}
   }
 
+  @InitBinder
+  public void initBinder(WebDataBinder binder) {
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+    NumberFormatUtil.registerDoubleFormat(binder);
+  }
 }

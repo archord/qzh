@@ -60,7 +60,7 @@ Ext.define("core.qzh_get.view.QzhGetForm", {
 //            component.setValue("TEXT");
             var cbhtWin;
             if (!cbhtWin) {
-              cbhtWin = Ext.create("core.qzh_get.view.QzhWindow");
+              cbhtWin = Ext.create("core.qzh_get.view.QzhWindow_get");
             }
             if (cbhtWin.isVisible()) {
               cbhtWin.hide();
@@ -98,13 +98,13 @@ Ext.define("core.qzh_get.view.QzhGetForm", {
       name: "qzlqrq",
       format: 'Y-m-d',
       value: new Date(),
-      allowBlank: true,
+      allowBlank: false,
       readOnly: false
     }, {
       xtype: "textfield",
       fieldLabel: "领取人姓名",
       name: "qzlqrxm",
-      allowBlank: true,
+      allowBlank: false,
       readOnly: false
     }, {
       xtype: "combobox",
@@ -113,13 +113,13 @@ Ext.define("core.qzh_get.view.QzhGetForm", {
       store: "core.combobox.store.ZjlxdmbStore",
       displayField: 'zjlx',
       valueField: 'dm',
-      allowBlank: true,
+      allowBlank: false,
       readOnly: false
     }, {
       xtype: "textfield",
       fieldLabel: "领取人证件号码",
       name: "qzlqrzjhm",
-      allowBlank: true,
+      allowBlank: false,
       readOnly: false
     }],
   buttons: [{

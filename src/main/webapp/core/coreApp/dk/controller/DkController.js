@@ -132,6 +132,7 @@ Ext.define("core.dk.controller.DkController", {
     "core.combobox.store.DklbdmbStore", 
     "core.combobox.store.DldjdmbStore", 
     "core.combobox.store.TdytdmbStore", 
-    "core.combobox.store.SfdmbStore"],
+    "core.combobox.store.SfdmbStore",
+  "core.combobox.store.TdlylxStore"],
   models: ["core.dk.model.DkModel"]
 });

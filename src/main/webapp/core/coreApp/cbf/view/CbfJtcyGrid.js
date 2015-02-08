@@ -14,7 +14,7 @@ Ext.define("core.cbf.view.CbfJtcyGrid", {
   frame: true,
   tbar: [
     {xtype: 'button', text: '添加家庭成员', ref: 'add', iconCls: 'table_add'}, '|',
-    {xtype: 'button', text: '查看家庭成员详情', ref: 'edit', iconCls: 'table_edit'}, '|',
+    {xtype: 'button', text: '查看详情', ref: 'edit', iconCls: 'table_edit'}, '|',
     {xtype: 'button', text: '删除', ref: 'del', iconCls: 'table_remove'},
     "->",
     '按名称查询:',
