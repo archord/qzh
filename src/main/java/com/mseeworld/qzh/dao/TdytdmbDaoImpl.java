@@ -23,4 +23,17 @@ public class TdytdmbDaoImpl  extends BaseHibernateDaoImpl<Tdytdmb> implements Td
 
     return q.list();
   }
+
+  public Tdytdmb getByName(String name) {
+
+    Session session = getCurrentSession();
+    String sql = "select * from tdytdmb where tdytd='" + name.trim() + "'";
+    Query q = session.createSQLQuery(sql).addEntity(Tdytdmb.class);
+
+    if (q.list().size() > 0) {
+      return (Tdytdmb) q.list().get(0);
+    } else {
+      return null;
+    }
+  }
 }

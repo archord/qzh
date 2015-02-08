@@ -1,5 +1,6 @@
 package com.mseeworld.qzh.dao;
 
+import com.mseeworld.qzh.model.Cbflxdmb;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.Resource;
@@ -123,5 +124,10 @@ public abstract class BaseHibernateDaoImpl<T extends Serializable> implements Ba
   @Transactional(readOnly = false)
   public void deleteById(final Long entityId) {
     this.delete(this.getById(entityId));
+  }
+  
+  
+  public T getByName(String name){
+    return null;
   }
 }

@@ -23,4 +23,17 @@ public class XbdmbDaoImpl  extends BaseHibernateDaoImpl<Xbdmb> implements XbdmbD
 
     return q.list();
   }
+
+  public Xbdmb getByName(String name) {
+
+    Session session = getCurrentSession();
+    String sql = "select * from xbdmb where xb='" + name.trim() + "'";
+    Query q = session.createSQLQuery(sql).addEntity(Xbdmb.class);
+
+    if (q.list().size() > 0) {
+      return (Xbdmb) q.list().get(0);
+    } else {
+      return null;
+    }
+  }
 }

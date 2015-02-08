@@ -98,10 +98,13 @@ Ext.define("core.cbf.view.CbfJtcyForm", {
       allowBlank: false,
       readOnly: false
     }, {
-      xtype: "textfield",
+      xtype: "combobox",
       fieldLabel: "成员备注",
       name: "cybz",
-      allowBlank: true,
+      store: "core.combobox.store.CybzdmbStore",
+      displayField: 'cybz',
+      valueField: 'dm',
+      allowBlank: false,
       readOnly: false
     }, {
       xtype: "combobox",

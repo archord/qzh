@@ -23,4 +23,17 @@ public class CybzdmbDaoImpl  extends BaseHibernateDaoImpl<Cybzdmb> implements Cy
 
     return q.list();
   }
+
+  public Cybzdmb getByName(String name) {
+
+    Session session = getCurrentSession();
+    String sql = "select * from cybzdmb where cybz='" + name.trim() + "'";
+    Query q = session.createSQLQuery(sql).addEntity(Cybzdmb.class);
+
+    if (q.list().size() > 0) {
+      return (Cybzdmb) q.list().get(0);
+    } else {
+      return null;
+    }
+  }
 }

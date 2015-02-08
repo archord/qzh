@@ -4,7 +4,7 @@
 Ext.define("core.combobox.store.CybzdmbStore", {
   extend: 'Ext.data.Store',
   storeId: 'cybzdmbStoreId',
-  fields: ['dm', 'syqsx'],
+  fields: ['dm', 'cybz'],
   //autoSync:true,//与服务器同步
   proxy: {
     api: {

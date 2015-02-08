@@ -23,5 +23,18 @@ public class SyqsxDaoImpl extends BaseHibernateDaoImpl<Syqsxdmb> implements Syqs
 
     return q.list();
   }
+
+  public Syqsxdmb getByName(String name) {
+
+    Session session = getCurrentSession();
+    String sql = "select * from syqsxdmb where syqsx='" + name.trim() + "'";
+    Query q = session.createSQLQuery(sql).addEntity(Syqsxdmb.class);
+
+    if (q.list().size() > 0) {
+      return (Syqsxdmb) q.list().get(0);
+    } else {
+      return null;
+    }
+  }
     
 }

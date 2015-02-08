@@ -23,4 +23,17 @@ public class CbjyqqdfsdmbDaoImpl  extends BaseHibernateDaoImpl<Cbjyqqdfsdmb> imp
 
     return q.list();
   }
+
+  public Cbjyqqdfsdmb getByName(String name) {
+
+    Session session = getCurrentSession();
+    String sql = "select * from cbjyqqdfsdmb where qdfs='" + name.trim() + "'";
+    Query q = session.createSQLQuery(sql).addEntity(Cbjyqqdfsdmb.class);
+
+    if (q.list().size() > 0) {
+      return (Cbjyqqdfsdmb) q.list().get(0);
+    } else {
+      return null;
+    }
+  }
 }

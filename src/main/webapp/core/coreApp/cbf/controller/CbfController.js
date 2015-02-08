@@ -230,6 +230,7 @@ Ext.define("core.cbf.controller.CbfController", {
     "core.combobox.store.XbdmbStore",
     "core.combobox.store.SfdmbStore",
     "core.cbf.store.CbfjtcyStore",
+    "core.combobox.store.CybzdmbStore",
     "core.combobox.store.XbdmbStore"],
   models: ["core.cbf.model.CbfModel", "core.cbf.model.CbfjtcyModel"]
 });

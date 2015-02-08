@@ -208,9 +208,9 @@ Ext.define("core.main.controller.MainController", {
           }else if (record.data["id"] === "data-import") {
             self.addFunItem({
               mainView: mainView,
-              funViewXtype: "qzhCancelLayout",
-              funController: "core.qzh_cancel.controller.QzhCancelController",
-              funViewName: "core.qzh_cancel.view.QzhCancelLayout"
+              funViewXtype: "dataImportLayout",
+              funController: "core.data_import.controller.DataImportController",
+              funViewName: "core.data_import.view.DataImportLayout"
             });
           }
         }//itemclick end

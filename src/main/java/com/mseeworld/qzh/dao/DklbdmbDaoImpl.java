@@ -23,4 +23,17 @@ public class DklbdmbDaoImpl  extends BaseHibernateDaoImpl<Dklbdmb> implements Dk
 
     return q.list();
   }
+
+  public Dklbdmb getByName(String name) {
+
+    Session session = getCurrentSession();
+    String sql = "select * from dklbdmb where dkxz='" + name.trim() + "'";
+    Query q = session.createSQLQuery(sql).addEntity(Dklbdmb.class);
+
+    if (q.list().size() > 0) {
+      return (Dklbdmb) q.list().get(0);
+    } else {
+      return null;
+    }
+  }
 }

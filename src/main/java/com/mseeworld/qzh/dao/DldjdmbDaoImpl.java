@@ -23,4 +23,17 @@ public class DldjdmbDaoImpl  extends BaseHibernateDaoImpl<Dldjdmb> implements Dl
 
     return q.list();
   }
+
+  public Dldjdmb getByName(String name) {
+
+    Session session = getCurrentSession();
+    String sql = "select * from dldjdmb where dldj='" + name.trim() + "'";
+    Query q = session.createSQLQuery(sql).addEntity(Dldjdmb.class);
+
+    if (q.list().size() > 0) {
+      return (Dldjdmb) q.list().get(0);
+    } else {
+      return null;
+    }
+  }
 }
