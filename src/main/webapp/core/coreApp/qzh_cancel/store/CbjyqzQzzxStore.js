@@ -1,12 +1,12 @@
 
-Ext.define("core.qzh_renew.store.CbjyqzStore", {
+Ext.define("core.qzh_cancel.store.CbjyqzQzzxStore", {
   extend: 'Ext.data.Store',
-  model: 'core.qzh_renew.model.CbjyqzModel',
+  model: 'core.qzh_cancel.model.CbjyqzQzzxModel',
   pageSize: 10,
   //autoSync:true,//与服务器同步
   proxy: {
     type: "ajax",
-    url: "./cbjyqzdjb/listall_cbjyqzdjb.do",
+    url: "./cbjyqzQzzx/listall_cbjyqzQzzx.do",
     reader: {
       type: "json",
       root: "rows",

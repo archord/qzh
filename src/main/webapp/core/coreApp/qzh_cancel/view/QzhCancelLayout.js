@@ -37,7 +37,7 @@ Ext.define("core.qzh_cancel.view.QzhCancelLayout", {
           xtype: "qzhCancelGrid",
           bbar: [],
 //          store: Ext.create("core.qzh_cancel.store.FbfStore", {}),
-          title: "权证列表"
+          title: "权证领取记录"
 
         }]
     }]

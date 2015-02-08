@@ -14,7 +14,6 @@ Ext.define("core.qzh.view.QzhGenerateGrid", {
   frame: true,
   tbar: [
     {xtype: 'button', text: '生成权证', ref: 'add', iconCls: 'table_add'}, '|',
-    {xtype: 'button', text: '查看权证', ref: 'edit', iconCls: 'table_edit'}, '|',
     {xtype: 'button', text: '删除', ref: 'del', iconCls: 'table_remove'},
     "->",
     '按名称查询:',

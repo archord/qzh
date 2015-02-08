@@ -1,7 +1,7 @@
-Ext.define("core.qzh_renew.view.QzhWindow_Renew", {
+Ext.define("core.qzh_reissue.view.QzhWindow_get", {
   extend: 'Ext.Window',
-  alias: "widget.qzhWindowRenew",
-  id: "qzhWindowRenewId",
+  alias: "widget.qzhWindow_get",
+  id: "qzhWindowId_get",
   bodyStyle: 'background:transparent',
   title: "选择权证",
   layout: "border",
@@ -19,8 +19,8 @@ Ext.define("core.qzh_renew.view.QzhWindow_Renew", {
       title: "组织机构列表",
       region: 'west',
       // iconCls:'goodtype_tree',
-      xtype: "orgTreeQzh_QzhRenew",
-      id: "orgTreeQzhRenew_QzhId",
+      xtype: "orgTreeQzh_QzhReissue",
+      id: "orgTreeQzhReissue_QzhId",
       margins: '5 2 5 5',
       width: 150,
       split: true,
@@ -33,9 +33,9 @@ Ext.define("core.qzh_renew.view.QzhWindow_Renew", {
       region: 'center',
       height: 300,
       margins: '5 0 5 0',
-      xtype: "qzhRenewGrid_Qzh",
+      xtype: "qzhReissueGrid_Qzh",
       multiSelect: false,
-//          store: Ext.create("core.qzh_renew.store.FbfStore", {}),
+//          store: Ext.create("core.qzh_reissue.store.FbfStore", {}),
       title: "权证列表"
     }
   ],

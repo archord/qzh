@@ -50,12 +50,14 @@ Ext.define("core.qzh_renew.controller.QzhRenewController", {
       },
       "qzhRenewGrid button[ref=edit]": {
         click: function(btn) {
-          var lzhhtTree = btn.up('qzhRenewGrid');
-          var curSelNode = lzhhtTree.getSelectionModel().getSelection();
+          var tree = btn.up('qzhRenewGrid');
+          var curSelNode = tree.getSelectionModel().getSelection();
           if (curSelNode.length > 0) {
-            var lzhhtWin = Ext.create("core.qzh_renew.view.QzhRenewWindow");
-            lzhhtWin.extraParas = {obj: curSelNode[0].raw, idAdd: 0, orgLevel: 3};
-            lzhhtWin.show();
+            var win = Ext.create("core.qzh_renew.view.QzhRenewWindow");
+            win.extraParas = {obj: curSelNode[0].raw, idAdd: 0, orgLevel: 3};
+            win.show();
+          } else {
+            Ext.MessageBox.alert("提示", "请在下面选择权证！");
           }
         }
       },
@@ -72,28 +74,22 @@ Ext.define("core.qzh_renew.controller.QzhRenewController", {
       },
       "qzhRenewWindow button[ref=save]": {
         click: function(btn) {
-          var orgTree = Ext.getCmp("qzhCbhtGridId");
-          var curSelNode = orgTree.getSelectionModel().getSelection();
-          if (curSelNode.length > 0) {
-            var cbhtIds = "";
-            for (var a in curSelNode) {
-              cbhtIds += curSelNode[a].raw.id + ",";
-            }
-            cbhtIds = cbhtIds.substring(0, cbhtIds.length - 1);
-//            console.log(cbhtIds);
+          var pform = btn.up("qzhRenewWindow").down("form").getForm();
+          if (pform.isValid()) {
+            pform.submit({
+              url: "./cbjyqzQzhf/add_cbjyqzQzhf.do",
+              success: function(form, action) {
+                Ext.MessageBox.confirm("提示", "保存成功！是否继续？", function(btn) {
+                  if (btn === "yes") {
+                    pform.reset();
+                  }
+                });
 
-            Ext.Ajax.request({
-              url: "./cbjyqzdjb/add_cbjyqzdjb.do?cbhtIds=" + cbhtIds,
-              success: function(response, opts) {
-
-                var dkgrid = Ext.getCmp("qzhRenewGridId");
-                var store = dkgrid.getStore();
-//                store.load({params: {cbhtId: cbhtId}});
+                var store = Ext.getCmp("qzhRenewGridId").getStore();
                 store.load();
-                Ext.MessageBox.alert("提示", "保存成功！");
               },
-              failure: function(response, opts) {
-                var resObj = Ext.decode(response.responseText);
+              failure: function(form, action) {
+                var resObj = Ext.decode(action.response.responseText);
                 Ext.MessageBox.show({
                   title: '错误',
                   buttons: Ext.MessageBox.OK,
@@ -102,17 +98,21 @@ Ext.define("core.qzh_renew.controller.QzhRenewController", {
                 });
               }
             });
+          }else{
+            Ext.MessageBox.alert("提示", "请完整填写所有项！");
           }
         }
       },
-      "qzhWindowRenew button[ref=save]": {
+      "qzhWindow_get button[ref=save]": {
         click: function(btn) {
-          var tree = btn.up('qzhWindowRenew').down('qzhRenewGrid_Qzh');
+          var tree = btn.up('qzhWindow_get').down('qzhRenewGrid_Qzh');
           var curSelNode = tree.getSelectionModel().getSelection();
           if (curSelNode.length > 0) {
             var window = Ext.getCmp("qzhRenewWindowId");
             var pform = window.down("form").getForm();
             pform.findField("cbjyqzbm").setValue(curSelNode[0].raw.cbjyqzbm);
+            pform.findField("orgId").setValue(curSelNode[0].raw.orgId);
+            pform.findField("orgName").setValue(curSelNode[0].raw.orgName);
           }
           btn.up('.window').close();
         }
@@ -124,14 +124,14 @@ Ext.define("core.qzh_renew.controller.QzhRenewController", {
     "core.qzh_renew.view.QzhRenewLayout",
     "core.qzh_renew.view.OrgTreeQzhRenew",
     "core.qzh_renew.view.QzhRenewWindow",
-    "core.qzh_renew.view.QzhWindow",
+    "core.qzh_renew.view.QzhWindow_get",
     "core.qzh_renew.view.QzhRenewGrid",
     "core.qzh_renew.view.OrgTreeQzhRenew_Qzh",
     "core.qzh_renew.view.QzhRenewGrid_Qzh",
     "core.qzh_renew.view.QzhRenewForm"
   ],
-  stores: ["core.qzh_renew.store.CbjyqzStore", "core.qzh_renew.store.OrgStore_QzhRenew", 
-            "core.qzh_renew.store.OrgStore_QzhRenew_Qzh", "core.qzh_renew.store.CbjyqzdjbStore",
-          "core.combobox.store.ZjlxdmbStore", "core.combobox.store.SfdmbStore"],
-  models: ["core.qzh_renew.model.CbjyqzModel", "core.qzh.model.CbjyqzdjbModel"]
+  stores: ["core.qzh_renew.store.CbjyqzQzhfStore", "core.qzh_renew.store.OrgStore_QzhRenew",
+    "core.qzh_renew.store.OrgStore_QzhRenew_Qzh", "core.qzh_renew.store.CbjyqzdjbStore",
+    "core.combobox.store.ZjlxdmbStore", "core.combobox.store.SfdmbStore"],
+  models: ["core.qzh_renew.model.CbjyqzQzhfModel", "core.qzh.model.CbjyqzdjbModel"]
 });

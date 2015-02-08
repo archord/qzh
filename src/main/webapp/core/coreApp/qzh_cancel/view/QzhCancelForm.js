@@ -23,7 +23,8 @@ Ext.define("core.qzh_cancel.view.QzhCancelForm", {
       name: "orgName",
       allowBlank: true,
       blankText: '必须在右侧选择村级以下区域',
-      readOnly: true
+      readOnly: true,
+      hidden: true
     }, {
       xtype: "textfield",
       fieldLabel: "区域级别",
@@ -60,7 +61,7 @@ Ext.define("core.qzh_cancel.view.QzhCancelForm", {
 //            component.setValue("TEXT");
             var cbhtWin;
             if (!cbhtWin) {
-              cbhtWin = Ext.create("core.qzh_cancel.view.QzhWindow");
+              cbhtWin = Ext.create("core.qzh_cancel.view.QzhWindow_get");
             }
             if (cbhtWin.isVisible()) {
               cbhtWin.hide();
@@ -71,55 +72,20 @@ Ext.define("core.qzh_cancel.view.QzhCancelForm", {
         }
       }
     }, {
-      xtype: "textfield",
-      fieldLabel: "发证机关",
-      name: "fzjg",
-      allowBlank: false,
-      readOnly: false
-    }, {
       xtype: "datefield",
-      fieldLabel: "发证日期",
-      name: "fzrq",
+      fieldLabel: "注销日期",
+      name: "zxrq",
       format: 'Y-m-d',
       allowBlank: false,
       readOnly: false
     }, {
-      xtype: "combobox",
-      fieldLabel: "是否领取",
-      name: "qzsfly",
-      store: "core.combobox.store.SfdmbStore",
-      displayField: 'sf',
-      valueField: 'dm',
+      colspan: 2,
+      xtype: "textfield",
+      width: 430,
+      xtype: "textfield",
+      fieldLabel: "注销原因",
+      name: "zxyy",
       allowBlank: false,
-      readOnly: false
-    }, {
-      xtype: "datefield",
-      fieldLabel: "领取日期",
-      name: "qzlqrq",
-      format: 'Y-m-d',
-      value: new Date(),
-      allowBlank: true,
-      readOnly: false
-    }, {
-      xtype: "textfield",
-      fieldLabel: "领取人姓名",
-      name: "qzlqrxm",
-      allowBlank: true,
-      readOnly: false
-    }, {
-      xtype: "combobox",
-      fieldLabel: "领取人证件类型",
-      name: "qzlqrzjlx",
-      store: "core.combobox.store.ZjlxdmbStore",
-      displayField: 'zjlx',
-      valueField: 'dm',
-      allowBlank: true,
-      readOnly: false
-    }, {
-      xtype: "textfield",
-      fieldLabel: "领取人证件号码",
-      name: "qzlqrzjhm",
-      allowBlank: true,
       readOnly: false
     }],
   buttons: [{

@@ -5,7 +5,7 @@ Ext.define("core.qzh_cancel.view.QzhCancelGrid", {
   extend: "Ext.grid.Panel",
   alias: "widget.qzhCancelGrid",
   id: "qzhCancelGridId",
-  store: "core.qzh_cancel.store.CbjyqzStore",
+  store: "core.qzh_cancel.store.CbjyqzQzzxStore",
   border: 0,
   selModel: {
     selType: "checkboxmodel"
@@ -13,7 +13,7 @@ Ext.define("core.qzh_cancel.view.QzhCancelGrid", {
   multiSelect: true,
   frame: true,
   tbar: [
-    {xtype: 'button', text: '权证注销', ref: 'add', iconCls: 'table_add'}, '|',
+    {xtype: 'button', text: '注销权证', ref: 'add', iconCls: 'table_add'}, '|',
     {xtype: 'button', text: '查看注销详情', ref: 'edit', iconCls: 'table_edit'}, '|',
     {xtype: 'button', text: '删除', ref: 'del', iconCls: 'table_remove'},
     "->",
@@ -54,7 +54,7 @@ Ext.define("core.qzh_cancel.view.QzhCancelGrid", {
   ],
   bbar: {
     xtype: 'pagingtoolbar',
-    store: 'core.qzh_cancel.store.CbjyqzStore',
+    store: 'core.qzh_cancel.store.CbjyqzQzzxStore',
     dock: 'bottom',
     displayInfo: true
   },
@@ -62,25 +62,13 @@ Ext.define("core.qzh_cancel.view.QzhCancelGrid", {
   columnLines: true, //展示竖线
   columns: [
     {xtype: 'rownumberer'},
-    {text: "承包经营权证编码", dataIndex: "cbjyqzbm", width: 120, field: {
+    {text: "承包经营权证编码", dataIndex: "cbjyqzbm", field: {
         xtype: "textfield"
       }},
-    {text: "发包方编码", dataIndex: "fbfbm", width: 120, field: {
+    {text: "注销原因", dataIndex: "zxyy", field: {
         xtype: "textfield"
       }},
-    {text: "承包方编码", dataIndex: "cbfbm", width: 120, field: {
-        xtype: "textfield"
-      }},
-    {text: "承包方式", dataIndex: "cbfs", width: 70, field: {
-        xtype: "textfield"
-      }},
-    {text: "承包期限", dataIndex: "cbqx", width: 70, field: {
-        xtype: "textfield"
-      }},
-    {text: "承包期限起", dataIndex: "cbqxq", width: 70, field: {
-        xtype: "textfield"
-      }},
-    {text: "承包期限止", dataIndex: "cbqxz", width: 70, field: {
+    {text: "注销日期", dataIndex: "zxrq", field: {
         xtype: "textfield"
       }}
   ],

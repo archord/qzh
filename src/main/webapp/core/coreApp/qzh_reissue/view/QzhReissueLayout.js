@@ -5,7 +5,7 @@ Ext.define("core.qzh_reissue.view.QzhReissueLayout", {
   extend: 'Ext.panel.Panel',
   alias: 'widget.qzhReissueLayout',
   id: "qzhReissueLayoutId",
-  title: "<center height=40>权证补发</center>",
+  title: "<center height=40>权证领取</center>",
   closable: true,
   defaults: {
     split: true, // 可以设置好看点的折叠效果
@@ -37,7 +37,7 @@ Ext.define("core.qzh_reissue.view.QzhReissueLayout", {
           xtype: "qzhReissueGrid",
           bbar: [],
 //          store: Ext.create("core.qzh_reissue.store.FbfStore", {}),
-          title: "权证列表"
+          title: "权证补发记录"
 
         }]
     }]

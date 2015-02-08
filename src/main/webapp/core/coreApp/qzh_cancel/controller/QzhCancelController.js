@@ -50,12 +50,14 @@ Ext.define("core.qzh_cancel.controller.QzhCancelController", {
       },
       "qzhCancelGrid button[ref=edit]": {
         click: function(btn) {
-          var lzhhtTree = btn.up('qzhCancelGrid');
-          var curSelNode = lzhhtTree.getSelectionModel().getSelection();
+          var tree = btn.up('qzhCancelGrid');
+          var curSelNode = tree.getSelectionModel().getSelection();
           if (curSelNode.length > 0) {
-            var lzhhtWin = Ext.create("core.qzh_cancel.view.QzhCancelWindow");
-            lzhhtWin.extraParas = {obj: curSelNode[0].raw, idAdd: 0, orgLevel: 3};
-            lzhhtWin.show();
+            var win = Ext.create("core.qzh_cancel.view.QzhCancelWindow");
+            win.extraParas = {obj: curSelNode[0].raw, idAdd: 0, orgLevel: 3};
+            win.show();
+          } else {
+            Ext.MessageBox.alert("提示", "请在下面选择权证！");
           }
         }
       },
@@ -72,28 +74,22 @@ Ext.define("core.qzh_cancel.controller.QzhCancelController", {
       },
       "qzhCancelWindow button[ref=save]": {
         click: function(btn) {
-          var orgTree = Ext.getCmp("qzhCbhtGridId");
-          var curSelNode = orgTree.getSelectionModel().getSelection();
-          if (curSelNode.length > 0) {
-            var cbhtIds = "";
-            for (var a in curSelNode) {
-              cbhtIds += curSelNode[a].raw.id + ",";
-            }
-            cbhtIds = cbhtIds.substring(0, cbhtIds.length - 1);
-//            console.log(cbhtIds);
+          var pform = btn.up("qzhCancelWindow").down("form").getForm();
+          if (pform.isValid()) {
+            pform.submit({
+              url: "./cbjyqzQzzx/add_cbjyqzQzzx.do",
+              success: function(form, action) {
+                Ext.MessageBox.confirm("提示", "保存成功！是否继续？", function(btn) {
+                  if (btn === "yes") {
+                    pform.reset();
+                  }
+                });
 
-            Ext.Ajax.request({
-              url: "./cbjyqzdjb/add_cbjyqzdjb.do?cbhtIds=" + cbhtIds,
-              success: function(response, opts) {
-
-                var dkgrid = Ext.getCmp("qzhCancelGridId");
-                var store = dkgrid.getStore();
-//                store.load({params: {cbhtId: cbhtId}});
+                var store = Ext.getCmp("qzhCancelGridId").getStore();
                 store.load();
-                Ext.MessageBox.alert("提示", "保存成功！");
               },
-              failure: function(response, opts) {
-                var resObj = Ext.decode(response.responseText);
+              failure: function(form, action) {
+                var resObj = Ext.decode(action.response.responseText);
                 Ext.MessageBox.show({
                   title: '错误',
                   buttons: Ext.MessageBox.OK,
@@ -105,14 +101,16 @@ Ext.define("core.qzh_cancel.controller.QzhCancelController", {
           }
         }
       },
-      "qzhWindowCancel button[ref=save]": {
+      "qzhWindow_get button[ref=save]": {
         click: function(btn) {
-          var tree = btn.up('qzhWindowCancel').down('qzhCancelGrid_Qzh');
+          var tree = btn.up('qzhWindow_get').down('qzhCancelGrid_Qzh');
           var curSelNode = tree.getSelectionModel().getSelection();
           if (curSelNode.length > 0) {
             var window = Ext.getCmp("qzhCancelWindowId");
             var pform = window.down("form").getForm();
             pform.findField("cbjyqzbm").setValue(curSelNode[0].raw.cbjyqzbm);
+            pform.findField("orgId").setValue(curSelNode[0].raw.orgId);
+            pform.findField("orgName").setValue(curSelNode[0].raw.orgName);
           }
           btn.up('.window').close();
         }
@@ -124,14 +122,14 @@ Ext.define("core.qzh_cancel.controller.QzhCancelController", {
     "core.qzh_cancel.view.QzhCancelLayout",
     "core.qzh_cancel.view.OrgTreeQzhCancel",
     "core.qzh_cancel.view.QzhCancelWindow",
-    "core.qzh_cancel.view.QzhWindow",
+    "core.qzh_cancel.view.QzhWindow_get",
     "core.qzh_cancel.view.QzhCancelGrid",
     "core.qzh_cancel.view.OrgTreeQzhCancel_Qzh",
     "core.qzh_cancel.view.QzhCancelGrid_Qzh",
     "core.qzh_cancel.view.QzhCancelForm"
   ],
-  stores: ["core.qzh_cancel.store.CbjyqzStore", "core.qzh_cancel.store.OrgStore_QzhCancel", 
-            "core.qzh_cancel.store.OrgStore_QzhCancel_Qzh", "core.qzh_cancel.store.CbjyqzdjbStore",
-          "core.combobox.store.ZjlxdmbStore", "core.combobox.store.SfdmbStore"],
-  models: ["core.qzh_cancel.model.CbjyqzModel", "core.qzh.model.CbjyqzdjbModel"]
+  stores: ["core.qzh_cancel.store.CbjyqzQzzxStore", "core.qzh_cancel.store.OrgStore_QzhCancel",
+    "core.qzh_cancel.store.OrgStore_QzhCancel_Qzh", "core.qzh_cancel.store.CbjyqzdjbStore",
+    "core.combobox.store.ZjlxdmbStore", "core.combobox.store.SfdmbStore"],
+  models: ["core.qzh_cancel.model.CbjyqzQzzxModel", "core.qzh.model.CbjyqzdjbModel"]
 });

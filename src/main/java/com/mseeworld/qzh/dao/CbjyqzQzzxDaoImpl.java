@@ -19,7 +19,7 @@ public class CbjyqzQzzxDaoImpl extends BaseHibernateDaoImpl<CbjyqzQzzx> implemen
     
     Session session = getCurrentSession();
     String sql = "select * "
-            + "from cbjyqz "
+            + "from cbjyqz_qzzx "
             + "where org_id= " + orgId + " "
             + "order by id";
     Query q = session.createSQLQuery(sql).addEntity(CbjyqzQzzx.class);
@@ -31,7 +31,7 @@ public class CbjyqzQzzxDaoImpl extends BaseHibernateDaoImpl<CbjyqzQzzx> implemen
   public List<CbjyqzQzzx> getFirstNOfAll(int n){
     
     Session session = getCurrentSession();
-    String sql = "select * from cbjyqz order by id limit "+ n;
+    String sql = "select * from cbjyqz_qzzx order by id limit "+ n;
     Query q = session.createSQLQuery(sql).addEntity(CbjyqzQzzx.class);
 
     return q.list();

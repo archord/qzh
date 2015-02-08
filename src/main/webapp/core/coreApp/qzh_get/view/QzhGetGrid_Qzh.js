@@ -56,7 +56,7 @@ Ext.define("core.qzh_get.view.QzhGetGrid_Qzh", {
   columnLines: true, //展示竖线
   columns: [
     {xtype: 'rownumberer'},
-    {text: "承包合同编码", dataIndex: "cbhtbm", width: 120, field: {
+    {text: "权证编码", dataIndex: "cbjyqzbm", width: 120, field: {
         xtype: "textfield"
       }},
     {text: "发包方编码", dataIndex: "fbfbm", width: 120, field: {
@@ -65,7 +65,16 @@ Ext.define("core.qzh_get.view.QzhGetGrid_Qzh", {
     {text: "承包方编码", dataIndex: "cbfbm", width: 120, field: {
         xtype: "textfield"
       }},
-    {text: "承包方姓名", dataIndex: "cbfmc", width: 70, field: {
+    {text: "承包方式", dataIndex: "cbfs", width: 70, field: {
+        xtype: "textfield"
+      }},
+    {text: "承包期限", dataIndex: "cbqx", width: 70, field: {
+        xtype: "textfield"
+      }},
+    {text: "承包期限起", dataIndex: "cbqxq", width: 70, field: {
+        xtype: "textfield"
+      }},
+    {text: "承包期限止", dataIndex: "cbqxz", width: 70, field: {
         xtype: "textfield"
       }}
   ],

@@ -5,8 +5,8 @@ Ext.define("core.qzh_renew.view.QzhRenewLayout", {
   extend: 'Ext.panel.Panel',
   alias: 'widget.qzhRenewLayout',
   id: "qzhRenewLayoutId",
-  title: "<center height=40>权证换发</center>",
-  closable:true,
+  title: "<center height=40>权证领取</center>",
+  closable: true,
   defaults: {
     split: true, // 可以设置好看点的折叠效果
     collapsible: true, // 可以被折叠
@@ -37,7 +37,7 @@ Ext.define("core.qzh_renew.view.QzhRenewLayout", {
           xtype: "qzhRenewGrid",
           bbar: [],
 //          store: Ext.create("core.qzh_renew.store.FbfStore", {}),
-          title: "权证列表"
+          title: "权证换发记录"
 
         }]
     }]

@@ -23,7 +23,8 @@ Ext.define("core.qzh_get.view.QzhGetForm", {
       name: "orgName",
       allowBlank: true,
       blankText: '必须在右侧选择村级以下区域',
-      readOnly: true
+      readOnly: true,
+      hidden: true
     }, {
       xtype: "textfield",
       fieldLabel: "区域级别",

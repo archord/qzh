@@ -1,7 +1,7 @@
-Ext.define("core.qzh_cancel.view.QzhWindow_Cancel", {
+Ext.define("core.qzh_cancel.view.QzhWindow_get", {
   extend: 'Ext.Window',
-  alias: "widget.qzhWindowCancel",
-  id: "qzhWindowCancelId",
+  alias: "widget.qzhWindow_get",
+  id: "qzhWindowId_get",
   bodyStyle: 'background:transparent',
   title: "选择权证",
   layout: "border",

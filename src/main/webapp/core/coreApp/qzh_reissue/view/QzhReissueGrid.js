@@ -5,7 +5,7 @@ Ext.define("core.qzh_reissue.view.QzhReissueGrid", {
   extend: "Ext.grid.Panel",
   alias: "widget.qzhReissueGrid",
   id: "qzhReissueGridId",
-  store: "core.qzh_reissue.store.CbjyqzStore",
+  store: "core.qzh_reissue.store.CbjyqzQzbfStore",
   border: 0,
   selModel: {
     selType: "checkboxmodel"
@@ -13,7 +13,7 @@ Ext.define("core.qzh_reissue.view.QzhReissueGrid", {
   multiSelect: true,
   frame: true,
   tbar: [
-    {xtype: 'button', text: '权证补发', ref: 'add', iconCls: 'table_add'}, '|',
+    {xtype: 'button', text: '补发权证', ref: 'add', iconCls: 'table_add'}, '|',
     {xtype: 'button', text: '查看补发详情', ref: 'edit', iconCls: 'table_edit'}, '|',
     {xtype: 'button', text: '删除', ref: 'del', iconCls: 'table_remove'},
     "->",
@@ -54,7 +54,7 @@ Ext.define("core.qzh_reissue.view.QzhReissueGrid", {
   ],
   bbar: {
     xtype: 'pagingtoolbar',
-    store: 'core.qzh_reissue.store.CbjyqzStore',
+    store: 'core.qzh_reissue.store.CbjyqzQzbfStore',
     dock: 'bottom',
     displayInfo: true
   },
@@ -62,25 +62,25 @@ Ext.define("core.qzh_reissue.view.QzhReissueGrid", {
   columnLines: true, //展示竖线
   columns: [
     {xtype: 'rownumberer'},
-    {text: "承包经营权证编码", dataIndex: "cbjyqzbm", width: 120, field: {
+    {text: "承包经营权证编码", dataIndex: "cbjyqzbm", field: {
         xtype: "textfield"
       }},
-    {text: "发包方编码", dataIndex: "fbfbm", width: 120, field: {
+    {text: "补发原因", dataIndex: "qzbfyy", field: {
         xtype: "textfield"
       }},
-    {text: "承包方编码", dataIndex: "cbfbm", width: 120, field: {
+    {text: "补发日期", dataIndex: "bfrq", field: {
         xtype: "textfield"
       }},
-    {text: "承包方式", dataIndex: "cbfs", width: 70, field: {
+    {text: "领取日期", dataIndex: "qzbflqrq", field: {
         xtype: "textfield"
       }},
-    {text: "承包期限", dataIndex: "cbqx", width: 70, field: {
+    {text: "领取人姓名", dataIndex: "qzbflqrxm", field: {
         xtype: "textfield"
       }},
-    {text: "承包期限起", dataIndex: "cbqxq", width: 70, field: {
+    {text: "领取人证件类型", dataIndex: "bflqrzjlx", field: {
         xtype: "textfield"
       }},
-    {text: "承包期限止", dataIndex: "cbqxz", width: 70, field: {
+    {text: "领取人证件号码", dataIndex: "bflqrzjhm", field: {
         xtype: "textfield"
       }}
   ],

@@ -23,7 +23,8 @@ Ext.define("core.qzh_renew.view.QzhRenewForm", {
       name: "orgName",
       allowBlank: true,
       blankText: '必须在右侧选择村级以下区域',
-      readOnly: true
+      readOnly: true,
+      hidden: true
     }, {
       xtype: "textfield",
       fieldLabel: "区域级别",
@@ -60,7 +61,7 @@ Ext.define("core.qzh_renew.view.QzhRenewForm", {
 //            component.setValue("TEXT");
             var cbhtWin;
             if (!cbhtWin) {
-              cbhtWin = Ext.create("core.qzh_renew.view.QzhWindow");
+              cbhtWin = Ext.create("core.qzh_renew.view.QzhWindow_get");
             }
             if (cbhtWin.isVisible()) {
               cbhtWin.hide();
@@ -72,14 +73,14 @@ Ext.define("core.qzh_renew.view.QzhRenewForm", {
       }
     }, {
       xtype: "textfield",
-      fieldLabel: "发证机关",
-      name: "fzjg",
+      fieldLabel: "换发原因",
+      name: "qzhfyy",
       allowBlank: false,
       readOnly: false
     }, {
       xtype: "datefield",
-      fieldLabel: "发证日期",
-      name: "fzrq",
+      fieldLabel: "换发日期",
+      name: "hfrq",
       format: 'Y-m-d',
       allowBlank: false,
       readOnly: false
@@ -90,36 +91,37 @@ Ext.define("core.qzh_renew.view.QzhRenewForm", {
       store: "core.combobox.store.SfdmbStore",
       displayField: 'sf',
       valueField: 'dm',
-      allowBlank: false,
-      readOnly: false
+      allowBlank: true,
+      readOnly: false,
+      hidden: true
     }, {
       xtype: "datefield",
       fieldLabel: "领取日期",
-      name: "qzlqrq",
+      name: "qzhflqrq",
       format: 'Y-m-d',
       value: new Date(),
-      allowBlank: true,
+      allowBlank: false,
       readOnly: false
     }, {
       xtype: "textfield",
       fieldLabel: "领取人姓名",
-      name: "qzlqrxm",
-      allowBlank: true,
+      name: "qzhflqrxm",
+      allowBlank: false,
       readOnly: false
     }, {
       xtype: "combobox",
       fieldLabel: "领取人证件类型",
-      name: "qzlqrzjlx",
+      name: "hflqrzjlx",
       store: "core.combobox.store.ZjlxdmbStore",
       displayField: 'zjlx',
       valueField: 'dm',
-      allowBlank: true,
+      allowBlank: false,
       readOnly: false
     }, {
       xtype: "textfield",
       fieldLabel: "领取人证件号码",
-      name: "qzlqrzjhm",
-      allowBlank: true,
+      name: "hflqrzjhm",
+      allowBlank: false,
       readOnly: false
     }],
   buttons: [{

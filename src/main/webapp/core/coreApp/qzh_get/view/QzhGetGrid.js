@@ -62,28 +62,28 @@ Ext.define("core.qzh_get.view.QzhGetGrid", {
   columnLines: true, //展示竖线
   columns: [
     {xtype: 'rownumberer'},
-    {text: "承包经营权证编码", dataIndex: "cbjyqzbm", width: 120, field: {
+    {text: "承包经营权证编码", dataIndex: "cbjyqzbm", field: {
         xtype: "textfield"
       }},
-    {text: "发证机关", dataIndex: "fzjg", width: 120, field: {
+    {text: "发证机关", dataIndex: "fzjg", field: {
         xtype: "textfield"
       }},
-    {text: "发证日期", dataIndex: "fzrq", width: 120, field: {
+    {text: "发证日期", dataIndex: "fzrq", field: {
         xtype: "textfield"
       }},
-    {text: "是否领取", dataIndex: "qzsfly", width: 70, field: {
+    {text: "是否领取", dataIndex: "qzsfly", field: {
         xtype: "textfield"
       }},
-    {text: "领取日期", dataIndex: "qzlqrq", width: 70, field: {
+    {text: "领取日期", dataIndex: "qzlqrq", field: {
         xtype: "textfield"
       }},
-    {text: "领取人姓名", dataIndex: "qzlqrxm", width: 70, field: {
+    {text: "领取人姓名", dataIndex: "qzlqrxm", field: {
         xtype: "textfield"
       }},
-    {text: "领取人证件类型", dataIndex: "qzlqrzjlx", width: 70, field: {
+    {text: "领取人证件类型", dataIndex: "qzlqrzjlx", field: {
         xtype: "textfield"
       }},
-    {text: "领取人证件号码", dataIndex: "qzlqrzjhm", width: 70, field: {
+    {text: "领取人证件号码", dataIndex: "qzlqrzjhm", field: {
         xtype: "textfield"
       }}
   ],
