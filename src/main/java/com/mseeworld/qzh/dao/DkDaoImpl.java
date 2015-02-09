@@ -63,4 +63,18 @@ public class DkDaoImpl extends BaseHibernateDaoImpl<Dk> implements DkDao {
     String sql = "update dk set cbht_id =" + cbhtId + " where id in (" + dkIds + ")";
     session.createSQLQuery(sql).executeUpdate();
   }
+
+  public void deleteCbhtByIds(String dkIds) {
+
+    Session session = getCurrentSession();
+    String sql = "update dk set cbht_id =0 where id in (" + dkIds + ")";
+    session.createSQLQuery(sql).executeUpdate();
+  }
+
+  public void deleteByIds(final String ids) {
+
+    String sql = "delete from dk where id in(" + ids + ")";
+    Session session = getCurrentSession();
+    session.createSQLQuery(sql).executeUpdate();
+  }
 }

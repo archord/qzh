@@ -22,4 +22,6 @@ public interface DkDao extends BaseHibernateDao<Dk> {
   public List<Dk> getDkOfNullChbtId(int limit);
 
   public void updateCbhtId(String dkIds, String cbhtId);
+  
+  public void deleteCbhtByIds(String dkIds);
 }

@@ -13,10 +13,10 @@ import org.hibernate.Session;
  *
  * @author xy
  */
-public class CbfDaoImpl extends BaseHibernateDaoImpl<Cbf> implements CbfDao{
-  
-  public List<Cbf> getCbfsByOrgId(long orgId){
-    
+public class CbfDaoImpl extends BaseHibernateDaoImpl<Cbf> implements CbfDao {
+
+  public List<Cbf> getCbfsByOrgId(long orgId) {
+
     Session session = getCurrentSession();
     String sql = "select * "
             + "from cbf "
@@ -26,13 +26,20 @@ public class CbfDaoImpl extends BaseHibernateDaoImpl<Cbf> implements CbfDao{
 
     return q.list();
   }
-  
-  public List<Cbf> getFirstNOfAll(int n){
-    
+
+  public List<Cbf> getFirstNOfAll(int n) {
+
     Session session = getCurrentSession();
-    String sql = "select * from cbf order by id limit "+ n;
+    String sql = "select * from cbf order by id limit " + n;
     Query q = session.createSQLQuery(sql).addEntity(Cbf.class);
 
     return q.list();
+  }
+
+  public void deleteByIds(final String ids) {
+
+    String sql = "delete from cbf where id in(" + ids + ")";
+    Session session = getCurrentSession();
+    session.createSQLQuery(sql).executeUpdate();
   }
 }

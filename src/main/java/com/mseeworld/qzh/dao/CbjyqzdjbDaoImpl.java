@@ -36,4 +36,11 @@ public class CbjyqzdjbDaoImpl extends BaseHibernateDaoImpl<Cbjyqzdjb> implements
 
     return q.list();
   }
+
+  public void deleteByIds(final String ids) {
+
+    String sql = "delete from cbjyqzdjb where id in(" + ids + ")";
+    Session session = getCurrentSession();
+    session.createSQLQuery(sql).executeUpdate();
+  }
 }

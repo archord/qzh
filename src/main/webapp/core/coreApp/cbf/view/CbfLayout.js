@@ -13,7 +13,8 @@ Ext.define("core.cbf.view.CbfLayout", {
     bodyStyle: 'padding:1px'
   },
   layout: 'border',
-  items: [Ext.create('core.cbf.view.OrgTreeCbf', {
+  items: [
+    Ext.create('core.cbf.view.OrgTreeCbf', {
       title: "地区列表",
       region: 'west',
       id: "orgTreeCbfId",

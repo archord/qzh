@@ -81,10 +81,9 @@ Ext.define("core.cbf.view.CbfGrid", {
         xtype: "textfield"
       }},
     {text: "联系电话", dataIndex: "lxdh", width: 80, field: {
-        xtype: "datefield",
-        width: 150
+        xtype: "textfield"
       }},
-    {text: "承包方调查员", dataIndex: "cbfdcy", width: 70, field: {
+    {text: "承包方调查员", dataIndex: "cbfdcy", width: 80, field: {
         xtype: "textfield"
       }},
     {text: "公示记事人", dataIndex: "gsjsr", width: 70, field: {
@@ -93,7 +92,7 @@ Ext.define("core.cbf.view.CbfGrid", {
     {text: "公示审核人", dataIndex: "gsshr", width: 70, field: {
         xtype: "textfield"
       }},
-    {text: "公示审核日期", dataIndex: "gsshrq", width: 70, field: {
+    {text: "公示审核日期", dataIndex: "gsshrq", width: 80, field: {
         xtype: "textfield"
       }}
   ],

@@ -35,30 +35,65 @@ Ext.define("core.fbf.controller.FbfController", {
           }
         }
       },
-      "fbfGrid": {
-        itemclick: function(tree, record, item, index, e, eOpts) {
-
-          var pform = tree.up("fbfLayout").down("fbfForm").getForm();
-          pform.findField("isAdd").setValue("0");
-
-          if (record.raw) {
-            pform.findField("orgName").setValue(" ");
-            pform.findField("orgId").setValue(record.raw.orgId);
-            pform.findField("orgLevel").setValue(record.raw.orgLevel);
-
-            pform.findField("id").setValue(record.raw.id);
-            pform.findField("fbfbm").setValue(record.raw.fbfbm);
-            pform.findField("fbfmc").setValue(record.raw.fbfmc);
-            pform.findField("fbffzrxm").setValue(record.raw.fbffzrxm);
-            pform.findField("fzrzjlx").setValue(record.raw.fzrzjlx);
-            pform.findField("fzrzjhm").setValue(record.raw.fzrzjhm);
-            pform.findField("lxdh").setValue(record.raw.lxdh);
-            pform.findField("fbfdz").setValue(record.raw.fbfdz);
-            pform.findField("yzbm").setValue(record.raw.yzbm);
-            pform.findField("fbfdcy").setValue(record.raw.fbfdcy);
-            pform.findField("fbfdcrq").setValue(record.raw.fbfdcrq);
-            pform.findField("fbfdcjs").setValue(record.raw.fbfdcjs);
+      "fbfgrid button[ref=add]": {
+        click: function(btn) {
+          var win = Ext.create("core.fbf.view.FbfWindow");
+          win.show();
+        }
+      },
+      "fbfgrid button[ref=edit]": {
+        click: function(btn) {
+          var cbhtTree = btn.up('fbfgrid');
+          var curSelNode = cbhtTree.getSelectionModel().getSelection();
+          if (curSelNode.length > 0) {
+            var cbhtWin = Ext.create("core.fbf.view.FbfWindow");
+            cbhtWin.extraParas = {obj: curSelNode[0].raw, idAdd: 0, orgLevel: 3};
+            cbhtWin.show();
+          } else {
+            Ext.MessageBox.alert("提示", "请在下方选择发包方！");
           }
+        }
+      },
+      "fbfgrid button[ref=del]": {
+        click: function(btn) {
+          var cbhtTree = btn.up('fbfgrid');
+          var curSelNode = cbhtTree.getSelectionModel().getSelection();
+          if (curSelNode.length > 0) {//curSelNode[0].raw
+            Ext.MessageBox.confirm("注意", "是否删除该记录？", function(btn) {
+              if (btn === "yes") {
+                var ids = "";
+                for (var i = 0; i < curSelNode.length; i++) {
+                  ids += curSelNode[i].raw.id + ",";
+                }
+                ids = ids.substring(0, ids.length - 1);
+                Ext.Ajax.request({
+                  waitMsg: '正在进行处理,请稍后...',
+                  url: "./fbf/remove_fbf.do",
+                  params: {
+                    ids: ids
+                  }, // 根据id删除
+                  method: "POST",
+                  timeout: 4000,
+                  success: function(response, opts) {
+                    var resObj = Ext.decode(response.responseText);
+                    if (resObj.success) {
+                      var store = Ext.getCmp("fbfgridId").getStore();
+                      store.reload();
+                      Ext.Msg.alert("提示", "删除成功！");
+                    } else {
+                      Ext.Msg.alert("提示", "删除失败！");
+                    }
+                  }
+                });
+              }
+            });
+          } else {
+            Ext.MessageBox.alert("提示", "请在下方选择承包合同！");
+          }
+        }
+      },
+      "fbfgrid": {
+        itemclick: function(tree, record, item, index, e, eOpts) {
         }
       },
       "fbfForm button[ref=save]": {
@@ -107,7 +142,8 @@ Ext.define("core.fbf.controller.FbfController", {
     "core.fbf.view.FbfLayout",
     "core.fbf.view.OrgTreeFbf",
     "core.fbf.view.FbfForm",
-    "core.fbf.view.FbfGrid"
+    "core.fbf.view.FbfGrid",
+    "core.fbf.view.FbfWindow"
   ],
   stores: ["core.fbf.store.FbfStore", "core.fbf.store.OrgStore","core.combobox.store.ZjlxdmbStore"],
   models: ["core.fbf.model.FbfModel"]

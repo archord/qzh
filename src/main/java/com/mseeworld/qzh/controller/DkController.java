@@ -148,19 +148,23 @@ public class DkController {
 
     writer.write("{success:true, msg:'地块信息保存成功!'}");
   }
+  
+  @RequestMapping(value = "/update_dk_cbht", method = RequestMethod.POST)
+  public void update2(HttpServletRequest request, PrintWriter writer) {
+
+    String ids = request.getParameter("ids");
+    dkDao.deleteCbhtByIds(ids);
+    writer.write("{success:true,msg:'删除成功!'}");
+  }
 
   /**
-   * 删除people/remove_people.do
+   * 删除
    */
   @RequestMapping(value = "/remove_dk", method = RequestMethod.POST)
   public void delete(HttpServletRequest request, PrintWriter writer) {
-//		
-//		String[] ids = request.getParameter("ids").replaceAll("\"", "").split(",");
-//		
-//		if(peopleService.remove(ids)){
-//			writer.write("{success:true,msg:'删除成功!'}");
-//		}else{
-//			writer.write("{success:false,msg:'删除失败!'}");
-//		}
+
+    String ids = request.getParameter("ids");
+    dkDao.deleteByIds(ids);
+    writer.write("{success:true,msg:'删除成功!'}");
   }
 }

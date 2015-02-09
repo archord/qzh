@@ -19,7 +19,7 @@ public class CbdkxxDaoImpl extends BaseHibernateDaoImpl<Cbdkxx> implements Cbdkx
     
     Session session = getCurrentSession();
     String sql = "select * "
-            + "from cbf "
+            + "from cbdkxx "
             + "where org_id= " + orgId + " "
             + "order by id";
     Query q = session.createSQLQuery(sql).addEntity(Cbdkxx.class);
@@ -34,5 +34,12 @@ public class CbdkxxDaoImpl extends BaseHibernateDaoImpl<Cbdkxx> implements Cbdkx
     Query q = session.createSQLQuery(sql).addEntity(Cbdkxx.class);
 
     return q.list();
+  }
+
+  public void deleteByIds(final String ids) {
+
+    String sql = "delete from cbdkxx where id in(" + ids + ")";
+    Session session = getCurrentSession();
+    session.createSQLQuery(sql).executeUpdate();
   }
 }

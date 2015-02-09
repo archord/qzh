@@ -68,7 +68,7 @@ Ext.define("core.cbht.controller.CbhtController", {
           var curSelNode = cbhtTree.getSelectionModel().getSelection();
           if (curSelNode.length > 0) {
             var cbhtWin = Ext.create("core.cbht.view.CbhtWindow");
-            cbhtWin.extraParas = {cbht: curSelNode[0].raw, idAdd: 0, orgLevel: 3};
+            cbhtWin.extraParas = {obj: curSelNode[0].raw, idAdd: 0, orgLevel: 3};
             cbhtWin.show();
           } else {
             Ext.MessageBox.alert("提示", "请在下方选择承包合同！");
@@ -77,13 +77,40 @@ Ext.define("core.cbht.controller.CbhtController", {
       },
       "cbhtgrid button[ref=del]": {
         click: function(btn) {
-          Ext.MessageBox.confirm("注意", "是否删除该记录？", function(btn) {
-            if (btn === "yes") {
-              console.log("delete record");
-            } else {
-              console.log("not delete record");
-            }
-          });
+          var cbhtTree = btn.up('cbhtgrid');
+          var curSelNode = cbhtTree.getSelectionModel().getSelection();
+          if (curSelNode.length > 0) {//curSelNode[0].raw
+            Ext.MessageBox.confirm("注意", "是否删除该记录？", function(btn) {
+              if (btn === "yes") {
+                var ids = "";
+                for (var i = 0; i < curSelNode.length; i++) {
+                  ids += curSelNode[i].raw.id + ",";
+                }
+                ids = ids.substring(0, ids.length - 1);
+                Ext.Ajax.request({
+                  waitMsg: '正在进行处理,请稍后...',
+                  url: "./cbht/remove_cbht.do",
+                  params: {
+                    ids: ids
+                  }, // 根据id删除
+                  method: "POST",
+                  timeout: 4000,
+                  success: function(response, opts) {
+                    var resObj = Ext.decode(response.responseText);
+                    if (resObj.success) {
+                      var store = Ext.getCmp("cbhtgrid").getStore();
+                      store.reload();
+                      Ext.Msg.alert("提示", "删除成功！");
+                    } else {
+                      Ext.Msg.alert("提示", "删除失败！");
+                    }
+                  }
+                });
+              }
+            });
+          } else {
+            Ext.MessageBox.alert("提示", "请在下方选择承包合同！");
+          }
         }
       },
       "fbfwindow_cbht button[ref=save]": {
@@ -229,22 +256,40 @@ Ext.define("core.cbht.controller.CbhtController", {
       },
       "cbhtdkgrid button[ref=del]": {
         click: function(btn) {
-//          var orgTree = btn.up('cbhtLayout').down("orgTreeCbht");
-//          var curSelNode = orgTree.getSelectionModel().getSelection();
-//          if (curSelNode.length > 0) {
-//            if (curSelNode[0].raw.orgLevel < 3) {
-//              Ext.MessageBox.alert("提示", "必须在左侧选择村级以下区域");
-//            } else {
-          var cbhtWin = Ext.create("core.cbht.view.CbhtWindow");
-//              cbhtWin.myExtraParams = {orgId: curSelNode[0].raw.orgId}; 
-//              cbhtWin.on('show', function(win) {
-//                console.log('orgId=' + win.myExtraParams.orgId);
-//              });
-          cbhtWin.show();
-//            }
-//          } else {
-//            Ext.MessageBox.alert("提示", "必须在左侧选择村级以下区域");
-//          }
+          var cbhtTree = btn.up('cbhtdkgrid');
+          var curSelNode = cbhtTree.getSelectionModel().getSelection();
+          if (curSelNode.length > 0) {//curSelNode[0].raw
+            Ext.MessageBox.confirm("注意", "是否删除该记录？", function(btn) {
+              if (btn === "yes") {
+                var ids = "";
+                for (var i = 0; i < curSelNode.length; i++) {
+                  ids += curSelNode[i].raw.id + ",";
+                }
+                ids = ids.substring(0, ids.length - 1);
+                Ext.Ajax.request({
+                  waitMsg: '正在进行处理,请稍后...',
+                  url: "./dk/update_dk_cbht.do",
+                  params: {
+                    ids: ids
+                  }, // 根据id删除
+                  method: "POST",
+                  timeout: 4000,
+                  success: function(response, opts) {
+                    var resObj = Ext.decode(response.responseText);
+                    if (resObj.success) {
+                      var store = Ext.getCmp("cbhtdkgridid").getStore();
+                      store.reload();
+                      Ext.Msg.alert("提示", "删除成功！");
+                    } else {
+                      Ext.Msg.alert("提示", "删除失败！");
+                    }
+                  }
+                });
+              }
+            });
+          } else {
+            Ext.MessageBox.alert("提示", "请在下方选择承包合同！");
+          }
         }
       }
 

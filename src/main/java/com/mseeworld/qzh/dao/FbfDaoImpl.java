@@ -35,4 +35,11 @@ public class FbfDaoImpl extends BaseHibernateDaoImpl<Fbf> implements FbfDao{
 
     return q.list();
   }
+
+  public void deleteByIds(final String ids) {
+
+    String sql = "delete from fbf where id in(" + ids + ")";
+    Session session = getCurrentSession();
+    session.createSQLQuery(sql).executeUpdate();
+  }
 }

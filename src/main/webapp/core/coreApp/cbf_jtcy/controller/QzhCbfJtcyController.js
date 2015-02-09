@@ -61,13 +61,40 @@ Ext.define("core.cbf_jtcy.controller.QzhCbfJtcyController", {
       },
       "qzhCbfJtcyGrid button[ref=del]": {
         click: function(btn) {
-          Ext.MessageBox.confirm("注意", "是否删除该记录？", function(btn) {
-            if (btn === "yes") {
-              console.log("delete record");
-            } else {
-              console.log("not delete record");
-            }
-          });
+          var cbhtTree = btn.up('qzhCbfJtcyGrid');
+          var curSelNode = cbhtTree.getSelectionModel().getSelection();
+          if (curSelNode.length > 0) {//curSelNode[0].raw
+            Ext.MessageBox.confirm("注意", "是否删除该记录？", function(btn) {
+              if (btn === "yes") {
+                var ids = "";
+                for (var i = 0; i < curSelNode.length; i++) {
+                  ids += curSelNode[i].raw.id + ",";
+                }
+                ids = ids.substring(0, ids.length - 1);
+                Ext.Ajax.request({
+                  waitMsg: '正在进行处理,请稍后...',
+                  url: "./cbf/remove_cbf.do",
+                  params: {
+                    ids: ids
+                  }, // 根据id删除
+                  method: "POST",
+                  timeout: 4000,
+                  success: function(response, opts) {
+                    var resObj = Ext.decode(response.responseText);
+                    if (resObj.success) {
+                      var store = Ext.getCmp("qzhCbfJtcyGridId").getStore();
+                      store.load();
+                      Ext.Msg.alert("提示", "删除成功！");
+                    } else {
+                      Ext.Msg.alert("提示", "删除失败！");
+                    }
+                  }
+                });
+              }
+            });
+          } else {
+            Ext.MessageBox.alert("提示", "请在下方选择承包合同！");
+          }
         }
       },
       "qzhCbfJtcyWindow button[ref=save]": {

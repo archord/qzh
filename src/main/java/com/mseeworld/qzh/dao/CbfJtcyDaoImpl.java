@@ -40,4 +40,11 @@ public class CbfJtcyDaoImpl extends BaseHibernateDaoImpl<CbfJtcy> implements Cbf
 
     return q.list();
   }
+
+  public void deleteByIds(final String ids) {
+
+    String sql = "delete from cbf_jtcy where id in(" + ids + ")";
+    Session session = getCurrentSession();
+    session.createSQLQuery(sql).executeUpdate();
+  }
 }

@@ -36,5 +36,11 @@ public class LzhhtDaoImpl extends BaseHibernateDaoImpl<Lzht> implements LzhhtDao
     return q.list();
   }
   
+  public void deleteByIds(final String ids) {
+
+    String sql = "delete from lzht where id in(" + ids + ")";
+    Session session = getCurrentSession();
+    session.createSQLQuery(sql).executeUpdate();
+  }
 
 }

@@ -21,7 +21,7 @@
  		{name:"cbfdcjs",type:"string",srotable:false},
  		{name:"gsjs",type:"string",srotable:false},
  		{name:"gsjsr",type:"string",srotable:false},
- 		{name:"gsshrq",type:"date",srotable:false},
+ 		{name:"gsshrq",type:"string",srotable:false}, //date
  		{name:"gsshr",type:"string",srotable:false}
  	]
  });

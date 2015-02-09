@@ -14,7 +14,7 @@
  		{name:"fbfdz",type:"string",srotable:false},
  		{name:"yzbm",type:"string",srotable:false},
  		{name:"fbfdcy",type:"string",srotable:false},
- 		{name:"fbfdcrq",type:"date",srotable:false},
+ 		{name:"fbfdcrq",type:"string",srotable:false},
  		{name:"fbfdcjs",type:"string",srotable:false}
  	]
  });

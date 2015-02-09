@@ -1,6 +1,6 @@
 Ext.define("core.fbf.view.FbfForm", {
   extend: "Ext.form.Panel",
-  alias: "widget.fbfForm",
+  alias: "widget.fbfform",
   align: "left",
   frame: true,
   defaults: {

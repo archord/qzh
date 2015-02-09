@@ -4,6 +4,7 @@
 Ext.define("core.fbf.view.FbfLayout", {
   extend: 'Ext.panel.Panel',
   alias: 'widget.fbfLayout',
+  id: "fbfLayoutId",
   title: "<center height=40>发包方信息管理</center>",
   closable: true,
   defaults: {
@@ -17,6 +18,7 @@ Ext.define("core.fbf.view.FbfLayout", {
       region: 'west',
       // iconCls:'goodtype_tree',
       xtype: "orgTreeFbf",
+      id: "orgTreeFbfId",
       store: Ext.create('core.fbf.store.OrgStore'),
       margins: '5 2 5 5',
       width: 150
@@ -27,23 +29,13 @@ Ext.define("core.fbf.view.FbfLayout", {
       header: false,
       layout: "border",
       items: [{
-          //xtype : 'panel',
-          region: 'north',
-          // iconCls:'goodtype_tree',
-          margins: '5 0 5 0',
-          height: 270,
-          title: '发包方详细信息',
-          collapsible: true, // 可以被折叠
-          xtype: "fbfForm"
-
-        }, {
           // iconCls:'good_table',
           collapsible: true, // 可以被折叠
           //xtype : 'panel',
           region: 'center',
           height: 300,
           margins: '5 0 5 0',
-          xtype: "fbfGrid",
+          xtype: "fbfgrid",
           bbar: [],
 //          store: Ext.create("core.fbf.store.FbfStore", {}),
           title: "发包方列表"

@@ -95,6 +95,7 @@ Ext.define("core.cbf.view.CbfJtcyForm", {
       xtype: "textfield",
       fieldLabel: "与户主关系",
       name: "yhzgx",
+      maxLength: 2,
       allowBlank: false,
       readOnly: false
     }, {

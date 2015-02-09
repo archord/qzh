@@ -56,7 +56,7 @@ public class FbfController {
 
     StringBuilder rstStr = new StringBuilder("");
     rstStr.append("{totalCount:");
-    rstStr.append(fbfs.get(0));
+    rstStr.append(fbfs.size());
     rstStr.append(",rows:[");
     int i = 0;
     for (Fbf fbf : fbfs) {
@@ -92,11 +92,15 @@ public class FbfController {
   }
 
   /**
-   * 删除people/remove_people.do
+   * 删除
    */
   @RequestMapping(value = "/remove_fbf", method = RequestMethod.POST)
-  public void deletePeople(HttpServletRequest request, PrintWriter writer) {
+  public void delete(HttpServletRequest request, PrintWriter writer) {
 
+//		String[] ids = request.getParameter("ids").replaceAll("\"", "").split(",");
+    String ids = request.getParameter("ids");
+    fbfDao.deleteByIds(ids);
+    writer.write("{success:true,msg:'删除成功!'}");
   }
 
   /**

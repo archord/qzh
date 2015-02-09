@@ -74,18 +74,14 @@ public class CbjyqzQzhfController {
   }
 
   /**
-   * 删除people/remove_people.do
+   * 删除
    */
   @RequestMapping(value = "/remove_cbjyqzQzhf", method = RequestMethod.POST)
   public void delete(HttpServletRequest request, PrintWriter writer) {
-//		
-//		String[] ids = request.getParameter("ids").replaceAll("\"", "").split(",");
-//		
-//		if(peopleService.remove(ids)){
-//			writer.write("{success:true,msg:'删除成功!'}");
-//		}else{
-//			writer.write("{success:false,msg:'删除失败!'}");
-//		}
+
+    String ids = request.getParameter("ids");
+    cbjyqzQzhfDao.deleteByIds(ids);
+    writer.write("{success:true,msg:'删除成功!'}");
   }
 
 

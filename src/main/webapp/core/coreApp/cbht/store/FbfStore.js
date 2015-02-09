@@ -8,7 +8,7 @@
 	//autoSync:true,//与服务器同步
 	proxy:{
 		type:"ajax",
-		url:"./people/listall_people.do",
+		url:"./fbf/listall_fbf.do",
 		reader:{
 			type:"json",
 			root:"rows",

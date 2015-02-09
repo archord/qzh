@@ -126,8 +126,11 @@ public abstract class BaseHibernateDaoImpl<T extends Serializable> implements Ba
     this.delete(this.getById(entityId));
   }
   
-  
   public T getByName(String name){
-    return null;
+    throw new UnsupportedOperationException("Not supported yet.");
+  }
+  
+  public void deleteByIds(final String ids){
+    throw new UnsupportedOperationException("Not supported yet.");
   }
 }

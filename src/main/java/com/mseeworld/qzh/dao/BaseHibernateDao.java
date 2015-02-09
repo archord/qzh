@@ -25,6 +25,8 @@ public interface BaseHibernateDao<T> {
   public void delete(final T entity);
 
   public void deleteById(final Long entityId);
+
+  public void deleteByIds(final String ids);
   
   public T getByName(String name);
 }

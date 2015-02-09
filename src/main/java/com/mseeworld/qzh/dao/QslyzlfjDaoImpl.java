@@ -19,7 +19,7 @@ public class QslyzlfjDaoImpl extends BaseHibernateDaoImpl<Qslyzlfj> implements Q
     
     Session session = getCurrentSession();
     String sql = "select * "
-            + "from cbf "
+            + "from qslyzlfj "
             + "where org_id= " + orgId + " "
             + "order by id";
     Query q = session.createSQLQuery(sql).addEntity(Qslyzlfj.class);
@@ -30,9 +30,16 @@ public class QslyzlfjDaoImpl extends BaseHibernateDaoImpl<Qslyzlfj> implements Q
   public List<Qslyzlfj> getFirstNOfAll(int n){
     
     Session session = getCurrentSession();
-    String sql = "select * from cbdkxx order by id limit "+ n;
+    String sql = "select * from qslyzlfj order by id limit "+ n;
     Query q = session.createSQLQuery(sql).addEntity(Qslyzlfj.class);
 
     return q.list();
+  }
+
+  public void deleteByIds(final String ids) {
+
+    String sql = "delete from qslyzlfj where id in(" + ids + ")";
+    Session session = getCurrentSession();
+    session.createSQLQuery(sql).executeUpdate();
   }
 }
