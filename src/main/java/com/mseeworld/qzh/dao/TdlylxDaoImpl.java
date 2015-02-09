@@ -23,4 +23,18 @@ public class TdlylxDaoImpl extends BaseHibernateDaoImpl<Tdlylx> implements Tdlyl
 
     return q.list();
   }
+  
+  public Tdlylx getByName(String name){
+    
+
+    Session session = getCurrentSession();
+    String sql = "select * from tdlylx where lbmc='" + name.trim() + "'";
+    Query q = session.createSQLQuery(sql).addEntity(Tdlylx.class);
+
+    if (q.list().size() > 0) {
+      return (Tdlylx) q.list().get(0);
+    } else {
+      return null;
+    }
+  }
 }

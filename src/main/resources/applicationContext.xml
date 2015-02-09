@@ -91,6 +91,8 @@
   <bean id="syqsxDao" class="com.mseeworld.qzh.dao.SyqsxDaoImpl"></bean>
   <bean id="cbjyqqdfsdmbDao" class="com.mseeworld.qzh.dao.CbjyqqdfsdmbDaoImpl"></bean>
   <bean id="cbfJtcyDao" class="com.mseeworld.qzh.dao.CbfJtcyDaoImpl"></bean>
+  <bean id="cbdkxxDaoDao" class="com.mseeworld.qzh.dao.CbdkxxDaoImpl"></bean>
+  <bean id="qslyzlfjDao" class="com.mseeworld.qzh.dao.QslyzlfjDaoImpl"></bean>
   
   <!--combobox-->
   <bean id="cbflxdmbDao" class="com.mseeworld.qzh.dao.CbflxdmbDaoImpl"></bean>

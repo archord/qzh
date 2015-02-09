@@ -33,7 +33,9 @@ public class DklbdmbDaoImpl  extends BaseHibernateDaoImpl<Dklbdmb> implements Dk
     if (q.list().size() > 0) {
       return (Dklbdmb) q.list().get(0);
     } else {
-      return null;
+      Dklbdmb obj = new Dklbdmb();
+      obj.setDm("99");
+      return obj;
     }
   }
 }

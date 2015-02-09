@@ -33,7 +33,9 @@ public class CybzdmbDaoImpl  extends BaseHibernateDaoImpl<Cybzdmb> implements Cy
     if (q.list().size() > 0) {
       return (Cybzdmb) q.list().get(0);
     } else {
-      return null;
+      Cybzdmb obj = new Cybzdmb();
+      obj.setDm('9');
+      return obj;
     }
   }
 }

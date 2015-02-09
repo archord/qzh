@@ -33,7 +33,9 @@ public class ZjlxdmbDaoImpl  extends BaseHibernateDaoImpl<Zjlxdmb> implements Zj
     if (q.list().size() > 0) {
       return (Zjlxdmb) q.list().get(0);
     } else {
-      return null;
+      Zjlxdmb obj =  new Zjlxdmb();
+      obj.setDm('9');
+      return obj;
     }
   }
 }

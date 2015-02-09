@@ -33,7 +33,9 @@ public class CbjyqqdfsdmbDaoImpl  extends BaseHibernateDaoImpl<Cbjyqqdfsdmb> imp
     if (q.list().size() > 0) {
       return (Cbjyqqdfsdmb) q.list().get(0);
     } else {
-      return null;
+      Cbjyqqdfsdmb obj =  new Cbjyqqdfsdmb();
+      obj.setDm("900");
+      return obj;
     }
   }
 }
