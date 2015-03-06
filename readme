@@ -1,0 +1,8 @@
+1，数据库
+使用postgresql数据库存储数据，表结构文件及测试数据在qzh/src/main/db/qzh.sql中。
+2,项目属性
+项目为maven项目，netbeans，eclipse，myeclipse可直接打开，在编译时，IDE会自动下载对应的依赖库。
+3，web系统数据库配置文件
+配置文件为qzh/src/main/resources/database.properties，运行之前要将配置文件中的数据库地址，用户名，密码等信息改为本机上数据库对应的信息。
+4,项目web服务器配置
+在项目属性中将web服务器改为本机已配置的web服务器。

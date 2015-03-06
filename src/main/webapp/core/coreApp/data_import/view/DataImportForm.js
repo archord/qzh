@@ -25,7 +25,7 @@ Ext.define("core.data_import.view.DataImportForm", {
           fld.setRawValue(newValue);
         }
       }
-    },{
+    }, {
       xtype: "button",
       width: 80,
       text: "上传",
@@ -44,6 +44,11 @@ Ext.define("core.data_import.view.DataImportForm", {
           });
         }
       }
-      
+    },
+    {
+      xtype: 'button',
+      text: '下载数据导入模板',
+      href: './data/import_template.xlsx',
+      hrefTarget: '_blank' // used in 4.1
     }]
 });
