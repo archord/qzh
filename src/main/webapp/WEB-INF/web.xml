@@ -24,25 +24,16 @@
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
   
-    <servlet>
-        <description></description>
-        <display-name>JsonServlet</display-name>
-        <servlet-name>JsonServlet</servlet-name>
-        <servlet-class>com.mseeworld.qzh.servlet.JsonServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>JsonServlet</servlet-name>
-        <url-pattern>/jsonServlet</url-pattern>
-    </servlet-mapping>
-  
-    <servlet>
-        <servlet-name>ProxyServlet</servlet-name>
-        <servlet-class>com.mseeworld.qzh.servlet.ProxyServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ProxyServlet</servlet-name>
-        <url-pattern>/proxy</url-pattern>
-    </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>JsonServlet</display-name>
+    <servlet-name>JsonServlet</servlet-name>
+    <servlet-class>com.mseeworld.qzh.servlet.JsonServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JsonServlet</servlet-name>
+    <url-pattern>/jsonServlet</url-pattern>
+  </servlet-mapping>
   
   
   <filter>
