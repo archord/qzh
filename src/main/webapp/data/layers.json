@@ -1,4 +1,4 @@
-[ 
+[
 {"featureType":"tuowankekalakale_CopyRaster", "name":"A","url":"http://localhost:8081/geoserver/cite/wms","params":{"layers":"cite:tuowankekalakale_CopyRaster","transparent":false},"options":{"isBaseLayer":true,"buffer":0,"visibility":true,"projection":"EPSG:2351","maxExtent":{"left":437196.1795211583,"bottom":4534065.922360078,"right":441864.1795211583,"top":4537355.922360078}}},
 {"featureType":"tuocun_cunjie", "name":"a0","url":"http://localhost:8081/geoserver/cite/wms","params":{"layers":"cite:tuocun_cunjie","transparent":true},"options":{"isBaseLayer":false,"buffer":0,"visibility":true,"projection":"EPSG:2351","maxExtent":{"left":437401.6021700017,"bottom":4534298.489206,"right":441723.6605929993,"top":4537002.018717}}},
 {"featureType":"tuocun1", "name":"a1","url":"http://localhost:8081/geoserver/cite/wms","params":{"layers":"cite:tuocun1","transparent":true},"options":{"isBaseLayer":false,"buffer":0,"visibility":true,"projection":"EPSG:2351","maxExtent":{"left":437533.1319999993,"bottom":4535782.89,"right":439375.4415249899,"top":4536783.197}}},
