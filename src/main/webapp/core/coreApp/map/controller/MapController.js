@@ -293,6 +293,7 @@ Ext.define("core.map.controller.MapController", {
                     
                     for (var i = 0; i < id2map.length; i++) {
                         if (record.get('id') == id2map[i].id) {
+                            curShp = id2map[i].tag;
                             mapPanel.map.addLayer(findLayerByName(id2map[i].base));
                             mapPanel.map.addLayer(findLayerByName(id2map[i].shp));
                             polygonLayer = findLayerVectorByName(id2map[i].shp);
