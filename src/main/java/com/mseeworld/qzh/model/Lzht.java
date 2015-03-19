@@ -95,7 +95,7 @@ public class Lzht implements java.io.Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "lzht_seq")
-  @SequenceGenerator(name = "lzht_seq", sequenceName = "lzht_id_seq")
+  @SequenceGenerator(name = "lzht_seq", sequenceName = "lzht_id_seq",allocationSize=1)
   @Column(name = "id", unique = true, nullable = false)
   public long getId() {
     return this.id;

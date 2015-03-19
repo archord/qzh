@@ -69,7 +69,7 @@ public class Dk  implements java.io.Serializable {
     
      @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dk_seq")
-  @SequenceGenerator(name = "dk_seq", sequenceName = "dk_id_seq")
+  @SequenceGenerator(name = "dk_seq", sequenceName = "dk_id_seq",allocationSize=1)
   @Column(name = "id", unique = true, nullable = false)
     public long getId() {
         return this.id;

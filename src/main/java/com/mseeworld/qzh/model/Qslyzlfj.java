@@ -49,7 +49,7 @@ public class Qslyzlfj  implements java.io.Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "qslyzlfj_seq")
-  @SequenceGenerator(name = "qslyzlfj_seq", sequenceName = "qslyzlfj_id_seq")
+  @SequenceGenerator(name = "qslyzlfj_seq", sequenceName = "qslyzlfj_id_seq",allocationSize=1)
   @Column(name = "id", unique = true, nullable = false)
     public long getId() {
         return this.id;

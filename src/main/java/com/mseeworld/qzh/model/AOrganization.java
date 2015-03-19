@@ -61,7 +61,7 @@ public class AOrganization implements java.io.Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "org_seq")
-  @SequenceGenerator(name = "org_seq", sequenceName = "org_id_seq")
+  @SequenceGenerator(name = "org_seq", sequenceName = "org_id_seq",allocationSize=1)
   @Column(name = "org_id", unique = true, nullable = false)
   public long getOrgId() {
     return this.orgId;

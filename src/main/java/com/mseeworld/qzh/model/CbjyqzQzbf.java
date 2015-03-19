@@ -53,7 +53,7 @@ public class CbjyqzQzbf  implements java.io.Serializable {
 
      @Id 
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cbjyqz_qzbf_seq")
-  @SequenceGenerator(name = "cbjyqz_qzbf_seq", sequenceName = "cbjyqz_qzbf_id_seq")
+  @SequenceGenerator(name = "cbjyqz_qzbf_seq", sequenceName = "cbjyqz_qzbf_id_seq",allocationSize=1)
     @Column(name="id", unique=true, nullable=false)
     public long getId() {
         return this.id;
