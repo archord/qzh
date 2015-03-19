@@ -57,7 +57,7 @@ public class Fbf implements java.io.Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fbf_seq")
-  @SequenceGenerator(name = "fbf_seq", sequenceName = "fbf_id_seq")
+  @SequenceGenerator(name = "fbf_seq", sequenceName = "fbf_id_seq",allocationSize=1)
   @Column(name = "id", unique = true, nullable = false)
   public long getId() {
     return this.id;

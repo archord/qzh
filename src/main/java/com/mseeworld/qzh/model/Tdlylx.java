@@ -30,7 +30,7 @@ public class Tdlylx implements java.io.Serializable {
    */
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tdlylx_seq")
-  @SequenceGenerator(name = "tdlylx_seq", sequenceName = "tdlylx_id_seq")
+  @SequenceGenerator(name = "tdlylx_seq", sequenceName = "tdlylx_id_seq",allocationSize=1)
   @Column(name = "id", unique = true, nullable = false)
   public int getId() {
     return id;

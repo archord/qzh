@@ -80,7 +80,7 @@ Ext.define("core.cbht.view.CbhtForm", {
 //            component.setValue("TEXT");
             var cbhtWin;
             if (!cbhtWin) {
-              cbhtWin = Ext.create("core.cbht.view.FbfWindow");
+              cbhtWin = Ext.create("core.cbht.view.FbfWindow_cbht");
             }
             if (cbhtWin.isVisible()) {
               cbhtWin.hide();
@@ -103,7 +103,7 @@ Ext.define("core.cbht.view.CbhtForm", {
 //            component.setValue("TEXT");
             var cbhtWin;
             if (!cbhtWin) {
-              cbhtWin = Ext.create("core.cbht.view.CbfWindow");
+              cbhtWin = Ext.create("core.cbht.view.CbfWindow_cbht");
             }
             if (cbhtWin.isVisible()) {
               cbhtWin.hide();
