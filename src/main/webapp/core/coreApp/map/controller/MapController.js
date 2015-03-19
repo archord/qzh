@@ -15,6 +15,7 @@ var hilightLayer;
 var layerArr = [];
 var layerVectorArr = [];
 var selectControl;
+var polygonLayer;
 
 var id2map = [
     {"id": 350, "base": "A", "shp": "a0", tag: "tuocun0"},
@@ -110,7 +111,14 @@ function loadVectorLayers(filepath)
                         })
                     }),
                     strategies: [new OpenLayers.Strategy.Fixed()],
-                    styleMap: vector_style_map
+                    styleMap: vector_style_map,
+                    eventListeners:{
+                        featuresadded: function(event){
+//                             console.log(this.getDataExtent());
+                             mapPanel = Ext.getCmp("mapPanelId");
+                             mapPanel.map.zoomToExtent(this.getDataExtent());
+                        }
+                    }
                 }
                 );
                 layerVectorArr.push(layer);
@@ -293,11 +301,14 @@ Ext.define("core.map.controller.MapController", {
                     
                     for (var i = 0; i < id2map.length; i++) {
                         if (record.get('id') == id2map[i].id) {
+                           
                             curShp = id2map[i].tag;
                             mapPanel.map.addLayer(findLayerByName(id2map[i].base));
                             mapPanel.map.addLayer(findLayerByName(id2map[i].shp));
                             polygonLayer = findLayerVectorByName(id2map[i].shp);
+                            
                             mapPanel.map.addLayer(polygonLayer);
+                            
 
                             if (selectControl) {
                                 mapPanel.map.removeControl(selectControl);
