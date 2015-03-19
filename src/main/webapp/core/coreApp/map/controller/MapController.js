@@ -1,4 +1,5 @@
 Ext.require([
+    'GeoExt.panel.Map',
     'GeoExt.data.MapfishPrintProvider',
     'GeoExt.panel.PrintMap'
 ]);
@@ -6,10 +7,14 @@ Ext.require([
 
 OpenLayers.ProxyHost = "./proxy?targetURL=";
 
-var layerArr;
 var curShp;
 var retlayer;
 var mapPanel;
+var searchPanel;
+var hilightLayer;
+var layerArr = [];
+var layerVectorArr = [];
+var selectControl;
 
 var id2map = [
     {"id": 350, "base": "A", "shp": "a0", tag: "tuocun0"},
@@ -29,6 +34,95 @@ var id2map = [
 ];
 
 
+var vector_style = new OpenLayers.Style({
+    'fillOpacity': .4,
+    'strokeColor': '#aaee77',
+    'strokeWidth': 3,
+    'pointRadius': 8
+});
+var vector_style_select = new OpenLayers.Style({
+    'fillOpacity': .9,
+    'strokeColor': '#aaee77',
+    'strokeWidth': 3,
+    'pointRadius': 8
+});
+var vector_style_map = new OpenLayers.StyleMap({
+    'default': vector_style,
+    'select': vector_style_select
+});
+
+layerArr = new Array();
+function loadLayers(filepath)
+{
+
+    OpenLayers.Request.GET({
+        url: "jsonServlet?filepath=" + filepath,
+        params: {
+            num: 100
+        },
+        success: function (response) {
+            layerArr = new Array();
+            var format = new OpenLayers.Format.JSON();
+            var layers = format.read(response.responseText);
+            for (var i = 0; i < layers.length; i++) {
+                layerArr[i] = new OpenLayers.Layer.WMS(layers[i].name, layers[i].url,
+                        {
+                            layers: layers[i].params.layers,
+                            transparent: layers[i].params.transparent
+                        }, {
+                    isBaseLayer: layers[i].options.isBaseLayer,
+                    buffer: layers[i].options.buffer,
+                    visibility: layers[i].options.visibility,
+                    projection: layers[i].options.projection,
+                    maxExtent: new OpenLayers.Bounds(
+                            layers[i].options.maxExtent.left, layers[i].options.maxExtent.bottom,
+                            layers[i].options.maxExtent.right, layers[i].options.maxExtent.top
+                            )
+                });
+            }
+        },
+        failure: function (response) {
+            alert("Sorry, there was an error requesting data !!!");
+        }
+    });
+}
+
+layerVectorArr = new Array();
+function loadVectorLayers(filepath)
+{
+    OpenLayers.Request.GET({
+        url: "jsonServlet?filepath=" + filepath,
+        params: {
+            num: 1000
+        },
+        success: function (response) {
+            var format = new OpenLayers.Format.JSON();
+
+            var layers = format.read(response.responseText);
+            for (var i = 0; i < layers.length; i++) {
+                var layer;
+                layer = new OpenLayers.Layer.Vector(layers[i].name, {
+                    projection: new OpenLayers.Projection('EPSG:2351'),
+                    protocol: new OpenLayers.Protocol.HTTP({
+                        url: layers[i].url,
+                        format: new OpenLayers.Format.GML({
+                            extractAttributes: true
+                        })
+                    }),
+                    strategies: [new OpenLayers.Strategy.Fixed()],
+                    styleMap: vector_style_map
+                }
+                );
+                layerVectorArr.push(layer);
+            }
+            // =============== notify(): ============== 
+        },
+        failure: function (response) {
+            alert("Sorry, there was an error requesting data !!!");
+        }
+    });
+}
+
 function findLayerByName(name)
 {
     for (var i = 0; i < layerArr.length; i++)
@@ -41,8 +135,21 @@ function findLayerByName(name)
     }
 }
 
+function findLayerVectorByName(name)
+{
+    for (var i = 0; i < layerVectorArr.length; i++)
+    {
+        if (name == layerVectorArr[i].name)
+        {
+            return layerVectorArr[i];//retlayer; 
+            break;
+        }
+    }
+}
 
-var hilightLayer;
+
+
+
 
 var txtCBFMC = Ext.create('Ext.form.field.Text', {
     xtype: 'textfield',
@@ -57,6 +164,7 @@ var btnSearch = Ext.create('Ext.button.Button', {
     enableToggle: true,
     handler: function () {
         
+        mapPanel = Ext.getCmp("mapPanelId");
 //        if (hilightLayer)
 //        {
 //            mapPanel.map.removeLayer(hilightLayer);
@@ -90,20 +198,6 @@ var printProvider = Ext.create('GeoExt.data.MapfishPrintProvider', {
     }
 });
 
-//alert(printProvider);
-//var printExtent = Ext.create('GeoExt.plugins.PrintExtent', {
-//    printProvider: Ext.create('GeoExt.data.MapfishPrintProvider', {
-//    id: "printProvider",
-//    method: "GET", //"POST", //recommended for production use
-//    capabilities: printCapabilities, // provide url instead for lazy loading
-//    customParams: {
-//        mapTitle: "当前视图",
-//        comment: ""
-//    }
-//})
-//});
-
-
 var btnScreenshot = Ext.create('Ext.button.Button', {
     text: '保存截图',
     bodyPadding: 10,
@@ -119,22 +213,71 @@ var btnScreenshot = Ext.create('Ext.button.Button', {
     }
 });
 
+function featureSelected(feature)
+{
+    var content =
+            "<table border='1' cellpadding='5' cellspacing='0' width='300' height='200'>"
+            + "<tr>"
+            + "<td>mingzi</td><td>" + feature.attributes.mingzi + "</td>"
+            + "</tr>"
+            + "<tr>"
+            + "<td>DKBM</td><td>" + feature.attributes.DKBM + "</td>"
+            + "</tr>"
+            + "<tr>"
+            + "<td>SCMJ</td><td>" + feature.attributes.SCMJ + "</td>"
+            + "</tr>"
+            + "<tr>"
+            + "<td>CBFMC</td><td>" + feature.attributes.CBFMC + "</td>"
+            + "</tr>"
+            + "</table>";
 
+    popupOpts = Ext.apply({
+        title: '详情',
+        location: feature,
+//                                        width: 200,
+        html: content,
+        maximizable: true,
+        collapsible: true,
+        anchorPosition: 'auto',
+        alwaysOnTop: true
+    }, null);
+    var popup = Ext.create('GeoExt.window.Popup', popupOpts);
+    popup.on({
+        close: function () {
+            if (OpenLayers.Util.indexOf(feature.layer.selectedFeatures,
+                    feature) > -1) {
+                selectControl.unselect(feature);
+            }
+        }
+    });
+    feature.popup = popup;
+    popup.show();
 
+}
+
+function featureUnSelected(feature) {
+//  mapPanel.map.removePopup(feature.popup);
+    feature.popup.destroy();
+    feature.popup = null;
+}
 
 
 Ext.define("core.map.controller.MapController", {
     extend: "Ext.app.Controller",
     init: function () {
-        var filepath = '/data/layers.json';
-        loadMapParameter(filepath);
+
+        loadLayers('/data/layers.json');
+        loadVectorLayers('/data/layers_vector.json');
+
         mapPanel = Ext.getCmp("mapPanelId");
-        searchPanel = Ext.getCmp("searchPanel");
-        searchPanel.items.add(txtCBFMC);
-        searchPanel.items.add(btnSearch);
-        searchPanel.items.add(btnScreenshot);
-        
-//        mapPanel.plugins[0].addPage();
+        searchPanel = Ext.getCmp("searchPanel");    
+
+        if (searchPanel.items.length == 0)
+        {
+            searchPanel.items.add(txtCBFMC);
+            searchPanel.items.add(btnSearch);
+            searchPanel.items.add(btnScreenshot);
+        }
 
         var self = this;
         this.control({
@@ -144,59 +287,40 @@ Ext.define("core.map.controller.MapController", {
             },
             "orgTreeMap": {
                 itemclick: function (tree, record, item, index, e, eOpts) {
-//                    console.log(record.get('id'));
-//                    console.log(record.get('orgName'));
-//                    console.log(item);
-
                     while (mapPanel.map.layers.length > 0) {
                         mapPanel.map.removeLayer(mapPanel.map.layers[0]);
                     }
+                    
                     for (var i = 0; i < id2map.length; i++) {
                         if (record.get('id') == id2map[i].id) {
                             mapPanel.map.addLayer(findLayerByName(id2map[i].base));
                             mapPanel.map.addLayer(findLayerByName(id2map[i].shp));
-                            curShp = id2map[i].tag;
+                            polygonLayer = findLayerVectorByName(id2map[i].shp);
+                            mapPanel.map.addLayer(polygonLayer);
+
+                            if (selectControl) {
+                                mapPanel.map.removeControl(selectControl);
+                            }
+
+                            selectControl = new OpenLayers.Control.SelectFeature(polygonLayer, {
+                                toggle: true,
+                                onSelect: featureSelected,
+                                onUnselect: featureUnSelected
+                            });
+                            mapPanel.map.addControl(selectControl);
+                            selectControl.activate();
+
                         }
                     }
-                    
-                    
+
+
+
+
+
                 }
             }
         });
 
-        function loadMapParameter(nodeId) {
-            var filepath = '/data/layers.json';
-            OpenLayers.Request.GET({
-                url: "jsonServlet?filepath=" + filepath,
-                params: {
-                    num: 100
-                },
-                success: function (response) {
-                    layerArr = new Array();
-                    var format = new OpenLayers.Format.JSON();
-                    var layers = format.read(response.responseText);
-                    for (var i = 0; i < layers.length; i++) {
-                        layerArr[i] = new OpenLayers.Layer.WMS(layers[i].name, layers[i].url,
-                                {
-                                    layers: layers[i].params.layers,
-                                    transparent: layers[i].params.transparent
-                                }, {
-                            isBaseLayer: layers[i].options.isBaseLayer,
-                            buffer: layers[i].options.buffer,
-                            visibility: layers[i].options.visibility,
-                            projection: layers[i].options.projection,
-                            maxExtent: new OpenLayers.Bounds(
-                                    layers[i].options.maxExtent.left, layers[i].options.maxExtent.bottom,
-                                    layers[i].options.maxExtent.right, layers[i].options.maxExtent.top
-                                    )
-                        });
-                    }
-                },
-                failure: function (response) {
-                    alert("Sorry, there was an error requesting data !!!");
-                }
-            });
-        }
     },
     views: [
         "core.map.view.MapLayout",

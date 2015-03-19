@@ -14,6 +14,18 @@ Ext.require([
     'GeoExt.plugins.PrintExtent'
 ]);
 
+var options = {
+    allOverlays: false,
+    controls: [new OpenLayers.Control.Navigation(),
+        new OpenLayers.Control.PanZoomBar(),
+        //new OpenLayers.Control.NavToolbar(),
+        new OpenLayers.Control.Scale(),
+//                new OpenLayers.Control.Permalink()
+        new OpenLayers.Control.LayerSwitcher(),
+//                new OpenLayers.Control.Attribution()
+    ]
+};
+
 
 //var provider2 = Ext.create('GeoExt.data.MapfishPrintProvider', {
 //    method: "GET", //"POST", //recommended for production use
@@ -57,7 +69,7 @@ Ext.define("core.map.view.MapLayout", {
             border: true,
             region: "center",
             // we do not want all overlays, to try the OverlayLayerContainer
-            map: new OpenLayers.Map({allOverlays: false}),
+            map: new OpenLayers.Map("xx", options),
             //center: [146.1569825, -41.6109735],
             //zoom: 6,
 //            plugins: [printExtent],
