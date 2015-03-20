@@ -112,11 +112,11 @@ function loadVectorLayers(filepath)
                     }),
                     strategies: [new OpenLayers.Strategy.Fixed()],
                     styleMap: vector_style_map,
-                    eventListeners:{
-                        featuresadded: function(event){
+                    eventListeners: {
+                        featuresadded: function (event) {
 //                             console.log(this.getDataExtent());
-                             mapPanel = Ext.getCmp("mapPanelId");
-                             mapPanel.map.zoomToExtent(this.getDataExtent());
+                            mapPanel = Ext.getCmp("mapPanelId");
+                            mapPanel.map.zoomToExtent(this.getDataExtent());
                         }
                     }
                 }
@@ -171,12 +171,13 @@ var btnSearch = Ext.create('Ext.button.Button', {
     bodyPadding: 10,
     enableToggle: true,
     handler: function () {
-        
+
         mapPanel = Ext.getCmp("mapPanelId");
-//        if (hilightLayer)
-//        {
-//            mapPanel.map.removeLayer(hilightLayer);
-//        }
+        
+        if (hilightLayer)
+        {
+            mapPanel.map.removeLayer(hilightLayer);
+        }
         hilightLayer = new OpenLayers.Layer.Vector(curShp, {
             protocol: new OpenLayers.Protocol.WFS({
                 version: "1.0.0",
@@ -189,7 +190,14 @@ var btnSearch = Ext.create('Ext.button.Button', {
                 property: "cite:CBFMC",
                 value: "*" + txtCBFMC.value + "*"
             }),
-            strategies: [new OpenLayers.Strategy.Fixed()]
+            strategies: [new OpenLayers.Strategy.Fixed()],
+            eventListeners: {
+                featuresadded: function (event) {
+//                             console.log(this.getDataExtent());
+                    mapPanel = Ext.getCmp("mapPanelId");
+                    mapPanel.map.zoomToExtent(this.getDataExtent());
+                }
+            }
         });
         //alert(curShp);
         mapPanel.map.addLayer(hilightLayer);
@@ -278,7 +286,7 @@ Ext.define("core.map.controller.MapController", {
         loadVectorLayers('/data/layers_vector.json');
 
         mapPanel = Ext.getCmp("mapPanelId");
-        searchPanel = Ext.getCmp("searchPanel");    
+        searchPanel = Ext.getCmp("searchPanel");
 
         if (searchPanel.items.length == 0)
         {
@@ -298,17 +306,17 @@ Ext.define("core.map.controller.MapController", {
                     while (mapPanel.map.layers.length > 0) {
                         mapPanel.map.removeLayer(mapPanel.map.layers[0]);
                     }
-                    
+
                     for (var i = 0; i < id2map.length; i++) {
                         if (record.get('id') == id2map[i].id) {
-                           
+
                             curShp = id2map[i].tag;
                             mapPanel.map.addLayer(findLayerByName(id2map[i].base));
                             mapPanel.map.addLayer(findLayerByName(id2map[i].shp));
                             polygonLayer = findLayerVectorByName(id2map[i].shp);
-                            
+
                             mapPanel.map.addLayer(polygonLayer);
-                            
+
 
                             if (selectControl) {
                                 mapPanel.map.removeControl(selectControl);
