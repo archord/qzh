@@ -11,7 +11,9 @@ import java.util.List;
  *
  * @author xy
  */
-public interface CbjyqqdfsdmbDao  extends BaseHibernateDao<Cbjyqqdfsdmb>{
-  
-  public List<Cbjyqqdfsdmb> getAll ();
+public interface CbjyqqdfsdmbDao extends BaseHibernateDao<Cbjyqqdfsdmb> {
+
+  public List<Cbjyqqdfsdmb> getAll();
+
+  public Cbjyqqdfsdmb getByDm(String dm);
 }

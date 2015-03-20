@@ -74,6 +74,7 @@
   <tx:annotation-driven transaction-manager="transactionManager" />
   
   <bean id="modelParser" class="com.mseeworld.qzh.service.ModelParser"></bean>
+  <bean id="documentHandler" class="com.mseeworld.qzh.word.DocumentHandler"></bean>
 	
   <bean id="orgDao" class="com.mseeworld.qzh.dao.OrganizationDAOImpl"></bean>
   <bean id="orgService" class="com.mseeworld.qzh.service.OrganizationServiceImpl"></bean>

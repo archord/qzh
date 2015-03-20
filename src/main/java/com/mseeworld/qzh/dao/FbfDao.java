@@ -12,6 +12,8 @@ import java.util.List;
  * @author xy
  */
 public interface FbfDao extends BaseHibernateDao<Fbf> {
+  
+  public Fbf getByFbfbm(String fbfbm);
 
   public List<Fbf> getFbfsByOrgId(long orgId);
 

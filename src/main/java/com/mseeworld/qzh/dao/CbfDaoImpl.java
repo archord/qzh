@@ -15,6 +15,17 @@ import org.hibernate.Session;
  */
 public class CbfDaoImpl extends BaseHibernateDaoImpl<Cbf> implements CbfDao {
 
+  public Cbf getByCbfbm(String cbfbm) {
+
+    Session session = getCurrentSession();
+    String sql = "select * "
+            + "from cbf "
+            + "where cbfbm= '" + cbfbm.trim() + "' ";
+    Query q = session.createSQLQuery(sql).addEntity(Cbf.class);
+
+    return (Cbf) q.list().get(0);
+  }
+
   public List<Cbf> getCbfsByOrgId(long orgId) {
 
     Session session = getCurrentSession();

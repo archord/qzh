@@ -15,6 +15,25 @@ import org.hibernate.Session;
  */
 public class LzhhtDaoImpl extends BaseHibernateDaoImpl<Lzht> implements LzhhtDao{
   
+  public List<Lzht> getByYcbhtbm(String cbhtbm){
+    
+    Session session = getCurrentSession();
+    String sql = "select * from lzht where ycbhtbm='"+ cbhtbm.trim() +"' ";
+    Query q = session.createSQLQuery(sql).addEntity(Lzht.class);
+    return q.list();
+  }
+
+  public Lzht getByLzhtbm(String lzhtbm) {
+
+    Session session = getCurrentSession();
+    String sql = "select * "
+            + "from lzht "
+            + "where lzhtbm= '" + lzhtbm.trim() + "' ";
+    Query q = session.createSQLQuery(sql).addEntity(Lzht.class);
+
+    return (Lzht) q.list().get(0);
+  }
+  
   public List<Lzht> getFirstNOfAll(int limit){
     
     Session session = getCurrentSession();

@@ -44,7 +44,7 @@ public class ModelParser {
   private LzhhtDao lzhhtDao;
   private DkDao dkDao;
   private CbdkxxDao cbdkxxDao;
-  private QslyzlfjDao qslyzlfjDao;
+  private QslyzlfjDao qslyzlfjDao;  //权属来源
   private CbjyqzdjbDao cbjyqzdjbDao;
   private CbjyqzDao cbjyqzDao;
   private CbjyqzQzbfDao cbjyqzQzbfDao;

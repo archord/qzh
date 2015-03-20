@@ -13,10 +13,21 @@ import org.hibernate.Session;
  *
  * @author xy
  */
-public class CbjyqzdjbDaoImpl extends BaseHibernateDaoImpl<Cbjyqzdjb> implements CbjyqzdjbDao{
-  
-  public List<Cbjyqzdjb> getByOrgId(long orgId){
-    
+public class CbjyqzdjbDaoImpl extends BaseHibernateDaoImpl<Cbjyqzdjb> implements CbjyqzdjbDao {
+
+  public Cbjyqzdjb getByQzbm(String qzbm) {
+
+    Session session = getCurrentSession();
+    String sql = "select * "
+            + "from cbjyqzdjb "
+            + "where cbjyqzbm= '" + qzbm.trim() + "' ";
+    Query q = session.createSQLQuery(sql).addEntity(Cbjyqzdjb.class);
+
+    return (Cbjyqzdjb) q.list().get(0);
+  }
+
+  public List<Cbjyqzdjb> getByOrgId(long orgId) {
+
     Session session = getCurrentSession();
     String sql = "select * "
             + "from cbjyqzdjb "
@@ -26,12 +37,11 @@ public class CbjyqzdjbDaoImpl extends BaseHibernateDaoImpl<Cbjyqzdjb> implements
 
     return q.list();
   }
-  
-  
-  public List<Cbjyqzdjb> getFirstNOfAll(int n){
-    
+
+  public List<Cbjyqzdjb> getFirstNOfAll(int n) {
+
     Session session = getCurrentSession();
-    String sql = "select * from cbjyqzdjb order by id limit "+ n;
+    String sql = "select * from cbjyqzdjb order by id limit " + n;
     Query q = session.createSQLQuery(sql).addEntity(Cbjyqzdjb.class);
 
     return q.list();

@@ -14,6 +14,8 @@ import java.util.List;
  */
 public interface CbhtDao extends BaseHibernateDao<Cbht> {
   
+  public Cbht getByCbhtbm(String cbhtbm);
+  
   public Cbht getCbhtById(long id) ;
 
   public List<Cbht> getByOrgId(long orgId);

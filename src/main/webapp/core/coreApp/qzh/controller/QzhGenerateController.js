@@ -48,6 +48,18 @@ Ext.define("core.qzh.controller.QzhGenerateController", {
           lzhhtWin.show();
         }
       },
+      "qzhGenerateGrid button[ref=download]": {
+        click: function(btn) {
+          var cbhtTree = btn.up('qzhGenerateGrid');
+          var curSelNode = cbhtTree.getSelectionModel().getSelection();
+          if (curSelNode.length > 0) {//curSelNode[0].raw
+            var qzbm = curSelNode[0].raw.cbjyqzbm;
+            window.open("download/qz.do?qzbm="+qzbm, "_blank");
+          } else {
+            Ext.MessageBox.alert("提示", "请在下方选择权证！");
+          }
+        }
+      },
       "qzhGenerateGrid button[ref=edit]": {
         click: function(btn) {
           var lzhhtTree = btn.up('qzhGenerateGrid');
@@ -93,7 +105,7 @@ Ext.define("core.qzh.controller.QzhGenerateController", {
               }
             });
           } else {
-            Ext.MessageBox.alert("提示", "请在下方选择承包合同！");
+            Ext.MessageBox.alert("提示", "请在下方选择权证！");
           }
         }
       },

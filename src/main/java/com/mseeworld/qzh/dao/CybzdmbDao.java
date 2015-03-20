@@ -14,4 +14,6 @@ import java.util.List;
 public interface CybzdmbDao  extends BaseHibernateDao<Cybzdmb>{
   
   public List<Cybzdmb> getAll ();
+  
+  public Cybzdmb getByDm(char dm);
 }
