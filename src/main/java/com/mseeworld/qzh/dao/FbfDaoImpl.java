@@ -14,6 +14,17 @@ import org.hibernate.Session;
  * @author xy
  */
 public class FbfDaoImpl extends BaseHibernateDaoImpl<Fbf> implements FbfDao{
+
+  public Fbf getByFbfbm(String fbfbm) {
+
+    Session session = getCurrentSession();
+    String sql = "select * "
+            + "from fbf "
+            + "where fbfbm= '" + fbfbm.trim() + "' ";
+    Query q = session.createSQLQuery(sql).addEntity(Fbf.class);
+
+    return (Fbf) q.list().get(0);
+  }
   
   public List<Fbf> getFbfsByOrgId(long orgId){
     

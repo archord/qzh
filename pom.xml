@@ -26,10 +26,30 @@
 
 
 	<build>
-		<finalName>qzh-1.0-SNAPSHOT</finalName>
+	 <plugins>
+	  <plugin>
+	   <groupId>org.apache.maven.plugins</groupId>
+	   <artifactId>maven-compiler-plugin</artifactId>
+	   <version>2.3.2</version>
+	   <configuration>
+	    <source>1.7</source>
+	    <target>1.7</target>
+	   </configuration>
+	  </plugin>
+	 </plugins>
+	 <finalName>qzh-1.0-SNAPSHOT</finalName>
 	</build>
     
 	<dependencies>
+      
+      
+      <!--start word generate freemarker -->
+    <dependency>
+      <groupId>org.freemarker</groupId>
+      <artifactId>freemarker</artifactId>
+      <version>2.3.13</version>
+    </dependency>
+      <!--end word generate-->
       
       <!--start excel read-->
     <dependency>

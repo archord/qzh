@@ -12,6 +12,8 @@ import java.util.List;
  * @author xy
  */
 public interface CbdkxxDao extends BaseHibernateDao<Cbdkxx> {
+  
+  public Cbdkxx getByQzbm(String qzbm);
 
   public List<Cbdkxx> getCbdkxxsByOrgId(long orgId);
 

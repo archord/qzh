@@ -14,4 +14,6 @@ import java.util.List;
 public interface SfdmbDao  extends BaseHibernateDao<Sfdmb>{
   
   public List<Sfdmb> getAll ();
+  
+  public Sfdmb getByDm(char dm);
 }

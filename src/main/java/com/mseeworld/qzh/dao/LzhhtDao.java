@@ -12,6 +12,10 @@ import java.util.List;
  * @author xy
  */
 public interface LzhhtDao extends BaseHibernateDao<Lzht> {
+  
+  public List<Lzht> getByYcbhtbm(String cbhtbm);
+  
+  public Lzht getByLzhtbm(String lzhtbm);
 
   public List<Lzht> getByOrgId(int orgId, int limit);
 

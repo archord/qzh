@@ -15,6 +15,44 @@ import org.hibernate.Session;
  */
 public class DkDaoImpl extends BaseHibernateDaoImpl<Dk> implements DkDao {
 
+  public Dk getByQzbm(String dkbm) {
+
+    Session session = getCurrentSession();
+    String sql = "select * "
+            + "from dk "
+            + "where dkbm= '" + dkbm.trim() + "' ";
+    Query q = session.createSQLQuery(sql).addEntity(Dk.class);
+
+    return (Dk) q.list().get(0);
+  }
+
+  public List<Dk> getCbDksByCbjyqzbm(String qzbm) {
+
+    Session session = getCurrentSession();
+    String sql = "select * from dk where dkbm in ( select dkbm from cbdkxx where coalesce(lzhtbm, '') = '' and cbjyqzbm='" + qzbm.trim() + "')";
+    Query q = session.createSQLQuery(sql).addEntity(Dk.class);
+
+    return q.list();
+  }
+
+  public List<Dk> getLzDksByCbjyqzbm(String qzbm) {
+
+    Session session = getCurrentSession();
+    String sql = "select * from dk where dkbm in ( select dkbm from cbdkxx where coalesce(lzhtbm, '') != '' and cbjyqzbm='" + qzbm.trim() + "')";
+    Query q = session.createSQLQuery(sql).addEntity(Dk.class);
+
+    return q.list();
+  }
+
+  public Dk getLzDkByLzhtbm(String lzhtbm) {
+
+    Session session = getCurrentSession();
+    String sql = "select * from dk where dkbm in ( select dkbm from cbdkxx where lzhtbm='" + lzhtbm.trim() + "')";
+    Query q = session.createSQLQuery(sql).addEntity(Dk.class);
+
+    return (Dk)q.list().get(0);
+  }
+
   public List<Dk> getFirstNOfAll(int limit) {
 
     Session session = getCurrentSession();

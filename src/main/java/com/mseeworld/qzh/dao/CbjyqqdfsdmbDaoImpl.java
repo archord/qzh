@@ -13,10 +13,10 @@ import org.hibernate.Session;
  *
  * @author xy
  */
-public class CbjyqqdfsdmbDaoImpl  extends BaseHibernateDaoImpl<Cbjyqqdfsdmb> implements CbjyqqdfsdmbDao{
-  
+public class CbjyqqdfsdmbDaoImpl extends BaseHibernateDaoImpl<Cbjyqqdfsdmb> implements CbjyqqdfsdmbDao {
+
   public List<Cbjyqqdfsdmb> getAll() {
-    
+
     Session session = getCurrentSession();
     String sql = "select * from cbjyqqdfsdmb order by dm asc";
     Query q = session.createSQLQuery(sql).addEntity(Cbjyqqdfsdmb.class);
@@ -33,9 +33,20 @@ public class CbjyqqdfsdmbDaoImpl  extends BaseHibernateDaoImpl<Cbjyqqdfsdmb> imp
     if (q.list().size() > 0) {
       return (Cbjyqqdfsdmb) q.list().get(0);
     } else {
-      Cbjyqqdfsdmb obj =  new Cbjyqqdfsdmb();
+      Cbjyqqdfsdmb obj = new Cbjyqqdfsdmb();
       obj.setDm("900");
       return obj;
     }
+  }
+
+  public Cbjyqqdfsdmb getByDm(String dm) {
+
+    Session session = getCurrentSession();
+    String sql = "select * "
+            + "from cbjyqqdfsdmb "
+            + "where dm='" + dm.trim() + "'";
+    Query q = session.createSQLQuery(sql).addEntity(Cbjyqqdfsdmb.class);
+
+    return (Cbjyqqdfsdmb) q.list().get(0);
   }
 }

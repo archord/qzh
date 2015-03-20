@@ -14,6 +14,17 @@ import org.hibernate.Session;
  * @author xy
  */
 public class CbdkxxDaoImpl extends BaseHibernateDaoImpl<Cbdkxx> implements CbdkxxDao{
+
+  public Cbdkxx getByQzbm(String qzbm) {
+
+    Session session = getCurrentSession();
+    String sql = "select * "
+            + "from cbdkxx "
+            + "where cbjyqzbm= '" + qzbm.trim() + "' ";
+    Query q = session.createSQLQuery(sql).addEntity(Cbdkxx.class);
+
+    return (Cbdkxx) q.list().get(0);
+  }
   
   public List<Cbdkxx> getCbdkxxsByOrgId(long orgId){
     

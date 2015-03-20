@@ -36,4 +36,16 @@ public class SfdmbDaoImpl  extends BaseHibernateDaoImpl<Sfdmb> implements SfdmbD
       return null;
     }
   }
+  
+
+  public Sfdmb getByDm(char dm) {
+
+    Session session = getCurrentSession();
+    String sql = "select * "
+            + "from sfdmb "
+            + "where dm='" + dm + "'";
+    Query q = session.createSQLQuery(sql).addEntity(Sfdmb.class);
+
+    return (Sfdmb) q.list().get(0);
+  }
 }
