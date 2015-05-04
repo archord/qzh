@@ -60,6 +60,7 @@ Ext.define("core.map.view.MapLayout", {
             region: 'west',
             // iconCls:'goodtype_tree',
             xtype: "orgTreeMap",
+            activeItem: 3,
             store: Ext.create('core.map.store.OrgStore'),
             margins: '5 2 5 5',
             width: 150

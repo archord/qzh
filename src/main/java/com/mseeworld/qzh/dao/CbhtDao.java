@@ -20,7 +20,7 @@ public interface CbhtDao extends BaseHibernateDao<Cbht> {
 
   public List<Cbht> getByOrgId(long orgId);
 
-  public List<Cbht> getFirstNOfAll(int n);
+  public List<Cbht> getFirstNOfAll(int start, int size);
 
   public List<CbhtView> getFirstNOfCbhtView(int n);
 

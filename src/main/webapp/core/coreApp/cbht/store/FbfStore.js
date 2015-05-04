@@ -4,7 +4,7 @@
  Ext.define("core.cbht.store.FbfStore",{
  	extend:'Ext.data.Store',
 	model:'core.fbf.model.FbfModel',
-	pageSize:10,
+	pageSize:30,
 	//autoSync:true,//与服务器同步
 	proxy:{
 		type:"ajax",

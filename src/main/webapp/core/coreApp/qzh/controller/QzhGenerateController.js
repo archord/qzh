@@ -50,6 +50,21 @@ Ext.define("core.qzh.controller.QzhGenerateController", {
       },
       "qzhGenerateGrid button[ref=download]": {
         click: function(btn) {
+//          var mainView = btn.up("mainviewlayout").down("centerview");
+//          var maptab = btn.up("mainviewlayout").down("mapLayout");
+//          var orgTreeMap = btn.up("mainviewlayout").down("mapLayout").down("orgTreeMap");
+//          orgTreeMap.setActive
+//          console.log(orgTreeMap.items[0]);
+//          mainView.setActiveTab(maptab);
+//          
+//          var cbrxmid = Ext.getCmp("cbrxmid");
+//          console.log(cbrxmid);
+//          cbrxmid.setValue('阿里木·赛买提'); //curSelNode[0].raw.cbjyqzbm
+//          var searchdkbutton = Ext.getCmp("searchdkbutton");
+//          var downqzbutton = Ext.getCmp("downqzbutton");
+//          
+//          
+//          return;
           var cbhtTree = btn.up('qzhGenerateGrid');
           var curSelNode = cbhtTree.getSelectionModel().getSelection();
           if (curSelNode.length > 0) {//curSelNode[0].raw

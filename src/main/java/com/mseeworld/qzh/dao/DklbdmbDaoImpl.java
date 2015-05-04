@@ -5,6 +5,7 @@
 package com.mseeworld.qzh.dao;
 
 import com.mseeworld.qzh.model.Dklbdmb;
+import java.math.BigInteger;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -14,6 +15,19 @@ import org.hibernate.Session;
  * @author xy
  */
 public class DklbdmbDaoImpl  extends BaseHibernateDaoImpl<Dklbdmb> implements DklbdmbDao{
+
+  public Number count() {
+
+    Session session = getCurrentSession();
+    String sql = "select count(*) from dklbdmb ";
+    int tNum = 0;
+    Query q = session.createSQLQuery(sql);
+    if (!q.list().isEmpty()) {
+      BigInteger objId = (BigInteger) q.list().get(0);
+      tNum = objId.intValue();
+    }
+    return tNum;
+  }
   
   public List<Dklbdmb> getAll() {
     

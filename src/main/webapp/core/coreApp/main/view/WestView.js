@@ -91,6 +91,7 @@ Ext.define("core.main.view.WestView", {
                 leaf: true
               }, {
                 id: "map-manage",
+                alias: 'map-manage',
                 text: "地图信息查看",
                 leaf: true
               }

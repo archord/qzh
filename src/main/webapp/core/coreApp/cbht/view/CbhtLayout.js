@@ -35,7 +35,7 @@ Ext.define("core.cbht.view.CbhtLayout", {
           region: 'center',
           height: 200,
           xtype: "cbhtgrid",
-          bbar: [],
+          //bbar: [],
 //          store: Ext.create("core.cbht.store.FbfStore", {}),
           title: "承包合同列表"
 

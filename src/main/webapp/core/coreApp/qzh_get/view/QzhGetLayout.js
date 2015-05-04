@@ -35,7 +35,7 @@ Ext.define("core.qzh_get.view.QzhGetLayout", {
           region: 'center',
           height: 200,
           xtype: "qzhGetGrid",
-          bbar: [],
+          //bbar: [],
 //          store: Ext.create("core.qzh_get.store.FbfStore", {}),
           title: "权证领取记录"
 

@@ -7,7 +7,7 @@ Ext.define("core.main.controller.MainController", {
     /**显示登陆窗口*/
     var loginWin = Ext.create("core.main.view.LoginWindow");
     loginWin.show();
-    
+
     /**公用添加页面的方法*/
     /**
      * 动态加载controller并渲染它的主窗体
@@ -128,7 +128,7 @@ Ext.define("core.main.controller.MainController", {
               funController: "core.fbf.controller.FbfController",
               funViewName: "core.fbf.view.FbfLayout"
             });
-          }  else if (record.data["id"] === "cbf-manage") {
+          } else if (record.data["id"] === "cbf-manage") {
             self.addFunItem({
               mainView: mainView,
               funViewXtype: "cbfLayout",
@@ -177,35 +177,35 @@ Ext.define("core.main.controller.MainController", {
               funController: "core.qzh.controller.QzhGenerateController",
               funViewName: "core.qzh.view.QzhGenerateLayout"
             });
-          }else if (record.data["id"] === "qzh-get") {
+          } else if (record.data["id"] === "qzh-get") {
             self.addFunItem({
               mainView: mainView,
               funViewXtype: "qzhGetLayout",
               funController: "core.qzh_get.controller.QzhGetController",
               funViewName: "core.qzh_get.view.QzhGetLayout"
             });
-          }else if (record.data["id"] === "qzh-reissue") {
+          } else if (record.data["id"] === "qzh-reissue") {
             self.addFunItem({
               mainView: mainView,
               funViewXtype: "qzhReissueLayout",
               funController: "core.qzh_reissue.controller.QzhReissueController",
               funViewName: "core.qzh_reissue.view.QzhReissueLayout"
             });
-          }else if (record.data["id"] === "qzh-renew") {
+          } else if (record.data["id"] === "qzh-renew") {
             self.addFunItem({
               mainView: mainView,
               funViewXtype: "qzhRenewLayout",
               funController: "core.qzh_renew.controller.QzhRenewController",
               funViewName: "core.qzh_renew.view.QzhRenewLayout"
             });
-          }else if (record.data["id"] === "qzh-cancel") {
+          } else if (record.data["id"] === "qzh-cancel") {
             self.addFunItem({
               mainView: mainView,
               funViewXtype: "qzhCancelLayout",
               funController: "core.qzh_cancel.controller.QzhCancelController",
               funViewName: "core.qzh_cancel.view.QzhCancelLayout"
             });
-          }else if (record.data["id"] === "data-import") {
+          } else if (record.data["id"] === "data-import") {
             self.addFunItem({
               mainView: mainView,
               funViewXtype: "dataImportLayout",
@@ -227,14 +227,14 @@ Ext.define("core.main.controller.MainController", {
   store: [],
   model: [],
   onPanelRendered: function() {
-//    var mainView = this.getView("core.view.CenterView").create();
-//    alert(mainView);
-//    alert(mainView.id);
-//    this.addFunItem({
-//      mainView: mainView,
-//      funViewXtype: "orgLayout",
-//      funController: "core.controller.OrgController",
-//      funViewName: "core.view.OrgLayout"
-//    });
+//    var mainView = tree.up("mainviewlayout").down("centerview");
+//    var mainView = this.getView("core.main.view.CenterView").create();
+    var mainView = Ext.getCmp("centerview-id");
+    this.addFunItem({
+      mainView: mainView,
+      funViewXtype: "mapLayout",
+      funController: "core.map.controller.MapController",
+      funViewName: "core.map.view.MapLayout"
+    });
   }
 });

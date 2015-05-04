@@ -59,7 +59,7 @@ Ext.define("core.cbht.view.CbhtWindow", {
       width: 750,
       margins: '5 0 5 0',
       xtype: "cbhtdkgrid",
-      bbar: [],
+      //bbar: [],
 //          store: Ext.create("core.cbht.store.FbfStore", {}),
       title: "承包地块"
 

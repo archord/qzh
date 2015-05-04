@@ -2,7 +2,7 @@
 Ext.define("core.qzh.store.CbhtStore_qz", {
   extend: 'Ext.data.Store',
   model: 'core.qzh.model.CbhtModel',
-  pageSize: 10,
+  pageSize:30,
   //autoSync:true,//与服务器同步
   proxy: {
     type: "ajax",

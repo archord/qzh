@@ -5,6 +5,7 @@
 package com.mseeworld.qzh.dao;
 
 import com.mseeworld.qzh.model.Qslyzlfj;
+import java.math.BigInteger;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -27,12 +28,13 @@ public class QslyzlfjDaoImpl extends BaseHibernateDaoImpl<Qslyzlfj> implements Q
     return q.list();
   }
   
-  public List<Qslyzlfj> getFirstNOfAll(int n){
-    
-    Session session = getCurrentSession();
-    String sql = "select * from qslyzlfj order by id limit "+ n;
-    Query q = session.createSQLQuery(sql).addEntity(Qslyzlfj.class);
+  public List<Qslyzlfj> getFirstNOfAll(int start, int size){
 
+    Session session = getCurrentSession();
+    String sql = "select * from qslyzlfj order by id desc ";
+    Query q = session.createSQLQuery(sql).addEntity(Qslyzlfj.class);
+    q.setFirstResult(start);
+    q.setMaxResults(size);
     return q.list();
   }
 
@@ -41,5 +43,18 @@ public class QslyzlfjDaoImpl extends BaseHibernateDaoImpl<Qslyzlfj> implements Q
     String sql = "delete from qslyzlfj where id in(" + ids + ")";
     Session session = getCurrentSession();
     session.createSQLQuery(sql).executeUpdate();
+  }
+
+  public Number count() {
+
+    Session session = getCurrentSession();
+    String sql = "select count(*) from qslyzlfj ";
+    int tNum = 0;
+    Query q = session.createSQLQuery(sql);
+    if (!q.list().isEmpty()) {
+      BigInteger objId = (BigInteger) q.list().get(0);
+      tNum = objId.intValue();
+    }
+    return tNum;
   }
 }

@@ -35,7 +35,7 @@ Ext.define("core.cbf_jtcy.view.QzhCbfJtcyLayout", {
           region: 'center',
           height: 200,
           xtype: "qzhCbfJtcyGrid",
-          bbar: [],
+          //bbar: [],
 //          store: Ext.create("core.cbf_jtcy.store.FbfStore", {}),
           title: "权证列表"
 

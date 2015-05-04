@@ -19,6 +19,19 @@ import org.hibernate.Session;
  */
 public class CbhtDaoImpl extends BaseHibernateDaoImpl<Cbht> implements CbhtDao {
 
+  public Number count() {
+
+    Session session = getCurrentSession();
+    String sql = "select count(*) from cbht ";
+    int tNum = 0;
+    Query q = session.createSQLQuery(sql);
+    if (!q.list().isEmpty()) {
+      BigInteger objId = (BigInteger) q.list().get(0);
+      tNum = objId.intValue();
+    }
+    return tNum;
+  }
+
   public Cbht getByCbhtbm(String cbhtbm) {
 
     Session session = getCurrentSession();
@@ -117,12 +130,13 @@ public class CbhtDaoImpl extends BaseHibernateDaoImpl<Cbht> implements CbhtDao {
     return objs;
   }
 
-  public List<Cbht> getFirstNOfAll(int n) {
+  public List<Cbht> getFirstNOfAll(int start, int size) {
 
     Session session = getCurrentSession();
-    String sql = "select * from cbht order by id limit " + n;
+    String sql = "select * from cbht order by id desc ";
     Query q = session.createSQLQuery(sql).addEntity(Cbht.class);
-
+    q.setFirstResult(start);
+    q.setMaxResults(size);
     return q.list();
   }
 

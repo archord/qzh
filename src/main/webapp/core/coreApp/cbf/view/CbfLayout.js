@@ -36,7 +36,7 @@ Ext.define("core.cbf.view.CbfLayout", {
           region: 'center',
           height: 200,
           xtype: "cbfgrid",
-          bbar: [],
+          //bbar: [],
 //          store: Ext.create("core.cbf.store.FbfStore", {}),
           title: "人员列表"
 

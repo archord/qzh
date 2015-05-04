@@ -4,7 +4,7 @@
 Ext.define("core.store.UserStore", {
   extend: 'Ext.data.Store',
   model: 'core.model.UserModel',
-  pageSize: 10, //每页显示5条记录
+  pageSize:30, //每页显示5条记录
   //autoSync:true,//与服务器同步
   proxy: {
     type: "ajax",

@@ -5,6 +5,7 @@
 package com.mseeworld.qzh.dao;
 
 import com.mseeworld.qzh.model.Cbdkxx;
+import java.math.BigInteger;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -38,12 +39,13 @@ public class CbdkxxDaoImpl extends BaseHibernateDaoImpl<Cbdkxx> implements Cbdkx
     return q.list();
   }
   
-  public List<Cbdkxx> getFirstNOfAll(int n){
-    
-    Session session = getCurrentSession();
-    String sql = "select * from cbdkxx order by id limit "+ n;
-    Query q = session.createSQLQuery(sql).addEntity(Cbdkxx.class);
+  public List<Cbdkxx> getFirstNOfAll(int start, int size){
 
+    Session session = getCurrentSession();
+    String sql = "select * from cbdkxx order by id desc ";
+    Query q = session.createSQLQuery(sql).addEntity(Cbdkxx.class);
+    q.setFirstResult(start);
+    q.setMaxResults(size);
     return q.list();
   }
 
@@ -52,5 +54,18 @@ public class CbdkxxDaoImpl extends BaseHibernateDaoImpl<Cbdkxx> implements Cbdkx
     String sql = "delete from cbdkxx where id in(" + ids + ")";
     Session session = getCurrentSession();
     session.createSQLQuery(sql).executeUpdate();
+  }
+
+  public Number count() {
+
+    Session session = getCurrentSession();
+    String sql = "select count(*) from cbdkxx ";
+    int tNum = 0;
+    Query q = session.createSQLQuery(sql);
+    if (!q.list().isEmpty()) {
+      BigInteger objId = (BigInteger) q.list().get(0);
+      tNum = objId.intValue();
+    }
+    return tNum;
   }
 }

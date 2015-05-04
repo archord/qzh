@@ -17,5 +17,5 @@ public interface CbdkxxDao extends BaseHibernateDao<Cbdkxx> {
 
   public List<Cbdkxx> getCbdkxxsByOrgId(long orgId);
 
-  public List<Cbdkxx> getFirstNOfAll(int n);
+  public List<Cbdkxx> getFirstNOfAll(int start, int size);
 }

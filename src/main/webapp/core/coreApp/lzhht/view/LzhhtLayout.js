@@ -35,7 +35,7 @@ Ext.define("core.lzhht.view.LzhhtLayout", {
           height: 200,
           margins: '5 0 5 0',
           xtype: "lzhhtGrid",
-          bbar: [],
+          //bbar: [],
 //          store: Ext.create("core.lzhht.store.FbfStore", {}),
           title: "流转合同列表"
 

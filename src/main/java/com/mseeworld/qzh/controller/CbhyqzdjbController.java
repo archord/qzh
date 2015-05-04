@@ -35,14 +35,22 @@ public class CbhyqzdjbController {
 
   @RequestMapping(value = "/listall_cbjyqzdjb", method = RequestMethod.GET)
   public void listAllPeople(HttpServletRequest request, PrintWriter writer) {
-    int n = 10;
-    List<Cbjyqzdjb> cbjyqzdjbs = cbjyqzdjbDao.getFirstNOfAll(n);
+
+    String page = request.getParameter("page");
+    String start = request.getParameter("start");
+    String psize = request.getParameter("limit");
+    int ipage = Integer.parseInt(page);
+    int istart = Integer.parseInt(start);
+    int isize = Integer.parseInt(psize);
+    
+    int total = cbjyqzdjbDao.count().intValue();
+    List<Cbjyqzdjb> cbjyqzdjbs = cbjyqzdjbDao.getFirstNOfAll(istart, isize);
 
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
     StringBuilder rstStr = new StringBuilder("");
     rstStr.append("{totalCount:");
-    rstStr.append(cbjyqzdjbs.size());
+    rstStr.append(total);
     rstStr.append(",rows:[");
     int i = 0;
     for (Cbjyqzdjb cbjyqzdjb : cbjyqzdjbs) {

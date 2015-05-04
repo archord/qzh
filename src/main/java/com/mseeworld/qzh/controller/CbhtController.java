@@ -36,14 +36,22 @@ public class CbhtController {
 
   @RequestMapping(value = "/listall_cbht", method = RequestMethod.GET)
   public void listAllPeople(HttpServletRequest request, PrintWriter writer) {
-    int n = 10;
-    List<Cbht> cbhts = cbhtDao.getFirstNOfAll(n);
+
+    String page = request.getParameter("page");
+    String start = request.getParameter("start");
+    String psize = request.getParameter("limit");
+    int ipage = Integer.parseInt(page);
+    int istart = Integer.parseInt(start);
+    int isize = Integer.parseInt(psize);
+    
+    int total = cbhtDao.count().intValue();
+    List<Cbht> cbhts = cbhtDao.getFirstNOfAll(istart, isize);
 
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
     StringBuilder rstStr = new StringBuilder("");
     rstStr.append("{totalCount:");
-    rstStr.append(cbhts.size());
+    rstStr.append(total);
     rstStr.append(",rows:[");
     int i = 0;
     for (Cbht cbht : cbhts) {

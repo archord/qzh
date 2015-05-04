@@ -15,5 +15,5 @@ public interface CbfJtcyDao extends BaseHibernateDao<CbfJtcy> {
 
   public List<CbfJtcy> getCbfsByCbfBm(String cbfbm);
 
-  public List<CbfJtcy> getFirstNOfAll(int n);
+  public List<CbfJtcy> getFirstNOfAll(int start, int size);
 }

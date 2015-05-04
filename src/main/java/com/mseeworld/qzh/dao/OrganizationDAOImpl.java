@@ -39,4 +39,17 @@ public class OrganizationDAOImpl extends BaseHibernateDaoImpl<AOrganization> imp
             + "where org_id=" + id;
     session.createSQLQuery(sql).executeUpdate();
   }
+
+  public Number count() {
+
+    Session session = getCurrentSession();
+    String sql = "select count(*) from a_organization ";
+    int tNum = 0;
+    Query q = session.createSQLQuery(sql);
+    if (!q.list().isEmpty()) {
+      BigInteger objId = (BigInteger) q.list().get(0);
+      tNum = objId.intValue();
+    }
+    return tNum;
+  }
 }

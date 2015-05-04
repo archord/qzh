@@ -5,6 +5,7 @@
 package com.mseeworld.qzh.dao;
 
 import com.mseeworld.qzh.model.CbjyqzQzhf;
+import java.math.BigInteger;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -14,6 +15,19 @@ import org.hibernate.Session;
  * @author xy
  */
 public class CbjyqzQzhfDaoImpl extends BaseHibernateDaoImpl<CbjyqzQzhf> implements CbjyqzQzhfDao{
+
+  public Number count() {
+
+    Session session = getCurrentSession();
+    String sql = "select count(*) from cbjyqz_qzhf ";
+    int tNum = 0;
+    Query q = session.createSQLQuery(sql);
+    if (!q.list().isEmpty()) {
+      BigInteger objId = (BigInteger) q.list().get(0);
+      tNum = objId.intValue();
+    }
+    return tNum;
+  }
   
   public List<CbjyqzQzhf> getByOrgId(long orgId){
     
@@ -28,12 +42,13 @@ public class CbjyqzQzhfDaoImpl extends BaseHibernateDaoImpl<CbjyqzQzhf> implemen
   }
   
   
-  public List<CbjyqzQzhf> getFirstNOfAll(int n){
-    
-    Session session = getCurrentSession();
-    String sql = "select * from cbjyqz_qzhf order by id limit "+ n;
-    Query q = session.createSQLQuery(sql).addEntity(CbjyqzQzhf.class);
+  public List<CbjyqzQzhf> getFirstNOfAll(int start, int size){
 
+    Session session = getCurrentSession();
+    String sql = "select * from cbjyqz_qzhf order by id desc ";
+    Query q = session.createSQLQuery(sql).addEntity(CbjyqzQzhf.class);
+    q.setFirstResult(start);
+    q.setMaxResults(size);
     return q.list();
   }
 

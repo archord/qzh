@@ -2,7 +2,7 @@
 Ext.define("core.lzhht.store.LzhhtStore", {
   extend: 'Ext.data.Store',
   model: 'core.lzhht.model.LzhhtModel',
-  pageSize: 10,
+  pageSize:30,
   //autoSync:true,//与服务器同步
   proxy: {
     type: "ajax",

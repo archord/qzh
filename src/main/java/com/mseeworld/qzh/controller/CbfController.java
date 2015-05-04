@@ -40,14 +40,22 @@ public class CbfController {
 
   @RequestMapping(value = "/listall_cbf", method = RequestMethod.GET)
   public void listAll(HttpServletRequest request, PrintWriter writer) {
-    int n = 10;
-    List<Cbf> cbfs = cbfDao.getFirstNOfAll(n);
+
+    String page = request.getParameter("page");
+    String start = request.getParameter("start");
+    String psize = request.getParameter("limit");
+    int ipage = Integer.parseInt(page);
+    int istart = Integer.parseInt(start);
+    int isize = Integer.parseInt(psize);
+    
+    int total = cbfDao.count().intValue();
+    List<Cbf> cbfs = cbfDao.getFirstNOfAll(istart, isize);
 
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
     StringBuilder rstStr = new StringBuilder("");
     rstStr.append("{totalCount:");
-    rstStr.append(cbfs.size());
+    rstStr.append(total);
     rstStr.append(",rows:[");
     int i = 0;
     for (Cbf cbf : cbfs) {

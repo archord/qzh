@@ -1,3 +1,14 @@
+
+//Ext.require([
+//    'Ext.grid.*',
+//    'Ext.data.*',
+//    'Ext.util.*',
+//    'Ext.toolbar.Paging',
+//    'Ext.ModelManager',
+//    'Ext.tip.QuickTipManager'
+//]);
+
+
 /**程序开始执行的位置
  * 相当于window.onload=function(){}
  * */

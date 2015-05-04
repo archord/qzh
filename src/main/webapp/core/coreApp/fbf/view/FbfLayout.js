@@ -36,7 +36,7 @@ Ext.define("core.fbf.view.FbfLayout", {
           height: 300,
           margins: '5 0 5 0',
           xtype: "fbfgrid",
-          bbar: [],
+          //bbar: [],
 //          store: Ext.create("core.fbf.store.FbfStore", {}),
           title: "发包方列表"
 

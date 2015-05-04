@@ -17,5 +17,5 @@ public interface FbfDao extends BaseHibernateDao<Fbf> {
 
   public List<Fbf> getFbfsByOrgId(long orgId);
 
-  public List<Fbf> getFirstNOfAll(int n);
+  public List<Fbf> getFirstNOfAll(int start, int size);
 }

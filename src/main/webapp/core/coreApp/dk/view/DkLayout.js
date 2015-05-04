@@ -35,7 +35,7 @@ Ext.define("core.dk.view.DkLayout", {
           region: 'center',
           height: 200,
           xtype: "dkgrid",
-          bbar: [],
+          //bbar: [],
 //          store: Ext.create("core.dk.store.FbfStore", {}),
           title: "地块信息列表"
 

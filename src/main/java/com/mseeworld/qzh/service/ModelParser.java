@@ -177,18 +177,58 @@ public class ModelParser {
       if (ts.length == 11) {
         try {
           Fbf obj = new Fbf();
-          obj.setFbfbm(ts[0].trim());
-          obj.setFbfmc(ts[1].trim());
-          obj.setFbffzrxm(ts[2].trim());
-          Zjlxdmb zjlx = zjlxdmbDao.getByName(ts[3].trim());
-          obj.setFzrzjlx(zjlx.getDm());
-          obj.setFzrzjhm(ts[4].trim());
-          obj.setLxdh(ts[5].trim());
-          obj.setFbfdz(ts[6].trim());
-          obj.setYzbm(ts[7].trim());
-          obj.setFbfdcy(ts[8].trim());
-          obj.setFbfdcrq(format.parse(ts[9].trim()));
-          obj.setFbfdcjs(ts[10].trim());
+          if (ts[0] == null) {
+            obj.setFbfbm("");
+          } else {
+            obj.setFbfbm(ts[0].trim());
+          }
+          if (ts[1] == null) {
+            obj.setFbfmc("");
+          } else {
+            obj.setFbfmc(ts[1].trim());
+          }
+          if (ts[2] == null) {
+            obj.setFbffzrxm("");
+          } else {
+            obj.setFbffzrxm(ts[2].trim());
+          }
+          if (ts[3] != null) {
+            Zjlxdmb zjlx = zjlxdmbDao.getByName(ts[3].trim());
+            obj.setFzrzjlx(zjlx.getDm());
+          }
+          if (ts[4] == null) {
+            obj.setFzrzjhm("");
+          } else {
+            obj.setFzrzjhm(ts[4].trim());
+          }
+          if (ts[5] == null) {
+            obj.setLxdh("");
+          } else {
+            obj.setLxdh(ts[5].trim());
+          }
+          if (ts[6] == null) {
+            obj.setFbfdz("");
+          } else {
+            obj.setFbfdz(ts[6].trim());
+          }
+          if (ts[7] == null) {
+            obj.setYzbm("");
+          } else {
+            obj.setYzbm(ts[7].trim());
+          }
+          if (ts[8] == null) {
+            obj.setFbfdcy("");
+          } else {
+            obj.setFbfdcy(ts[8].trim());
+          }
+          if (ts[9] != null && !ts[9].isEmpty()) {
+            obj.setFbfdcrq(format.parse(ts[9].trim()));
+          }
+          if (ts[10] == null) {
+            obj.setFbfdcjs("");
+          } else {
+            obj.setFbfdcjs(ts[10].trim());
+          }
           objs.add(obj);
         } catch (ParseException ex) {
           Logger.getLogger(ModelParser.class.getName()).log(Level.SEVERE, null, ex);
@@ -221,17 +261,27 @@ public class ModelParser {
           System.out.println("query:" + ts[5].trim() + ":");
           Zjlxdmb zjlx = zjlxdmbDao.getByName(ts[5].trim());
           obj.setCbfzjlx(zjlx.getDm());
-          obj.setCbfzjhm(ts[6].trim());
+          if (ts[6] == null) {
+            obj.setCbfzjhm("");
+          } else {
+            obj.setCbfzjhm(ts[6].trim());
+          }
           obj.setCbfdz(ts[7].trim());
           obj.setYzbm(ts[8].trim());
           obj.setLxdh(ts[9].trim());
-          obj.setCbfcysl(Integer.parseInt(ts[10].trim()));
-          obj.setCbfdcrq(format.parse(ts[11].trim()));
+          if (ts[10] != null && !ts[10].isEmpty()) {
+            obj.setCbfcysl(Integer.parseInt(ts[10].trim()));
+          }
+          if (ts[11] != null && !ts[11].isEmpty()) {
+            obj.setCbfdcrq(format.parse(ts[11].trim()));
+          }
           obj.setCbfdcy(ts[12].trim());
           obj.setCbfdcjs(ts[13].trim());
           obj.setGsjs(ts[14].trim());
           obj.setGsjsr(ts[15].trim());
-          obj.setGsshrq(format.parse(ts[16].trim()));
+          if (ts[16] != null && !ts[16].isEmpty()) {
+            obj.setGsshrq(format.parse(ts[16].trim()));
+          }
           obj.setGsshr(ts[17].trim());
           objs.add(obj);
         } catch (ParseException ex) {
@@ -296,11 +346,21 @@ public class ModelParser {
           obj.setCbfbm(ts[3].trim());
           Cbjyqqdfsdmb cbjyqqdfsdmb = cbjyqqdfsdmbDao.getByName(ts[4].trim());
           obj.setCbfs(cbjyqqdfsdmb.getDm());
-          obj.setCbqxq(format.parse(ts[5].trim()));
-          obj.setCbqxz(format.parse(ts[6].trim()));
-          obj.setHtzmj(Float.parseFloat(ts[7].trim()));
-          obj.setCbdkzs(Integer.parseInt(ts[8].trim()));
-          obj.setQdsj(format.parse(ts[9].trim()));
+          if (ts[5] != null && !ts[5].isEmpty()) {
+            obj.setCbqxq(format.parse(ts[5].trim()));
+          }
+          if (ts[6] != null && !ts[6].isEmpty()) {
+            obj.setCbqxz(format.parse(ts[6].trim()));
+          }
+          if (ts[7] != null && !ts[7].isEmpty()) {
+            obj.setHtzmj(Float.parseFloat(ts[7].trim()));
+          }
+          if (ts[8] != null && !ts[8].isEmpty()) {
+            obj.setCbdkzs(Integer.parseInt(ts[8].trim()));
+          }
+          if (ts[9] != null && !ts[9].isEmpty()) {
+            obj.setQdsj(format.parse(ts[9].trim()));
+          }
           objs.add(obj);
         } catch (ParseException ex) {
           Logger.getLogger(ModelParser.class.getName()).log(Level.SEVERE, null, ex);
@@ -330,16 +390,26 @@ public class ModelParser {
           Cbjyqqdfsdmb cbjyqqdfsdmb = cbjyqqdfsdmbDao.getByName(ts[4].trim());
           obj.setLzfs(cbjyqqdfsdmb.getDm());
           obj.setLzqx(ts[5].trim());
-          obj.setLzqxksrq(format.parse(ts[6].trim()));
-          obj.setLzqxjsrq(format.parse(ts[7].trim()));
-          obj.setLzmj(Float.parseFloat(ts[8].trim()));
-          obj.setLzdks(Integer.parseInt(ts[9].trim()));
+          if (ts[6] != null && !ts[6].isEmpty()) {
+            obj.setLzqxksrq(format.parse(ts[6].trim()));
+          }
+          if (ts[7] != null && !ts[7].isEmpty()) {
+            obj.setLzqxjsrq(format.parse(ts[7].trim()));
+          }
+          if (ts[8] != null && !ts[8].isEmpty()) {
+            obj.setLzmj(Float.parseFloat(ts[8].trim()));
+          }
+          if (ts[9] != null && !ts[9].isEmpty()) {
+            obj.setLzdks(Integer.parseInt(ts[9].trim()));
+          }
           Tdytdmb tdytdmb1 = tdytdmbDao.getByName(ts[10].trim());
           obj.setLzqtdyt(tdytdmb1.getDm());
           Tdytdmb tdytdmb2 = tdytdmbDao.getByName(ts[11].trim());
           obj.setLzhtdyt(tdytdmb2.getDm());
           obj.setLzjgsm(ts[12].trim());
-          obj.setHtqdrq(format.parse(ts[13].trim()));
+          if (ts[13] != null && !ts[13].isEmpty()) {
+            obj.setHtqdrq(format.parse(ts[13].trim()));
+          }
           objs.add(obj);
         } catch (ParseException ex) {
           Logger.getLogger(ModelParser.class.getName()).log(Level.SEVERE, null, ex);
@@ -375,7 +445,9 @@ public class ModelParser {
         obj.setTdyt(tdytdmb.getDm());
         Sfdmb sfdmb = sfdmbDao.getByName(ts[7].trim());
         obj.setSfjbnt(sfdmb.getDm());
-        obj.setScmj(Float.parseFloat(ts[8].trim()));
+        if (ts[8] != null && !ts[8].isEmpty()) {
+          obj.setScmj(Float.parseFloat(ts[8].trim()));
+        }
         obj.setDkdz(ts[9].trim());
         obj.setDkxz(ts[10].trim());
         obj.setDknz(ts[11].trim());
@@ -405,7 +477,9 @@ public class ModelParser {
         obj.setCbfbm(ts[2].trim());
         Cbjyqqdfsdmb cbjyqqdfsdmb = cbjyqqdfsdmbDao.getByName(ts[3].trim());
         obj.setCbjyqqdfs(cbjyqqdfsdmb.getDm());
-        obj.setHtmj(Float.parseFloat(ts[4].trim()));
+        if (ts[4] != null && !ts[4].isEmpty()) {
+          obj.setHtmj(Float.parseFloat(ts[4].trim()));
+        }
         obj.setCbhtbm(ts[5].trim());
         if (null == ts[6] || ts[6].isEmpty()) {
           obj.setLzhtbm(" ");
@@ -435,7 +509,9 @@ public class ModelParser {
           obj.setCbjyqzbm(ts[0].trim());
           obj.setZlfjbh(ts[1].trim());
           obj.setZlfjmc(ts[2].trim());
-          obj.setZlfjrq(format.parse(ts[3].trim()));
+          if (ts[3] != null && !ts[3].isEmpty()) {
+            obj.setZlfjrq(format.parse(ts[3].trim()));
+          }
           obj.setFj(ts[4].trim());
           objs.add(obj);
         } catch (ParseException ex) {
@@ -465,8 +541,12 @@ public class ModelParser {
           Cbjyqqdfsdmb cbjyqqdfsdmb = cbjyqqdfsdmbDao.getByName(ts[3].trim());
           obj.setCbfs(cbjyqqdfsdmb.getDm());
           obj.setCbqx(ts[4].trim());
-          obj.setCbqxq(format.parse(ts[5].trim()));
-          obj.setCbqxz(format.parse(ts[6].trim()));
+          if (ts[5] != null && !ts[5].isEmpty()) {
+            obj.setCbqxq(format.parse(ts[5].trim()));
+          }
+          if (ts[6] != null && !ts[6].isEmpty()) {
+            obj.setCbqxz(format.parse(ts[6].trim()));
+          }
           obj.setDksyt(ts[7].trim());
           objs.add(obj);
         } catch (ParseException ex) {
@@ -492,10 +572,14 @@ public class ModelParser {
           Cbjyqz obj = new Cbjyqz();
           obj.setCbjyqzbm(ts[0].trim());
           obj.setFzjg(ts[1].trim());
-          obj.setFzrq(format.parse(ts[2].trim()));
+          if (ts[2] != null && !ts[2].isEmpty()) {
+            obj.setFzrq(format.parse(ts[2].trim()));
+          }
           Sfdmb sfdmb = sfdmbDao.getByName(ts[3].trim());
           obj.setQzsfly(sfdmb.getDm());
-          obj.setQzlqrq(format.parse(ts[4].trim()));
+          if (ts[4] != null && !ts[4].isEmpty()) {
+            obj.setQzlqrq(format.parse(ts[4].trim()));
+          }
           obj.setQzlqrxm(ts[5].trim());
           Zjlxdmb zjlx = zjlxdmbDao.getByName(ts[6].trim());
           obj.setQzlqrzjlx(zjlx.getDm());
@@ -524,8 +608,12 @@ public class ModelParser {
           CbjyqzQzbf obj = new CbjyqzQzbf();
           obj.setCbjyqzbm(ts[0].trim());
           obj.setQzbfyy(ts[1].trim());
-          obj.setBfrq(format.parse(ts[2].trim()));
-          obj.setQzbflqrq(format.parse(ts[3].trim()));
+          if (ts[2] != null && !ts[2].isEmpty()) {
+            obj.setBfrq(format.parse(ts[2].trim()));
+          }
+          if (ts[3] != null && !ts[3].isEmpty()) {
+            obj.setQzbflqrq(format.parse(ts[3].trim()));
+          }
           obj.setQzbflqrxm(ts[4].trim());
           Zjlxdmb zjlx = zjlxdmbDao.getByName(ts[5].trim());
           obj.setBflqrzjlx(zjlx.getDm());
@@ -554,8 +642,12 @@ public class ModelParser {
           CbjyqzQzhf obj = new CbjyqzQzhf();
           obj.setCbjyqzbm(ts[0].trim());
           obj.setQzhfyy(ts[1].trim());
-          obj.setHfrq(format.parse(ts[2].trim()));
-          obj.setQzhflqrq(format.parse(ts[3].trim()));
+          if (ts[2] != null && !ts[2].isEmpty()) {
+            obj.setHfrq(format.parse(ts[2].trim()));
+          }
+          if (ts[3] != null && !ts[3].isEmpty()) {
+            obj.setQzhflqrq(format.parse(ts[3].trim()));
+          }
           obj.setQzhflqrxm(ts[4].trim());
           Zjlxdmb zjlx = zjlxdmbDao.getByName(ts[5].trim());
           obj.setHflqrzjlx(zjlx.getDm());
@@ -584,7 +676,9 @@ public class ModelParser {
           CbjyqzQzzx obj = new CbjyqzQzzx();
           obj.setCbjyqzbm(ts[0].trim());
           obj.setZxyy(ts[1].trim());
-          obj.setZxrq(format.parse(ts[2].trim()));
+          if (ts[2] != null && !ts[2].isEmpty()) {
+            obj.setZxrq(format.parse(ts[2].trim()));
+          }
           objs.add(obj);
         } catch (ParseException ex) {
           Logger.getLogger(ModelParser.class.getName()).log(Level.SEVERE, null, ex);

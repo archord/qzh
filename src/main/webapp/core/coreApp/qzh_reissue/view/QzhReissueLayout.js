@@ -35,7 +35,7 @@ Ext.define("core.qzh_reissue.view.QzhReissueLayout", {
           region: 'center',
           height: 200,
           xtype: "qzhReissueGrid",
-          bbar: [],
+          //bbar: [],
 //          store: Ext.create("core.qzh_reissue.store.FbfStore", {}),
           title: "权证补发记录"
 

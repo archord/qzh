@@ -17,5 +17,5 @@ public interface CbfDao extends BaseHibernateDao<Cbf> {
 
   public List<Cbf> getCbfsByOrgId(long orgId);
 
-  public List<Cbf> getFirstNOfAll(int n);
+  public List<Cbf> getFirstNOfAll(int start, int size);
 }

@@ -67,6 +67,9 @@ public class ExcelReader {
       // 不能用row.getPhysicalNumberOfCells()，可能会有空cell导致索引溢出
       // 使用row.getLastCellNum()至少可以保证索引不溢出，但会有很多Null值，如果使用集合的话，就不说了
       String[] cells = new String[row.getLastCellNum()];
+      for(int i=0; i<cells.length; i++){
+        cells[i]="";
+      }
       for (int c = row.getFirstCellNum(); c <= row.getLastCellNum(); c++) {
         Cell cell = row.getCell(c);
         if (cell != null) {

@@ -49,14 +49,22 @@ public class FbfController {
    */
   @RequestMapping(value = "/listall_fbf", method = RequestMethod.GET)
   public void listAllPeople(HttpServletRequest request, PrintWriter writer) {
-    int n = 10;
-    List<Fbf> fbfs = fbfDao.getFirstNOfAll(n);
+
+    String page = request.getParameter("page");
+    String start = request.getParameter("start");
+    String psize = request.getParameter("limit");
+    int ipage = Integer.parseInt(page);
+    int istart = Integer.parseInt(start);
+    int isize = Integer.parseInt(psize);
+    
+    int total = fbfDao.count().intValue();
+    List<Fbf> fbfs = fbfDao.getFirstNOfAll(istart, isize);
 
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
     StringBuilder rstStr = new StringBuilder("");
     rstStr.append("{totalCount:");
-    rstStr.append(fbfs.size());
+    rstStr.append(total);
     rstStr.append(",rows:[");
     int i = 0;
     for (Fbf fbf : fbfs) {

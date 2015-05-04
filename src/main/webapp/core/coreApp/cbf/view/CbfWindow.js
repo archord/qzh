@@ -67,7 +67,7 @@ Ext.define("core.cbf.view.CbfWindow", {
       width: 750,
       margins: '5 0 5 0',
       xtype: "cbfJtcyGrid",
-      bbar: [],
+      //bbar: [],
 //          store: Ext.create("core.cbht.store.FbfStore", {}),
       title: "承包方家庭成员"
 

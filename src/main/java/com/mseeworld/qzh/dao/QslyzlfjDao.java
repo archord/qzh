@@ -15,5 +15,5 @@ public interface QslyzlfjDao extends BaseHibernateDao<Qslyzlfj> {
 
   public List<Qslyzlfj> getQslyzlfjsByOrgId(long orgId);
 
-  public List<Qslyzlfj> getFirstNOfAll(int n);
+  public List<Qslyzlfj> getFirstNOfAll(int start, int size);
 }

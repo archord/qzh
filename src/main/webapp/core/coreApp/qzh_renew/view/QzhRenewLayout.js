@@ -35,7 +35,7 @@ Ext.define("core.qzh_renew.view.QzhRenewLayout", {
           region: 'center',
           height: 200,
           xtype: "qzhRenewGrid",
-          bbar: [],
+          //bbar: [],
 //          store: Ext.create("core.qzh_renew.store.FbfStore", {}),
           title: "权证换发记录"
 

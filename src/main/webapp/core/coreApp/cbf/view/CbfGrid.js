@@ -52,6 +52,12 @@ Ext.define("core.cbf.view.CbfGrid", {
       }
     }
   ],
+//  bbar: Ext.create('Ext.PagingToolbar', {
+//    store: 'core.cbf.store.CbfStore',
+//    displayInfo: true,
+//    displayMsg: 'Displaying topics {0} - {1} of {2}',
+//    emptyMsg: "No topics to display"
+//  }),
   bbar: {
     xtype: 'pagingtoolbar',
     store: 'core.cbf.store.CbfStore',

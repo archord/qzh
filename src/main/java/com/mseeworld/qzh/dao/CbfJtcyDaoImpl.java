@@ -5,6 +5,7 @@
 package com.mseeworld.qzh.dao;
 
 import com.mseeworld.qzh.model.CbfJtcy;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
@@ -15,6 +16,19 @@ import org.hibernate.Session;
  * @author xy
  */
 public class CbfJtcyDaoImpl extends BaseHibernateDaoImpl<CbfJtcy> implements CbfJtcyDao {
+
+  public Number count() {
+
+    Session session = getCurrentSession();
+    String sql = "select count(*) from cbf_jtcy ";
+    int tNum = 0;
+    Query q = session.createSQLQuery(sql);
+    if (!q.list().isEmpty()) {
+      BigInteger objId = (BigInteger) q.list().get(0);
+      tNum = objId.intValue();
+    }
+    return tNum;
+  }
 
   public List<CbfJtcy> getCbfsByCbfBm(String cbfbm) {
 
@@ -32,12 +46,13 @@ public class CbfJtcyDaoImpl extends BaseHibernateDaoImpl<CbfJtcy> implements Cbf
     return q.list();
   }
 
-  public List<CbfJtcy> getFirstNOfAll(int n) {
+  public List<CbfJtcy> getFirstNOfAll(int start, int size) {
 
     Session session = getCurrentSession();
-    String sql = "select * from cbf_jtcy order by id limit " + n;
+    String sql = "select * from cbf_jtcy order by id desc ";
     Query q = session.createSQLQuery(sql).addEntity(CbfJtcy.class);
-
+    q.setFirstResult(start);
+    q.setMaxResults(size);
     return q.list();
   }
 
