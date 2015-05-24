@@ -197,6 +197,23 @@ public class DocumentHandler {
         dataMap.put("xz4", "");
         dataMap.put("nz4", "");
         dataMap.put("bz4", "");
+      } else {
+        dataMap.put("dkmc3", "");
+        dataMap.put("dkbm3", "");
+        dataMap.put("dkmj3", "");
+        dataMap.put("sfnt3", "");  //是否
+        dataMap.put("dz3", "");
+        dataMap.put("xz3", "");
+        dataMap.put("nz3", "");
+        dataMap.put("bz3", "");
+        dataMap.put("dkmc4", "");
+        dataMap.put("dkbm4", "");
+        dataMap.put("dkmj4", "");
+        dataMap.put("sfnt4", "");
+        dataMap.put("dz4", "");
+        dataMap.put("xz4", "");
+        dataMap.put("nz4", "");
+        dataMap.put("bz4", "");
       }
     }
     cal.setTime(cbht.getQdsj());

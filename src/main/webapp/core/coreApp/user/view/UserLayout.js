@@ -1,17 +1,45 @@
-/**用户管理视图布局类*/
-Ext.define("core.view.UserLayout", {
+/**
+ *  
+ */
+Ext.define("core.user.view.UserLayout", {
   extend: 'Ext.panel.Panel',
-  alias: 'widget.userlayout',
-  title: "<center height=40>用户基本信息</center>",
-  closable:true,
+  alias: 'widget.userLayout',
+  id: "userLayoutId",
+  title: "<center height=40>系统用户管理</center>",
+  closable: true,
   defaults: {
+    split: true, // 可以设置好看点的折叠效果
+    collapsible: true, // 可以被折叠
     bodyStyle: 'padding:1px'
   },
-  layout: 'fit',
+  layout: 'border',
   items: [{
-      xtype: "usergrid"
+      title: "地区列表",
+      region: 'west',
+      // iconCls:'goodtype_tree',
+      xtype: "orgTreeUser",
+      id: "orgTreeUserId",
+      store: Ext.create('core.user.store.OrgStore'),
+      margins: '5 2 5 5',
+      width: 150
     }, {
-      xtype: "userform",
-      hidden: true
+      xtype: "panel",
+      region: "center",
+      border: 0,
+      header: false,
+      layout: "border",
+      items: [{
+          // iconCls:'good_table',
+          collapsible: true, // 可以被折叠
+          //xtype : 'panel',
+          region: 'center',
+          height: 300,
+          margins: '5 0 5 0',
+          xtype: "usergrid",
+          //bbar: [],
+//          store: Ext.create("core.user.store.UserStore", {}),
+          title: "系统用户列表"
+
+        }]
     }]
 });

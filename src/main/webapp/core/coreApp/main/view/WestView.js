@@ -137,41 +137,43 @@ Ext.define("core.main.view.WestView", {
             ]
           }
         }]
-    }, {
-      title: "数据统计与查询",
-      items: [{
-          xtype: "treepanel",
-          rootVisible: false, // 不展示根节点
-          displayField: "text",
-          border: 0,
-          root: {
-            expanded: true,
-            children: [
-              {
-                id: "org-statistic-search",
-                text: "组织机构统计与查询",
-                leaf: true
-              }, {
-                id: "people-statistic-search",
-                text: "人员信息统计与查询",
-                leaf: true
-              }, {
-                id: "dk-statistic-search",
-                text: "地块信息统计与查询",
-                leaf: true
-              }, {
-                id: "ht-statistic-search",
-                text: "合同信息统计与查询",
-                leaf: true
-              }, {
-                id: "qz-statistic-search",
-                text: "权证信息统计与查询",
-                leaf: true
-              }
-            ]
-          }
-        }]
-    }, {
+    }, 
+//    {
+//      title: "数据统计与查询",
+//      items: [{
+//          xtype: "treepanel",
+//          rootVisible: false, // 不展示根节点
+//          displayField: "text",
+//          border: 0,
+//          root: {
+//            expanded: true,
+//            children: [
+//              {
+//                id: "org-statistic-search",
+//                text: "组织机构统计与查询",
+//                leaf: true
+//              }, {
+//                id: "people-statistic-search",
+//                text: "人员信息统计与查询",
+//                leaf: true
+//              }, {
+//                id: "dk-statistic-search",
+//                text: "地块信息统计与查询",
+//                leaf: true
+//              }, {
+//                id: "ht-statistic-search",
+//                text: "合同信息统计与查询",
+//                leaf: true
+//              }, {
+//                id: "qz-statistic-search",
+//                text: "权证信息统计与查询",
+//                leaf: true
+//              }
+//            ]
+//          }
+//        }]
+//    }, 
+    {
       title: "系统管理",
       items: [{
           xtype: "treepanel",
@@ -181,12 +183,13 @@ Ext.define("core.main.view.WestView", {
           root: {
             expanded: true,
             children: [
+//              {
+//                id: "system-data-manage",
+//                text: "系统数据维护",
+//                leaf: true
+//              }, 
               {
-                id: "system-data-manage",
-                text: "系统数据维护",
-                leaf: true
-              }, {
-                id: "system-user-manage",
+                id: "user-manage",
                 text: "系统用户管理",
                 leaf: true
               }, {

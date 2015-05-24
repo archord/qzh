@@ -17,6 +17,7 @@ Ext.define("core.main.controller.MainController", {
         var mainView = funInfo.mainView;
         var funPanel = mainView.down(funInfo.funViewXtype);
         if (!funPanel) {
+//          self.application.getController(funInfo.funController).init();
           self.application.getController(funInfo.funController).init();
           funPanel = Ext.create(funInfo.funViewName);
           mainView.add(funPanel);
@@ -212,6 +213,13 @@ Ext.define("core.main.controller.MainController", {
               funController: "core.data_import.controller.DataImportController",
               funViewName: "core.data_import.view.DataImportLayout"
             });
+          } else if (record.data["id"] === "user-manage") {
+            self.addFunItem({
+              mainView: mainView,
+              funViewXtype: "userManageLayout",
+              funController: "core.user.controller.UserController",
+              funViewName: "core.user.view.UserLayout"
+            });
           }
         }//itemclick end
       }//"westview treepanel" end
@@ -229,12 +237,12 @@ Ext.define("core.main.controller.MainController", {
   onPanelRendered: function() {
 //    var mainView = tree.up("mainviewlayout").down("centerview");
 //    var mainView = this.getView("core.main.view.CenterView").create();
-    var mainView = Ext.getCmp("centerview-id");
-    this.addFunItem({
-      mainView: mainView,
-      funViewXtype: "mapLayout",
-      funController: "core.map.controller.MapController",
-      funViewName: "core.map.view.MapLayout"
-    });
+//    var mainView = Ext.getCmp("centerview-id");
+//    this.addFunItem({
+//      mainView: mainView,
+//      funViewXtype: "mapLayout",
+//      funController: "core.map.controller.MapController",
+//      funViewName: "core.map.view.MapLayout"
+//    });
   }
 });

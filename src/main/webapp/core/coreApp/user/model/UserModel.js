@@ -1,18 +1,20 @@
 /*
- * 用户实体类
+ *  
  */
- Ext.define("core.model.UserModel",{
+ Ext.define("core.user.model.UserModel",{
  	extend:"Ext.data.Model",
  	fields:[
- 		{name:"id",type:"int",srotable:true},
- 		{name:"name",type:"string",srotable:true},
- 		{name:"password",type:"string",srotable:true},
- 		{name:"sex",type:"boolean",srotable:true},
- 		{name:"phone",type:"long",srotable:true},
- 		{name:"QQ",type:"long",srotable:true},
- 		{name:"email",type:"string",srotable:true},
- 		{name:"addr",type:"string",srotable:true},
- 		{name:"regDate",type:"string",srotable:true},
- 		{name:"IP",type:"string",srotable:true}
+ 		{name:"id",type:"int",srotable:false},
+ 		{name:"userbm",type:"string",srotable:false},
+ 		{name:"usermc",type:"string",srotable:false},
+ 		{name:"userfzrxm",type:"string",srotable:false},
+ 		{name:"fzrzjlx",type:"char",srotable:false},
+ 		{name:"fzrzjhm",type:"string",srotable:false},
+ 		{name:"lxdh",type:"string",srotable:false},
+ 		{name:"userdz",type:"string",srotable:false},
+ 		{name:"yzbm",type:"string",srotable:false},
+ 		{name:"userdcy",type:"string",srotable:false},
+ 		{name:"userdcrq",type:"string",srotable:false},
+ 		{name:"userdcjs",type:"string",srotable:false}
  	]
  });

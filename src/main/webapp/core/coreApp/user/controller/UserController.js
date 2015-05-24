@@ -1,150 +1,150 @@
-Ext.define("core.controller.UserController", {
+Ext.define("core.user.controller.UserController", {
+//	mixins:{
+//		gridUtils:"core.utils.GridUtils"
+//	},
+//	
   extend: "Ext.app.Controller",
   init: function() {
     var self = this;
     this.control({
-      /**
-       * 添加用户
-       */
-      "usergrid button[ref=addUser]": {
-	click: function(btn) {
-	  var form = btn.up("userlayout").down("userform");
-	  //清空数据
-	  form.getForm().reset();
-	  grid = form.up("userlayout").down("usergrid");
-	  grid.hide();
-	  form.show();
-	}
+      /**showbefor*/
+      "userLayout": {
+        beforeshow: function(layout, opt) {
+          //alert(layout.getXType());
+//          var grid = layout.down("product_grid");
+//          var store = grid.getStore();
+//          store.filter("id", 0);
+        }
       },
-      /**
-       * 修改用户,这个功能在保存按钮中完成， 要修改用户，请双击记录
-       */
-      "usergrid button[ref=updateUser]": {
-	click: function(btn) {
-	  Ext.Msg.alert("友情提示", "请双击需要修改的记录进行修改!");
-	}
+      "orgTreeUser": {
+        itemclick: function(tree, record, item, index, e, eOpts) {
+          //节点点击事件
+          var pform = tree.up("userLayout").down("userForm").getForm();
+          pform.findField("isAdd").setValue("1");
+
+          if (record.raw) {
+            if (record.raw.orgLevel < 3) {
+              pform.findField("orgName").setValue("必须在左侧选择村级以下区域");
+              pform.findField("orgId").setValue("");
+              pform.findField("orgLevel").setValue(record.raw.orgLevel);
+            } else {
+              pform.findField("orgName").setValue(record.raw.orgName);
+              pform.findField("orgId").setValue(record.raw.orgId);
+              pform.findField("orgLevel").setValue(record.raw.orgLevel);
+            }
+          }
+        }
       },
-      /**
-       * 添加用户form的保存按钮
-       */
-      "userform button[ref=save]": {
-	click: function(btn) {
-	  //根据id值来做判断，如果id为null说明是做添加操作，否则就是做修改操作
-
-	  //1获得form
-	  var form = btn.up("userform");
-
-	  var id = form.getForm().findField("id").getValue();
-	  var url = "";
-	  if (id == "" || null == id) {
-	    url = "user/add_user.do";
-	  } else {
-	    url = "user/update_user.do";
-	  }
-	  //2.把数据保存到数据库中去
-	  form.submit({
-	    clientValidation: true,
-	    waitMsg: '正在进行处理,请稍后...',
-	    url: url,
-	    method: 'POST',
-	    success: function(form, action) {
-	      var resObj = Ext.decode(action.response.responseText);
-	      if (resObj.success) {
-
-		form.reset();
-		//3.把这条数据加到grid中
-		grid.getStore().load();
-
-		Ext.Msg.alert("提示", resObj.msg);
-	      } else {
-		Ext.Msg.alert("提示", resObj.msg);
-	      }
-	    },
-	    failure: function(form, action) {
-	      Ext.Msg.alert("提示", "请求处理失败！");
-	    }
-	  });
-
-	}
+      "usergrid button[ref=add]": {
+        click: function(btn) {
+          var win = Ext.create("core.user.view.UserWindow");
+          win.show();
+        }
       },
-      /**
-       * 添加用户form的返回按钮
-       */
-      "userform button[ref=return]": {
-	click: function(btn) {
-	  var form = btn.up("userform");
-	  var grid = form.up("userlayout").down("usergrid");
-	  form.hide();
-	  grid.show();
-	}
+      "usergrid button[ref=edit]": {
+        click: function(btn) {
+          var cbhtTree = btn.up('usergrid');
+          var curSelNode = cbhtTree.getSelectionModel().getSelection();
+          if (curSelNode.length > 0) {
+            var cbhtWin = Ext.create("core.user.view.UserWindow");
+            cbhtWin.extraParas = {obj: curSelNode[0].raw, idAdd: 0, orgLevel: 3};
+            cbhtWin.show();
+          } else {
+            Ext.MessageBox.alert("提示", "请在下方选择发包方！");
+          }
+        }
       },
-      /**
-       * 删除用户
-       */
-      "usergrid button[ref=removeUser]": {
-	click: function(btn) {
-	  var grid = btn.up("usergrid");
-	  var store = grid.getStore();
-	  //你选择的将要删除的记录
-	  var records = grid.getSelectionModel().getSelection();
-	  if (!records || records.length <= 0) {
-	    Ext.Msg.alert("提示", "请选择需要删除的数据!");
-	    return;
-	  }
-	  // 根据id删除多条记录
-	  var data = [];
-	  Ext.Array.each(records, function(model) {
-	    data.push(Ext.JSON.encode(model.get('id')));
-	  });
-
-	  Ext.Ajax.request({
-	    waitMsg: '正在进行处理,请稍后...',
-	    url: "user/remove_user.do",
-	    params: {
-	      ids: data.join(",")
-	    }, // 根据id删除
-	    method: "POST",
-	    timeout: 4000,
-	    success: function(response, opts) {
-	      var resObj = Ext.decode(response.responseText);
-	      if (resObj.success) {
-		// 不用查询，从grid中去掉对应的记录就OK了
-		store.load();
-		Ext.Msg.alert("提示", resObj.msg);
-	      } else {
-		Ext.Msg.alert("提示", resObj.msg);
-	      }
-	    }
-	  });
-	}
+      "usergrid button[ref=del]": {
+        click: function(btn) {
+          var cbhtTree = btn.up('usergrid');
+          var curSelNode = cbhtTree.getSelectionModel().getSelection();
+          if (curSelNode.length > 0) {//curSelNode[0].raw
+            Ext.MessageBox.confirm("注意", "是否删除该记录？", function(btn) {
+              if (btn === "yes") {
+                var ids = "";
+                for (var i = 0; i < curSelNode.length; i++) {
+                  ids += curSelNode[i].raw.id + ",";
+                }
+                ids = ids.substring(0, ids.length - 1);
+                Ext.Ajax.request({
+                  waitMsg: '正在进行处理,请稍后...',
+                  url: "./user/remove_user.do",
+                  params: {
+                    ids: ids
+                  }, // 根据id删除
+                  method: "POST",
+                  timeout: 4000,
+                  success: function(response, opts) {
+                    var resObj = Ext.decode(response.responseText);
+                    if (resObj.success) {
+                      var store = Ext.getCmp("usergridId").getStore();
+                      store.reload();
+                      Ext.Msg.alert("提示", "删除成功！");
+                    } else {
+                      Ext.Msg.alert("提示", "删除失败！");
+                    }
+                  }
+                });
+              }
+            });
+          } else {
+            Ext.MessageBox.alert("提示", "请在下方选择承包合同！");
+          }
+        }
       },
-      /**
-       * 单击进入form，修改信息
-       */
       "usergrid": {
-	itemdblclick: function(_grid, record, item, index, e, eOpts) {
-	  var form = _grid.up("userlayout").down("userform");
-	  var grid = form.up("userlayout").down("usergrid");
-	  //把选择的数据加载到form中去
-	  var _record = grid.getSelectionModel().getSelection();
-	  form.loadRecord(_record[0]);
-	  grid.hide();
-	  form.show();
-	}
+        itemclick: function(tree, record, item, index, e, eOpts) {
+        }
       },
-      // 任务节点事件添加
-      "taskeventgrid button[ref=addEvent]": {
-	click: function(btn) {
-	}
+      "userForm button[ref=save]": {
+        click: function(btn) {
+          var pform = btn.up("userForm").getForm();
+          var orgTree = btn.up('userLayout').down("orgTreeUser");
+          var curSelNode = orgTree.getSelectionModel().getSelection();
+//          alert(curSelNode[0].raw.orgId);
+          if (pform.findField("isAdd").getValue() === '1') {
+            if (pform.findField("orgId").getValue() === "" || pform.findField("orgLevel").getValue() < 3) {
+              pform.findField("orgName").setValue("必须在左侧选择村级以下区域");
+              Ext.MessageBox.alert("提示","必须在左侧选择村级以下区域!");
+              return;
+            }
+          }
+          if (pform.isValid()) {
+            pform.submit({
+              url: "./user/add_user.do",
+              success: function(form, action) {
+                Ext.MessageBox.confirm("提示", "保存成功！是否继续？", function(btn) {
+                  if (btn === "yes") {
+                    pform.reset();
+                  }
+                });
+
+                var store = btn.up("userLayout").down("userGrid").getStore();
+                store.load();
+              },
+              failure: function(form, action) {
+                var resObj = Ext.decode(action.response.responseText);
+                Ext.MessageBox.show({
+                  title: '错误',
+                  buttons: Ext.MessageBox.OK,
+                  icon: Ext.MessageBox.ERROR,
+                  msg: resObj.msg
+                });
+              }
+            });
+          }
+        }
       }
 
     });
   },
   views: [
-    "core.view.user.UserLayout",
-    "core.view.user.UserGrid",
-    "core.view.user.UserForm"
+    "core.user.view.UserLayout",
+    "core.user.view.OrgTreeUser",
+    "core.user.view.UserForm",
+    "core.user.view.UserGrid",
+    "core.user.view.UserWindow"
   ],
-  stores: ["core.store.UserStore"],
-  models: ["core.model.UserModel"]
+  stores: ["core.user.store.UserStore", "core.user.store.OrgStore"],
+  models: ["core.user.model.UserModel"]
 });

@@ -1,67 +1,70 @@
-Ext.define("core.view.UserForm", {
+Ext.define("core.user.view.UserForm", {
   extend: "Ext.form.Panel",
   alias: "widget.userform",
+  align: "left",
+  frame: true,
+  defaults: {
+    margin: "7 0 0 15",
+    selectOnFocus: true
+  },
   layout: {
     type: "table",
-    columns: 2
-  },
-  align: "left",
-  defaults: {
-    margin: "10 0 0 15",
-    selectOnFocus: true,
-    width: 300,
-    msgTarget: "side" //提示信息现在的位置
+    columns: 1
   },
   tbar: [{
       xtype: "button",
       ref: "save",
-      iconCls: "table_save",
+      iconCls: 'table_save',
       text: "保存"
-    }, {
-      xtype: "button",
-      ref: "return",
-      iconCls: "return",
-      text: "返回"
     }],
   items: [{
       xtype: "textfield",
+      fieldLabel: "所属区域",
+      name: "orgName",
+      allowBlank: true,
+      blankText: '必须在右侧选择村级以下区域',
+      readOnly: true
+    }, {
+      xtype: "textfield",
+      fieldLabel: "区域级别",
+      name: "isAdd",
+      value: "1",
+      hidden: true
+    }, {
+      xtype: "textfield",
+      fieldLabel: "区域级别",
+      name: "orgLevel",
+      value: "0",
+      hidden: true
+    }, {
+      xtype: "textfield",
       fieldLabel: "主键",
       name: "id",
+      value: "",
+      hidden: true
+    }, {
+      xtype: "textfield",
+      fieldLabel: "组织机构id",
+      name: "orgId",
+      value: "",
       hidden: true
     }, {
       xtype: "textfield",
       fieldLabel: "用户名",
-      name: "name",
-      allowBlank: false, //不允许为空
-      blankText: '用户名不能为空', //错误提示内容 
-      readOnly: false
+      name: "userbm",
+      allowBlank: false,
+      blankText: '发包方编码不能为空'
     }, {
       xtype: "textfield",
       fieldLabel: "密码",
-      inputType: 'password',
-      name: "password",
-      allowBlank: false, //不允许为空
-      blankText: '密码不能为空', //错误提示内容 
+      name: "usermc",
+      allowBlank: false,
+      blankText: '发包方名称不能为空',
       readOnly: false
     }, {
-      xtype: "numberfield",
-      fieldLabel: "电话",
-      name: "phone",
-      allowBlank: false, //不允许为空
-      blankText: '电话不能为空', //错误提示内容
+      xtype: "textfield",
+      fieldLabel: "再次输入密码",
+      name: "userfzrxm",
       readOnly: false
-    }, {
-      xtype: "numberfield",
-      fieldLabel: "QQ",
-      name: "QQ",
-      readOnly: false
-    }, {
-      xtype: "textareafield",
-      fieldLabel: "地址",
-      name: "addr",
-      readOnly: false
-    }],
-  initComponent: function() {
-    this.callParent(arguments);
-  }
+    }]
 });
