@@ -86,7 +86,7 @@ Ext.define("core.main.controller.MainController", {
           dis.setValue("<font color=white><b>未登录</b></font>");
 
           Ext.util.Cookies.clear("autologin");
-          Ext.create("core.user.view.LoginWindow").show();
+          Ext.create("core.main.view.LoginWindow").show();
         }
       },
       /**退出系统*/

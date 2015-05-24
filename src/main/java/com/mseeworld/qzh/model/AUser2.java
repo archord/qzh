@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "a_user", schema = "public"
 )
-public class AUser implements java.io.Serializable {
+public class AUser2 implements java.io.Serializable {
 
   private int id;
   private String ip;
@@ -32,15 +32,16 @@ public class AUser implements java.io.Serializable {
   private Boolean sex;
   private Boolean canDelete;
   private int orgId;
+  private String orgName;
 
-  public AUser() {
+  public AUser2() {
   }
 
-  public AUser(int id) {
+  public AUser2(int id) {
     this.id = id;
   }
 
-  public AUser(int id, String ip, String qq, String addr, String email, String name, String password, String phone, Date regDate, Boolean sex, Boolean canDelete, int orgId) {
+  public AUser2(int id, String ip, String qq, String addr, String email, String name, String password, String phone, Date regDate, Boolean sex, Boolean canDelete, int orgId, String orgName) {
     this.id = id;
     this.ip = ip;
     this.qq = qq;
@@ -53,6 +54,7 @@ public class AUser implements java.io.Serializable {
     this.sex = sex;
     this.canDelete = canDelete;
     this.orgId = orgId;
+    this.orgName = orgName;
   }
 
   @Id
@@ -177,6 +179,21 @@ public class AUser implements java.io.Serializable {
    */
   public void setOrgId(int orgId) {
     this.orgId = orgId;
+  }
+
+  /**
+   * @return the orgName
+   */
+  @Column(name = "org_name")
+  public String getOrgName() {
+    return orgName;
+  }
+
+  /**
+   * @param orgName the orgName to set
+   */
+  public void setOrgName(String orgName) {
+    this.orgName = orgName;
   }
 
 }

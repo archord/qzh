@@ -62,36 +62,8 @@ Ext.define("core.user.view.UserGrid", {
   columnLines: true, //展示竖线
   columns: [
     {xtype: 'rownumberer'},
-    {text: "发包方编码", dataIndex: "userbm", width: 100, field: {
-        xtype: "textfield"
-      }},
-    {text: "发包方名称", dataIndex: "usermc", width: 100, field: {
-        xtype: "textfield"
-      }},
-    {text: "负责人名称", dataIndex: "userfzrxm", width: 100, field: {
-        xtype: "textfield"
-      }},
-    {text: "负责人证件类型", dataIndex: "fzrzjlx", width: 90, field: {
-        xtype: "textfield"
-      }},
-    {text: "负责人证件号码", dataIndex: "fzrzjhm", width: 100, field: {
-        xtype: "textfield"
-      }},
-    {text: "联系电话", dataIndex: "lxdh", width: 80, field: {
-        xtype: "textfield"
-      }},
-    {text: "发包方地址", dataIndex: "userdz", width: 150, field: {
-        xtype: "textfield"
-      }},
-    {text: "邮政编码", dataIndex: "yzbm", width: 70, field: {
-        xtype: "textfield"
-      }},
-    {text: "发包方调查员", dataIndex: "userdcy", width: 80, field: {
-        xtype: "textfield"
-      }},
-    {text: "发包方调查日期", dataIndex: "userdcrq", width: 80, field: {
-        xtype: "textfield"
-      }}
+    {text: "用户名", dataIndex: "name", width: 100, field: {xtype: "textfield"}},
+    {text: "所属区域", dataIndex: "orgName", width: 150, field: {xtype: "textfield"}}
   ],
   initComponent: function() {
     this.callParent(arguments);

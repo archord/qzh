@@ -1,115 +1,73 @@
 package com.mseeworld.qzh.dao;
 
-import com.mseeworld.qzh.dao.UserDAO;
 import com.mseeworld.qzh.model.AUser;
-import com.mseeworld.qzh.util.HibernateUtil;
+import com.mseeworld.qzh.model.AUser2;
+import java.math.BigInteger;
 import java.util.List;
-import javax.annotation.Resource;
-import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
-public class UserDAOImpl implements UserDAO {
 
-	private HibernateUtil hibernateUtil;
+public class UserDAOImpl extends BaseHibernateDaoImpl<AUser> implements UserDAO {
 
-	public HibernateUtil getHibernateUtil() {
-		return hibernateUtil;
-	}
-	@Resource
-	public void setHibernateUtil(HibernateUtil hibernateUtil) {
-		this.hibernateUtil = hibernateUtil;
-	}
+  public void deleteByIds(final String ids) {
 
-	public boolean checkUserName(String username) {
-		// TODO Auto-generated method stub
-		String hql = "from AUser u where u.name='"+username+"'";
-		if(hibernateUtil.exeQuery(hql).size() > 0){
-			return true;
-		}
-		return false;
-	}
+    String sql = "delete from a_user where id in(" + ids + ")";
+    Session session = getCurrentSession();
+    session.createSQLQuery(sql).executeUpdate();
+  }
 
-	public boolean delete(int id) {
-		// TODO Auto-generated method stub
-		String hql = "delete from AUser where id="+id;
-		return hibernateUtil.exeDelete(hql);
-	}
+  @Override
+  public Number count() {
 
-	public List<AUser> findAll() {
-		// TODO Auto-generated method stub
-		String hql = "from AUser";
-		return hibernateUtil.exeQuery(hql);
-	}
+    Session session = getCurrentSession();
+    String sql = "select count(*) from a_user ";
+    int tNum = 0;
+    Query q = session.createSQLQuery(sql);
+    if (!q.list().isEmpty()) {
+      BigInteger objId = (BigInteger) q.list().get(0);
+      tNum = objId.intValue();
+    }
+    return tNum;
+  }
+  
 
-	public AUser login(String name, String password) throws IndexOutOfBoundsException{
-		// TODO Auto-generated method stub
-		AUser user = null;
-		String hql = "from AUser where name='"+name+"' and password='"+password+"'";
-		
-		user=(AUser)hibernateUtil.exeQuery(hql).get(0);
-		
-		return user;
-	}
+  public List<AUser2> getFirstNOfAll2(int start, int size) {
 
-	public AUser save(AUser user) {
-		// TODO Auto-generated method stub
-		AUser u = null;
-		Transaction transaction = null;
-		Session session  = null;
-		try{
-			session = hibernateUtil.getSession();
-			transaction = session.beginTransaction();
-			
-			u=(AUser)session.load(AUser.class, session.save(user));
-			
-			transaction.commit();
-			//hibernateUtil.closeSession(session);
-		}catch(HibernateException he){
-			he.printStackTrace();
-			hibernateUtil.rollbackTransaction(transaction);
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			hibernateUtil.closeSession(session);
-		}
-		return u;
-	}
+    Session session = getCurrentSession();
+    String sql = "select u.*, o.org_name "
+            + "from a_user u "
+            + "inner join a_organization o on u.org_id=o.org_id"
+            + " order by u.id desc ";
+    Query q = session.createSQLQuery(sql).addEntity(AUser2.class);
+    q.setFirstResult(start);
+    q.setMaxResults(size);
+    return q.list();
+  }
 
-	public boolean update(AUser user) {
-		boolean flag = false;
-		Transaction transaction = null;
-		Session session  = null;
-		try{
-			session = hibernateUtil.getSession();
-			transaction = session.beginTransaction();
-			
-			AUser u=(AUser)session.load(AUser.class, user.getId());
-			u.setName(user.getName());
-			u.setPassword(user.getPassword());
-			u.setAddr(user.getAddr());
-			u.setEmail(user.getEmail());
-			u.setPhone(user.getPhone());
-			u.setQq(user.getQq());
-			
-			transaction.commit();
-			flag = true;
-		}catch(HibernateException he){
-			flag = false;
-			he.printStackTrace();
-			hibernateUtil.rollbackTransaction(transaction);
-		}catch(Exception e){
-			flag = false;
-			e.printStackTrace();
-		}finally{
-			hibernateUtil.closeSession(session);
-		}
-		return flag;
-	}
-	public List<AUser> findAll(int start, int end) {
-		// TODO Auto-generated method stub
-		String hql = "from AUser";
-		return hibernateUtil.exeQueryPage(hql, start, end);
-	}
-
+  @Override
+  public Boolean checkUser(AUser user) {
+    
+    Session session = getCurrentSession();
+    String sql = "select * from a_user where name='"+user.getName().trim()+"' and password='"+user.getPassword()+"'";
+    
+    Query q = session.createSQLQuery(sql).addEntity(AUser.class);
+    if (!q.list().isEmpty()) {
+      return true;
+    }else{
+      return false;
+    }
+  }
+  
+  public Boolean exist(AUser user) {
+    
+    Session session = getCurrentSession();
+    String sql = "select * from a_user where name='"+user.getName().trim()+"'";
+    Query q = session.createSQLQuery(sql).addEntity(AUser.class);
+    if (!q.list().isEmpty()) {
+      return true;
+    }else{
+      return false;
+    }
+  }
 }

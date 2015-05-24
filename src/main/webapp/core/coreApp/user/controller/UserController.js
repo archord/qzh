@@ -47,7 +47,7 @@ Ext.define("core.user.controller.UserController", {
           var curSelNode = cbhtTree.getSelectionModel().getSelection();
           if (curSelNode.length > 0) {
             var cbhtWin = Ext.create("core.user.view.UserWindow");
-            cbhtWin.extraParas = {obj: curSelNode[0].raw, idAdd: 0, orgLevel: 3};
+            cbhtWin.extraParas = {obj: curSelNode[0].raw, idAdd: 0};
             cbhtWin.show();
           } else {
             Ext.MessageBox.alert("提示", "请在下方选择发包方！");
@@ -77,8 +77,9 @@ Ext.define("core.user.controller.UserController", {
                   success: function(response, opts) {
                     var resObj = Ext.decode(response.responseText);
                     if (resObj.success) {
-                      var store = Ext.getCmp("usergridId").getStore();
-                      store.reload();
+                      var grid = Ext.getCmp("usergridId");
+                      var store = grid.getStore();
+                      store.load();
                       Ext.Msg.alert("提示", "删除成功！");
                     } else {
                       Ext.Msg.alert("提示", "删除失败！");
@@ -96,30 +97,24 @@ Ext.define("core.user.controller.UserController", {
         itemclick: function(tree, record, item, index, e, eOpts) {
         }
       },
-      "userForm button[ref=save]": {
+      "userform button[ref=save]": {
         click: function(btn) {
-          var pform = btn.up("userForm").getForm();
-          var orgTree = btn.up('userLayout').down("orgTreeUser");
-          var curSelNode = orgTree.getSelectionModel().getSelection();
-//          alert(curSelNode[0].raw.orgId);
-          if (pform.findField("isAdd").getValue() === '1') {
-            if (pform.findField("orgId").getValue() === "" || pform.findField("orgLevel").getValue() < 3) {
-              pform.findField("orgName").setValue("必须在左侧选择村级以下区域");
-              Ext.MessageBox.alert("提示","必须在左侧选择村级以下区域!");
-              return;
-            }
-          }
+          var pform = btn.up("userform").getForm();
           if (pform.isValid()) {
             pform.submit({
-              url: "./user/add_user.do",
+              url: "./user/save_user.do",
               success: function(form, action) {
                 Ext.MessageBox.confirm("提示", "保存成功！是否继续？", function(btn) {
                   if (btn === "yes") {
                     pform.reset();
+                  } else {
+                    var win = Ext.getCmp("userWindowId");
+                    win.close();
                   }
                 });
 
-                var store = btn.up("userLayout").down("userGrid").getStore();
+                var grid = Ext.getCmp("usergridId");
+                var store = grid.getStore();
                 store.load();
               },
               failure: function(form, action) {
@@ -134,6 +129,24 @@ Ext.define("core.user.controller.UserController", {
             });
           }
         }
+      },
+      "orgTreeAll button[ref=save]": {
+        click: function(btn) {
+          var tree = btn.up('orgWindowAll').down('orgTreeAll');
+          var curSelNode = tree.getSelectionModel().getSelection();
+          if (curSelNode.length > 0 && curSelNode[0].raw) {
+//            if (curSelNode[0].raw.orgLevel < 3) {
+//              Ext.MessageBox.alert("提示", "必须在左侧选择村级以下区域!");
+//              return;
+//            }
+            var window = Ext.getCmp("userWindowId");
+            var pform = window.down("form").getForm();
+            pform.findField("orgName").setValue(curSelNode[0].raw.orgName);
+            pform.findField("orgId").setValue(curSelNode[0].raw.orgId);
+          }
+//          btn.up('.window').close();
+          btn.up('.window').hide();
+        }
       }
 
     });
@@ -143,8 +156,10 @@ Ext.define("core.user.controller.UserController", {
     "core.user.view.OrgTreeUser",
     "core.user.view.UserForm",
     "core.user.view.UserGrid",
-    "core.user.view.UserWindow"
+    "core.user.view.UserWindow",
+    "core.main.view.OrgTree",
+    "core.main.view.OrgWindow"
   ],
-  stores: ["core.user.store.UserStore", "core.user.store.OrgStore"],
+  stores: ["core.user.store.UserStore", "core.user.store.OrgStore", "core.main.store.OrgStore"],
   models: ["core.user.model.UserModel"]
 });

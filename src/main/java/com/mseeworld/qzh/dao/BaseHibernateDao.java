@@ -29,4 +29,6 @@ public interface BaseHibernateDao<T> {
   public void deleteByIds(final String ids);
   
   public T getByName(String name);
+  
+  public List<T> getFirstNOfAll(int start, int size);
 }

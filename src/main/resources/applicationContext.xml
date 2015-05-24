@@ -94,6 +94,7 @@
   <bean id="cbfJtcyDao" class="com.mseeworld.qzh.dao.CbfJtcyDaoImpl"></bean>
   <bean id="cbdkxxDaoDao" class="com.mseeworld.qzh.dao.CbdkxxDaoImpl"></bean>
   <bean id="qslyzlfjDao" class="com.mseeworld.qzh.dao.QslyzlfjDaoImpl"></bean>
+  <bean id="userDao" class="com.mseeworld.qzh.dao.UserDAOImpl"></bean>
   
   <!--combobox-->
   <bean id="cbflxdmbDao" class="com.mseeworld.qzh.dao.CbflxdmbDaoImpl"></bean>
@@ -107,6 +108,4 @@
   <bean id="tdlylxDao" class="com.mseeworld.qzh.dao.TdlylxDaoImpl"></bean>
 
   <bean id="hibernateUtil" class="com.mseeworld.qzh.util.HibernateUtil"></bean>
-  <bean id="userDao" class="com.mseeworld.qzh.dao.UserDAOImpl"></bean>
-  <bean id="userService" class="com.mseeworld.qzh.service.UserServiceImpl"></bean>
 </beans>

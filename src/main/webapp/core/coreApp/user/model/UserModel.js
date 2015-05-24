@@ -5,16 +5,7 @@
  	extend:"Ext.data.Model",
  	fields:[
  		{name:"id",type:"int",srotable:false},
- 		{name:"userbm",type:"string",srotable:false},
- 		{name:"usermc",type:"string",srotable:false},
- 		{name:"userfzrxm",type:"string",srotable:false},
- 		{name:"fzrzjlx",type:"char",srotable:false},
- 		{name:"fzrzjhm",type:"string",srotable:false},
- 		{name:"lxdh",type:"string",srotable:false},
- 		{name:"userdz",type:"string",srotable:false},
- 		{name:"yzbm",type:"string",srotable:false},
- 		{name:"userdcy",type:"string",srotable:false},
- 		{name:"userdcrq",type:"string",srotable:false},
- 		{name:"userdcjs",type:"string",srotable:false}
+ 		{name:"name",type:"string",srotable:false},
+ 		{name:"orgName",type:"string",srotable:false}
  	]
  });

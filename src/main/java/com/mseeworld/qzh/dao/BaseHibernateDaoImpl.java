@@ -19,7 +19,7 @@ public abstract class BaseHibernateDaoImpl<T extends Serializable> implements Ba
   public static final int SORT_DESC = 2;
   private Class<T> clazz;
   private SessionFactory sessionFactory;
-  
+
   public final Session getCurrentSession() {
     return sessionFactory.getCurrentSession();
   }
@@ -125,12 +125,29 @@ public abstract class BaseHibernateDaoImpl<T extends Serializable> implements Ba
   public void deleteById(final Long entityId) {
     this.delete(this.getById(entityId));
   }
-  
-  public T getByName(String name){
+
+  public T getByName(String name) {
     throw new UnsupportedOperationException("Not supported yet.");
   }
-  
-  public void deleteByIds(final String ids){
+
+  public void deleteByIds(final String ids) {
     throw new UnsupportedOperationException("Not supported yet.");
+  }
+
+  @Override
+  public List<T> getFirstNOfAll(int start, int size) {
+    try {
+      Session curSession = getCurrentSession();
+      if (curSession == null) {
+        System.out.println("curSession is null!");
+        return null;
+      } else {
+        List<T> list = curSession.createCriteria(clazz).setFirstResult(start).setMaxResults(size).list();
+        return list;
+      }
+    } catch (HibernateException ex) {
+      System.out.println(ex.toString());
+    }
+    return null;
   }
 }
