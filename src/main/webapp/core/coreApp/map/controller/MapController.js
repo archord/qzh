@@ -16,6 +16,7 @@ var layerArr = [];
 var layerVectorArr = [];
 var selectControl;
 var polygonLayer;
+var tmplayers;
 
 var id2map = [
     {"id": 350, "base": "A", "shp": "a0", tag: "tuocun0"},
@@ -31,7 +32,9 @@ var id2map = [
     {"id": 21, "base": "B", "shp": "b4", tag: "youcun4"},
     {"id": 22, "base": "B", "shp": "b5", tag: "youcun5"},
     {"id": 23, "base": "B", "shp": "b6", tag: "youcun6"},
-    {"id": 24, "base": "B", "shp": "b7", tag: "youcun7"}
+    {"id": 24, "base": "B", "shp": "b7", tag: "youcun7"},
+    {"id": 26, "base": "C", "shp": "c0", tag: "ykk"},
+    {"id": 29, "base": "D", "shp": "d0", tag: "aznbz"}
 ];
 
 
@@ -65,6 +68,7 @@ function loadLayers(filepath)
             layerArr = new Array();
             var format = new OpenLayers.Format.JSON();
             var layers = format.read(response.responseText);
+            tmplayers = layers;
             for (var i = 0; i < layers.length; i++) {
                 layerArr[i] = new OpenLayers.Layer.WMS(layers[i].name, layers[i].url,
                         {
@@ -155,9 +159,54 @@ function findLayerVectorByName(name)
     }
 }
 
+function featureSelected(feature)
+{
+    var content =
+            "<table border='1' cellpadding='5' cellspacing='0' width='300' height='200'>"
+            + "<tr>"
+            + "<td>名字</td><td>" + feature.attributes.mingzi + "</td>"
+            + "</tr>"
+            + "<tr>"
+            + "<td>地块编码</td><td>" + feature.attributes.DKBM + "</td>"
+            + "</tr>"
+            + "<tr>"
+            + "<td>面积</td><td>" + feature.attributes.SCMJ + "</td>"
+            + "</tr>"
+            + "<tr>"
+            + "<td>承包方名称</td><td>" + feature.attributes.CBFMC + "</td>"
+            + "</tr>"
+            + "</table>";
 
+    popupOpts = Ext.apply({
+        title: '详情',
+        location: feature,
+//                                        width: 200,
+        html: content,
+        maximizable: true,
+        collapsible: true,
+        anchorPosition: 'auto',
+        alwaysOnTop: true
+    }, null);
+    var popup = Ext.create('GeoExt.window.Popup', popupOpts);
+    popup.on({
+        close: function () {
+            if (OpenLayers.Util.indexOf(feature.layer.selectedFeatures,
+                    feature) > -1) {
+                selectControl.unselect(feature);
+            }
+        }
+    });
+    feature.popup = popup;
+    popup.show();
 
+}
 
+function featureUnSelected(feature)
+{
+//  mapPanel.map.removePopup(feature.popup);
+    feature.popup.destroy();
+    feature.popup = null;
+}
 
 var txtCBFMC = Ext.create('Ext.form.field.Text', {
     xtype: 'textfield',
@@ -173,7 +222,7 @@ var btnSearch = Ext.create('Ext.button.Button', {
     handler: function () {
 
         mapPanel = Ext.getCmp("mapPanelId");
-        
+
         if (hilightLayer)
         {
             mapPanel.map.removeLayer(hilightLayer);
@@ -219,64 +268,17 @@ var btnScreenshot = Ext.create('Ext.button.Button', {
     bodyPadding: 10,
     enableToggle: true,
     handler: function () {
-        var printPage = Ext.create('GeoExt.data.PrintPage', {
-            printProvider: printProvider
-        });
-        printPage.fit(mapPanel, false);
-        printProvider.print(mapPanel, printPage);
-
-//        mapPanel.plugins[0].print();
+        mapPanel = Ext.getCmp("mapPanelId");
+        var layers=mapPanel.map.layers[0].params.LAYERS;
+        var extent=mapPanel.map.getExtent();
+        var width=500;
+        var height=300;
+        console.log("layers="+layers);
+        console.log("extent="+extent);
+        
+        window.location.href = "./toWord.jsp?host=localhost&layers="+layers+"&bbox="+extent+"&width="+width+"&height="+height;
     }
 });
-
-function featureSelected(feature)
-{
-    var content =
-            "<table border='1' cellpadding='5' cellspacing='0' width='300' height='200'>"
-            + "<tr>"
-            + "<td>mingzi</td><td>" + feature.attributes.mingzi + "</td>"
-            + "</tr>"
-            + "<tr>"
-            + "<td>DKBM</td><td>" + feature.attributes.DKBM + "</td>"
-            + "</tr>"
-            + "<tr>"
-            + "<td>SCMJ</td><td>" + feature.attributes.SCMJ + "</td>"
-            + "</tr>"
-            + "<tr>"
-            + "<td>CBFMC</td><td>" + feature.attributes.CBFMC + "</td>"
-            + "</tr>"
-            + "</table>";
-
-    popupOpts = Ext.apply({
-        title: '详情',
-        location: feature,
-//                                        width: 200,
-        html: content,
-        maximizable: true,
-        collapsible: true,
-        anchorPosition: 'auto',
-        alwaysOnTop: true
-    }, null);
-    var popup = Ext.create('GeoExt.window.Popup', popupOpts);
-    popup.on({
-        close: function () {
-            if (OpenLayers.Util.indexOf(feature.layer.selectedFeatures,
-                    feature) > -1) {
-                selectControl.unselect(feature);
-            }
-        }
-    });
-    feature.popup = popup;
-    popup.show();
-
-}
-
-function featureUnSelected(feature) {
-//  mapPanel.map.removePopup(feature.popup);
-    feature.popup.destroy();
-    feature.popup = null;
-}
-
 
 Ext.define("core.map.controller.MapController", {
     extend: "Ext.app.Controller",
@@ -329,18 +331,11 @@ Ext.define("core.map.controller.MapController", {
                             });
                             mapPanel.map.addControl(selectControl);
                             selectControl.activate();
-
                         }
                     }
-
-
-
-
-
                 }
             }
         });
-
     },
     views: [
         "core.map.view.MapLayout",
