@@ -52,7 +52,7 @@ Ext.define("core.main.controller.MainController", {
               if (resObj.success) {
                 var userObj = resObj.obj;
                 var dis = Ext.getCmp("displaylogin");
-                dis.setValue("<font color=red><b>" + username + " 您好</b></font>");
+                dis.setValue("<font color=white><b>" + username + " 您好</b></font>");
 
                 //登陆成功后设置cookie
                 if (remember.getValue()) {

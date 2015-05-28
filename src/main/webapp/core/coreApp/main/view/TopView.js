@@ -10,9 +10,10 @@ Ext.define("core.main.view.TopView", {
   layout: "border",
   items: [{
       region: 'west',
-      width: 450,
+      width: 1920,
+      heigh: 70,
       bodyStyle: {
-        background: '#7598e0',
+//        background: '#7598e0',
         backgroundImage: 'url(/qzh/images/head_bg.png)',
         textAlign: 'right',
         border: 0,
@@ -20,7 +21,7 @@ Ext.define("core.main.view.TopView", {
         paddingRight: '10px'
       },
 //      html: "<h1><font color=white size=5>&nbsp;&nbsp;&nbsp;&nbsp;Extjs4</font></h1>"
-      html: "<h3><font color=white size=4>&nbsp;&nbsp;&nbsp;&nbsp;农村土地承包经营权管理系统</font></h2>"
+      html: "<div style=\"width:450px;\"><h3><font color=white size=4>&nbsp;&nbsp;&nbsp;&nbsp;农村土地承包经营权管理系统</font></h2></div>"
     }, {
       layout: {
         type: 'hbox',
@@ -29,9 +30,10 @@ Ext.define("core.main.view.TopView", {
       },
       region: 'east',
       bodyStyle: {
-        background: '#7598e0',
+        background: 'transparent !important;',
         border: 0,
-        padding: '10px'
+        padding: '10px',
+        color: 'white'
       },
       items: [{
           padding: '0 20 0 0',

@@ -230,7 +230,7 @@ var btnSearch = Ext.create('Ext.button.Button', {
         hilightLayer = new OpenLayers.Layer.Vector(curShp, {
             protocol: new OpenLayers.Protocol.WFS({
                 version: "1.0.0",
-                url: "http://localhost:8081/geoserver/cite/wfs",
+                url: "/geoserver/cite/wfs",
                 featureType: curShp,
                 featureNS: "http://www.opengeospatial.net/cite"
             }),

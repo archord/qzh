@@ -36,7 +36,7 @@ Ext.define('core.main.view.LoginWindow', {
 							if(resObj.success){
 								var userObj=resObj.obj;
 								var dis=Ext.getCmp("displaylogin");
-								dis.setValue("<font><b>"+userName+" 您好</b></font>");
+								dis.setValue("<font color=white><b>"+userName+" 您好</b></font>");
 								
 								_this.close();
 							}else{
