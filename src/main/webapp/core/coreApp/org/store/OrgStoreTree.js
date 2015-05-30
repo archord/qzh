@@ -1,9 +1,10 @@
 /*
  *  
  */
-Ext.define("core.main.store.OrgStore", {
+Ext.define("core.org.store.OrgStoreTree", {
   extend: 'Ext.data.TreeStore',
   defaultRootId: "root",
+//  storeId: 'orgStoreId',
   //autoSync:true,//与服务器同步
   proxy: {
     api: {

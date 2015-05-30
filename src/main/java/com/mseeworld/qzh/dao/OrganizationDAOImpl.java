@@ -32,11 +32,10 @@ public class OrganizationDAOImpl extends BaseHibernateDaoImpl<AOrganization> imp
     return otnId.intValue();
   }
 
-  public void deleteOrgById(long id) {
+  public void deleteOrgById(String ids) {
 
     Session session = getCurrentSession();
-    String sql = "update a_organization set is_deleted=true "
-            + "where org_id=" + id;
+    String sql = "update a_organization set is_deleted=true  where org_id in(" + ids + ")";
     session.createSQLQuery(sql).executeUpdate();
   }
 
@@ -51,5 +50,16 @@ public class OrganizationDAOImpl extends BaseHibernateDaoImpl<AOrganization> imp
       tNum = objId.intValue();
     }
     return tNum;
+  }
+  
+
+  public List<AOrganization> getFirstNOfAll(int start, int size) {
+
+    Session session = getCurrentSession();
+    String sql = "select * from a_organization where is_deleted=false order by org_id desc ";
+    Query q = session.createSQLQuery(sql).addEntity(AOrganization.class);
+    q.setFirstResult(start);
+    q.setMaxResults(size);
+    return q.list();
   }
 }

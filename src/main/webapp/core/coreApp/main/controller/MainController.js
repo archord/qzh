@@ -216,7 +216,7 @@ Ext.define("core.main.controller.MainController", {
           } else if (record.data["id"] === "user-manage") {
             self.addFunItem({
               mainView: mainView,
-              funViewXtype: "userManageLayout",
+              funViewXtype: "userLayout",
               funController: "core.user.controller.UserController",
               funViewName: "core.user.view.UserLayout"
             });

@@ -17,13 +17,28 @@ Ext.define("core.org.view.OrgLayout", {
       region: 'west',
       // iconCls:'goodtype_tree',
       xtype: "orgTree",
-      store: Ext.create('core.org.store.OrgStore'),
+      id: "orgStoreId",
+      store: Ext.create('core.org.store.OrgStoreTree'),
       margins: '5 2 5 5',
       width: 200
-    }, {
-      title: "增加组织机构",
-      xtype: "addOrganization",
-      margins: '5 2 5 5',
-      region: "center"
+    },  {
+      xtype: "panel",
+      region: "center",
+      border: 0,
+      header: false,
+      layout: "border",
+      items: [{
+          // iconCls:'good_table',
+          collapsible: true, // 可以被折叠
+          //xtype : 'panel',
+          region: 'center',
+          height: 300,
+          margins: '5 0 5 0',
+          xtype: "orggrid",
+          //bbar: [],
+//          store: Ext.create("core.user.store.UserStore", {}),
+          title: "组织机构列表"
+
+        }]
     }]
 });

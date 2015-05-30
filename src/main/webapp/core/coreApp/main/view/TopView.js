@@ -3,7 +3,7 @@ Ext.define("core.main.view.TopView", {
   extend: "Ext.panel.Panel",
   alias: 'widget.topview',
   id: "topview",
-  height: 50,
+  height: 70,
   bodyStyle: {
     background: '#7598e0'
   },
@@ -17,11 +17,11 @@ Ext.define("core.main.view.TopView", {
         backgroundImage: 'url(/qzh/images/head_bg.png)',
         textAlign: 'right',
         border: 0,
-        paddingTop: '25px',
+        paddingTop: '35px',
         paddingRight: '10px'
       },
 //      html: "<h1><font color=white size=5>&nbsp;&nbsp;&nbsp;&nbsp;Extjs4</font></h1>"
-      html: "<div style=\"width:450px;\"><h3><font color=white size=4>&nbsp;&nbsp;&nbsp;&nbsp;农村土地承包经营权管理系统</font></h2></div>"
+      html: "<div style=\"width:450px;\"><h3><font color=white size=5>&nbsp;&nbsp;&nbsp;&nbsp;农村土地承包经营权管理系统</font></h3></div>"
     }, {
       layout: {
         type: 'hbox',
@@ -43,13 +43,13 @@ Ext.define("core.main.view.TopView", {
           value: "<font color=white><b>未登录</b></font>"
         }, {
           width: 60,
-          margin: '0 20 0 0',
+          margin: '10 20 10 0',
           xtype: "button",
           ref: "logout",
           text: "注销"
         }, {
           width: 80,
-          margin: '0 20 0 0',
+          margin: '10 20 10 0',
           xtype: "button",
           ref: "exit",
           text: "退出系统"

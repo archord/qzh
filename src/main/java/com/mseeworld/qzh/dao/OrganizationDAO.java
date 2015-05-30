@@ -12,5 +12,7 @@ public interface OrganizationDAO extends BaseHibernateDao<AOrganization>{
   
   public int getChildNumber(long id);
   
-  public void deleteOrgById(long id);
+  public void deleteOrgById(String ids);
+  
+  public List<AOrganization> getFirstNOfAll(int start, int size);
 }

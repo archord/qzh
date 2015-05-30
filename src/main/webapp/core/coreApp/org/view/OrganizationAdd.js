@@ -1,7 +1,7 @@
 
 Ext.define('core.org.view.OrganizationAdd', {
   extend: 'Ext.panel.Panel',
-  title: "增加县级组织机构",
+  title: "增加组织机构",
 //	iconCls:'table_login',
 //  width: 600,
 //  height: 450,
@@ -15,7 +15,6 @@ Ext.define('core.org.view.OrganizationAdd', {
       border: false,
       columnWidth: .7,
       xtype: "form",
-      ref: "orgAddForm",
       layout: {
         type: "table",
         columns: 2

@@ -1,22 +1,20 @@
-/*
- *  
- */
-Ext.define("core.org.store.OrgStore", {
-  extend: 'Ext.data.TreeStore',
-  defaultRootId: "root",
-  storeId: 'orgStoreId',
-  //autoSync:true,//与服务器同步
-  proxy: {
-    api: {
-    },
-    type: "ajax",
-    url: "./organization/list_org_tree.do",
-    reader: {
-      type: "json"
-    },
-    writer: {
-      type: "json"
-    }
-  },
-  autoLoad: true
-});
+
+Ext.define("core.org.store.OrgStore",{
+ 	extend:'Ext.data.Store',
+	model:'core.org.model.OrgModel',
+	pageSize:30,
+	//autoSync:true,//与服务器同步
+	proxy:{
+		type:"ajax",
+		url:"./org/listall_org.do",
+		reader:{
+			type:"json",
+			root:"rows",
+			totalProperty :'totalCount'		
+		},
+		writer:{
+			type:"json"
+		}
+	},
+	autoLoad:true	
+ });

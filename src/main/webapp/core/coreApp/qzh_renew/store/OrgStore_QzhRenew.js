@@ -9,7 +9,7 @@ Ext.define("core.qzh_renew.store.OrgStore_QzhRenew", {
     api: {
     },
     type: "ajax",
-    url: "./organization/list_org_tree.do",
+    url: "./org/list_org_tree.do",
     reader: {
       type: "json"
     },

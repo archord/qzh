@@ -1,0 +1,23 @@
+/*
+ *  
+ */
+ Ext.define("core.org.model.OrgModel",{
+ 	extend:"Ext.data.Model",
+ 	fields:[
+ 		{name:"orgId",type:"int",srotable:false},
+ 		{name:"parentId",type:"int",srotable:false},
+ 		{name:"orgName",type:"string",srotable:false},
+ 		{name:"orgCoding",type:"string",srotable:false},
+ 		{name:"postalCode",type:"string",srotable:false},
+ 		{name:"authOrgName",type:"string",srotable:false},
+ 		{name:"authPeople",type:"string",srotable:false},
+ 		{name:"authPhone",type:"string",srotable:false},
+ 		{name:"fbfName",type:"string",srotable:false},
+ 		{name:"fbfLegalPerson",type:"string",srotable:false},
+ 		{name:"fbfPhone",type:"string",srotable:false},
+ 		{name:"fbfAddress",type:"string",srotable:false},
+ 		{name:"orgMember",type:"string",srotable:false},
+ 		{name:"regionType",type:"int",srotable:false},
+ 		{name:"orgLevel",type:"int",srotable:false}
+ 	]
+ });

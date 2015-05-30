@@ -10,7 +10,7 @@ Ext.define("core.cbht.store.OrgStore", {
     api: {
     },
     type: "ajax",
-    url: "./organization/list_org_tree.do",
+    url: "./org/list_org_tree.do",
     reader: {
       type: "json"
     },
