@@ -1,9 +1,10 @@
 package com.mseeworld.qzh.controller;
 
 import com.mseeworld.qzh.dao.OrganizationDAO;
-import com.mseeworld.qzh.model.AOrganization;
-import com.mseeworld.qzh.model.Category;
-import com.mseeworld.qzh.model.Product;
+import com.mseeworld.qzh.bean.AOrganization;
+import com.mseeworld.qzh.bean.Category;
+import com.mseeworld.qzh.bean.Product;
+import com.mseeworld.qzh.model.AOrganization2;
 import com.mseeworld.qzh.service.OrganizationService;
 import java.io.File;
 import java.io.IOException;
@@ -50,7 +51,7 @@ public class OrganizationController {
    * @param orgService the orgService to set
    */
   @RequestMapping(value = "/list_org_tree", method = RequestMethod.GET)
-  public void listProduct(HttpServletRequest request, PrintWriter writer) {
+  public void listTree(HttpServletRequest request, PrintWriter writer) {
     writer.write(orgService.getOrgTree(0));
   }
 
@@ -65,7 +66,7 @@ public class OrganizationController {
     int isize = Integer.parseInt(psize);
     
     int total = orgDao.count().intValue();
-    List<AOrganization> orgs = orgDao.getFirstNOfAll(istart, isize);
+    List<AOrganization2> orgs = orgDao.getFirstNOfAll2(istart, isize);
 
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
@@ -74,7 +75,7 @@ public class OrganizationController {
     rstStr.append(total);
     rstStr.append(",rows:[");
     int i = 0;
-    for (AOrganization org : orgs) {
+    for (AOrganization2 org : orgs) {
       try {
         String tStr = ow.writeValueAsString(org);
         rstStr.append(tStr);

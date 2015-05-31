@@ -4,8 +4,8 @@
  */
 package com.mseeworld.qzh.controller;
 
-import com.mseeworld.qzh.model.ExtJSFormResult;
-import com.mseeworld.qzh.model.FileUpload;
+import com.mseeworld.qzh.bean.ExtJSFormResult;
+import com.mseeworld.qzh.bean.FileUpload;
 import com.mseeworld.qzh.service.ModelParser;
 import java.io.File;
 import java.io.IOException;

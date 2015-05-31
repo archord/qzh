@@ -1,7 +1,7 @@
 package com.mseeworld.qzh.dao;
 
 import java.util.List;
-import com.mseeworld.qzh.model.AUser;
+import com.mseeworld.qzh.bean.AUser;
 import com.mseeworld.qzh.model.AUser2;
 
 public interface UserDAO  extends BaseHibernateDao<AUser>{

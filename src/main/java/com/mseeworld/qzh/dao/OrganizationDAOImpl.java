@@ -1,6 +1,7 @@
 package com.mseeworld.qzh.dao;
 
-import com.mseeworld.qzh.model.AOrganization;
+import com.mseeworld.qzh.bean.AOrganization;
+import com.mseeworld.qzh.model.AOrganization2;
 import java.math.BigInteger;
 import java.util.List;
 import org.hibernate.Query;
@@ -53,11 +54,14 @@ public class OrganizationDAOImpl extends BaseHibernateDaoImpl<AOrganization> imp
   }
   
 
-  public List<AOrganization> getFirstNOfAll(int start, int size) {
+  public List<AOrganization2> getFirstNOfAll2(int start, int size) {
 
     Session session = getCurrentSession();
-    String sql = "select * from a_organization where is_deleted=false order by org_id desc ";
-    Query q = session.createSQLQuery(sql).addEntity(AOrganization.class);
+    String sql = "select org.*, o.org_name parent_name "
+            + "from a_organization org "
+            + "left join a_organization o on org.parent_id=o.org_id "
+            + "where org.is_deleted=false order by org.org_id desc ";
+    Query q = session.createSQLQuery(sql).addEntity(AOrganization2.class);
     q.setFirstResult(start);
     q.setMaxResults(size);
     return q.list();

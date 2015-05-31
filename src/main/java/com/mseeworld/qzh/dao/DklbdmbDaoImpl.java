@@ -4,7 +4,7 @@
  */
 package com.mseeworld.qzh.dao;
 
-import com.mseeworld.qzh.model.Dklbdmb;
+import com.mseeworld.qzh.bean.Dklbdmb;
 import java.math.BigInteger;
 import java.util.List;
 import org.hibernate.Query;

@@ -18,6 +18,7 @@
  		{name:"fbfAddress",type:"string",srotable:false},
  		{name:"orgMember",type:"string",srotable:false},
  		{name:"regionType",type:"int",srotable:false},
- 		{name:"orgLevel",type:"int",srotable:false}
+ 		{name:"orgLevel",type:"int",srotable:false},
+ 		{name:"parentName",type:"string",srotable:false}
  	]
  });

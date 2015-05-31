@@ -1,7 +1,7 @@
 package com.mseeworld.qzh.service;
 
 import com.mseeworld.qzh.dao.OrganizationDAO;
-import com.mseeworld.qzh.model.AOrganization;
+import com.mseeworld.qzh.bean.AOrganization;
 import java.io.IOException;
 import java.util.List;
 import javax.annotation.Resource;

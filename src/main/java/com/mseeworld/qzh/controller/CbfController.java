@@ -2,9 +2,9 @@ package com.mseeworld.qzh.controller;
 
 import com.mseeworld.qzh.dao.CbfDao;
 import com.mseeworld.qzh.dao.CbfJtcyDao;
-import com.mseeworld.qzh.model.Cbf;
-import com.mseeworld.qzh.model.CbfJtcy;
-import com.mseeworld.qzh.model.Dk;
+import com.mseeworld.qzh.bean.Cbf;
+import com.mseeworld.qzh.bean.CbfJtcy;
+import com.mseeworld.qzh.bean.Dk;
 import com.mseeworld.qzh.util.NumberFormatUtil;
 import java.beans.PropertyEditorSupport;
 import java.io.IOException;

@@ -1,6 +1,6 @@
 package com.mseeworld.qzh.dao;
 
-import com.mseeworld.qzh.model.Cbflxdmb;
+import com.mseeworld.qzh.bean.Cbflxdmb;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.Resource;

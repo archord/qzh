@@ -1,8 +1,8 @@
 package com.mseeworld.qzh.controller;
 
 import com.mseeworld.qzh.dao.LzhhtDao;
-import com.mseeworld.qzh.model.Lzht;
-import com.mseeworld.qzh.model.Lzht1;
+import com.mseeworld.qzh.bean.Lzht;
+import com.mseeworld.qzh.bean.Lzht1;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.mseeworld.qzh.controller;
 
 import com.mseeworld.qzh.dao.DkDao;
-import com.mseeworld.qzh.model.Dk;
+import com.mseeworld.qzh.bean.Dk;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;

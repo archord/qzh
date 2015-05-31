@@ -4,7 +4,7 @@
  */
 package com.mseeworld.qzh.dao;
 
-import com.mseeworld.qzh.model.Cbflxdmb;
+import com.mseeworld.qzh.bean.Cbflxdmb;
 import java.util.List;
 
 /**

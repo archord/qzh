@@ -1,7 +1,7 @@
 package com.mseeworld.qzh.controller;
 
 import com.mseeworld.qzh.dao.FbfDao;
-import com.mseeworld.qzh.model.Fbf;
+import com.mseeworld.qzh.bean.Fbf;
 import com.mseeworld.qzh.service.PeopleService;
 import com.mseeworld.qzh.util.NumberFormatUtil;
 import java.io.IOException;

@@ -4,7 +4,7 @@
  */
 package com.mseeworld.qzh.dao;
 
-import com.mseeworld.qzh.model.CbfJtcy;
+import com.mseeworld.qzh.bean.CbfJtcy;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;

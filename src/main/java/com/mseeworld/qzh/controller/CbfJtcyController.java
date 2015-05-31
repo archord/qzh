@@ -1,7 +1,7 @@
 package com.mseeworld.qzh.controller;
 
 import com.mseeworld.qzh.dao.CbfJtcyDao;
-import com.mseeworld.qzh.model.CbfJtcy;
+import com.mseeworld.qzh.bean.CbfJtcy;
 import com.mseeworld.qzh.util.NumberFormatUtil;
 import java.io.IOException;
 import java.io.PrintWriter;

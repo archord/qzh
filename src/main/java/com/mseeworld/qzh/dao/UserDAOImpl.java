@@ -1,6 +1,6 @@
 package com.mseeworld.qzh.dao;
 
-import com.mseeworld.qzh.model.AUser;
+import com.mseeworld.qzh.bean.AUser;
 import com.mseeworld.qzh.model.AUser2;
 import java.math.BigInteger;
 import java.util.List;

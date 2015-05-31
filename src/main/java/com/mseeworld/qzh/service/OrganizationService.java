@@ -1,6 +1,6 @@
 package com.mseeworld.qzh.service;
 
-import com.mseeworld.qzh.model.AOrganization;
+import com.mseeworld.qzh.bean.AOrganization;
 
 public interface OrganizationService {
 

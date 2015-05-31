@@ -4,7 +4,7 @@
  */
 package com.mseeworld.qzh.dao;
 
-import com.mseeworld.qzh.model.Syqsxdmb;
+import com.mseeworld.qzh.bean.Syqsxdmb;
 import java.util.List;
 
 /**

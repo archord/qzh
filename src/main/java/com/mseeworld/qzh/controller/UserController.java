@@ -1,7 +1,7 @@
 package com.mseeworld.qzh.controller;
 
 import com.mseeworld.qzh.dao.UserDAO;
-import com.mseeworld.qzh.model.AUser;
+import com.mseeworld.qzh.bean.AUser;
 import com.mseeworld.qzh.model.AUser2;
 import java.io.IOException;
 import java.io.PrintWriter;

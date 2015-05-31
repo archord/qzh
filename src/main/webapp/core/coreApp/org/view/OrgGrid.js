@@ -63,9 +63,9 @@ Ext.define("core.org.view.OrgGrid", {
   columns: [
     {xtype: 'rownumberer'},
 //    {text: "组织Id", dataIndex: "orgId", width: 100, field: {xtype: "textfield"}},
-//    {text: "父组织Id", dataIndex: "parentId", width: 100, field: {xtype: "textfield"}},
     {text: "组织代码", dataIndex: "orgCoding", width: 100, field: {xtype: "textfield"}},
     {text: "组织名称", dataIndex: "orgName", width: 100, field: {xtype: "textfield"}},
+    {text: "上级名称", dataIndex: "parentName", width: 100, field: {xtype: "textfield"}},
     {text: "组织成员", dataIndex: "orgMember", width: 100, field: {xtype: "textfield"}},
     {text: "发包方名称", dataIndex: "fbfName", width: 100, field: {xtype: "textfield"}},
     {text: "法人代表", dataIndex: "fbfLegalPerson", width: 100, field: {xtype: "textfield"}},

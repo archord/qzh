@@ -4,7 +4,7 @@
  */
 package com.mseeworld.qzh.dao;
 
-import com.mseeworld.qzh.model.Sfdmb;
+import com.mseeworld.qzh.bean.Sfdmb;
 import java.util.List;
 
 /**

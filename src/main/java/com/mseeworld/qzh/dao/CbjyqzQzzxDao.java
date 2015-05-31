@@ -4,7 +4,7 @@
  */
 package com.mseeworld.qzh.dao;
 
-import com.mseeworld.qzh.model.CbjyqzQzzx;
+import com.mseeworld.qzh.bean.CbjyqzQzzx;
 import java.util.List;
 
 /**
