@@ -15,5 +15,5 @@ public interface CbjyqzDao extends BaseHibernateDao<Cbjyqz> {
 
   public List<Cbjyqz> getByOrgId(long orgId);
 
-  public List<Cbjyqz> getFirstNOfAll(int start, int size);
+  public List<Cbjyqz> getFirstNOfAll2(int start, int size, int parentId);
 }

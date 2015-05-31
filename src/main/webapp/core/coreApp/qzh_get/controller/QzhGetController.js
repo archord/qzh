@@ -18,23 +18,19 @@ Ext.define("core.qzh_get.controller.QzhGetController", {
       },
       "orgTreeQzhGet": {
         itemclick: function(tree, record, item, index, e, eOpts) {
-          //cannot find qzhGetWindow, so pform is undefined
-          var pform = Ext.getCmp("qzhGetWindowId");
-          if (false) { // null  undefined NaN empty string("") 0 false //if( typeof foo !== 'undefined' )
-            console.log(pform);
-            console.log(pform.findField("orgName").getValue());
-            pform.findField("isAdd").setValue("1");
-            if (record.raw) {
-              if (record.raw.orgLevel < 3) {
-                pform.findField("orgName").setValue("必须在左侧选择村级以下区域");
-                pform.findField("orgId").setValue("");
-                pform.findField("orgLevel").setValue(record.raw.orgLevel);
-              } else {
-                pform.findField("orgName").setValue(record.raw.orgName);
-                pform.findField("orgId").setValue(record.raw.orgId);
-                pform.findField("orgLevel").setValue(record.raw.orgLevel);
-              }
-            }
+          var grid = Ext.getCmp("qzhGetGridId");
+          var store = grid.getStore();
+          if (record.raw) {
+            store.load({params: {orgId: record.raw.orgId}});
+          }
+        }
+      },
+      "orgTreeQzh_QzhGet": {
+        itemclick: function(tree, record, item, index, e, eOpts) {
+          var grid = Ext.getCmp("qzhGetGrid_QzhId");
+          var store = grid.getStore();
+          if (record.raw) {
+            store.load({params: {orgId: record.raw.orgId}});
           }
         }
       },

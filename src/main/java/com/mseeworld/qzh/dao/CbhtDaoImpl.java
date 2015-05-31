@@ -51,9 +51,9 @@ public class CbhtDaoImpl extends BaseHibernateDaoImpl<Cbht> implements CbhtDao {
             + "where id= " + id;
     Query q = session.createSQLQuery(sql).addEntity(Cbht.class);
 
-    return (Cbht)q.list().get(0);
+    return (Cbht) q.list().get(0);
   }
-  
+
   public List<Cbht> getByOrgId(long orgId) {
 
     Session session = getCurrentSession();
@@ -96,7 +96,7 @@ public class CbhtDaoImpl extends BaseHibernateDaoImpl<Cbht> implements CbhtDao {
     }
   }
 
-  public List<CbhtView> getFirstNOfCbhtView(int n) {
+  public List<CbhtView> getFirstNOfCbhtView(int start, int size, int parentId) {
 
     ArrayList<CbhtView> objs = new ArrayList();
 
@@ -104,8 +104,16 @@ public class CbhtDaoImpl extends BaseHibernateDaoImpl<Cbht> implements CbhtDao {
     String sql = "select h.id, h.cbhtbm, h.fbfbm, h.cbfbm, c.cbfmc "
             + "from cbht h "
             + "left join cbf c on h.cbfbm=c.cbfbm "
-            + "order by id limit " + n;
+            + "left join a_organization org on h.org_id=org.org_id";
+    if (parentId != 0) {
+      sql += " where h.org_id=" + parentId;
+    }
+    sql += " order by h.id desc ";
+
     Query q = session.createSQLQuery(sql);
+    q.setFirstResult(start);
+    q.setMaxResults(size);
+
     List lst = q.list();
     if (lst.size() > 0) {
       Iterator itor = lst.iterator();
@@ -130,10 +138,17 @@ public class CbhtDaoImpl extends BaseHibernateDaoImpl<Cbht> implements CbhtDao {
     return objs;
   }
 
-  public List<Cbht> getFirstNOfAll(int start, int size) {
+  public List<Cbht> getFirstNOfAll2(int start, int size, int parentId) {
 
     Session session = getCurrentSession();
-    String sql = "select * from cbht order by id desc ";
+//    String sql = "select * from cbht order by id desc ";
+    String sql = "select obj.*, org.org_name "
+            + "from cbht obj "
+            + "left join a_organization org on obj.org_id=org.org_id";
+    if (parentId != 0) {
+      sql += " where obj.org_id=" + parentId;
+    }
+    sql += " order by obj.id desc ";
     Query q = session.createSQLQuery(sql).addEntity(Cbht.class);
     q.setFirstResult(start);
     q.setMaxResults(size);

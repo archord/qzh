@@ -67,11 +67,20 @@ public class DkDaoImpl extends BaseHibernateDaoImpl<Dk> implements DkDao {
     return (Dk)q.list().get(0);
   }
 
-  public List<Dk> getFirstNOfAll(int limit) {
+  public List<Dk> getFirstNOfAll2(int start, int size, int parentId) {
 
     Session session = getCurrentSession();
-    String sql = "select * from dk order by id limit " + limit;
+//    String sql = "select * from dk order by id limit " + limit;
+    String sql = "select obj.*, org.org_name "
+            + "from dk obj "
+            + "left join a_organization org on obj.org_id=org.org_id";
+    if (parentId != 0) {
+      sql += " where obj.org_id=" + parentId;
+    }
+    sql += " order by obj.id desc ";
     Query q = session.createSQLQuery(sql).addEntity(Dk.class);
+    q.setFirstResult(start);
+    q.setMaxResults(size);
 
     return q.list();
   }

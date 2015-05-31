@@ -42,10 +42,17 @@ public class CbjyqzQzbfDaoImpl extends BaseHibernateDaoImpl<CbjyqzQzbf> implemen
   }
   
   
-  public List<CbjyqzQzbf> getFirstNOfAll(int start, int size){
+  public List<CbjyqzQzbf> getFirstNOfAll2(int start, int size, int parentId){
 
     Session session = getCurrentSession();
-    String sql = "select * from cbjyqz_qzbf order by id desc ";
+//    String sql = "select * from cbjyqz_qzbf order by id desc ";
+    String sql = "select obj.*, org.org_name "
+            + "from cbjyqz_qzbf obj "
+            + "left join a_organization org on obj.org_id=org.org_id";
+    if (parentId != 0) {
+      sql += " where obj.org_id=" + parentId;
+    }
+    sql += " order by obj.id desc ";
     Query q = session.createSQLQuery(sql).addEntity(CbjyqzQzbf.class);
     q.setFirstResult(start);
     q.setMaxResults(size);

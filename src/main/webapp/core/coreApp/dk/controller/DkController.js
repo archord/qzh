@@ -21,9 +21,7 @@ Ext.define("core.dk.controller.DkController", {
           var dkgrid = Ext.getCmp("dkgrid");
           var store = dkgrid.getStore();
           if (record.raw) {
-              if (record.raw.orgLevel >= 3) {
-                store.load({params: {orgId: record.raw.orgId}});
-              }
+            store.load({params: {orgId: record.raw.orgId}});
           }
         }
       },
@@ -153,13 +151,13 @@ Ext.define("core.dk.controller.DkController", {
     "core.dk.view.DkWindow",
     "core.dk.view.DkGrid"
   ],
-  stores: ["core.dk.store.DkStore", 
-    "core.dk.store.OrgStore", 
-    "core.combobox.store.SyqsxdmbStore", 
-    "core.combobox.store.DklbdmbStore", 
-    "core.combobox.store.DldjdmbStore", 
-    "core.combobox.store.TdytdmbStore", 
+  stores: ["core.dk.store.DkStore",
+    "core.dk.store.OrgStore",
+    "core.combobox.store.SyqsxdmbStore",
+    "core.combobox.store.DklbdmbStore",
+    "core.combobox.store.DldjdmbStore",
+    "core.combobox.store.TdytdmbStore",
     "core.combobox.store.SfdmbStore",
-  "core.combobox.store.TdlylxStore"],
+    "core.combobox.store.TdlylxStore"],
   models: ["core.dk.model.DkModel"]
 });

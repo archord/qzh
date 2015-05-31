@@ -36,40 +36,46 @@ public class DkController {
   public void listAll(HttpServletRequest request, PrintWriter writer) {
 
     String page = request.getParameter("page");
-    String start = request.getParameter("from");
-    String limit = request.getParameter("to");
+    String start = request.getParameter("start");
+    String psize = request.getParameter("limit");
+    int ipage = Integer.parseInt(page);
+    int istart = Integer.parseInt(start);
+    int isize = Integer.parseInt(psize);
 
-    String orgId = request.getParameter("orgId");
     String cbhtId = request.getParameter("cbhtId");
-
-    List<Dk> cbfs = null;
-    int limit1 = 10;
-
-    if (orgId != null && !orgId.trim().isEmpty()) {
-      if (!orgId.equals("all") && !orgId.equals("0")) {
-        cbfs = dkDao.getByOrgId(Integer.parseInt(orgId), limit1);
-      }
-    } else if (cbhtId != null && !cbhtId.trim().isEmpty() && !cbhtId.equals("0")) {
-      cbfs = dkDao.getByCbhtId(Integer.parseInt(cbhtId), limit1);
-    } else {
-      cbfs = dkDao.getFirstNOfAll(limit1);
+    
+    String porgId = request.getParameter("orgId");
+    System.out.println("porgId="+porgId);
+    int iorgId = 0;
+    if(porgId!=null && !porgId.isEmpty()){
+      iorgId = Integer.parseInt(porgId);
     }
 
+    List<Dk> dks = null;
+    int limit1 = 10;
+
+    if (cbhtId != null && !cbhtId.trim().isEmpty() && !cbhtId.equals("0")) {
+      dks = dkDao.getByCbhtId(Integer.parseInt(cbhtId), limit1);
+    } else {
+      dks = dkDao.getFirstNOfAll2(istart, isize, iorgId);
+    }
+
+    int total = dkDao.count().intValue();
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
     StringBuilder rstStr = new StringBuilder("");
     rstStr.append("{totalCount:");
-    rstStr.append(cbfs.size());
+    rstStr.append(total);
     rstStr.append(",rows:[");
     int i = 0;
-    for (Dk cbf : cbfs) {
+    for (Dk cbf : dks) {
       try {
         String tStr = ow.writeValueAsString(cbf);
         rstStr.append(tStr);
       } catch (IOException ex) {
         ex.printStackTrace();
       }
-      if (++i < cbfs.size()) {
+      if (++i < dks.size()) {
         rstStr.append(",");
       }
     }
@@ -87,27 +93,27 @@ public class DkController {
     String orgId = request.getParameter("orgId");
     String cbhtId = request.getParameter("cbhtId");
 
-    List<Dk> cbfs = null;
+    List<Dk> dks = null;
     int limit1 = 10;
 
-    cbfs = dkDao.getDkOfNullChbtId(limit1);
+    dks = dkDao.getDkOfNullChbtId(limit1);
 
 
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
     StringBuilder rstStr = new StringBuilder("");
     rstStr.append("{totalCount:");
-    rstStr.append(cbfs.size());
+    rstStr.append(dks.size());
     rstStr.append(",rows:[");
     int i = 0;
-    for (Dk cbf : cbfs) {
+    for (Dk cbf : dks) {
       try {
         String tStr = ow.writeValueAsString(cbf);
         rstStr.append(tStr);
       } catch (IOException ex) {
         ex.printStackTrace();
       }
-      if (++i < cbfs.size()) {
+      if (++i < dks.size()) {
         rstStr.append(",");
       }
     }

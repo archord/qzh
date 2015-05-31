@@ -44,8 +44,15 @@ public class CbhtController {
     int istart = Integer.parseInt(start);
     int isize = Integer.parseInt(psize);
     
+    String porgId = request.getParameter("orgId");
+    System.out.println("porgId="+porgId);
+    int iorgId = 0;
+    if(porgId!=null && !porgId.isEmpty()){
+      iorgId = Integer.parseInt(porgId);
+    }
+    
     int total = cbhtDao.count().intValue();
-    List<Cbht> cbhts = cbhtDao.getFirstNOfAll(istart, isize);
+    List<Cbht> cbhts = cbhtDao.getFirstNOfAll2(istart, isize, iorgId);
 
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
@@ -71,8 +78,23 @@ public class CbhtController {
 
   @RequestMapping(value = "/listall_cbht2", method = RequestMethod.GET)
   public void listAllCbht2(HttpServletRequest request, PrintWriter writer) {
-    int n = 10;
-    List<CbhtView> cbhts = cbhtDao.getFirstNOfCbhtView(n);
+
+    String page = request.getParameter("page");
+    String start = request.getParameter("start");
+    String psize = request.getParameter("limit");
+    int ipage = Integer.parseInt(page);
+    int istart = Integer.parseInt(start);
+    int isize = Integer.parseInt(psize);
+    
+    String porgId = request.getParameter("orgId");
+    System.out.println("porgId="+porgId);
+    int iorgId = 0;
+    if(porgId!=null && !porgId.isEmpty()){
+      iorgId = Integer.parseInt(porgId);
+    }
+    
+    int total = cbhtDao.count().intValue();
+    List<CbhtView> cbhts = cbhtDao.getFirstNOfCbhtView(istart, isize, iorgId);
 
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 

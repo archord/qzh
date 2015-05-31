@@ -32,13 +32,16 @@ public class UserDAOImpl extends BaseHibernateDaoImpl<AUser> implements UserDAO 
   }
   
 
-  public List<AUser2> getFirstNOfAll2(int start, int size) {
+  public List<AUser2> getFirstNOfAll2(int start, int size, int parentId) {
 
     Session session = getCurrentSession();
     String sql = "select u.*, o.org_name "
             + "from a_user u "
-            + "inner join a_organization o on u.org_id=o.org_id"
-            + " order by u.id desc ";
+            + "left join a_organization o on u.org_id=o.org_id";
+    if (parentId != 0) {
+      sql += " where o.org_id=" + parentId;
+    }
+    sql += " order by u.id desc ";
     Query q = session.createSQLQuery(sql).addEntity(AUser2.class);
     q.setFirstResult(start);
     q.setMaxResults(size);

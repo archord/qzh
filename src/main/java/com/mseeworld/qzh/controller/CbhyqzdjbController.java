@@ -43,8 +43,15 @@ public class CbhyqzdjbController {
     int istart = Integer.parseInt(start);
     int isize = Integer.parseInt(psize);
     
+    String porgId = request.getParameter("orgId");
+    System.out.println("porgId="+porgId);
+    int iorgId = 0;
+    if(porgId!=null && !porgId.isEmpty()){
+      iorgId = Integer.parseInt(porgId);
+    }
+    
     int total = cbjyqzdjbDao.count().intValue();
-    List<Cbjyqzdjb> cbjyqzdjbs = cbjyqzdjbDao.getFirstNOfAll(istart, isize);
+    List<Cbjyqzdjb> cbjyqzdjbs = cbjyqzdjbDao.getFirstNOfAll2(istart, isize, iorgId);
 
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 

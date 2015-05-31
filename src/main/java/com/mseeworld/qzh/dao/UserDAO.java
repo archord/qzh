@@ -10,5 +10,5 @@ public interface UserDAO  extends BaseHibernateDao<AUser>{
   
   public Boolean exist(AUser user);
   
-  public List<AUser2> getFirstNOfAll2(int start, int size);
+  public List<AUser2> getFirstNOfAll2(int start, int size, int parentId);
 }

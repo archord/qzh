@@ -39,10 +39,17 @@ public class CbfDaoImpl extends BaseHibernateDaoImpl<Cbf> implements CbfDao {
     return q.list();
   }
 
-  public List<Cbf> getFirstNOfAll(int start, int size) {
+  public List<Cbf> getFirstNOfAll2(int start, int size, int parentId) {
 
     Session session = getCurrentSession();
-    String sql = "select * from cbf order by id desc ";
+//    String sql = "select * from cbf order by id desc ";
+    String sql = "select obj.*, org.org_name "
+            + "from cbf obj "
+            + "left join a_organization org on obj.org_id=org.org_id";
+    if (parentId != 0) {
+      sql += " where obj.org_id=" + parentId;
+    }
+    sql += " order by obj.id desc ";
     Query q = session.createSQLQuery(sql).addEntity(Cbf.class);
     q.setFirstResult(start);
     q.setMaxResults(size);

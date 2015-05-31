@@ -19,6 +19,6 @@ public interface LzhhtDao extends BaseHibernateDao<Lzht> {
 
   public List<Lzht> getByOrgId(int orgId, int limit);
 
-  public List<Lzht> getFirstNOfAll(int limit);
+  public List<Lzht> getFirstNOfAll2(int start, int size, int parentId);
   
 }

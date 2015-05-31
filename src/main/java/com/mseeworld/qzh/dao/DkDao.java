@@ -25,7 +25,7 @@ public interface DkDao extends BaseHibernateDao<Dk> {
 
   public List<Dk> getByCbhtId(int cbhtId, int limit);
 
-  public List<Dk> getFirstNOfAll(int limit);
+  public List<Dk> getFirstNOfAll2(int start, int size, int parentId);
 
   public List<Dk> getDkOfNullChbtId(int limit);
 

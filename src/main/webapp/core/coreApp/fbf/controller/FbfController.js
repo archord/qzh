@@ -18,20 +18,10 @@ Ext.define("core.fbf.controller.FbfController", {
       },
       "orgTreeFbf": {
         itemclick: function(tree, record, item, index, e, eOpts) {
-          //节点点击事件
-          var pform = tree.up("fbfLayout").down("fbfForm").getForm();
-          pform.findField("isAdd").setValue("1");
-
+          var grid = Ext.getCmp("fbfgridId");
+          var store = grid.getStore();
           if (record.raw) {
-            if (record.raw.orgLevel < 3) {
-              pform.findField("orgName").setValue("必须在左侧选择村级以下区域");
-              pform.findField("orgId").setValue("");
-              pform.findField("orgLevel").setValue(record.raw.orgLevel);
-            } else {
-              pform.findField("orgName").setValue(record.raw.orgName);
-              pform.findField("orgId").setValue(record.raw.orgId);
-              pform.findField("orgLevel").setValue(record.raw.orgLevel);
-            }
+            store.load({params: {orgId: record.raw.orgId}});
           }
         }
       },

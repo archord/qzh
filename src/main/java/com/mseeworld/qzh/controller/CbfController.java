@@ -48,8 +48,15 @@ public class CbfController {
     int istart = Integer.parseInt(start);
     int isize = Integer.parseInt(psize);
     
+    String porgId = request.getParameter("orgId");
+    System.out.println("porgId="+porgId);
+    int iorgId = 0;
+    if(porgId!=null && !porgId.isEmpty()){
+      iorgId = Integer.parseInt(porgId);
+    }
+    
     int total = cbfDao.count().intValue();
-    List<Cbf> cbfs = cbfDao.getFirstNOfAll(istart, isize);
+    List<Cbf> cbfs = cbfDao.getFirstNOfAll2(istart, isize, iorgId);
 
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 

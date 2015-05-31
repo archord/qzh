@@ -130,6 +130,15 @@ Ext.define("core.org.controller.OrgController", {
 //          btn.up('.window').close();
           btn.up('.window').hide();
         }
+      },
+      "orgTree": {
+        itemclick: function(tree, record, item, index, e, eOpts) {
+          var grid = Ext.getCmp("orggridId");
+          var store = grid.getStore();
+          if (record.raw) {
+            store.load({params: {orgId: record.raw.orgId}});
+          }
+        }
       }
 
     });

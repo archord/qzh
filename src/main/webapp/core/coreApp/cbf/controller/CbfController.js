@@ -18,7 +18,11 @@ Ext.define("core.cbf.controller.CbfController", {
       },
       "orgTreeCbf": {
         itemclick: function(tree, record, item, index, e, eOpts) {
-
+          var grid = Ext.getCmp("cbfgridId");
+          var store = grid.getStore();
+          if (record.raw) {
+            store.load({params: {orgId: record.raw.orgId}});
+          }
         }
       },
       "cbfgrid": {

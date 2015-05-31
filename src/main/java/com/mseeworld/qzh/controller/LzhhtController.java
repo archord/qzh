@@ -37,40 +37,37 @@ public class LzhhtController {
   public void listAll(HttpServletRequest request, PrintWriter writer) {
 
     String page = request.getParameter("page");
-    String start = request.getParameter("from");
-    String limit = request.getParameter("to");
+    String start = request.getParameter("start");
+    String psize = request.getParameter("limit");
+    int ipage = Integer.parseInt(page);
+    int istart = Integer.parseInt(start);
+    int isize = Integer.parseInt(psize);
 
-    String orgId = request.getParameter("orgId");
-    String cbhtId = request.getParameter("cbhtId");
-    System.out.println("orgId=" + orgId);
-    System.out.println("cbhtId=" + cbhtId);
-
-    List<Lzht> cbfs = null;
-    int limit1 = 10;
-
-    if (orgId != null && !orgId.trim().isEmpty()) {
-      if (!orgId.equals("all") && !orgId.equals("0")) {
-        cbfs = lzhtDao.getByOrgId(Integer.parseInt(orgId), limit1);
-      }
-    } else {
-      cbfs = lzhtDao.getFirstNOfAll(limit1);
+    String porgId = request.getParameter("orgId");
+    System.out.println("porgId=" + porgId);
+    int iorgId = 0;
+    if (porgId != null && !porgId.isEmpty()) {
+      iorgId = Integer.parseInt(porgId);
     }
+
+    int total = lzhtDao.count().intValue();
+    List<Lzht> objs = lzhtDao.getFirstNOfAll2(istart, isize, iorgId);
 
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
     StringBuilder rstStr = new StringBuilder("");
     rstStr.append("{totalCount:");
-    rstStr.append(cbfs.size());
+    rstStr.append(total);
     rstStr.append(",rows:[");
     int i = 0;
-    for (Lzht cbf : cbfs) {
+    for (Lzht cbf : objs) {
       try {
         String tStr = ow.writeValueAsString(cbf);
         rstStr.append(tStr);
       } catch (IOException ex) {
         ex.printStackTrace();
       }
-      if (++i < cbfs.size()) {
+      if (++i < objs.size()) {
         rstStr.append(",");
       }
     }
@@ -106,8 +103,6 @@ public class LzhhtController {
     String cbhtId = request.getParameter("cbhtId");
     System.out.println("lzhtIds=" + lzhtIds);
     System.out.println("cbhtId=" + cbhtId);
-
-
 
     writer.write("{success:true, msg:'流转合同保存成功!'}");
   }

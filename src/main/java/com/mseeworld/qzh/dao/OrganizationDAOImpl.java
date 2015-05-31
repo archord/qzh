@@ -52,15 +52,18 @@ public class OrganizationDAOImpl extends BaseHibernateDaoImpl<AOrganization> imp
     }
     return tNum;
   }
-  
 
-  public List<AOrganization2> getFirstNOfAll2(int start, int size) {
+  public List<AOrganization2> getFirstNOfAll2(int start, int size, int parentId) {
 
     Session session = getCurrentSession();
     String sql = "select org.*, o.org_name parent_name "
             + "from a_organization org "
             + "left join a_organization o on org.parent_id=o.org_id "
-            + "where org.is_deleted=false order by org.org_id desc ";
+            + "where org.is_deleted=false ";
+    if (parentId != 0) {
+      sql += " and org.parent_id=" + parentId;
+    }
+    sql += " order by org.org_id desc";
     Query q = session.createSQLQuery(sql).addEntity(AOrganization2.class);
     q.setFirstResult(start);
     q.setMaxResults(size);

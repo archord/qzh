@@ -52,10 +52,17 @@ public class CbjyqzdjbDaoImpl extends BaseHibernateDaoImpl<Cbjyqzdjb> implements
     return q.list();
   }
 
-  public List<Cbjyqzdjb> getFirstNOfAll(int start, int size) {
+  public List<Cbjyqzdjb> getFirstNOfAll2(int start, int size, int parentId) {
 
     Session session = getCurrentSession();
-    String sql = "select * from cbjyqzdjb order by id desc ";
+//    String sql = "select * from cbjyqzdjb order by id desc ";
+    String sql = "select obj.*, org.org_name "
+            + "from cbjyqzdjb obj "
+            + "left join a_organization org on obj.org_id=org.org_id";
+    if (parentId != 0) {
+      sql += " where obj.org_id=" + parentId;
+    }
+    sql += " order by obj.id desc ";
     Query q = session.createSQLQuery(sql).addEntity(Cbjyqzdjb.class);
     q.setFirstResult(start);
     q.setMaxResults(size);
