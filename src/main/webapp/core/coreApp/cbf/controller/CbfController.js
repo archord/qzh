@@ -267,6 +267,24 @@ Ext.define("core.cbf.controller.CbfController", {
             Ext.MessageBox.alert("提示", "请在下方选择承包合同！");
           }
         }
+      },
+      "OrgWindowAll_cbf button[ref=save]": {
+        click: function(btn) {
+          var tree = btn.up('OrgWindowAll_cbf').down('treepanel');
+          var curSelNode = tree.getSelectionModel().getSelection();
+          if (curSelNode.length > 0 && curSelNode[0].raw) {
+//            if (curSelNode[0].raw.orgLevel < 3) {
+//              Ext.MessageBox.alert("提示", "必须在左侧选择村级以下区域!");
+//              return;
+//            }
+            var window = Ext.getCmp("cbfWindowId");
+            var pform = window.down("form").getForm();
+            pform.findField("orgName").setValue(curSelNode[0].raw.orgName);
+            pform.findField("orgId").setValue(curSelNode[0].raw.orgId);
+          }
+          btn.up('.window').close();
+//          btn.up('.window').hide();
+        }
       }
 
     });
@@ -279,7 +297,8 @@ Ext.define("core.cbf.controller.CbfController", {
     "core.cbf.view.CbfJtcyGrid",
     "core.cbf.view.CbfJtcyWindow",
     "core.cbf.view.CbfJtcyForm",
-    "core.cbf.view.CbfWindow"
+    "core.cbf.view.CbfWindow",
+    "core.cbf.view.OrgWindowAll_fbf"
   ],
   stores: ["core.cbf.store.CbfStore",
     "core.cbf.store.OrgStore",
@@ -289,6 +308,6 @@ Ext.define("core.cbf.controller.CbfController", {
     "core.combobox.store.SfdmbStore",
     "core.cbf.store.CbfjtcyStore",
     "core.combobox.store.CybzdmbStore",
-    "core.combobox.store.XbdmbStore"],
+    "core.combobox.store.XbdmbStore", "core.main.store.OrgStore"],
   models: ["core.cbf.model.CbfModel", "core.cbf.model.CbfjtcyModel"]
 });

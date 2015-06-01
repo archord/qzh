@@ -113,10 +113,12 @@ Ext.define("core.org.controller.OrgController", {
           }
         }
       },
-      "orgTreeAll button[ref=save]": {
+      "OrgWindowAll_org button[ref=save]": {
         click: function(btn) {
-          var tree = btn.up('orgWindowAll').down('orgTreeAll');
+          var tree = btn.up('OrgWindowAll_org').down('treepanel');
+          console.log(tree);
           var curSelNode = tree.getSelectionModel().getSelection();
+          
           if (curSelNode.length > 0 && curSelNode[0].raw) {
 //            if (curSelNode[0].raw.orgLevel < 3) {
 //              Ext.MessageBox.alert("提示", "必须在左侧选择村级以下区域!");
@@ -127,8 +129,8 @@ Ext.define("core.org.controller.OrgController", {
             pform.findField("parentName").setValue(curSelNode[0].raw.orgName);
             pform.findField("parentId").setValue(curSelNode[0].raw.orgId);
           }
-//          btn.up('.window').close();
-          btn.up('.window').hide();
+          btn.up('.window').close();
+//          btn.up('.window').hide();
         }
       },
       "orgTree": {
@@ -150,8 +152,7 @@ Ext.define("core.org.controller.OrgController", {
     "core.org.view.OrganizationAdd",
     "core.org.view.OrgGrid",
     "core.org.view.OrgWindow",
-    "core.main.view.OrgTree",
-    "core.main.view.OrgWindow"
+    "core.org.view.OrgWindowAll_org"
   ],
   stores: ["core.org.store.OrgStore", "core.org.store.OrgStoreTree", "core.main.store.OrgStore"],
   models: ["core.org.model.OrgModel"]

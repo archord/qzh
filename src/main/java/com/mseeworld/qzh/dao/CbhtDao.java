@@ -5,6 +5,7 @@
 package com.mseeworld.qzh.dao;
 
 import com.mseeworld.qzh.bean.Cbht;
+import com.mseeworld.qzh.model.Cbht2;
 import com.mseeworld.qzh.view.CbhtView;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public interface CbhtDao extends BaseHibernateDao<Cbht> {
 
   public List<Cbht> getByOrgId(long orgId);
 
-  public List<Cbht> getFirstNOfAll2(int start, int size, int parentId);
+  public List<Cbht2> getFirstNOfAll2(int start, int size, int parentId);
 
   public List<CbhtView> getFirstNOfCbhtView(int start, int size, int parentId);
 

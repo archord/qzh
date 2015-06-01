@@ -5,6 +5,7 @@
 package com.mseeworld.qzh.dao;
 
 import com.mseeworld.qzh.bean.Dk;
+import com.mseeworld.qzh.model.Dk2;
 import java.util.List;
 
 /**
@@ -23,9 +24,9 @@ public interface DkDao extends BaseHibernateDao<Dk> {
 
   public List<Dk> getByOrgId(int orgId, int limit);
 
-  public List<Dk> getByCbhtId(int cbhtId, int limit);
+  public List<Dk2> getByCbhtId(int start, int size, int cbhtId);
 
-  public List<Dk> getFirstNOfAll2(int start, int size, int parentId);
+  public List<Dk2> getFirstNOfAll2(int start, int size, int parentId);
 
   public List<Dk> getDkOfNullChbtId(int limit);
 

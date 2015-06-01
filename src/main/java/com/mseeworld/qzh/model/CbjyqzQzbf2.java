@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
 public class CbjyqzQzbf2  implements java.io.Serializable {
 
 
-     private long id;
+     private Long id;
      private String cbjyqzbm;
      private String qzbfyy;
      private Date bfrq;
@@ -32,15 +32,17 @@ public class CbjyqzQzbf2  implements java.io.Serializable {
      private String qzbflqrxm;
      private Character bflqrzjlx;
      private String bflqrzjhm;
+  private Long orgId;
+  private String orgName;
 
     public CbjyqzQzbf2() {
     }
 
 	
-    public CbjyqzQzbf2(long id) {
+    public CbjyqzQzbf2(Long id) {
         this.id = id;
     }
-    public CbjyqzQzbf2(long id, String cbjyqzbm, String qzbfyy, Date bfrq, Date qzbflqrq, String qzbflqrxm, Character bflqrzjlx, String bflqrzjhm) {
+    public CbjyqzQzbf2(Long id, String cbjyqzbm, String qzbfyy, Date bfrq, Date qzbflqrq, String qzbflqrxm, Character bflqrzjlx, String bflqrzjhm) {
        this.id = id;
        this.cbjyqzbm = cbjyqzbm;
        this.qzbfyy = qzbfyy;
@@ -56,11 +58,11 @@ public class CbjyqzQzbf2  implements java.io.Serializable {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cbjyqz_qzbf_seq")
   @SequenceGenerator(name = "cbjyqz_qzbf_seq", sequenceName = "cbjyqz_qzbf_id_seq",allocationSize=1)
     @Column(name="id", unique=true, nullable=false)
-    public long getId() {
+    public Long getId() {
         return this.id;
     }
     
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
     
@@ -127,6 +129,36 @@ public class CbjyqzQzbf2  implements java.io.Serializable {
         this.bflqrzjhm = bflqrzjhm;
     }
 
+
+  /**
+   * @return the orgId
+   */
+  @Column(name = "org_id", length = 300)
+  public Long getOrgId() {
+    return orgId;
+  }
+
+  /**
+   * @param orgId the orgId to set
+   */
+  public void setOrgId(Long orgId) {
+    this.orgId = orgId;
+  }
+
+  /**
+   * @return the orgName
+   */
+  @Column(name = "org_name")
+  public String getOrgName() {
+    return orgName;
+  }
+
+  /**
+   * @param orgName the orgName to set
+   */
+  public void setOrgName(String orgName) {
+    this.orgName = orgName;
+  }
 
 
 

@@ -31,22 +31,8 @@ Ext.define("core.dk.controller.DkController", {
       },
       "dkgrid button[ref=add]": {
         click: function(btn) {
-          var orgTree = btn.up('dkLayout').down("orgTreeDk");
-          var curSelNode = orgTree.getSelectionModel().getSelection();
-          if (curSelNode.length > 0) {
-            if (curSelNode[0].raw.orgLevel < 3) {
-              Ext.MessageBox.alert("提示", "必须在左侧选择村级以下区域");
-            } else {
-              var dkWin = Ext.create("core.dk.view.DkWindow");
-              dkWin.myExtraParams = {orgId: curSelNode[0].raw.orgId}; // Add additional stuff
-//              dkWin.on('show', function(win) {
-//                console.log('orgId=' + win.myExtraParams.orgId);
-//              });
-              dkWin.show();
-            }
-          } else {
-            Ext.MessageBox.alert("提示", "必须在左侧选择村级以下区域");
-          }
+          var win = Ext.create("core.dk.view.DkWindow");
+          win.show();
         }
       },
       "dkgrid button[ref=edit]": {
@@ -141,6 +127,24 @@ Ext.define("core.dk.controller.DkController", {
             });
           }
         }
+      },
+      "OrgWindowAll_dk button[ref=save]": {
+        click: function(btn) {
+          var tree = btn.up('OrgWindowAll_dk').down('treepanel');
+          var curSelNode = tree.getSelectionModel().getSelection();
+          if (curSelNode.length > 0 && curSelNode[0].raw) {
+//            if (curSelNode[0].raw.orgLevel < 3) {
+//              Ext.MessageBox.alert("提示", "必须在左侧选择村级以下区域!");
+//              return;
+//            }
+            var window = Ext.getCmp("dkWindowId");
+            var pform = window.down("form").getForm();
+            pform.findField("orgName").setValue(curSelNode[0].raw.orgName);
+            pform.findField("orgId").setValue(curSelNode[0].raw.orgId);
+          }
+          btn.up('.window').close();
+//          btn.up('.window').hide();
+        }
       }
 
     });
@@ -149,7 +153,8 @@ Ext.define("core.dk.controller.DkController", {
     "core.dk.view.DkLayout",
     "core.dk.view.OrgTreeDk",
     "core.dk.view.DkWindow",
-    "core.dk.view.DkGrid"
+    "core.dk.view.DkGrid",
+    "core.dk.view.OrgWindowAll_dk"
   ],
   stores: ["core.dk.store.DkStore",
     "core.dk.store.OrgStore",
@@ -158,6 +163,6 @@ Ext.define("core.dk.controller.DkController", {
     "core.combobox.store.DldjdmbStore",
     "core.combobox.store.TdytdmbStore",
     "core.combobox.store.SfdmbStore",
-    "core.combobox.store.TdlylxStore"],
+    "core.combobox.store.TdlylxStore", "core.main.store.OrgStore"],
   models: ["core.dk.model.DkModel"]
 });

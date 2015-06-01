@@ -2,6 +2,7 @@ package com.mseeworld.qzh.controller;
 
 import com.mseeworld.qzh.dao.CbjyqzQzbfDao;
 import com.mseeworld.qzh.bean.CbjyqzQzbf;
+import com.mseeworld.qzh.model.CbjyqzQzbf2;
 import com.mseeworld.qzh.util.NumberFormatUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -50,7 +51,7 @@ public class CbjyqzQzbfController {
     }
     
     int total = cbjyqzQzbfDao.count().intValue();
-    List<CbjyqzQzbf> objs = cbjyqzQzbfDao.getFirstNOfAll2(istart, isize, iorgId);
+    List<CbjyqzQzbf2> objs = cbjyqzQzbfDao.getFirstNOfAll2(istart, isize, iorgId);
 
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
@@ -59,7 +60,7 @@ public class CbjyqzQzbfController {
     rstStr.append(total);
     rstStr.append(",rows:[");
     int i = 0;
-    for (CbjyqzQzbf cbjyqzQzbf : objs) {
+    for (CbjyqzQzbf2 cbjyqzQzbf : objs) {
       try {
         String tStr = ow.writeValueAsString(cbjyqzQzbf);
         rstStr.append(tStr);

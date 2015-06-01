@@ -5,6 +5,7 @@ import com.mseeworld.qzh.dao.CbfJtcyDao;
 import com.mseeworld.qzh.bean.Cbf;
 import com.mseeworld.qzh.bean.CbfJtcy;
 import com.mseeworld.qzh.bean.Dk;
+import com.mseeworld.qzh.model.Cbf2;
 import com.mseeworld.qzh.util.NumberFormatUtil;
 import java.beans.PropertyEditorSupport;
 import java.io.IOException;
@@ -56,7 +57,7 @@ public class CbfController {
     }
     
     int total = cbfDao.count().intValue();
-    List<Cbf> cbfs = cbfDao.getFirstNOfAll2(istart, isize, iorgId);
+    List<Cbf2> cbfs = cbfDao.getFirstNOfAll2(istart, isize, iorgId);
 
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
@@ -65,7 +66,7 @@ public class CbfController {
     rstStr.append(total);
     rstStr.append(",rows:[");
     int i = 0;
-    for (Cbf cbf : cbfs) {
+    for (Cbf2 cbf : cbfs) {
       try {
         String tStr = ow.writeValueAsString(cbf);
         rstStr.append(tStr);

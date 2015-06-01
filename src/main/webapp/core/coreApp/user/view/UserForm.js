@@ -40,7 +40,7 @@ Ext.define("core.user.view.UserForm", {
 //            component.setValue("TEXT");
             var win;
             if (!win) {
-              win = Ext.create("core.main.view.OrgWindow");
+              win = Ext.create("core.user.view.OrgWindowAll_user");
             }
             if (win.isVisible()) {
               win.hide();

@@ -5,6 +5,7 @@
 package com.mseeworld.qzh.dao;
 
 import com.mseeworld.qzh.bean.Lzht;
+import com.mseeworld.qzh.model.Lzht2;
 import java.math.BigInteger;
 import java.util.List;
 import org.hibernate.Query;
@@ -48,7 +49,7 @@ public class LzhhtDaoImpl extends BaseHibernateDaoImpl<Lzht> implements LzhhtDao
     return (Lzht) q.list().get(0);
   }
   
-  public List<Lzht> getFirstNOfAll2(int start, int size, int parentId){
+  public List<Lzht2> getFirstNOfAll2(int start, int size, int parentId){
     
     Session session = getCurrentSession();
 //    String sql = "select * from lzht order by id limit "+ limit;
@@ -59,7 +60,7 @@ public class LzhhtDaoImpl extends BaseHibernateDaoImpl<Lzht> implements LzhhtDao
       sql += " where obj.org_id=" + parentId;
     }
     sql += " order by obj.id desc ";
-    Query q = session.createSQLQuery(sql).addEntity(Lzht.class);
+    Query q = session.createSQLQuery(sql).addEntity(Lzht2.class);
     q.setFirstResult(start);
     q.setMaxResults(size);
 

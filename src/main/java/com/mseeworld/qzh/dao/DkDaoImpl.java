@@ -5,6 +5,7 @@
 package com.mseeworld.qzh.dao;
 
 import com.mseeworld.qzh.bean.Dk;
+import com.mseeworld.qzh.model.Dk2;
 import java.math.BigInteger;
 import java.util.List;
 import org.hibernate.Query;
@@ -67,7 +68,7 @@ public class DkDaoImpl extends BaseHibernateDaoImpl<Dk> implements DkDao {
     return (Dk)q.list().get(0);
   }
 
-  public List<Dk> getFirstNOfAll2(int start, int size, int parentId) {
+  public List<Dk2> getFirstNOfAll2(int start, int size, int parentId) {
 
     Session session = getCurrentSession();
 //    String sql = "select * from dk order by id limit " + limit;
@@ -78,7 +79,7 @@ public class DkDaoImpl extends BaseHibernateDaoImpl<Dk> implements DkDao {
       sql += " where obj.org_id=" + parentId;
     }
     sql += " order by obj.id desc ";
-    Query q = session.createSQLQuery(sql).addEntity(Dk.class);
+    Query q = session.createSQLQuery(sql).addEntity(Dk2.class);
     q.setFirstResult(start);
     q.setMaxResults(size);
 
@@ -106,14 +107,13 @@ public class DkDaoImpl extends BaseHibernateDaoImpl<Dk> implements DkDao {
     return q.list();
   }
 
-  public List<Dk> getByCbhtId(int cbhtId, int limit) {
+  public List<Dk2> getByCbhtId(int start, int size, int cbhtId){
 
     Session session = getCurrentSession();
     String sql = "select * from dk where cbht_id=" + cbhtId + " order by id";
-    if (limit > 0) {
-      sql += " limit " + limit;
-    }
-    Query q = session.createSQLQuery(sql).addEntity(Dk.class);
+    Query q = session.createSQLQuery(sql).addEntity(Dk2.class);
+    q.setFirstResult(start);
+    q.setMaxResults(size);
 
     return q.list();
   }

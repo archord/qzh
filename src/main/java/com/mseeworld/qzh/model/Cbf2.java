@@ -40,6 +40,7 @@ public class Cbf2 implements java.io.Serializable {
   private String gsjsr;
   private Date gsshrq;
   private String gsshr;
+  private String orgName;
 
   public Cbf2() {
   }
@@ -274,6 +275,21 @@ public class Cbf2 implements java.io.Serializable {
    */
   public void setCbfmz(String cbfmz) {
     this.cbfmz = cbfmz;
+  }
+
+  /**
+   * @return the orgName
+   */
+  @Column(name = "org_name")
+  public String getOrgName() {
+    return orgName;
+  }
+
+  /**
+   * @param orgName the orgName to set
+   */
+  public void setOrgName(String orgName) {
+    this.orgName = orgName;
   }
 
 }

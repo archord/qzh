@@ -32,6 +32,7 @@ public class Cbjyqz  implements java.io.Serializable {
      private String qzlqrxm;
      private Character qzlqrzjlx;
      private String qzlqrzjhm;
+     private long orgId;
 
     public Cbjyqz() {
     }
@@ -137,6 +138,21 @@ public class Cbjyqz  implements java.io.Serializable {
     }
 
 
+
+  /**
+   * @return the orgId
+   */
+  @Column(name = "org_id", length = 300)
+  public long getOrgId() {
+    return orgId;
+  }
+
+  /**
+   * @param orgId the orgId to set
+   */
+  public void setOrgId(long orgId) {
+    this.orgId = orgId;
+  }
 
 
 }

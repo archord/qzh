@@ -20,6 +20,7 @@
  		{name:"dkbz",type:"string",srotable:false},
  		{name:"dkbzxx",type:"string",srotable:false},
  		{name:"zjrxm",type:"string",srotable:false},
- 		{name:"orgId",type:"long",srotable:false}
+ 		{name:"orgId",type:"long",srotable:false},
+ 		{name:"orgName",type:"string",srotable:false}
  	]
  });

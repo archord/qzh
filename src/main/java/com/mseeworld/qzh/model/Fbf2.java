@@ -33,6 +33,7 @@ public class Fbf2 implements java.io.Serializable {
   private String fbfdcy;
   private Date fbfdcrq;
   private String fbfdcjs;
+  private String orgName;
 
   public Fbf2() {
   }
@@ -181,5 +182,20 @@ public class Fbf2 implements java.io.Serializable {
    */
   public void setOrgId(long orgId) {
     this.orgId = orgId;
+  }
+
+  /**
+   * @return the orgName
+   */
+  @Column(name = "org_name")
+  public String getOrgName() {
+    return orgName;
+  }
+
+  /**
+   * @param orgName the orgName to set
+   */
+  public void setOrgName(String orgName) {
+    this.orgName = orgName;
   }
 }

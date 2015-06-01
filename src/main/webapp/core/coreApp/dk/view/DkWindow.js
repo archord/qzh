@@ -1,6 +1,7 @@
 Ext.define("core.dk.view.DkWindow", {
   extend: 'Ext.window.Window',
   alias: "widget.dkwindow",
+  id: "dkWindowId",
   align: "left",
   frame: true,
   bodyStyle: 'background:transparent',
@@ -8,7 +9,7 @@ Ext.define("core.dk.view.DkWindow", {
   listeners: {
     show: function(_this) {
       if (_this.extraParas) {
-        _this.down("form").getForm().findField("orgName").setValue("修改地块信息");
+        _this.down("form").getForm().findField("orgName").setValue(_this.extraParas.obj.orgName);
         _this.down("form").getForm().findField("isAdd").setValue(0);
         _this.down("form").getForm().findField("orgId").setValue(_this.extraParas.dk.orgId);
         _this.down("form").getForm().findField("orgLevel").setValue(_this.extraParas.orgLevel);
@@ -60,9 +61,25 @@ Ext.define("core.dk.view.DkWindow", {
           width: 430,
           fieldLabel: "所属区域",
           name: "orgName",
-          allowBlank: true,
+          allowBlank: false,
           blankText: '必须在右侧选择村级以下区域',
-          readOnly: true
+          readOnly: true,
+          listeners: {
+            render: function(component) {
+              component.getEl().on('click', function(event, el) {
+//            component.setValue("TEXT");
+                var win;
+                if (!win) {
+                  win = Ext.create("core.dk.view.OrgWindowAll_dk");
+                }
+                if (win.isVisible()) {
+                  win.hide();
+                } else {
+                  win.show();
+                }
+              });
+            }
+          }
         }, {
           xtype: "textfield",
           fieldLabel: "区域级别",

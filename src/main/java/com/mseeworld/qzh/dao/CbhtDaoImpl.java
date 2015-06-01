@@ -5,6 +5,7 @@
 package com.mseeworld.qzh.dao;
 
 import com.mseeworld.qzh.bean.Cbht;
+import com.mseeworld.qzh.model.Cbht2;
 import com.mseeworld.qzh.view.CbhtView;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -138,7 +139,7 @@ public class CbhtDaoImpl extends BaseHibernateDaoImpl<Cbht> implements CbhtDao {
     return objs;
   }
 
-  public List<Cbht> getFirstNOfAll2(int start, int size, int parentId) {
+  public List<Cbht2> getFirstNOfAll2(int start, int size, int parentId) {
 
     Session session = getCurrentSession();
 //    String sql = "select * from cbht order by id desc ";
@@ -149,7 +150,7 @@ public class CbhtDaoImpl extends BaseHibernateDaoImpl<Cbht> implements CbhtDao {
       sql += " where obj.org_id=" + parentId;
     }
     sql += " order by obj.id desc ";
-    Query q = session.createSQLQuery(sql).addEntity(Cbht.class);
+    Query q = session.createSQLQuery(sql).addEntity(Cbht2.class);
     q.setFirstResult(start);
     q.setMaxResults(size);
     return q.list();

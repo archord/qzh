@@ -5,6 +5,7 @@
 package com.mseeworld.qzh.dao;
 
 import com.mseeworld.qzh.bean.Fbf;
+import com.mseeworld.qzh.model.Fbf2;
 import java.math.BigInteger;
 import java.util.List;
 import org.hibernate.Query;
@@ -52,7 +53,7 @@ public class FbfDaoImpl extends BaseHibernateDaoImpl<Fbf> implements FbfDao{
     return q.list();
   }
   
-  public List<Fbf> getFirstNOfAll2(int start, int size, int parentId){
+  public List<Fbf2> getFirstNOfAll2(int start, int size, int parentId){
 
     Session session = getCurrentSession();
 //    String sql = "select * from fbf order by id desc ";
@@ -63,7 +64,7 @@ public class FbfDaoImpl extends BaseHibernateDaoImpl<Fbf> implements FbfDao{
       sql += " where obj.org_id=" + parentId;
     }
     sql += " order by obj.id desc ";
-    Query q = session.createSQLQuery(sql).addEntity(Fbf.class);
+    Query q = session.createSQLQuery(sql).addEntity(Fbf2.class);
     q.setFirstResult(start);
     q.setMaxResults(size);
     return q.list();

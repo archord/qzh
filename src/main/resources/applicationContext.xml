@@ -36,7 +36,7 @@
     <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />  
     <property name="ignoreResourceNotFound" value="false" />
     <property name="locations">
-      <value>classpath:database_vm.properties</value>
+      <value>classpath:database.properties</value>
     </property>
   </bean>
 	

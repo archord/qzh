@@ -39,6 +39,7 @@ public class Dk2  implements java.io.Serializable {
      private String zjrxm;
      private Long orgId;
      private Long cbhtId;
+  private String orgName;
 
     public Dk2() {
     }
@@ -234,6 +235,21 @@ public class Dk2  implements java.io.Serializable {
     }
 
 
+
+  /**
+   * @return the orgName
+   */
+  @Column(name = "org_name")
+  public String getOrgName() {
+    return orgName;
+  }
+
+  /**
+   * @param orgName the orgName to set
+   */
+  public void setOrgName(String orgName) {
+    this.orgName = orgName;
+  }
 
 
 }

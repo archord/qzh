@@ -11,7 +11,9 @@ Ext.define("core.qzh_renew.model.CbjyqzQzhfModel", {
     {name: "qzhflqrq", type: "string", srotable: false},
     {name: "qzhflqrxm", type: "string", srotable: false},
     {name: "hflqrzjlx", type: "string", srotable: false},
-    {name: "hflqrzjhm", type: "string", srotable: false}
+    {name: "hflqrzjhm", type: "string", srotable: false},
+    {name: "orgId", type: "int", srotable: false},
+ 		{name:"orgName",type:"string",srotable:false}
   ],
   proxy: {
     type: 'ajax',

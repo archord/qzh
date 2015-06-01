@@ -8,7 +8,7 @@ Ext.define("core.lzhht.view.LzhhtWindow", {
   listeners: {
     show: function(_this) {
       if (_this.extraParas) {
-        _this.down("form").getForm().findField("orgName").setValue("修改地块信息");
+        _this.down("form").getForm().findField("orgName").setValue(_this.extraParas.obj.orgName);
         _this.down("form").getForm().findField("isAdd").setValue(0);
         _this.down("form").getForm().findField("orgId").setValue(_this.extraParas.obj.orgId);
         _this.down("form").getForm().findField("orgLevel").setValue(_this.extraParas.orgLevel);
@@ -61,7 +61,8 @@ Ext.define("core.lzhht.view.LzhhtWindow", {
           name: "orgName",
           allowBlank: true,
           blankText: '必须在右侧选择村级以下区域',
-          readOnly: true
+          readOnly: true,
+          hidden: true
         }, {
           xtype: "textfield",
           fieldLabel: "区域级别",

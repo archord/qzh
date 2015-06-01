@@ -120,9 +120,9 @@ Ext.define("core.user.controller.UserController", {
           }
         }
       },
-      "orgTreeAll button[ref=save]": {
+      "OrgWindowAll_user button[ref=save]": {
         click: function(btn) {
-          var tree = btn.up('orgWindowAll').down('orgTreeAll');
+          var tree = btn.up('OrgWindowAll_user').down('treepanel');
           var curSelNode = tree.getSelectionModel().getSelection();
           if (curSelNode.length > 0 && curSelNode[0].raw) {
 //            if (curSelNode[0].raw.orgLevel < 3) {
@@ -134,8 +134,8 @@ Ext.define("core.user.controller.UserController", {
             pform.findField("orgName").setValue(curSelNode[0].raw.orgName);
             pform.findField("orgId").setValue(curSelNode[0].raw.orgId);
           }
-//          btn.up('.window').close();
-          btn.up('.window').hide();
+          btn.up('.window').close();
+//          btn.up('.window').hide();
         }
       }
 
@@ -147,8 +147,7 @@ Ext.define("core.user.controller.UserController", {
     "core.user.view.UserForm",
     "core.user.view.UserGrid",
     "core.user.view.UserWindow",
-    "core.main.view.OrgTree",
-    "core.main.view.OrgWindow"
+    "core.user.view.OrgWindowAll_user"
   ],
   stores: ["core.user.store.UserStore", "core.user.store.OrgStore", "core.main.store.OrgStore"],
   models: ["core.user.model.UserModel"]

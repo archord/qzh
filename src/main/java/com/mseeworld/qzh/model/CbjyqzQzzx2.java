@@ -24,19 +24,21 @@ import javax.persistence.TemporalType;
 public class CbjyqzQzzx2  implements java.io.Serializable {
 
 
-     private long id;
+     private Long id;
      private String cbjyqzbm;
      private String zxyy;
      private Date zxrq;
+  private Long orgId;
+  private String orgName;
 
     public CbjyqzQzzx2() {
     }
 
 	
-    public CbjyqzQzzx2(long id) {
+    public CbjyqzQzzx2(Long id) {
         this.id = id;
     }
-    public CbjyqzQzzx2(long id, String cbjyqzbm, String zxyy, Date zxrq) {
+    public CbjyqzQzzx2(Long id, String cbjyqzbm, String zxyy, Date zxrq) {
        this.id = id;
        this.cbjyqzbm = cbjyqzbm;
        this.zxyy = zxyy;
@@ -48,11 +50,11 @@ public class CbjyqzQzzx2  implements java.io.Serializable {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cbjyqz_qzzx_seq")
   @SequenceGenerator(name = "cbjyqz_qzzx_seq", sequenceName = "cbjyqz_qzzx_id_seq",allocationSize=1)
     @Column(name="id", unique=true, nullable=false)
-    public long getId() {
+    public Long getId() {
         return this.id;
     }
     
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
     
@@ -85,6 +87,36 @@ public class CbjyqzQzzx2  implements java.io.Serializable {
 
 
 
+
+  /**
+   * @return the orgId
+   */
+  @Column(name = "org_id", length = 300)
+  public Long getOrgId() {
+    return orgId;
+  }
+
+  /**
+   * @param orgId the orgId to set
+   */
+  public void setOrgId(Long orgId) {
+    this.orgId = orgId;
+  }
+
+  /**
+   * @return the orgName
+   */
+  @Column(name = "org_name")
+  public String getOrgName() {
+    return orgName;
+  }
+
+  /**
+   * @param orgName the orgName to set
+   */
+  public void setOrgName(String orgName) {
+    this.orgName = orgName;
+  }
 
 }
 

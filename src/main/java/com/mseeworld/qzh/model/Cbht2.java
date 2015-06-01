@@ -36,6 +36,7 @@ public class Cbht2  implements java.io.Serializable {
      private Integer cbdkzs;
      private Date qdsj;
      private Long orgId;
+  private String orgName;
 
     public Cbht2() {
     }
@@ -172,6 +173,21 @@ public class Cbht2  implements java.io.Serializable {
     }
 
 
+
+  /**
+   * @return the orgName
+   */
+  @Column(name = "org_name")
+  public String getOrgName() {
+    return orgName;
+  }
+
+  /**
+   * @param orgName the orgName to set
+   */
+  public void setOrgName(String orgName) {
+    this.orgName = orgName;
+  }
 
 
 }

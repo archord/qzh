@@ -7,7 +7,9 @@ Ext.define("core.qzh_cancel.model.CbjyqzQzzxModel", {
     {name: "id", type: "int", srotable: false},
     {name: "cbjyqzbm", type: "string", srotable: false},
     {name: "zxyy", type: "string", srotable: false},
-    {name: "zxrq", type: "string", srotable: false}
+    {name: "zxrq", type: "string", srotable: false},
+    {name: "orgId", type: "int", srotable: false},
+ 		{name:"orgName",type:"string",srotable:false}
   ],
   proxy: {
     type: 'ajax',

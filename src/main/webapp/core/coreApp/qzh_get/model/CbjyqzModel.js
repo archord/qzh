@@ -12,7 +12,9 @@ Ext.define("core.qzh_get.model.CbjyqzModel", {
     {name: "qzlqrq", type: "string", srotable: false},
     {name: "qzlqrxm", type: "string", srotable: false},
     {name: "qzlqrzjlx", type: "string", srotable: false},
-    {name: "qzlqrzjhm", type: "string", srotable: false}
+    {name: "qzlqrzjhm", type: "string", srotable: false},
+    {name: "orgId", type: "int", srotable: false},
+ 		{name:"orgName",type:"string",srotable:false}
   ],
   proxy: {
     type: 'ajax',

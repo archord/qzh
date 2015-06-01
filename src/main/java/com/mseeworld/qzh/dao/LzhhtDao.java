@@ -5,6 +5,7 @@
 package com.mseeworld.qzh.dao;
 
 import com.mseeworld.qzh.bean.Lzht;
+import com.mseeworld.qzh.model.Lzht2;
 import java.util.List;
 
 /**
@@ -19,6 +20,6 @@ public interface LzhhtDao extends BaseHibernateDao<Lzht> {
 
   public List<Lzht> getByOrgId(int orgId, int limit);
 
-  public List<Lzht> getFirstNOfAll2(int start, int size, int parentId);
+  public List<Lzht2> getFirstNOfAll2(int start, int size, int parentId);
   
 }

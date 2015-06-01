@@ -19,6 +19,7 @@ Ext.define("core.lzhht.model.LzhhtModel", {
     {name: "lzhtdyt", type: "string", srotable: false},
     {name: "lzjgsm", type: "string", srotable: false},
     {name: "htqdrq", type: "string", srotable: false},
-    {name: "orgId", type: "int", srotable: false}
+    {name: "orgId", type: "int", srotable: false},
+ 		{name:"orgName",type:"string",srotable:false}
   ]
 });

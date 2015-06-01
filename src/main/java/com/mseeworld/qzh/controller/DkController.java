@@ -2,6 +2,7 @@ package com.mseeworld.qzh.controller;
 
 import com.mseeworld.qzh.dao.DkDao;
 import com.mseeworld.qzh.bean.Dk;
+import com.mseeworld.qzh.model.Dk2;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -38,24 +39,25 @@ public class DkController {
     String page = request.getParameter("page");
     String start = request.getParameter("start");
     String psize = request.getParameter("limit");
+    String pcbhtId = request.getParameter("cbhtId");
+
     int ipage = Integer.parseInt(page);
     int istart = Integer.parseInt(start);
     int isize = Integer.parseInt(psize);
 
-    String cbhtId = request.getParameter("cbhtId");
-    
     String porgId = request.getParameter("orgId");
-    System.out.println("porgId="+porgId);
+    System.out.println("porgId=" + porgId);
     int iorgId = 0;
-    if(porgId!=null && !porgId.isEmpty()){
+    if (porgId != null && !porgId.isEmpty()) {
       iorgId = Integer.parseInt(porgId);
     }
 
-    List<Dk> dks = null;
+    List<Dk2> dks = null;
     int limit1 = 10;
 
-    if (cbhtId != null && !cbhtId.trim().isEmpty() && !cbhtId.equals("0")) {
-      dks = dkDao.getByCbhtId(Integer.parseInt(cbhtId), limit1);
+    if (pcbhtId != null && !pcbhtId.isEmpty()) {
+      int icbhtId = Integer.parseInt(pcbhtId);
+      dks = dkDao.getByCbhtId(istart, isize, icbhtId);
     } else {
       dks = dkDao.getFirstNOfAll2(istart, isize, iorgId);
     }
@@ -68,7 +70,7 @@ public class DkController {
     rstStr.append(total);
     rstStr.append(",rows:[");
     int i = 0;
-    for (Dk cbf : dks) {
+    for (Dk2 cbf : dks) {
       try {
         String tStr = ow.writeValueAsString(cbf);
         rstStr.append(tStr);
@@ -154,7 +156,7 @@ public class DkController {
 
     writer.write("{success:true, msg:'地块信息保存成功!'}");
   }
-  
+
   @RequestMapping(value = "/update_dk_cbht", method = RequestMethod.POST)
   public void update2(HttpServletRequest request, PrintWriter writer) {
 

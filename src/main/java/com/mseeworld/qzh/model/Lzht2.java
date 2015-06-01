@@ -37,6 +37,7 @@ public class Lzht2 implements java.io.Serializable {
   private String lzjgsm;
   private Date htqdrq;
   private Long orgId;
+  private String orgName;
 
   public Lzht2() {
   }
@@ -248,5 +249,20 @@ public class Lzht2 implements java.io.Serializable {
    */
   public void setOrgId(Long orgId) {
     this.orgId = orgId;
+  }
+
+  /**
+   * @return the orgName
+   */
+  @Column(name = "org_name")
+  public String getOrgName() {
+    return orgName;
+  }
+
+  /**
+   * @param orgName the orgName to set
+   */
+  public void setOrgName(String orgName) {
+    this.orgName = orgName;
   }
 }

@@ -5,6 +5,7 @@
 package com.mseeworld.qzh.dao;
 
 import com.mseeworld.qzh.bean.Cbf;
+import com.mseeworld.qzh.model.Cbf2;
 import java.util.List;
 
 /**
@@ -17,5 +18,5 @@ public interface CbfDao extends BaseHibernateDao<Cbf> {
 
   public List<Cbf> getCbfsByOrgId(long orgId);
 
-  public List<Cbf> getFirstNOfAll2(int start, int size, int parentId);
+  public List<Cbf2> getFirstNOfAll2(int start, int size, int parentId);
 }

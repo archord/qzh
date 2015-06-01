@@ -15,6 +15,8 @@
  		{name:"yzbm",type:"string",srotable:false},
  		{name:"fbfdcy",type:"string",srotable:false},
  		{name:"fbfdcrq",type:"string",srotable:false},
- 		{name:"fbfdcjs",type:"string",srotable:false}
+ 		{name:"fbfdcjs",type:"string",srotable:false},
+ 		{name:"orgId",type:"int",srotable:false},
+ 		{name:"orgName",type:"string",srotable:false}
  	]
  });

@@ -4,6 +4,7 @@ import com.mseeworld.qzh.dao.CbhtDao;
 import com.mseeworld.qzh.dao.CbjyqzdjbDao;
 import com.mseeworld.qzh.bean.Cbht;
 import com.mseeworld.qzh.bean.Cbjyqzdjb;
+import com.mseeworld.qzh.model.Cbjyqzdjb2;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -34,7 +35,7 @@ public class CbhyqzdjbController {
   }
 
   @RequestMapping(value = "/listall_cbjyqzdjb", method = RequestMethod.GET)
-  public void listAllPeople(HttpServletRequest request, PrintWriter writer) {
+  public void listAll(HttpServletRequest request, PrintWriter writer) {
 
     String page = request.getParameter("page");
     String start = request.getParameter("start");
@@ -51,7 +52,7 @@ public class CbhyqzdjbController {
     }
     
     int total = cbjyqzdjbDao.count().intValue();
-    List<Cbjyqzdjb> cbjyqzdjbs = cbjyqzdjbDao.getFirstNOfAll2(istart, isize, iorgId);
+    List<Cbjyqzdjb2> cbjyqzdjbs = cbjyqzdjbDao.getFirstNOfAll(istart, isize, iorgId);
 
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
@@ -60,7 +61,7 @@ public class CbhyqzdjbController {
     rstStr.append(total);
     rstStr.append(",rows:[");
     int i = 0;
-    for (Cbjyqzdjb cbjyqzdjb : cbjyqzdjbs) {
+    for (Cbjyqzdjb2 cbjyqzdjb : cbjyqzdjbs) {
       try {
         String tStr = ow.writeValueAsString(cbjyqzdjb);
         rstStr.append(tStr);

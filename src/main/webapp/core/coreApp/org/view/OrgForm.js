@@ -57,7 +57,7 @@ Ext.define("core.org.view.OrgForm", {
 //            component.setValue("TEXT");
             var win;
             if (!win) {
-              win = Ext.create("core.main.view.OrgWindow");
+              win = Ext.create("core.org.view.OrgWindowAll_org");
             }
             if (win.isVisible()) {
               win.hide();

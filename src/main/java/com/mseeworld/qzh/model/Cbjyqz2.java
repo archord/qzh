@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
 public class Cbjyqz2  implements java.io.Serializable {
 
 
-     private long id;
+     private Long id;
      private String cbjyqzbm;
      private String fzjg;
      private Date fzrq;
@@ -33,15 +33,17 @@ public class Cbjyqz2  implements java.io.Serializable {
      private String qzlqrxm;
      private Character qzlqrzjlx;
      private String qzlqrzjhm;
+  private Long orgId;
+  private String orgName;
 
     public Cbjyqz2() {
     }
 
 	
-    public Cbjyqz2(long id) {
+    public Cbjyqz2(Long id) {
         this.id = id;
     }
-    public Cbjyqz2(long id, String cbjyqzbm, String fzjg, Date fzrq, Character qzsfly, Date qzlqrq, String qzlqrxm, Character qzlqrzjlx, String qzlqrzjhm) {
+    public Cbjyqz2(Long id, String cbjyqzbm, String fzjg, Date fzrq, Character qzsfly, Date qzlqrq, String qzlqrxm, Character qzlqrzjlx, String qzlqrzjhm) {
        this.id = id;
        this.cbjyqzbm = cbjyqzbm;
        this.fzjg = fzjg;
@@ -57,11 +59,11 @@ public class Cbjyqz2  implements java.io.Serializable {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cbjyqz_seq")
   @SequenceGenerator(name = "cbjyqz_seq", sequenceName = "cbjyqz_id_seq",allocationSize=1)
     @Column(name="id", unique=true, nullable=false)
-    public long getId() {
+    public Long getId() {
         return this.id;
     }
     
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
     
@@ -139,6 +141,35 @@ public class Cbjyqz2  implements java.io.Serializable {
 
 
 
+  /**
+   * @return the orgName
+   */
+  @Column(name = "org_name")
+  public String getOrgName() {
+    return orgName;
+  }
+
+  /**
+   * @param orgName the orgName to set
+   */
+  public void setOrgName(String orgName) {
+    this.orgName = orgName;
+  }
+
+  /**
+   * @return the orgId
+   */
+  @Column(name = "org_id", length = 300)
+  public Long getOrgId() {
+    return orgId;
+  }
+
+  /**
+   * @param orgId the orgId to set
+   */
+  public void setOrgId(Long orgId) {
+    this.orgId = orgId;
+  }
 
 }
 

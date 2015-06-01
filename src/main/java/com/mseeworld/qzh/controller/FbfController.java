@@ -2,6 +2,7 @@ package com.mseeworld.qzh.controller;
 
 import com.mseeworld.qzh.dao.FbfDao;
 import com.mseeworld.qzh.bean.Fbf;
+import com.mseeworld.qzh.model.Fbf2;
 import com.mseeworld.qzh.service.PeopleService;
 import com.mseeworld.qzh.util.NumberFormatUtil;
 import java.io.IOException;
@@ -65,7 +66,7 @@ public class FbfController {
     }
     
     int total = fbfDao.count().intValue();
-    List<Fbf> fbfs = fbfDao.getFirstNOfAll2(istart, isize, iorgId);
+    List<Fbf2> fbfs = fbfDao.getFirstNOfAll2(istart, isize, iorgId);
 
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
@@ -74,7 +75,7 @@ public class FbfController {
     rstStr.append(total);
     rstStr.append(",rows:[");
     int i = 0;
-    for (Fbf fbf : fbfs) {
+    for (Fbf2 fbf : fbfs) {
       try {
         String tStr = ow.writeValueAsString(fbf);
         rstStr.append(tStr);

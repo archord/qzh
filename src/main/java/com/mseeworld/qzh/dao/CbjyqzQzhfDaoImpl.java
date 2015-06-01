@@ -5,6 +5,7 @@
 package com.mseeworld.qzh.dao;
 
 import com.mseeworld.qzh.bean.CbjyqzQzhf;
+import com.mseeworld.qzh.model.CbjyqzQzhf2;
 import java.math.BigInteger;
 import java.util.List;
 import org.hibernate.Query;
@@ -42,7 +43,7 @@ public class CbjyqzQzhfDaoImpl extends BaseHibernateDaoImpl<CbjyqzQzhf> implemen
   }
   
   
-  public List<CbjyqzQzhf> getFirstNOfAll2(int start, int size, int parentId){
+  public List<CbjyqzQzhf2> getFirstNOfAll2(int start, int size, int parentId){
 
     Session session = getCurrentSession();
 //    String sql = "select * from cbjyqz_qzhf order by id desc ";
@@ -53,7 +54,7 @@ public class CbjyqzQzhfDaoImpl extends BaseHibernateDaoImpl<CbjyqzQzhf> implemen
       sql += " where obj.org_id=" + parentId;
     }
     sql += " order by obj.id desc ";
-    Query q = session.createSQLQuery(sql).addEntity(CbjyqzQzhf.class);
+    Query q = session.createSQLQuery(sql).addEntity(CbjyqzQzhf2.class);
     q.setFirstResult(start);
     q.setMaxResults(size);
     return q.list();

@@ -124,6 +124,24 @@ Ext.define("core.fbf.controller.FbfController", {
             });
           }
         }
+      },
+      "OrgWindowAll_fbf button[ref=save]": {
+        click: function(btn) {
+          var tree = btn.up('OrgWindowAll_fbf').down('treepanel');
+          var curSelNode = tree.getSelectionModel().getSelection();
+          if (curSelNode.length > 0 && curSelNode[0].raw) {
+//            if (curSelNode[0].raw.orgLevel < 3) {
+//              Ext.MessageBox.alert("提示", "必须在左侧选择村级以下区域!");
+//              return;
+//            }
+            var window = Ext.getCmp("fbfWindowId");
+            var pform = window.down("form").getForm();
+            pform.findField("orgName").setValue(curSelNode[0].raw.orgName);
+            pform.findField("orgId").setValue(curSelNode[0].raw.orgId);
+          }
+          btn.up('.window').close();
+//          btn.up('.window').hide();
+        }
       }
 
     });
@@ -133,8 +151,9 @@ Ext.define("core.fbf.controller.FbfController", {
     "core.fbf.view.OrgTreeFbf",
     "core.fbf.view.FbfForm",
     "core.fbf.view.FbfGrid",
-    "core.fbf.view.FbfWindow"
+    "core.fbf.view.FbfWindow",
+    "core.fbf.view.OrgWindowAll_fbf"
   ],
-  stores: ["core.fbf.store.FbfStore", "core.fbf.store.OrgStore","core.combobox.store.ZjlxdmbStore"],
+  stores: ["core.fbf.store.FbfStore", "core.fbf.store.OrgStore","core.combobox.store.ZjlxdmbStore", "core.main.store.OrgStore"],
   models: ["core.fbf.model.FbfModel"]
 });

@@ -5,6 +5,7 @@
 package com.mseeworld.qzh.dao;
 
 import com.mseeworld.qzh.bean.Cbf;
+import com.mseeworld.qzh.model.Cbf2;
 import java.math.BigInteger;
 import java.util.List;
 import org.hibernate.Query;
@@ -39,7 +40,7 @@ public class CbfDaoImpl extends BaseHibernateDaoImpl<Cbf> implements CbfDao {
     return q.list();
   }
 
-  public List<Cbf> getFirstNOfAll2(int start, int size, int parentId) {
+  public List<Cbf2> getFirstNOfAll2(int start, int size, int parentId) {
 
     Session session = getCurrentSession();
 //    String sql = "select * from cbf order by id desc ";
@@ -50,7 +51,7 @@ public class CbfDaoImpl extends BaseHibernateDaoImpl<Cbf> implements CbfDao {
       sql += " where obj.org_id=" + parentId;
     }
     sql += " order by obj.id desc ";
-    Query q = session.createSQLQuery(sql).addEntity(Cbf.class);
+    Query q = session.createSQLQuery(sql).addEntity(Cbf2.class);
     q.setFirstResult(start);
     q.setMaxResults(size);
     return q.list();

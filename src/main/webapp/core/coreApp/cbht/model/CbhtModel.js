@@ -16,7 +16,8 @@ Ext.define("core.cbht.model.CbhtModel", {
     {name: "htzmj", type: "float", srotable: false},
     {name: "cbdkzs", type: "int", srotable: false},
     {name: "qdsj", type: "string", srotable: false},
-    {name: "orgId", type: "int", srotable: false}
+    {name: "orgId", type: "int", srotable: false},
+ 		{name:"orgName",type:"string",srotable:false}
   ],
   proxy: {
     type: 'ajax',

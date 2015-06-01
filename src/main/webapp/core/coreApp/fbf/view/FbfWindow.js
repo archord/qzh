@@ -10,7 +10,7 @@ Ext.define("core.fbf.view.FbfWindow", {
   listeners: {
     show: function(_this) {
       if (_this.extraParas) {
-        _this.down("form").getForm().findField("orgName").setValue("修改承包合同信息");
+        _this.down("form").getForm().findField("orgName").setValue(_this.extraParas.obj.orgName);
         _this.down("form").getForm().findField("isAdd").setValue(0);
         _this.down("form").getForm().findField("orgId").setValue(_this.extraParas.obj.orgId);
         _this.down("form").getForm().findField("orgLevel").setValue(_this.extraParas.orgLevel);

@@ -3,6 +3,7 @@ package com.mseeworld.qzh.controller;
 import com.mseeworld.qzh.dao.LzhhtDao;
 import com.mseeworld.qzh.bean.Lzht;
 import com.mseeworld.qzh.bean.Lzht1;
+import com.mseeworld.qzh.model.Lzht2;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -51,7 +52,7 @@ public class LzhhtController {
     }
 
     int total = lzhtDao.count().intValue();
-    List<Lzht> objs = lzhtDao.getFirstNOfAll2(istart, isize, iorgId);
+    List<Lzht2> objs = lzhtDao.getFirstNOfAll2(istart, isize, iorgId);
 
     ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
@@ -60,7 +61,7 @@ public class LzhhtController {
     rstStr.append(total);
     rstStr.append(",rows:[");
     int i = 0;
-    for (Lzht cbf : objs) {
+    for (Lzht2 cbf : objs) {
       try {
         String tStr = ow.writeValueAsString(cbf);
         rstStr.append(tStr);

@@ -24,9 +24,25 @@ Ext.define("core.cbf.view.CbfForm", {
       width: 430,
       fieldLabel: "所属区域",
       name: "orgName",
-      allowBlank: true,
+      allowBlank: false,
       blankText: '必须在右侧选择村级以下区域',
-      readOnly: true
+      readOnly: true,
+      listeners: {
+        render: function(component) {
+          component.getEl().on('click', function(event, el) {
+//            component.setValue("TEXT");
+            var win;
+            if (!win) {
+              win = Ext.create("core.cbf.view.OrgWindowAll_cbf");
+            }
+            if (win.isVisible()) {
+              win.hide();
+            } else {
+              win.show();
+            }
+          });
+        }
+      }
     }, {
       xtype: "textfield",
       fieldLabel: "区域级别",

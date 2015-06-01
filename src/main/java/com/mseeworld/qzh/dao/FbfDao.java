@@ -5,6 +5,7 @@
 package com.mseeworld.qzh.dao;
 
 import com.mseeworld.qzh.bean.Fbf;
+import com.mseeworld.qzh.model.Fbf2;
 import java.util.List;
 
 /**
@@ -17,5 +18,5 @@ public interface FbfDao extends BaseHibernateDao<Fbf> {
 
   public List<Fbf> getFbfsByOrgId(long orgId);
 
-  public List<Fbf> getFirstNOfAll2(int start, int size, int parentId);
+  public List<Fbf2> getFirstNOfAll2(int start, int size, int parentId);
 }
