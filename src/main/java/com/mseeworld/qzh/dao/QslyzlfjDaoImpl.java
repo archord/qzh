@@ -57,4 +57,14 @@ public class QslyzlfjDaoImpl extends BaseHibernateDaoImpl<Qslyzlfj> implements Q
     }
     return tNum;
   }
+  
+  @Override
+  public void deleteAndSave(Qslyzlfj obj){
+    
+    Session session = getCurrentSession();
+    String sql = "delete from qslyzlfj where cbjyqzbm='" + obj.getCbjyqzbm().trim() + "' and zlfjbh='"+obj.getZlfjbh()+"'";
+    session.createSQLQuery(sql).executeUpdate();
+    
+    super.save(obj);
+  }
 }

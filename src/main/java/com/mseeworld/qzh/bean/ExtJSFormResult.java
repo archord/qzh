@@ -11,6 +11,7 @@ package com.mseeworld.qzh.bean;
 public class ExtJSFormResult {
 
   private boolean success;
+  private String msg;
 
   public boolean isSuccess() {
     return success;
@@ -21,6 +22,21 @@ public class ExtJSFormResult {
   }
 
   public String toString() {
-    return "{success:" + this.success + "}";
+    return "{success:" + this.success + ",msg:'"+getMsg()+"'}";
   }
+
+  /**
+   * @return the msg
+   */
+  public String getMsg() {
+    return msg;
+  }
+
+  /**
+   * @param msg the msg to set
+   */
+  public void setMsg(String msg) {
+    this.msg = msg;
+  }
+
 }

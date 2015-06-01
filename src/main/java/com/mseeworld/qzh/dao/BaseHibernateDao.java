@@ -31,4 +31,6 @@ public interface BaseHibernateDao<T> {
   public T getByName(String name);
   
   public List<T> getFirstNOfAll(int start, int size);
+  
+  public void deleteAndSave(final T entity);
 }

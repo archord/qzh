@@ -4,6 +4,7 @@
  */
 package com.mseeworld.qzh.service;
 
+import com.mseeworld.qzh.bean.AOrganization;
 import com.mseeworld.qzh.bean.Cbf;
 import com.mseeworld.qzh.bean.Dldjdmb;
 import com.mseeworld.qzh.bean.Dk;
@@ -49,6 +50,7 @@ import org.apache.poi.ss.usermodel.Workbook;
  */
 public class ModelParser {
 
+  private OrganizationDAO orgDao;
   private CbflxdmbDao cbflxdmbDao;   //承包方类型
   private CbjyqqdfsdmbDao cbjyqqdfsdmbDao; //承包经营权取得方式
   private CybzdmbDao cybzdmbDao; //成员备注
@@ -74,116 +76,146 @@ public class ModelParser {
   private CbjyqzQzhfDao cbjyqzQzhfDao;
   private CbjyqzQzzxDao cbjyqzQzzxDao;
 
-  public void parseData(String fileName) {
+  public String parseData(String fileName) {
     try {
       Workbook wb = ExcelReader.createWb(fileName);
 
       Sheet sheet = ExcelReader.getSheet(wb, 0);
       List<String[]> list = ExcelReader.listFromSheet(sheet);
-      List<Fbf> fbfs = getFbfs(list);
-      for (Fbf obj : fbfs) {
-        System.out.println("fbfbm=" + obj.getFbfbm());
-        fbfDao.save(obj);
+      String orgName = getOrgName(list);
+      if(orgName==null||orgName.isEmpty()){
+        return "组织机构表->县（市）名称不能为空。";
       }
+      System.out.println("orgName=" + orgName);
+      AOrganization org = new AOrganization();
+      org.setOrgName(orgName);
+      org.setParentId(0);
+      org.setIsDeleted(false);
+      orgDao.saveByName(org);
+      System.out.println("orgId="+org.getOrgId());
 
       sheet = ExcelReader.getSheet(wb, 1);
       list = ExcelReader.listFromSheet(sheet);
-      List<Cbf> cbfs = getCbfs(list);
-      for (Cbf obj : cbfs) {
-        System.out.println("cbfbm=" + obj.getCbfbm());
-        cbfDao.save(obj);
+      List<Fbf> fbfs = getFbfs(list);
+      for (Fbf obj : fbfs) {
+        System.out.println("fbfbm=" + obj.getFbfbm());
+        obj.setOrgId(org.getOrgId());
+        fbfDao.deleteAndSave(obj);
+//        fbfDao.save(obj);
       }
 
       sheet = ExcelReader.getSheet(wb, 2);
       list = ExcelReader.listFromSheet(sheet);
-      List<CbfJtcy> cbfJtcys = getCbfJtcys(list);
-      for (CbfJtcy obj : cbfJtcys) {
-        System.out.println("cbfJtcys=" + obj.getCbfbm());
-        cbfJtcyDao.save(obj);
-      }
+      List<Cbf> cbfs = getCbfs(list);
+      for (Cbf obj : cbfs) {
+        System.out.println("cbfbm=" + obj.getCbfbm());
+        obj.setOrgId(org.getOrgId());
+        cbfDao.deleteAndSave(obj);
+      } 
 
       sheet = ExcelReader.getSheet(wb, 3);
       list = ExcelReader.listFromSheet(sheet);
-      List<Cbht> cbhts = getCbhts(list);
-      for (Cbht obj : cbhts) {
-        System.out.println("cbhts=" + obj.getCbhtbm());
-        cbhtDao.save(obj);
+      List<CbfJtcy> cbfJtcys = getCbfJtcys(list);
+      for (CbfJtcy obj : cbfJtcys) {
+        System.out.println("cbfJtcys=" + obj.getCbfbm());
+        cbfJtcyDao.deleteAndSave(obj);
       }
 
       sheet = ExcelReader.getSheet(wb, 4);
       list = ExcelReader.listFromSheet(sheet);
-      List<Lzht> lzhts = getLzhhts(list);
-      for (Lzht obj : lzhts) {
-        System.out.println("lzhts=" + obj.getLzhtbm());
-        lzhhtDao.save(obj);
+      List<Cbht> cbhts = getCbhts(list);
+      for (Cbht obj : cbhts) {
+        System.out.println("cbhts=" + obj.getCbhtbm());
+        obj.setOrgId(org.getOrgId());
+        cbhtDao.deleteAndSave(obj);
       }
 
       sheet = ExcelReader.getSheet(wb, 5);
       list = ExcelReader.listFromSheet(sheet);
-      List<Dk> dks = getDks(list);
-      for (Dk obj : dks) {
-        System.out.println("dks=" + obj.getDkbm());
-        dkDao.save(obj);
+      List<Lzht> lzhts = getLzhhts(list);
+      for (Lzht obj : lzhts) {
+        System.out.println("lzhts=" + obj.getLzhtbm());
+        obj.setOrgId(org.getOrgId());
+        lzhhtDao.deleteAndSave(obj);
       }
 
       sheet = ExcelReader.getSheet(wb, 6);
       list = ExcelReader.listFromSheet(sheet);
-      List<Cbdkxx> cbdkxxs = getCbdkxxs(list);
-      for (Cbdkxx obj : cbdkxxs) {
-        System.out.println("cbdkxx=" + obj.getDkbm());
-        cbdkxxDao.save(obj);
+      List<Dk> dks = getDks(list);
+      for (Dk obj : dks) {
+        System.out.println("dks=" + obj.getDkbm());
+        obj.setOrgId(org.getOrgId());
+        dkDao.deleteAndSave(obj);
       }
 
       sheet = ExcelReader.getSheet(wb, 7);
       list = ExcelReader.listFromSheet(sheet);
-      List<Qslyzlfj> qslyzlfjs = getQslyzlfjs(list);
-      for (Qslyzlfj obj : qslyzlfjs) {
-        System.out.println("Qslyzlfj=" + obj.getCbjyqzbm());
-        qslyzlfjDao.save(obj);
+      List<Cbdkxx> cbdkxxs = getCbdkxxs(list);
+      for (Cbdkxx obj : cbdkxxs) {
+        System.out.println("cbdkxx=" + obj.getDkbm());
+        cbdkxxDao.deleteAndSave(obj);
       }
 
       sheet = ExcelReader.getSheet(wb, 8);
       list = ExcelReader.listFromSheet(sheet);
-      List<Cbjyqzdjb> cbjyqzdjbs = getCbjyqzdjbs(list);
-      for (Cbjyqzdjb obj : cbjyqzdjbs) {
-        System.out.println("Cbjyqzdjb=" + obj.getCbjyqzbm());
-        cbjyqzdjbDao.save(obj);
+      List<Qslyzlfj> qslyzlfjs = getQslyzlfjs(list);
+      for (Qslyzlfj obj : qslyzlfjs) {
+        System.out.println("Qslyzlfj=" + obj.getCbjyqzbm());
+        qslyzlfjDao.deleteAndSave(obj);
       }
 
       sheet = ExcelReader.getSheet(wb, 9);
       list = ExcelReader.listFromSheet(sheet);
-      List<Cbjyqz> cbjyqzs = getCbjyqzs(list);
-      for (Cbjyqz obj : cbjyqzs) {
-        System.out.println("cbjyqzs=" + obj.getCbjyqzbm());
-        cbjyqzDao.save(obj);
+      List<Cbjyqzdjb> cbjyqzdjbs = getCbjyqzdjbs(list);
+      for (Cbjyqzdjb obj : cbjyqzdjbs) {
+        System.out.println("Cbjyqzdjb=" + obj.getCbjyqzbm());
+        cbjyqzdjbDao.deleteAndSave(obj);
       }
 
       sheet = ExcelReader.getSheet(wb, 10);
       list = ExcelReader.listFromSheet(sheet);
-      List<CbjyqzQzbf> cbjyqzQzbfs = getCbjyqzQzbfs(list);
-      for (CbjyqzQzbf obj : cbjyqzQzbfs) {
-        System.out.println("CbjyqzQzbf=" + obj.getCbjyqzbm());
-        cbjyqzQzbfDao.save(obj);
+      List<Cbjyqz> cbjyqzs = getCbjyqzs(list);
+      for (Cbjyqz obj : cbjyqzs) {
+        System.out.println("cbjyqzs=" + obj.getCbjyqzbm());
+        cbjyqzDao.deleteAndSave(obj);
       }
 
       sheet = ExcelReader.getSheet(wb, 11);
       list = ExcelReader.listFromSheet(sheet);
-      List<CbjyqzQzhf> cbjyqzQzhfs = getCbjyqzQzhfs(list);
-      for (CbjyqzQzhf obj : cbjyqzQzhfs) {
-        System.out.println("CbjyqzQzhf=" + obj.getCbjyqzbm());
-        cbjyqzQzhfDao.save(obj);
+      List<CbjyqzQzbf> cbjyqzQzbfs = getCbjyqzQzbfs(list);
+      for (CbjyqzQzbf obj : cbjyqzQzbfs) {
+        System.out.println("CbjyqzQzbf=" + obj.getCbjyqzbm());
+        cbjyqzQzbfDao.deleteAndSave(obj);
       }
 
       sheet = ExcelReader.getSheet(wb, 12);
       list = ExcelReader.listFromSheet(sheet);
+      List<CbjyqzQzhf> cbjyqzQzhfs = getCbjyqzQzhfs(list);
+      for (CbjyqzQzhf obj : cbjyqzQzhfs) {
+        System.out.println("CbjyqzQzhf=" + obj.getCbjyqzbm());
+        cbjyqzQzhfDao.deleteAndSave(obj);
+      }
+
+      sheet = ExcelReader.getSheet(wb, 13);
+      list = ExcelReader.listFromSheet(sheet);
       List<CbjyqzQzzx> cbjyqzQzzxs = getCbjyqzQzzxs(list);
       for (CbjyqzQzzx obj : cbjyqzQzzxs) {
         System.out.println("cbjyqzQzzxs=" + obj.getCbjyqzbm());
-        cbjyqzQzzxDao.save(obj);
+        cbjyqzQzzxDao.deleteAndSave(obj);
       }
 
     } catch (IOException ex) {
       Logger.getLogger(ModelParser.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return null;
+  }
+
+  public String getOrgName(List<String[]> values) {
+    
+    if(values.size()==0){
+      return null;
+    }else{
+      return values.get(0)[1].trim();
     }
   }
 
@@ -457,16 +489,22 @@ public class ModelParser {
         obj.setDkbm(ts[0].trim());
         obj.setDkmc(ts[1].trim());
         Syqsxdmb syqsxdmb = syqsxDao.getByName(ts[2].trim());
+        if(syqsxdmb!=null)
         obj.setSyqxz(syqsxdmb.getDm());
         Dklbdmb dklbdmb = dklbdmbDao.getByName(ts[3].trim());
+        if(dklbdmb!=null)
         obj.setDklb(dklbdmb.getDm());
         Tdlylx tdlylx = tdlylxDao.getByName(ts[4].trim());
+        if(tdlylx!=null)
         obj.setTdlylx(tdlylx.getLbbm());
         Dldjdmb dldjdmb = dldjdmbDao.getByName(ts[5].trim());
+        if(dldjdmb!=null)
         obj.setDldj(dldjdmb.getDm());
         Tdytdmb tdytdmb = tdytdmbDao.getByName(ts[6].trim());
+        if(tdytdmb!=null)
         obj.setTdyt(tdytdmb.getDm());
         Sfdmb sfdmb = sfdmbDao.getByName(ts[7].trim());
+        if(sfdmb!=null)
         obj.setSfjbnt(sfdmb.getDm());
         if (ts[8] != null && !ts[8].isEmpty()) {
           obj.setScmj(Float.parseFloat(ts[8].trim()));
@@ -901,5 +939,13 @@ public class ModelParser {
   @Resource
   public void setTdlylxDao(TdlylxDao tdlylxDao) {
     this.tdlylxDao = tdlylxDao;
+  }
+
+  /**
+   * @param orgDao the orgDao to set
+   */
+  @Resource
+  public void setOrgDao(OrganizationDAO orgDao) {
+    this.orgDao = orgDao;
   }
 }

@@ -69,4 +69,18 @@ public class OrganizationDAOImpl extends BaseHibernateDaoImpl<AOrganization> imp
     q.setMaxResults(size);
     return q.list();
   }
+
+  @Override
+  public void saveByName(AOrganization org) {
+    
+    String sql = "select * from a_organization where org_name='"+org.getOrgName().trim()+"'";
+    Session session = getCurrentSession();
+    Query q = session.createSQLQuery(sql).addEntity(AOrganization.class);
+    if (q.list().size()>0) {
+      AOrganization torg = (AOrganization) q.list().get(0);
+      org.setOrgId(torg.getOrgId());
+    }else{
+      super.save(org);
+    }
+  }
 }

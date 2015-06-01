@@ -138,4 +138,14 @@ public class DkDaoImpl extends BaseHibernateDaoImpl<Dk> implements DkDao {
     Session session = getCurrentSession();
     session.createSQLQuery(sql).executeUpdate();
   }
+  
+  @Override
+  public void deleteAndSave(Dk obj){
+    
+    Session session = getCurrentSession();
+    String sql = "delete from dk where dkbm='" + obj.getDkbm().trim() + "'";
+    session.createSQLQuery(sql).executeUpdate();
+    
+    super.save(obj);
+  }
 }

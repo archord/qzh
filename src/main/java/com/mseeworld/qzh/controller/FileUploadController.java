@@ -53,8 +53,12 @@ public class FileUploadController {
 
     String absPath = moveFile(uploadItem.getFile(), webRoot);
     if (!absPath.isEmpty()) {
-      System.out.println("absPath="+absPath);
-      modelParser.parseData(absPath);
+      System.out.println("absPath=" + absPath);
+      String rst = modelParser.parseData(absPath);
+      if (rst != null) {
+        extjsFormResult.setSuccess(false);
+        extjsFormResult.setMsg(rst);
+      }
     }
 
     return extjsFormResult.toString();

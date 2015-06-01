@@ -35,11 +35,12 @@ Ext.define("core.data_import.view.DataImportForm", {
           form.submit({
             url: './uploadData.do',
             waitMsg: '上传数据文件...',
-            success: function(fp, o) {
+            success: function(form, action) {
               Ext.Msg.alert('提示', '上传成功！');
             },
-            failure: function(fp, o) {
-              Ext.Msg.alert('警告', '上传失败！');
+            failure: function(form, action) {
+              var resObj = Ext.decode(action.response.responseText);
+              Ext.Msg.alert('上传失败', resObj.msg);
             }
           });
         }

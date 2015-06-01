@@ -76,4 +76,14 @@ public class CbfDaoImpl extends BaseHibernateDaoImpl<Cbf> implements CbfDao {
     }
     return tNum;
   }
+  
+  @Override
+  public void deleteAndSave(Cbf obj){
+    
+    Session session = getCurrentSession();
+    String sql = "delete from cbf where cbfbm='" + obj.getCbfbm().trim() + "'";
+    session.createSQLQuery(sql).executeUpdate();
+    
+    super.save(obj);
+  }
 }

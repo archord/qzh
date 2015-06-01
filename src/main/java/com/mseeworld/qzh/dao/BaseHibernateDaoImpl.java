@@ -150,4 +150,9 @@ public abstract class BaseHibernateDaoImpl<T extends Serializable> implements Ba
     }
     return null;
   }
+  
+  @Override
+  public void deleteAndSave(final T entity){
+    throw new UnsupportedOperationException("Not supported yet.");
+  }
 }

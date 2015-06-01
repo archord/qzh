@@ -76,4 +76,14 @@ public class FbfDaoImpl extends BaseHibernateDaoImpl<Fbf> implements FbfDao{
     Session session = getCurrentSession();
     session.createSQLQuery(sql).executeUpdate();
   }
+  
+  @Override
+  public void deleteAndSave(Fbf obj){
+    
+    Session session = getCurrentSession();
+    String sql = "delete from fbf where fbfbm='" + obj.getFbfbm().trim() + "'";
+    session.createSQLQuery(sql).executeUpdate();
+    
+    super.save(obj);
+  }
 }

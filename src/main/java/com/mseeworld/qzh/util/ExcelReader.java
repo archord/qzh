@@ -59,6 +59,8 @@ public class ExcelReader {
     Debug.printf("{}共有{}行记录！", sheet.getSheetName(), rowTotal);
 
     List<String[]> list = new ArrayList<String[]>();
+    int firstRowNum = 0;
+    int curRowNum = 0;
     for (int r = sheet.getFirstRowNum(); r <= sheet.getLastRowNum(); r++) {
       Row row = sheet.getRow(r);
       if (row == null || row.getLastCellNum() <= 0) {
@@ -66,9 +68,16 @@ public class ExcelReader {
       }
       // 不能用row.getPhysicalNumberOfCells()，可能会有空cell导致索引溢出
       // 使用row.getLastCellNum()至少可以保证索引不溢出，但会有很多Null值，如果使用集合的话，就不说了
-      String[] cells = new String[row.getLastCellNum()];
-      for(int i=0; i<cells.length; i++){
-        cells[i]="";
+      if (firstRowNum == 0) {
+        firstRowNum = row.getLastCellNum(); //后面所有的行的列数都和第一行的列数一样，因为第一行为注释行，其列数时正确的。
+      }
+      curRowNum = row.getLastCellNum();
+      if (curRowNum < firstRowNum) {
+        curRowNum = firstRowNum;
+      }
+      String[] cells = new String[curRowNum];
+      for (int i = 0; i < cells.length; i++) {
+        cells[i] = "";
       }
       for (int c = row.getFirstCellNum(); c <= row.getLastCellNum(); c++) {
         Cell cell = row.getCell(c);

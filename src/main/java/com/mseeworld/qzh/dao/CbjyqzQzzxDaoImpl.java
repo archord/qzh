@@ -66,4 +66,14 @@ public class CbjyqzQzzxDaoImpl extends BaseHibernateDaoImpl<CbjyqzQzzx> implemen
     Session session = getCurrentSession();
     session.createSQLQuery(sql).executeUpdate();
   }
+  
+  @Override
+  public void deleteAndSave(CbjyqzQzzx obj){
+    
+    Session session = getCurrentSession();
+    String sql = "delete from cbjyqz_qzzx where cbjyqzbm='" + obj.getCbjyqzbm().trim() + "'";
+    session.createSQLQuery(sql).executeUpdate();
+    
+    super.save(obj);
+  }
 }
