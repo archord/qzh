@@ -164,12 +164,13 @@ public class CbhtDaoImpl extends BaseHibernateDaoImpl<Cbht> implements CbhtDao {
   }
   
   @Override
-  public void deleteAndSave(Cbht obj){
+  public int deleteAndSave(Cbht obj){
     
     Session session = getCurrentSession();
     String sql = "delete from cbht where cbhtbm='" + obj.getCbhtbm().trim() + "'";
-    session.createSQLQuery(sql).executeUpdate();
+    int num = session.createSQLQuery(sql).executeUpdate();
     
     super.save(obj);
+    return num;
   }
 }

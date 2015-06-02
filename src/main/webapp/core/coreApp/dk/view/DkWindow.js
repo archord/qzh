@@ -9,7 +9,7 @@ Ext.define("core.dk.view.DkWindow", {
   listeners: {
     show: function(_this) {
       if (_this.extraParas) {
-        _this.down("form").getForm().findField("orgName").setValue(_this.extraParas.obj.orgName);
+        _this.down("form").getForm().findField("orgName").setValue(_this.extraParas.dk.orgName);
         _this.down("form").getForm().findField("isAdd").setValue(0);
         _this.down("form").getForm().findField("orgId").setValue(_this.extraParas.dk.orgId);
         _this.down("form").getForm().findField("orgLevel").setValue(_this.extraParas.orgLevel);

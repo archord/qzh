@@ -87,13 +87,14 @@ public class LzhhtDaoImpl extends BaseHibernateDaoImpl<Lzht> implements LzhhtDao
   }
   
   @Override
-  public void deleteAndSave(Lzht obj){
+  public int deleteAndSave(Lzht obj){
     
     Session session = getCurrentSession();
     String sql = "delete from lzht where lzhtbm='" + obj.getLzhtbm().trim() + "'";
-    session.createSQLQuery(sql).executeUpdate();
+    int num = session.createSQLQuery(sql).executeUpdate();
     
     super.save(obj);
+    return num;
   }
 
 }

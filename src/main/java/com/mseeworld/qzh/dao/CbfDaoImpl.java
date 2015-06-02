@@ -28,6 +28,21 @@ public class CbfDaoImpl extends BaseHibernateDaoImpl<Cbf> implements CbfDao {
     return (Cbf) q.list().get(0);
   }
 
+  public Cbf getByDkbm(String dkbm) {
+
+    Session session = getCurrentSession();
+    String sql = "select o1.* "
+            + "from cbf o1 "
+            + "inner join cbdkxx o2 on o2.cbfbm=o1.cbfbm and o2.dkbm= '" + dkbm.trim() + "' ";
+    Query q = session.createSQLQuery(sql).addEntity(Cbf.class);
+
+    if (q.list().size() > 0) {
+      return (Cbf) q.list().get(0);
+    } else {
+      return null;
+    }
+  }
+
   public List<Cbf> getCbfsByOrgId(long orgId) {
 
     Session session = getCurrentSession();
@@ -76,14 +91,15 @@ public class CbfDaoImpl extends BaseHibernateDaoImpl<Cbf> implements CbfDao {
     }
     return tNum;
   }
-  
+
   @Override
-  public void deleteAndSave(Cbf obj){
-    
+  public int deleteAndSave(Cbf obj) {
+
     Session session = getCurrentSession();
     String sql = "delete from cbf where cbfbm='" + obj.getCbfbm().trim() + "'";
-    session.createSQLQuery(sql).executeUpdate();
-    
+    int num = session.createSQLQuery(sql).executeUpdate();
+
     super.save(obj);
+    return num;
   }
 }

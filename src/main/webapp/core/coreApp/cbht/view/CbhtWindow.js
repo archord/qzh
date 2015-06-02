@@ -28,7 +28,7 @@ Ext.define("core.cbht.view.CbhtWindow", {
         
         var dkgrid = Ext.getCmp("cbhtdkgridid");
         var store = dkgrid.getStore();
-        store.load({params: {cbhtId: _this.extraParas.obj.id}});
+        store.load({params: {cbhtId: _this.extraParas.obj.id, cbhtbm: _this.extraParas.obj.cbhtbm}});
       } else {
         var orgTree = Ext.getCmp("orgTreeCbht");
         var curSelNode = orgTree.getSelectionModel().getSelection();

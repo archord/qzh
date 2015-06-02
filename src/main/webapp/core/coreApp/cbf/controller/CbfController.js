@@ -298,7 +298,7 @@ Ext.define("core.cbf.controller.CbfController", {
     "core.cbf.view.CbfJtcyWindow",
     "core.cbf.view.CbfJtcyForm",
     "core.cbf.view.CbfWindow",
-    "core.cbf.view.OrgWindowAll_fbf"
+    "core.cbf.view.OrgWindowAll_cbf"
   ],
   stores: ["core.cbf.store.CbfStore",
     "core.cbf.store.OrgStore",

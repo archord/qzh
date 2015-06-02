@@ -19,12 +19,14 @@ public interface DkDao extends BaseHibernateDao<Dk> {
   public List<Dk> getCbDksByCbjyqzbm(String qzbm);
 
   public List<Dk> getLzDksByCbjyqzbm(String qzbm);
-  
+
   public Dk getLzDkByLzhtbm(String lzhtbm);
 
   public List<Dk> getByOrgId(int orgId, int limit);
 
   public List<Dk2> getByCbhtId(int start, int size, int cbhtId);
+
+  public List<Dk2> getByCbhtbm(int start, int size, String cbhtbm);
 
   public List<Dk2> getFirstNOfAll2(int start, int size, int parentId);
 

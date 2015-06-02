@@ -9,10 +9,12 @@ import com.mseeworld.qzh.bean.FileUpload;
 import com.mseeworld.qzh.service.ModelParser;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -32,36 +34,34 @@ public class FileUploadController {
   private ModelParser modelParser;
 
   @RequestMapping(method = RequestMethod.POST)
-  public @ResponseBody
-  String create(FileUpload uploadItem, BindingResult result, HttpServletRequest request) {
+  public void create(FileUpload uploadItem, BindingResult result, HttpServletRequest request, PrintWriter writer) {
 
     String webRoot = request.getSession().getServletContext().getRealPath("/");
-    System.out.println("webRoot=" + webRoot);
 
     ExtJSFormResult extjsFormResult = new ExtJSFormResult();
     if (result.hasErrors()) {
+      String errMsg = "";
       for (ObjectError error : result.getAllErrors()) {
-        System.err.println("Error: " + error.getCode() + " - " + error.getDefaultMessage());
+        errMsg += "Error: " + error.getCode() + " - " + error.getDefaultMessage();
       }
       extjsFormResult.setSuccess(false);
-      return extjsFormResult.toString();
-    }
-    System.err.println("-------------------------------------------");
-    System.err.println("Test upload: " + uploadItem.getFile().getOriginalFilename());
-    System.err.println("-------------------------------------------");
-    extjsFormResult.setSuccess(true);
+      extjsFormResult.setMsg(errMsg);
+    } else {
+      System.err.println("upload file: " + uploadItem.getFile().getOriginalFilename());
+      extjsFormResult.setSuccess(true);
 
-    String absPath = moveFile(uploadItem.getFile(), webRoot);
-    if (!absPath.isEmpty()) {
-      System.out.println("absPath=" + absPath);
-      String rst = modelParser.parseData(absPath);
-      if (rst != null) {
-        extjsFormResult.setSuccess(false);
-        extjsFormResult.setMsg(rst);
+      String absPath = moveFile(uploadItem.getFile(), webRoot);
+      if (!absPath.isEmpty()) {
+        System.out.println("absPath=" + absPath);
+        String rst = modelParser.parseData(absPath);
+        if (!rst.isEmpty()) {
+          extjsFormResult.setSuccess(false);
+          extjsFormResult.setMsg(rst);
+        }
       }
     }
 
-    return extjsFormResult.toString();
+    writer.write(extjsFormResult.toString());
   }
 
   private String moveFile(CommonsMultipartFile file, String webRoot) {

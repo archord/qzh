@@ -52,7 +52,7 @@ public class CbhyqzController {
     int isize = Integer.parseInt(psize);
     
     String porgId = request.getParameter("orgId");
-    System.out.println("porgId="+porgId);
+    
     int iorgId = 0;
     if(porgId!=null && !porgId.isEmpty()){
       iorgId = Integer.parseInt(porgId);

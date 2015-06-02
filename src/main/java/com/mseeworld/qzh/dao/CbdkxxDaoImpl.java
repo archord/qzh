@@ -70,12 +70,14 @@ public class CbdkxxDaoImpl extends BaseHibernateDaoImpl<Cbdkxx> implements Cbdkx
   }
   
   @Override
-  public void deleteAndSave(Cbdkxx obj){
+  public int deleteAndSave(Cbdkxx obj){
     
     Session session = getCurrentSession();
-    String sql = "delete from cbdkxx where dkbm='" + obj.getDkbm().trim() + "' and fbfbm='"+obj.getFbfbm()+"' and cbfbm='"+obj.getCbfbm()+"' and cbhtbm='"+obj.getCbhtbm()+"' ";
-    session.createSQLQuery(sql).executeUpdate();
+//    String sql = "delete from cbdkxx where dkbm='" + obj.getDkbm().trim() + "' and fbfbm='"+obj.getFbfbm()+"' and cbfbm='"+obj.getCbfbm()+"' and cbhtbm='"+obj.getCbhtbm()+"' ";
+    String sql = "delete from cbdkxx where dkbm='" + obj.getDkbm().trim() + "'";
+    int num = session.createSQLQuery(sql).executeUpdate();
     
     super.save(obj);
+    return num;
   }
 }

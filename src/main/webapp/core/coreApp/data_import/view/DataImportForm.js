@@ -40,7 +40,7 @@ Ext.define("core.data_import.view.DataImportForm", {
             },
             failure: function(form, action) {
               var resObj = Ext.decode(action.response.responseText);
-              Ext.Msg.alert('上传失败', resObj.msg);
+              Ext.Msg.alert('警告', "大部分错误是由于数据格式不规范引起的，如数据项空缺或格式错误。<br/>"+resObj.msg);
             }
           });
         }

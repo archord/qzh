@@ -40,6 +40,7 @@ public class DkController {
     String start = request.getParameter("start");
     String psize = request.getParameter("limit");
     String pcbhtId = request.getParameter("cbhtId");
+    String cbhtbm = request.getParameter("cbhtbm");
 
     int ipage = Integer.parseInt(page);
     int istart = Integer.parseInt(start);
@@ -55,9 +56,8 @@ public class DkController {
     List<Dk2> dks = null;
     int limit1 = 10;
 
-    if (pcbhtId != null && !pcbhtId.isEmpty()) {
-      int icbhtId = Integer.parseInt(pcbhtId);
-      dks = dkDao.getByCbhtId(istart, isize, icbhtId);
+    if (cbhtbm != null && !cbhtbm.isEmpty()) {
+      dks = dkDao.getByCbhtbm(istart, isize, cbhtbm);
     } else {
       dks = dkDao.getFirstNOfAll2(istart, isize, iorgId);
     }

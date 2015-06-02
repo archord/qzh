@@ -49,7 +49,7 @@ import org.apache.poi.ss.usermodel.Workbook;
  * @author xy
  */
 public class ModelParser {
-
+  
   private OrganizationDAO orgDao;
   private CbflxdmbDao cbflxdmbDao;   //承包方类型
   private CbjyqqdfsdmbDao cbjyqqdfsdmbDao; //承包经营权取得方式
@@ -75,152 +75,355 @@ public class ModelParser {
   private CbjyqzQzbfDao cbjyqzQzbfDao;
   private CbjyqzQzhfDao cbjyqzQzhfDao;
   private CbjyqzQzzxDao cbjyqzQzzxDao;
-
+  
   public String parseData(String fileName) {
+    StringBuilder sb = new StringBuilder("");
     try {
       Workbook wb = ExcelReader.createWb(fileName);
-
+      
       Sheet sheet = ExcelReader.getSheet(wb, 0);
       List<String[]> list = ExcelReader.listFromSheet(sheet);
       String orgName = getOrgName(list);
-      if(orgName==null||orgName.isEmpty()){
-        return "组织机构表->县（市）名称不能为空。";
+      if (orgName == null || orgName.isEmpty()) {
+        return "组织机构表->县（市）名称不能为空，终止导入。";
       }
-      System.out.println("orgName=" + orgName);
       AOrganization org = new AOrganization();
       org.setOrgName(orgName);
       org.setParentId(0);
       org.setIsDeleted(false);
       orgDao.saveByName(org);
-      System.out.println("orgId="+org.getOrgId());
-
+      
       sheet = ExcelReader.getSheet(wb, 1);
       list = ExcelReader.listFromSheet(sheet);
       List<Fbf> fbfs = getFbfs(list);
+      int i = 1;
+      int delTotal = 0;
+      String tstr = "";
       for (Fbf obj : fbfs) {
-        System.out.println("fbfbm=" + obj.getFbfbm());
-        obj.setOrgId(org.getOrgId());
-        fbfDao.deleteAndSave(obj);
+        if (obj.getFbfdz() != null && !obj.getFbfdz().isEmpty()) {
+          AOrganization torg = orgDao.getOrgByName(obj.getFbfdz(), org.getOrgId());
+          if (torg != null) {
+            obj.setOrgId(torg.getOrgId());
+            int tnum = fbfDao.deleteAndSave(obj);
+            if (tnum > 0) {
+//              sb.append("发包方，第").append(i).append("行与前面有重复。<br/>");
+              tstr += i + ",";
+            }
+            delTotal += tnum;
 //        fbfDao.save(obj);
+          } else {
+            return "发包方，第" + i + "行，发包方地址（组织机构）不完整，终止导入。";
+          }
+        }
+        i++;
       }
-
+      if (delTotal > 0) {
+        sb.append("发包方，第").append(tstr.substring(0, tstr.length() - 1)).append("行重复，共").append(delTotal).append("行，已删除重复项。<br/>");
+      }
+      
       sheet = ExcelReader.getSheet(wb, 2);
       list = ExcelReader.listFromSheet(sheet);
       List<Cbf> cbfs = getCbfs(list);
+      i = 1;
+      delTotal = 0;
+      tstr = "";
       for (Cbf obj : cbfs) {
-        System.out.println("cbfbm=" + obj.getCbfbm());
-        obj.setOrgId(org.getOrgId());
-        cbfDao.deleteAndSave(obj);
-      } 
-
+        if (obj.getCbfdz() != null && !obj.getCbfdz().isEmpty()) {
+          AOrganization torg = orgDao.getOrgByName(obj.getCbfdz(), org.getOrgId());
+          if (torg != null) {
+            obj.setOrgId(torg.getOrgId());
+            int tnum = cbfDao.deleteAndSave(obj);
+            
+            if (tnum > 0) {
+//              sb.append("承包方，第").append(i).append("行与前面有重复。<br/>");
+              tstr += i + ",";
+            }
+            delTotal += tnum;
+//        fbfDao.save(obj);
+          } else {
+            return "承包方，第" + i + "行，发包方地址（组织机构）不完整，终止导入。";
+          }
+        }
+        i++;
+      }
+      if (delTotal > 0) {
+        sb.append("承包方，第").append(tstr.substring(0, tstr.length() - 1)).append("行重复，共").append(delTotal).append("行，已删除重复项。<br/>");
+      }
+      
       sheet = ExcelReader.getSheet(wb, 3);
       list = ExcelReader.listFromSheet(sheet);
       List<CbfJtcy> cbfJtcys = getCbfJtcys(list);
+      i = 1;
+      delTotal = 0;
+      tstr = "";
       for (CbfJtcy obj : cbfJtcys) {
-        System.out.println("cbfJtcys=" + obj.getCbfbm());
-        cbfJtcyDao.deleteAndSave(obj);
+        int tnum = cbfJtcyDao.deleteAndSave(obj);
+        if (tnum > 0) {
+//          sb.append("承包方家庭成员，第").append(i).append("行与前面有重复。<br/>");
+          tstr += i + ",";
+        }
+        delTotal += tnum;
+        i++;
       }
-
+      if (delTotal > 0) {
+        sb.append("承包方家庭成员，第").append(tstr.substring(0, tstr.length() - 1)).append("行重复，共").append(delTotal).append("行，已删除重复项。<br/>");
+      }
+      
       sheet = ExcelReader.getSheet(wb, 4);
       list = ExcelReader.listFromSheet(sheet);
       List<Cbht> cbhts = getCbhts(list);
+      i = 1;
+      delTotal = 0;
+      tstr = "";
       for (Cbht obj : cbhts) {
-        System.out.println("cbhts=" + obj.getCbhtbm());
-        obj.setOrgId(org.getOrgId());
-        cbhtDao.deleteAndSave(obj);
+        Cbf tcbf = cbfDao.getByCbfbm(obj.getCbfbm());
+        if (tcbf != null) {
+          obj.setOrgId(tcbf.getOrgId());
+          int tnum = cbhtDao.deleteAndSave(obj);
+          if (tnum > 0) {
+//            sb.append("承包合同，第").append(i).append("行与前面有重复。<br/>");
+            tstr += i + ",";
+          }
+          delTotal += tnum;
+          i++;
+        } else {
+          return "承包合同，第" + i + "行，承包方编码不存在，终止导入。";
+        }
       }
-
+      if (delTotal > 0) {
+        sb.append("承包合同，第").append(tstr.substring(0, tstr.length() - 1)).append("行重复，共").append(delTotal).append("行，已删除重复项。<br/>");
+      }
+      
       sheet = ExcelReader.getSheet(wb, 5);
       list = ExcelReader.listFromSheet(sheet);
       List<Lzht> lzhts = getLzhhts(list);
+      i = 1;
+      delTotal = 0;
+      tstr = "";
       for (Lzht obj : lzhts) {
-        System.out.println("lzhts=" + obj.getLzhtbm());
-        obj.setOrgId(org.getOrgId());
-        lzhhtDao.deleteAndSave(obj);
+        Cbf tcbf = cbfDao.getByCbfbm(obj.getCbfbm());
+        if (tcbf != null) {
+          obj.setOrgId(tcbf.getOrgId());
+          int tnum = lzhhtDao.deleteAndSave(obj);
+          if (tnum > 0) {
+//            sb.append("流转合同，第").append(i).append("行与前面有重复。<br/>");
+            tstr += i + ",";
+          }
+          delTotal += tnum;
+          i++;
+        } else {
+          return "流转合同，第" + i + "行，承包方编码不存在，终止导入。";
+        }
       }
-
-      sheet = ExcelReader.getSheet(wb, 6);
-      list = ExcelReader.listFromSheet(sheet);
-      List<Dk> dks = getDks(list);
-      for (Dk obj : dks) {
-        System.out.println("dks=" + obj.getDkbm());
-        obj.setOrgId(org.getOrgId());
-        dkDao.deleteAndSave(obj);
+      if (delTotal > 0) {
+        sb.append("流转合同，第").append(tstr.substring(0, tstr.length() - 1)).append("行重复，共").append(delTotal).append("行，已删除重复项。<br/>");
       }
-
+      
       sheet = ExcelReader.getSheet(wb, 7);
       list = ExcelReader.listFromSheet(sheet);
       List<Cbdkxx> cbdkxxs = getCbdkxxs(list);
+      i = 1;
+      delTotal = 0;
+      tstr = "";
       for (Cbdkxx obj : cbdkxxs) {
-        System.out.println("cbdkxx=" + obj.getDkbm());
-        cbdkxxDao.deleteAndSave(obj);
+        int tnum = cbdkxxDao.deleteAndSave(obj);
+        if (tnum > 0) {
+//          sb.append("承包地块，第").append(i).append("行与前面有重复。<br/>");
+          tstr += i + ",";
+        }
+        delTotal += tnum;
+        i++;
       }
-
+      if (delTotal > 0) {
+        sb.append("承包地块，第").append(tstr.substring(0, tstr.length() - 1)).append("行重复，共").append(delTotal).append("行，已删除重复项。<br/>");
+      }
+      
+      sheet = ExcelReader.getSheet(wb, 6);
+      list = ExcelReader.listFromSheet(sheet);
+      List<Dk> dks = getDks(list);
+      i = 1;
+      delTotal = 0;
+      tstr = "";
+      for (Dk obj : dks) {
+        Cbf tcbf = cbfDao.getByDkbm(obj.getDkbm());
+        if (tcbf != null) {
+          obj.setOrgId(tcbf.getOrgId());
+          int tnum = dkDao.deleteAndSave(obj);
+          if (tnum > 0) {
+//            sb.append("地块，第").append(i).append("行与前面有重复。<br/>");
+            tstr += i + ",";
+          }
+          delTotal += tnum;
+          i++;
+        } else {
+          return "地块，第" + i + "行，地块编码对应的承包地块信息不能找到承包方信息，终止导入。";
+        }
+      }
+      if (delTotal > 0) {
+        sb.append("地块，第").append(tstr.substring(0, tstr.length() - 1)).append("行重复，共").append(delTotal).append("行，已删除重复项。<br/>");
+      }
+      
       sheet = ExcelReader.getSheet(wb, 8);
       list = ExcelReader.listFromSheet(sheet);
       List<Qslyzlfj> qslyzlfjs = getQslyzlfjs(list);
+      i = 1;
+      delTotal = 0;
+      tstr = "";
       for (Qslyzlfj obj : qslyzlfjs) {
-        System.out.println("Qslyzlfj=" + obj.getCbjyqzbm());
-        qslyzlfjDao.deleteAndSave(obj);
+        int tnum = qslyzlfjDao.deleteAndSave(obj);
+        if (tnum > 0) {
+//          sb.append("权属来源，第").append(i).append("行与前面有重复。<br/>");
+          tstr += i + ",";
+        }
+        delTotal += tnum;
+        i++;
       }
-
+      if (delTotal > 0) {
+        sb.append("权属来源，第").append(tstr.substring(0, tstr.length() - 1)).append("行重复，共").append(delTotal).append("行，已删除重复项。<br/>");
+      }
+      
       sheet = ExcelReader.getSheet(wb, 9);
       list = ExcelReader.listFromSheet(sheet);
       List<Cbjyqzdjb> cbjyqzdjbs = getCbjyqzdjbs(list);
+      i = 1;
+      delTotal = 0;
+      tstr = "";
       for (Cbjyqzdjb obj : cbjyqzdjbs) {
-        System.out.println("Cbjyqzdjb=" + obj.getCbjyqzbm());
-        cbjyqzdjbDao.deleteAndSave(obj);
+        Cbf tcbf = cbfDao.getByCbfbm(obj.getCbfbm());
+        if (tcbf != null) {
+          obj.setOrgId(tcbf.getOrgId());
+          int tnum = cbjyqzdjbDao.deleteAndSave(obj);
+          if (tnum > 0) {
+//            sb.append("承包经营权证登记簿，第").append(i).append("行与前面有重复。<br/>");
+            tstr += i + ",";
+          }
+          delTotal += tnum;
+          i++;
+        } else {
+          return "承包经营权证登记簿，第" + i + "行，承包方编码不存在，终止导入。";
+        }
       }
-
+      if (delTotal > 0) {
+        sb.append("承包经营权证登记簿，第").append(tstr.substring(0, tstr.length() - 1)).append("行重复，共").append(delTotal).append("行，已删除重复项。<br/>");
+      }
+      
       sheet = ExcelReader.getSheet(wb, 10);
       list = ExcelReader.listFromSheet(sheet);
       List<Cbjyqz> cbjyqzs = getCbjyqzs(list);
+      i = 1;
+      delTotal = 0;
+      tstr = "";
       for (Cbjyqz obj : cbjyqzs) {
-        System.out.println("cbjyqzs=" + obj.getCbjyqzbm());
-        cbjyqzDao.deleteAndSave(obj);
+        Cbjyqzdjb djb = cbjyqzdjbDao.getByQzbm(obj.getCbjyqzbm());
+        if (djb != null) {
+          obj.setOrgId(djb.getOrgId());
+          int tnum = cbjyqzDao.deleteAndSave(obj);
+          if (tnum > 0) {
+//            sb.append("承包经营权证，第").append(i).append("行与前面有重复。<br/>");
+            tstr += i + ",";
+          }
+          delTotal += tnum;
+          i++;
+        } else {
+          return "承包经营权证，第" + i + "行，承包经营权证编码不存在，终止导入。";
+        }
       }
-
+      if (delTotal > 0) {
+        sb.append("承包经营权证，第").append(tstr.substring(0, tstr.length() - 1)).append("行重复，共").append(delTotal).append("行，已删除重复项。<br/>");
+      }
+      
       sheet = ExcelReader.getSheet(wb, 11);
       list = ExcelReader.listFromSheet(sheet);
       List<CbjyqzQzbf> cbjyqzQzbfs = getCbjyqzQzbfs(list);
+      i = 1;
+      delTotal = 0;
+      tstr = "";
       for (CbjyqzQzbf obj : cbjyqzQzbfs) {
-        System.out.println("CbjyqzQzbf=" + obj.getCbjyqzbm());
-        cbjyqzQzbfDao.deleteAndSave(obj);
+        Cbjyqzdjb djb = cbjyqzdjbDao.getByQzbm(obj.getCbjyqzbm());
+        if (djb != null) {
+          obj.setOrgId(djb.getOrgId());
+          int tnum = cbjyqzQzbfDao.deleteAndSave(obj);
+          if (tnum > 0) {
+//            sb.append("权证补发，第").append(i).append("行与前面有重复。<br/>");
+            tstr += i + ",";
+          }
+          delTotal += tnum;
+          i++;
+        } else {
+          return "权证补发，第" + i + "行，承包经营权证编码不存在，终止导入。";
+        }
       }
-
+      if (delTotal > 0) {
+        sb.append("权证补发，第").append(tstr.substring(0, tstr.length() - 1)).append("行重复，共").append(delTotal).append("行，已删除重复项。<br/>");
+      }
+      
       sheet = ExcelReader.getSheet(wb, 12);
       list = ExcelReader.listFromSheet(sheet);
       List<CbjyqzQzhf> cbjyqzQzhfs = getCbjyqzQzhfs(list);
+      i = 1;
+      delTotal = 0;
+      tstr = "";
       for (CbjyqzQzhf obj : cbjyqzQzhfs) {
-        System.out.println("CbjyqzQzhf=" + obj.getCbjyqzbm());
-        cbjyqzQzhfDao.deleteAndSave(obj);
+        Cbjyqzdjb djb = cbjyqzdjbDao.getByQzbm(obj.getCbjyqzbm());
+        if (djb != null) {
+          obj.setOrgId(djb.getOrgId());
+          int tnum = cbjyqzQzhfDao.deleteAndSave(obj);
+          if (tnum > 0) {
+//            sb.append("权证换发，第").append(i).append("行与前面有重复。<br/>");
+            tstr += i + ",";
+          }
+          delTotal += tnum;
+          i++;
+        } else {
+          return "权证换发，第" + i + "行，承包经营权证编码不存在，终止导入。";
+        }
       }
-
+      if (delTotal > 0) {
+        sb.append("权证换发，第").append(tstr.substring(0, tstr.length() - 1)).append("行重复，共").append(delTotal).append("行，已删除重复项。<br/>");
+      }
+      
       sheet = ExcelReader.getSheet(wb, 13);
       list = ExcelReader.listFromSheet(sheet);
       List<CbjyqzQzzx> cbjyqzQzzxs = getCbjyqzQzzxs(list);
+      i = 1;
+      delTotal = 0;
+      tstr = "";
       for (CbjyqzQzzx obj : cbjyqzQzzxs) {
-        System.out.println("cbjyqzQzzxs=" + obj.getCbjyqzbm());
-        cbjyqzQzzxDao.deleteAndSave(obj);
+        Cbjyqzdjb djb = cbjyqzdjbDao.getByQzbm(obj.getCbjyqzbm());
+        if (djb != null) {
+          obj.setOrgId(djb.getOrgId());
+          int tnum = cbjyqzQzzxDao.deleteAndSave(obj);
+          if (tnum > 0) {
+//            sb.append("权证注销，第").append(i).append("行与前面有重复。<br/>");
+            tstr += i + ",";
+          }
+          delTotal += tnum;
+          i++;
+        } else {
+          return "权证注销，第" + i + "行，承包经营权证编码不存在，终止导入。";
+        }
       }
-
+      if (delTotal > 0) {
+        sb.append("权证注销，第").append(tstr.substring(0, tstr.length() - 1)).append("行重复，共").append(delTotal).append("行，已删除重复项。<br/>");
+      }
+      
     } catch (IOException ex) {
       Logger.getLogger(ModelParser.class.getName()).log(Level.SEVERE, null, ex);
     }
-    return null;
+    return sb.toString();
   }
-
+  
   public String getOrgName(List<String[]> values) {
     
-    if(values.size()==0){
+    if (values.size() == 0) {
       return null;
-    }else{
+    } else {
       return values.get(0)[1].trim();
     }
   }
-
+  
   public List<Fbf> getFbfs(List<String[]> values) {
-
+    
     ArrayList<Fbf> objs = new ArrayList<Fbf>();
     DateFormat format = new SimpleDateFormat("yyyyMMdd");
     int i = 0;
@@ -292,9 +495,9 @@ public class ModelParser {
     }
     return objs;
   }
-
+  
   public List<Cbf> getCbfs(List<String[]> values) {
-
+    
     ArrayList<Cbf> objs = new ArrayList<Cbf>();
     DateFormat format = new SimpleDateFormat("yyyyMMdd");
     int i = 0;
@@ -313,7 +516,6 @@ public class ModelParser {
           Xbdmb xbdmb = xbdmbDao.getByName(ts[3].trim());
           obj.setCbfxb(xbdmb.getDm());
           obj.setCbfmz(ts[4].trim());
-          System.out.println("query:" + ts[5].trim() + ":");
           Zjlxdmb zjlx = zjlxdmbDao.getByName(ts[5].trim());
           obj.setCbfzjlx(zjlx.getDm());
           if (ts[6] == null) {
@@ -346,9 +548,9 @@ public class ModelParser {
     }
     return objs;
   }
-
+  
   public List<CbfJtcy> getCbfJtcys(List<String[]> values) {
-
+    
     ArrayList<CbfJtcy> objs = new ArrayList<CbfJtcy>();
     DateFormat format = new SimpleDateFormat("yyyyMMdd");
     int i = 0;
@@ -377,9 +579,9 @@ public class ModelParser {
     }
     return objs;
   }
-
+  
   public List<Cbht> getCbhts(List<String[]> values) {
-
+    
     ArrayList<Cbht> objs = new ArrayList<Cbht>();
     DateFormat format = new SimpleDateFormat("yyyyMMdd");
     int i = 0;
@@ -424,9 +626,9 @@ public class ModelParser {
     }
     return objs;
   }
-
+  
   public List<Lzht> getLzhhts(List<String[]> values) {
-
+    
     ArrayList<Lzht> objs = new ArrayList<Lzht>();
     DateFormat format = new SimpleDateFormat("yyyyMMdd");
     int i = 0;
@@ -473,9 +675,9 @@ public class ModelParser {
     }
     return objs;
   }
-
+  
   public List<Dk> getDks(List<String[]> values) {
-
+    
     ArrayList<Dk> objs = new ArrayList<Dk>();
     DateFormat format = new SimpleDateFormat("yyyyMMdd");
     int i = 0;
@@ -489,23 +691,29 @@ public class ModelParser {
         obj.setDkbm(ts[0].trim());
         obj.setDkmc(ts[1].trim());
         Syqsxdmb syqsxdmb = syqsxDao.getByName(ts[2].trim());
-        if(syqsxdmb!=null)
-        obj.setSyqxz(syqsxdmb.getDm());
+        if (syqsxdmb != null) {
+          obj.setSyqxz(syqsxdmb.getDm());
+        }
         Dklbdmb dklbdmb = dklbdmbDao.getByName(ts[3].trim());
-        if(dklbdmb!=null)
-        obj.setDklb(dklbdmb.getDm());
+        if (dklbdmb != null) {
+          obj.setDklb(dklbdmb.getDm());
+        }
         Tdlylx tdlylx = tdlylxDao.getByName(ts[4].trim());
-        if(tdlylx!=null)
-        obj.setTdlylx(tdlylx.getLbbm());
+        if (tdlylx != null) {
+          obj.setTdlylx(tdlylx.getLbbm());
+        }
         Dldjdmb dldjdmb = dldjdmbDao.getByName(ts[5].trim());
-        if(dldjdmb!=null)
-        obj.setDldj(dldjdmb.getDm());
+        if (dldjdmb != null) {
+          obj.setDldj(dldjdmb.getDm());
+        }
         Tdytdmb tdytdmb = tdytdmbDao.getByName(ts[6].trim());
-        if(tdytdmb!=null)
-        obj.setTdyt(tdytdmb.getDm());
+        if (tdytdmb != null) {
+          obj.setTdyt(tdytdmb.getDm());
+        }
         Sfdmb sfdmb = sfdmbDao.getByName(ts[7].trim());
-        if(sfdmb!=null)
-        obj.setSfjbnt(sfdmb.getDm());
+        if (sfdmb != null) {
+          obj.setSfjbnt(sfdmb.getDm());
+        }
         if (ts[8] != null && !ts[8].isEmpty()) {
           obj.setScmj(Float.parseFloat(ts[8].trim()));
         }
@@ -520,9 +728,9 @@ public class ModelParser {
     }
     return objs;
   }
-
+  
   public List<Cbdkxx> getCbdkxxs(List<String[]> values) {
-
+    
     ArrayList<Cbdkxx> objs = new ArrayList<Cbdkxx>();
     DateFormat format = new SimpleDateFormat("yyyyMMdd");
     int i = 0;
@@ -553,9 +761,9 @@ public class ModelParser {
     }
     return objs;
   }
-
+  
   public List<Qslyzlfj> getQslyzlfjs(List<String[]> values) {
-
+    
     ArrayList<Qslyzlfj> objs = new ArrayList<Qslyzlfj>();
     DateFormat format = new SimpleDateFormat("yyyyMMdd");
     int i = 0;
@@ -582,9 +790,9 @@ public class ModelParser {
     }
     return objs;
   }
-
+  
   public List<Cbjyqzdjb> getCbjyqzdjbs(List<String[]> values) {
-
+    
     ArrayList<Cbjyqzdjb> objs = new ArrayList<Cbjyqzdjb>();
     DateFormat format = new SimpleDateFormat("yyyyMMdd");
     int i = 0;
@@ -617,9 +825,9 @@ public class ModelParser {
     }
     return objs;
   }
-
+  
   public List<Cbjyqz> getCbjyqzs(List<String[]> values) {
-
+    
     ArrayList<Cbjyqz> objs = new ArrayList<Cbjyqz>();
     DateFormat format = new SimpleDateFormat("yyyyMMdd");
     int i = 0;
@@ -653,9 +861,9 @@ public class ModelParser {
     }
     return objs;
   }
-
+  
   public List<CbjyqzQzbf> getCbjyqzQzbfs(List<String[]> values) {
-
+    
     ArrayList<CbjyqzQzbf> objs = new ArrayList<CbjyqzQzbf>();
     DateFormat format = new SimpleDateFormat("yyyyMMdd");
     int i = 0;
@@ -687,9 +895,9 @@ public class ModelParser {
     }
     return objs;
   }
-
+  
   public List<CbjyqzQzhf> getCbjyqzQzhfs(List<String[]> values) {
-
+    
     ArrayList<CbjyqzQzhf> objs = new ArrayList<CbjyqzQzhf>();
     DateFormat format = new SimpleDateFormat("yyyyMMdd");
     int i = 0;
@@ -721,9 +929,9 @@ public class ModelParser {
     }
     return objs;
   }
-
+  
   public List<CbjyqzQzzx> getCbjyqzQzzxs(List<String[]> values) {
-
+    
     ArrayList<CbjyqzQzzx> objs = new ArrayList<CbjyqzQzzx>();
     DateFormat format = new SimpleDateFormat("yyyyMMdd");
     int i = 0;

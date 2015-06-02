@@ -71,12 +71,13 @@ public class CbfJtcyDaoImpl extends BaseHibernateDaoImpl<CbfJtcy> implements Cbf
   }
   
   @Override
-  public void deleteAndSave(CbfJtcy obj){
+  public int deleteAndSave(CbfJtcy obj){
     
     Session session = getCurrentSession();
     String sql = "delete from cbf_jtcy where cbfbm='" + obj.getCbfbm().trim() + "' and cyxm='"+obj.getCyxm()+"'";
-    session.createSQLQuery(sql).executeUpdate();
+    int num = session.createSQLQuery(sql).executeUpdate();
     
     super.save(obj);
+    return num;
   }
 }

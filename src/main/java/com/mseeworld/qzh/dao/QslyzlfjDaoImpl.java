@@ -59,12 +59,13 @@ public class QslyzlfjDaoImpl extends BaseHibernateDaoImpl<Qslyzlfj> implements Q
   }
   
   @Override
-  public void deleteAndSave(Qslyzlfj obj){
+  public int deleteAndSave(Qslyzlfj obj){
     
     Session session = getCurrentSession();
     String sql = "delete from qslyzlfj where cbjyqzbm='" + obj.getCbjyqzbm().trim() + "' and zlfjbh='"+obj.getZlfjbh()+"'";
-    session.createSQLQuery(sql).executeUpdate();
+    int num = session.createSQLQuery(sql).executeUpdate();
     
     super.save(obj);
+    return num;
   }
 }

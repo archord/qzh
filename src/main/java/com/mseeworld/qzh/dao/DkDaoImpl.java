@@ -118,6 +118,21 @@ public class DkDaoImpl extends BaseHibernateDaoImpl<Dk> implements DkDao {
     return q.list();
   }
 
+  public List<Dk2> getByCbhtbm(int start, int size, String cbhtbm){
+
+    Session session = getCurrentSession();
+    String sql = "select dk.*, org.org_name "
+            + "from dk "
+            + "inner join cbdkxx xx on xx.dkbm=dk.dkbm and xx.cbhtbm='"+cbhtbm.trim()+"' "
+            + "left join a_organization org on dk.org_id=org.org_id "
+            + "order by dk.id ";
+    Query q = session.createSQLQuery(sql).addEntity(Dk2.class);
+    q.setFirstResult(start);
+    q.setMaxResults(size);
+
+    return q.list();
+  }
+
   public void updateCbhtId(String dkIds, String cbhtId) {
 
     Session session = getCurrentSession();
@@ -140,12 +155,13 @@ public class DkDaoImpl extends BaseHibernateDaoImpl<Dk> implements DkDao {
   }
   
   @Override
-  public void deleteAndSave(Dk obj){
+  public int deleteAndSave(Dk obj){
     
     Session session = getCurrentSession();
     String sql = "delete from dk where dkbm='" + obj.getDkbm().trim() + "'";
-    session.createSQLQuery(sql).executeUpdate();
+    int num = session.createSQLQuery(sql).executeUpdate();
     
     super.save(obj);
+    return num;
   }
 }

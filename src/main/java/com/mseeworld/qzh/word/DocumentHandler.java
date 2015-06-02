@@ -1,5 +1,6 @@
 package com.mseeworld.qzh.word;
 
+import com.mseeworld.qzh.bean.AOrganization;
 import com.mseeworld.qzh.dao.CbdkxxDao;
 import com.mseeworld.qzh.dao.CbfDao;
 import com.mseeworld.qzh.dao.CbfJtcyDao;
@@ -23,6 +24,7 @@ import com.mseeworld.qzh.bean.Dk;
 import com.mseeworld.qzh.bean.Fbf;
 import com.mseeworld.qzh.bean.Lzht;
 import com.mseeworld.qzh.bean.Sfdmb;
+import com.mseeworld.qzh.dao.OrganizationDAO;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -61,6 +63,7 @@ public class DocumentHandler {
   private CbjyqqdfsdmbDao cbjyqqdfsdmbDao; //承包经营权取得方式
   private SfdmbDao sfdmbDao; //是否
   private CybzdmbDao cybzdmbDao; //成员备注
+  private OrganizationDAO orgDao;
   private Configuration configuration = null;
 
   public DocumentHandler() {
@@ -131,12 +134,29 @@ public class DocumentHandler {
     int dknum = dks.size();
 
     dataMap.put("qzhbm1", "GB0001001");
-    dataMap.put("qzh_org1", "阿克苏市");
-    dataMap.put("qzh_org2", "阿克苏市");
-    dataMap.put("qzh_org3", "阿克苏市");
-    dataMap.put("year1", year+"");
+    if (qz.getOrgId() != null) {
+      AOrganization org = orgDao.getByOrgId(qz.getOrgId());
+      while (org != null && org.getParentId() != 0) {
+        org = orgDao.getByOrgId(org.getParentId());
+      }
+      if (org == null) {
+        dataMap.put("qzh_org1", "XXX市");
+        dataMap.put("qzh_org2", "XXX市");
+        dataMap.put("qzh_org3", "XXX市");
+      } else {
+        dataMap.put("qzh_org1", org.getOrgName());
+        dataMap.put("qzh_org2", org.getOrgName());
+        dataMap.put("qzh_org3", org.getOrgName());
+      }
+    } else {
+      dataMap.put("qzh_org1", "XXX市");
+      dataMap.put("qzh_org2", "XXX市");
+      dataMap.put("qzh_org3", "XXX市");
+    }
+
+    dataMap.put("year1", year + "");
     dataMap.put("num1", "000001");
-    dataMap.put("year2", year+"");
+    dataMap.put("year2", year + "");
     dataMap.put("month2", month);
     dataMap.put("day2", day);
     dataMap.put("fbfmc", fbf.getFbfmc());
@@ -147,14 +167,26 @@ public class DocumentHandler {
     dataMap.put("postalcode", cbf.getYzbm());
     dataMap.put("phone", cbf.getLxdh());
     dataMap.put("cbhtbm", cbdkxx.getCbhtbm());
-    cal.setTime(cbht.getCbqxq());
-    dataMap.put("y3", cal.get(Calendar.YEAR)+"");
-    dataMap.put("m3", cal.get(Calendar.MONTH) + 1);
-    dataMap.put("d3", cal.get(Calendar.DAY_OF_MONTH));
-    cal.setTime(cbht.getCbqxz());
-    dataMap.put("y4", cal.get(Calendar.YEAR)+"");
-    dataMap.put("m4", cal.get(Calendar.MONTH) + 1);
-    dataMap.put("d4", cal.get(Calendar.DAY_OF_MONTH));
+    if (cbht.getCbqxq() != null) {
+      cal.setTime(cbht.getCbqxq());
+      dataMap.put("y3", cal.get(Calendar.YEAR) + "");
+      dataMap.put("m3", cal.get(Calendar.MONTH) + 1);
+      dataMap.put("d3", cal.get(Calendar.DAY_OF_MONTH));
+    } else {
+      dataMap.put("y3", "");
+      dataMap.put("m3", "");
+      dataMap.put("d3", "");
+    }
+    if (cbht.getCbqxz() != null) {
+      cal.setTime(cbht.getCbqxz());
+      dataMap.put("y4", cal.get(Calendar.YEAR) + "");
+      dataMap.put("m4", cal.get(Calendar.MONTH) + 1);
+      dataMap.put("d4", cal.get(Calendar.DAY_OF_MONTH));
+    } else {
+      dataMap.put("y4", "");
+      dataMap.put("m4", "");
+      dataMap.put("d4", "");
+    }
     dataMap.put("sum_area", cbht.getHtzmj());
     dataMap.put("lands", cbht.getCbdkzs());
 
@@ -163,8 +195,12 @@ public class DocumentHandler {
         dataMap.put("dkmc3", dks.get(dknum - 2).getDkmc());
         dataMap.put("dkbm3", dks.get(dknum - 2).getDkbm());
         dataMap.put("dkmj3", dks.get(dknum - 2).getScmj());
-        Sfdmb sf = sfdmbDao.getByDm(dks.get(dknum - 2).getSfjbnt());
-        dataMap.put("sfnt3", sf.getSf());  //是否
+        if (dks.get(dknum - 2).getSfjbnt() != null) {
+          Sfdmb sf = sfdmbDao.getByDm(dks.get(dknum - 2).getSfjbnt());
+          dataMap.put("sfnt3", sf.getSf());  //是否
+        } else {
+          dataMap.put("sfnt3", "");  //是否
+        }
         dataMap.put("dz3", dks.get(dknum - 2).getDkdz());
         dataMap.put("xz3", dks.get(dknum - 2).getDkxz());
         dataMap.put("nz3", dks.get(dknum - 2).getDknz());
@@ -173,7 +209,7 @@ public class DocumentHandler {
         dataMap.put("dkmc4", dks.get(dknum - 1).getDkmc());
         dataMap.put("dkbm4", dks.get(dknum - 1).getDkbm());
         dataMap.put("dkmj4", dks.get(dknum - 1).getScmj());
-        sf = sfdmbDao.getByDm(dks.get(dknum - 1).getSfjbnt());
+        Sfdmb sf = sfdmbDao.getByDm(dks.get(dknum - 1).getSfjbnt());
         dataMap.put("sfnt4", sf.getSf());  //是否
         dataMap.put("dz4", dks.get(dknum - 1).getDkdz());
         dataMap.put("xz4", dks.get(dknum - 1).getDkxz());
@@ -197,29 +233,35 @@ public class DocumentHandler {
         dataMap.put("xz4", "");
         dataMap.put("nz4", "");
         dataMap.put("bz4", "");
-      } else {
-        dataMap.put("dkmc3", "");
-        dataMap.put("dkbm3", "");
-        dataMap.put("dkmj3", "");
-        dataMap.put("sfnt3", "");  //是否
-        dataMap.put("dz3", "");
-        dataMap.put("xz3", "");
-        dataMap.put("nz3", "");
-        dataMap.put("bz3", "");
-        dataMap.put("dkmc4", "");
-        dataMap.put("dkbm4", "");
-        dataMap.put("dkmj4", "");
-        dataMap.put("sfnt4", "");
-        dataMap.put("dz4", "");
-        dataMap.put("xz4", "");
-        dataMap.put("nz4", "");
-        dataMap.put("bz4", "");
       }
+    } else {
+      dataMap.put("dkmc3", "");
+      dataMap.put("dkbm3", "");
+      dataMap.put("dkmj3", "");
+      dataMap.put("sfnt3", "");  //是否
+      dataMap.put("dz3", "");
+      dataMap.put("xz3", "");
+      dataMap.put("nz3", "");
+      dataMap.put("bz3", "");
+      dataMap.put("dkmc4", "");
+      dataMap.put("dkbm4", "");
+      dataMap.put("dkmj4", "");
+      dataMap.put("sfnt4", "");
+      dataMap.put("dz4", "");
+      dataMap.put("xz4", "");
+      dataMap.put("nz4", "");
+      dataMap.put("bz4", "");
     }
-    cal.setTime(cbht.getQdsj());
-    dataMap.put("y5", cal.get(Calendar.YEAR)+"");
-    dataMap.put("m5", cal.get(Calendar.MONTH) + 1);
-    dataMap.put("d5", cal.get(Calendar.DAY_OF_MONTH));
+    if (cbht.getQdsj() != null) {
+      cal.setTime(cbht.getQdsj());
+      dataMap.put("y5", cal.get(Calendar.YEAR) + "");
+      dataMap.put("m5", cal.get(Calendar.MONTH) + 1);
+      dataMap.put("d5", cal.get(Calendar.DAY_OF_MONTH));
+    } else {
+      dataMap.put("y5", "");
+      dataMap.put("m5", "");
+      dataMap.put("d5", "");
+    }
 
     List<Jtcytable> _table1 = new ArrayList<>();
     for (int i = 0; i < 5; i++) {
@@ -247,8 +289,12 @@ public class DocumentHandler {
         t.setT2dkmc(dks.get(i).getDkmc());
         t.setT2dkbm(dks.get(i).getDkbm());
         t.setT2dkmj(dks.get(i).getScmj().toString());
-        Sfdmb sf = sfdmbDao.getByDm(dks.get(i).getSfjbnt());
-        t.setT2sfnt(sf.getSf());  //是否
+        if (dks.get(i).getSfjbnt() != null) {
+          Sfdmb sf = sfdmbDao.getByDm(dks.get(i).getSfjbnt());
+          t.setT2sfnt(sf.getSf());  //是否
+        } else {
+          t.setT2sfnt("");  //是否
+        }
         t.setT2dz(dks.get(i).getDkdz());
         t.setT2xz(dks.get(i).getDkxz());
         t.setT2nz(dks.get(i).getDknz());
@@ -276,8 +322,12 @@ public class DocumentHandler {
         t.setT3dkmc(dks.get(i + 3).getDkmc());
         t.setT3dkbm(dks.get(i + 3).getDkbm());
         t.setT3dkmj(dks.get(i + 3).getScmj().toString());
-        Sfdmb sf = sfdmbDao.getByDm(dks.get(i + 3).getSfjbnt());
-        t.setT3sfnt(sf.getSf());  //是否
+        if (dks.get(i + 3).getSfjbnt() != null) {
+          Sfdmb sf = sfdmbDao.getByDm(dks.get(i + 3).getSfjbnt());
+          t.setT3sfnt(sf.getSf());  //是否
+        } else {
+          t.setT3sfnt("");  //是否
+        }
         t.setT3dz(dks.get(i + 3).getDkdz());
         t.setT3xz(dks.get(i + 3).getDkxz());
         t.setT3nz(dks.get(i + 3).getDknz());
@@ -302,12 +352,20 @@ public class DocumentHandler {
       if (i < lzhts.size()) {
         t.setT4bgcbf(lzhts.get(i).getCbfbm());
         t.setT4bgsrf(lzhts.get(i).getSrfbm());
-        qzqdfs = cbjyqqdfsdmbDao.getByDm(lzhts.get(i).getLzfs());
-        t.setT4bgbgfs(qzqdfs.getQdfs());
+        if (lzhts.get(i).getLzfs() != null) {
+          qzqdfs = cbjyqqdfsdmbDao.getByDm(lzhts.get(i).getLzfs());
+          t.setT4bgbgfs(qzqdfs.getQdfs());
+        } else {
+          t.setT4bgbgfs("");
+        }
         t.setT4bgmj(lzhts.get(i).getLzmj().toString());
         t.setT4bghtbh(lzhts.get(i).getLzhtbm());
-        Dk dk = dkDao.getLzDkByLzhtbm(lzhts.get(i).getLzhtbm());
-        t.setT4bgdkbm(dk.getDkbm());
+        if (lzhts.get(i).getLzhtbm() != null) {
+          Dk dk = dkDao.getLzDkByLzhtbm(lzhts.get(i).getLzhtbm());
+          t.setT4bgdkbm(dk.getDkbm());
+        } else {
+          t.setT4bgdkbm("");
+        }
         t.setT4bgbmqz("");
       } else {
         t.setT4bgbgfs("");
@@ -323,11 +381,11 @@ public class DocumentHandler {
     dataMap.put("bgtable", _table4);
 
     List<String> images = new ArrayList<>();
-    images.add(getImageStr(storePath+"/images/dk1.jpg"));
-    images.add(getImageStr(storePath+"/images/dk2.jpg"));
-    images.add(getImageStr(storePath+"/images/dk3.jpg"));
-    images.add(getImageStr(storePath+"/images/dk4.jpg"));
-    images.add(getImageStr(storePath+"/images/dk5.jpg"));
+    images.add(getImageStr(storePath + "/images/dk1.jpg"));
+    images.add(getImageStr(storePath + "/images/dk2.jpg"));
+    images.add(getImageStr(storePath + "/images/dk3.jpg"));
+    images.add(getImageStr(storePath + "/images/dk4.jpg"));
+    images.add(getImageStr(storePath + "/images/dk5.jpg"));
     dataMap.put("images", images);
   }
 
@@ -453,5 +511,13 @@ public class DocumentHandler {
   @Resource
   public void setCybzdmbDao(CybzdmbDao cybzdmbDao) {
     this.cybzdmbDao = cybzdmbDao;
+  }
+
+  /**
+   * @param orgDao the orgDao to set
+   */
+  @Resource
+  public void setOrgDao(OrganizationDAO orgDao) {
+    this.orgDao = orgDao;
   }
 }

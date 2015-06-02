@@ -32,5 +32,5 @@ public interface BaseHibernateDao<T> {
   
   public List<T> getFirstNOfAll(int start, int size);
   
-  public void deleteAndSave(final T entity);
+  public int deleteAndSave(final T entity);
 }

@@ -18,4 +18,8 @@ public interface OrganizationDAO extends BaseHibernateDao<AOrganization>{
   public List<AOrganization2> getFirstNOfAll2(int start, int size, int parentId);
   
   public void saveByName(AOrganization org);
+  
+  public AOrganization getOrgByName(String orgName, long parentId);
+  
+  public AOrganization getByOrgId(long orgId);
 }

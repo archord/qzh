@@ -13,8 +13,10 @@ import java.util.List;
  * @author xy
  */
 public interface CbfDao extends BaseHibernateDao<Cbf> {
-  
+
   public Cbf getByCbfbm(String cbfbm);
+
+  public Cbf getByDkbm(String dkbm);
 
   public List<Cbf> getCbfsByOrgId(long orgId);
 

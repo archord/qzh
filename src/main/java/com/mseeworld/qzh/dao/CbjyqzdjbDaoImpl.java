@@ -38,7 +38,11 @@ public class CbjyqzdjbDaoImpl extends BaseHibernateDaoImpl<Cbjyqzdjb> implements
             + "where cbjyqzbm= '" + qzbm.trim() + "' ";
     Query q = session.createSQLQuery(sql).addEntity(Cbjyqzdjb.class);
 
-    return (Cbjyqzdjb) q.list().get(0);
+    if (q.list().size() > 0) {
+      return (Cbjyqzdjb) q.list().get(0);
+    } else {
+      return null;
+    }
   }
 
   public List<Cbjyqzdjb> getByOrgId(long orgId) {
@@ -81,12 +85,13 @@ public class CbjyqzdjbDaoImpl extends BaseHibernateDaoImpl<Cbjyqzdjb> implements
   }
   
   @Override
-  public void deleteAndSave(Cbjyqzdjb obj){
+  public int deleteAndSave(Cbjyqzdjb obj){
     
     Session session = getCurrentSession();
     String sql = "delete from cbjyqzdjb where cbjyqzbm='" + obj.getCbjyqzbm().trim() + "'";
-    session.createSQLQuery(sql).executeUpdate();
+    int num = session.createSQLQuery(sql).executeUpdate();
     
     super.save(obj);
+    return num;
   }
 }

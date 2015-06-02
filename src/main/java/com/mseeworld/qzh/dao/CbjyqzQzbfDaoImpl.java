@@ -68,12 +68,13 @@ public class CbjyqzQzbfDaoImpl extends BaseHibernateDaoImpl<CbjyqzQzbf> implemen
   }
   
   @Override
-  public void deleteAndSave(CbjyqzQzbf obj){
+  public int deleteAndSave(CbjyqzQzbf obj){
     
     Session session = getCurrentSession();
     String sql = "delete from cbjyqz_qzbf where cbjyqzbm='" + obj.getCbjyqzbm().trim() + "'";
-    session.createSQLQuery(sql).executeUpdate();
+    int num = session.createSQLQuery(sql).executeUpdate();
     
     super.save(obj);
+    return num;
   }
 }
