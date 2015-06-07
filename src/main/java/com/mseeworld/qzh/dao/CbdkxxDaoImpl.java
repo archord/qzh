@@ -24,7 +24,11 @@ public class CbdkxxDaoImpl extends BaseHibernateDaoImpl<Cbdkxx> implements Cbdkx
             + "where cbjyqzbm= '" + qzbm.trim() + "' ";
     Query q = session.createSQLQuery(sql).addEntity(Cbdkxx.class);
 
-    return (Cbdkxx) q.list().get(0);
+    if (q.list().size() > 0) {
+      return (Cbdkxx) q.list().get(0);
+    } else {
+      return null;
+    }
   }
   
   public List<Cbdkxx> getCbdkxxsByOrgId(long orgId){

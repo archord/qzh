@@ -25,7 +25,11 @@ public class CbfDaoImpl extends BaseHibernateDaoImpl<Cbf> implements CbfDao {
             + "where cbfbm= '" + cbfbm.trim() + "' ";
     Query q = session.createSQLQuery(sql).addEntity(Cbf.class);
 
-    return (Cbf) q.list().get(0);
+    if (q.list().size() > 0) {
+      return (Cbf) q.list().get(0);
+    } else {
+      return null;
+    }
   }
 
   public Cbf getByDkbm(String dkbm) {

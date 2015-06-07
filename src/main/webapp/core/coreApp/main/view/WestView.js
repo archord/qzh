@@ -20,6 +20,29 @@ Ext.define("core.main.view.WestView", {
     activeOnTop: true
   },
   items: [{
+      title: "地块信息管理",
+      items: [{
+          xtype: "treepanel",
+          rootVisible: false, // 不展示根节点
+          displayField: "text",
+          border: 0,
+          root: {
+            expanded: true,
+            children: [
+              {
+                id: "map-manage",
+                alias: 'map-manage',
+                text: "地图信息查看",
+                leaf: true
+              },{
+                id: "dk-manage",
+                text: "地块信息管理",
+                leaf: true
+              }
+            ]
+          }
+        }]
+    }, {
       title: "权证管理",
       items: [{
           xtype: "treepanel",
@@ -70,29 +93,6 @@ Ext.define("core.main.view.WestView", {
               }, {
                 id: "lzhht-manage",
                 text: "流转合同管理",
-                leaf: true
-              }
-            ]
-          }
-        }]
-    }, {
-      title: "地块信息管理",
-      items: [{
-          xtype: "treepanel",
-          rootVisible: false, // 不展示根节点
-          displayField: "text",
-          border: 0,
-          root: {
-            expanded: true,
-            children: [
-              {
-                id: "dk-manage",
-                text: "地块信息管理",
-                leaf: true
-              }, {
-                id: "map-manage",
-                alias: 'map-manage',
-                text: "地图信息查看",
                 leaf: true
               }
             ]

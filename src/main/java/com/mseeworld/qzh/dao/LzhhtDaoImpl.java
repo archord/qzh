@@ -46,7 +46,11 @@ public class LzhhtDaoImpl extends BaseHibernateDaoImpl<Lzht> implements LzhhtDao
             + "where lzhtbm= '" + lzhtbm.trim() + "' ";
     Query q = session.createSQLQuery(sql).addEntity(Lzht.class);
 
-    return (Lzht) q.list().get(0);
+    if (q.list().size() > 0) {
+      return (Lzht) q.list().get(0);
+    } else {
+      return null;
+    }
   }
   
   public List<Lzht2> getFirstNOfAll2(int start, int size, int parentId){

@@ -61,6 +61,10 @@ public class CybzdmbDaoImpl  extends BaseHibernateDaoImpl<Cybzdmb> implements Cy
             + "where dm='" + dm + "'";
     Query q = session.createSQLQuery(sql).addEntity(Cybzdmb.class);
 
-    return (Cybzdmb) q.list().get(0);
+    if (q.list().size() > 0) {
+      return (Cybzdmb) q.list().get(0);
+    } else {
+      return null;
+    }
   }
 }

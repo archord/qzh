@@ -61,6 +61,10 @@ public class CbjyqqdfsdmbDaoImpl extends BaseHibernateDaoImpl<Cbjyqqdfsdmb> impl
             + "where dm='" + dm.trim() + "'";
     Query q = session.createSQLQuery(sql).addEntity(Cbjyqqdfsdmb.class);
 
-    return (Cbjyqqdfsdmb) q.list().get(0);
+    if (q.list().size() > 0) {
+      return (Cbjyqqdfsdmb) q.list().get(0);
+    } else {
+      return null;
+    }
   }
 }

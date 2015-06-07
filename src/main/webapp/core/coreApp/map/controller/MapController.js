@@ -33,8 +33,8 @@ var id2map = [
     {"id": 22, "base": "B", "shp": "b5", tag: "youcun5"},
     {"id": 23, "base": "B", "shp": "b6", tag: "youcun6"},
     {"id": 24, "base": "B", "shp": "b7", tag: "youcun7"},
-    {"id": 26, "base": "C", "shp": "c0", tag: "ykk"},
-    {"id": 29, "base": "D", "shp": "d0", tag: "aznbz"}
+    {"id": 26, "base": "C", "shp": "d0", tag: "ykk"},
+    {"id": 29, "base": "D", "shp": "c0", tag: "aznbz"}
 ];
 
 
@@ -210,7 +210,7 @@ function featureUnSelected(feature)
 
 var txtCBFMC = Ext.create('Ext.form.field.Text', {
     xtype: 'textfield',
-    fieldLabel: '所有权人姓名',
+    fieldLabel: '户主姓名',
     width: 250,
     name: 'CBFMC'
 });
@@ -294,7 +294,7 @@ Ext.define("core.map.controller.MapController", {
         {
             searchPanel.items.add(txtCBFMC);
             searchPanel.items.add(btnSearch);
-            searchPanel.items.add(btnScreenshot);
+//            searchPanel.items.add(btnScreenshot);
         }
 
         var self = this;

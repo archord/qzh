@@ -38,7 +38,11 @@ public class FbfDaoImpl extends BaseHibernateDaoImpl<Fbf> implements FbfDao{
             + "where fbfbm= '" + fbfbm.trim() + "' ";
     Query q = session.createSQLQuery(sql).addEntity(Fbf.class);
 
-    return (Fbf) q.list().get(0);
+    if (q.list().size() > 0) {
+      return (Fbf) q.list().get(0);
+    } else {
+      return null;
+    }
   }
   
   public List<Fbf> getFbfsByOrgId(long orgId){

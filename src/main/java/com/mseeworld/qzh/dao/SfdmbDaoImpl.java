@@ -47,7 +47,11 @@ public class SfdmbDaoImpl  extends BaseHibernateDaoImpl<Sfdmb> implements SfdmbD
             + "where dm='" + dm + "'";
     Query q = session.createSQLQuery(sql).addEntity(Sfdmb.class);
 
-    return (Sfdmb) q.list().get(0);
+    if (q.list().size() > 0) {
+      return (Sfdmb) q.list().get(0);
+    } else {
+      return null;
+    }
   }
 
   public Number count() {

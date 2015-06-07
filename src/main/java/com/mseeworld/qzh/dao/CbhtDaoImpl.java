@@ -41,7 +41,11 @@ public class CbhtDaoImpl extends BaseHibernateDaoImpl<Cbht> implements CbhtDao {
             + "where cbhtbm= '" + cbhtbm.trim() + "' ";
     Query q = session.createSQLQuery(sql).addEntity(Cbht.class);
 
-    return (Cbht) q.list().get(0);
+    if (q.list().size() > 0) {
+      return (Cbht) q.list().get(0);
+    } else {
+      return null;
+    }
   }
 
   public Cbht getCbhtById(long id) {
@@ -52,7 +56,11 @@ public class CbhtDaoImpl extends BaseHibernateDaoImpl<Cbht> implements CbhtDao {
             + "where id= " + id;
     Query q = session.createSQLQuery(sql).addEntity(Cbht.class);
 
-    return (Cbht) q.list().get(0);
+    if (q.list().size() > 0) {
+      return (Cbht) q.list().get(0);
+    } else {
+      return null;
+    }
   }
 
   public List<Cbht> getByOrgId(long orgId) {

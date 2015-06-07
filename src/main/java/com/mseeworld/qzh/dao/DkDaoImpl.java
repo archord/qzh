@@ -38,7 +38,11 @@ public class DkDaoImpl extends BaseHibernateDaoImpl<Dk> implements DkDao {
             + "where dkbm= '" + dkbm.trim() + "' ";
     Query q = session.createSQLQuery(sql).addEntity(Dk.class);
 
-    return (Dk) q.list().get(0);
+    if (q.list().size() > 0) {
+      return (Dk) q.list().get(0);
+    } else {
+      return null;
+    }
   }
 
   public List<Dk> getCbDksByCbjyqzbm(String qzbm) {
@@ -65,7 +69,11 @@ public class DkDaoImpl extends BaseHibernateDaoImpl<Dk> implements DkDao {
     String sql = "select * from dk where dkbm in ( select dkbm from cbdkxx where lzhtbm='" + lzhtbm.trim() + "')";
     Query q = session.createSQLQuery(sql).addEntity(Dk.class);
 
-    return (Dk)q.list().get(0);
+    if (q.list().size() > 0) {
+      return (Dk) q.list().get(0);
+    } else {
+      return null;
+    }
   }
 
   public List<Dk2> getFirstNOfAll2(int start, int size, int parentId) {
