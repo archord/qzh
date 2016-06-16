@@ -1,4 +1,4 @@
-Ext.require([
+﻿Ext.require([
     'GeoExt.panel.Map',
     'GeoExt.data.MapfishPrintProvider',
     'GeoExt.panel.PrintMap'
@@ -34,7 +34,11 @@ var id2map = [
     {"id": 23, "base": "B", "shp": "b6", tag: "youcun6"},
     {"id": 24, "base": "B", "shp": "b7", tag: "youcun7"},
     {"id": 26, "base": "C", "shp": "d0", tag: "ykk"},
-    {"id": 29, "base": "D", "shp": "c0", tag: "aznbz"}
+    {"id": 29, "base": "D", "shp": "c0", tag: "aznbz"},
+    {"id": 472, "base": "E", "shp": "e0", tag: "kelakule_shp01"},
+    {"id": 481, "base": "E", "shp": "e1", tag: "kelakule_shp01"},
+    {"id": 482, "base": "E", "shp": "e2", tag: "kelakule_shp02"},
+    {"id": 483, "base": "E", "shp": "e3", tag: "kelakule_shp03"},
 ];
 
 
